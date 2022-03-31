@@ -11,29 +11,30 @@ int main(int argc, char* argv[]){
    
     List A = newList();
     List B = newList();
-    List C = NULL;
+    //List C = NULL;
     int i;
 
-    for(i=1; i<=20; i++){
-        append(A,i);
-        prepend(B,i);
-   }
+    for(i = 1; i <= 20; i++){
+        append(A, i);
+        prepend(B, i);
+    }
 
-    printList(stdout,A); 
+    printList(stdout, A); 
     printf("\n");
-    printList(stdout,B); 
+    printList(stdout, B); 
     printf("\n");
 
-    for(moveFront(A); index(A)>=0; moveNext(A)){
+    for (moveFront(A); index(A) >= 0; moveNext(A)){
         printf("%d ", get(A));
     }
     printf("\n");
-    for(moveBack(B); index(B)>=0; movePrev(B)){
+    
+    for (moveBack(B); index(B) >= 0; movePrev(B)){
         printf("%d ", get(B));
     }
     printf("\n");
 
-    C = copyList(A);
+    /*C = copyList(A);
     printf("%s\n", equals(A,B)?"true":"false");
     printf("%s\n", equals(B,C)?"true":"false");
     printf("%s\n", equals(C,A)?"true":"false");
@@ -54,7 +55,7 @@ int main(int argc, char* argv[]){
 
     freeList(&A);
     freeList(&B);
-    freeList(&C);
+    freeList(&C);*/
 
     return(0);
 }
