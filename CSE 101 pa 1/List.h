@@ -1,10 +1,10 @@
 #pragma once
 
-typedef struct List {
-    struct List *next;
-    struct List *prev;
-    char* number;
-} List;
+typedef struct ListObj* List;
 
 List newList(void);
-void freeList(List* pL);
+
+int length(List L);
+int index(List L);
+
+void append(List L, int x);
