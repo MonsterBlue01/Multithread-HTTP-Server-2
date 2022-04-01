@@ -1,0 +1,36 @@
+% pdflatex --shell-escape DESIGN.tex
+
+\documentclass[12pt]{article}
+\usepackage{booktabs,fullpage,amsmath,minted,graphicx,fourier,comment,listings,fancyhdr,tikz,array,hyperref, geometry}
+
+\title{The note of CSE 120}
+\author{Dongjing Wang}
+\date{Created date: 03/31/2022}
+
+\begin{document}\maketitle
+\section{Lecture I}
+    \subsection{Moore’s Law}
+    Moore's Law refers to Gordon Moore's perception that the number of transistors on a microchip doubles every two years, though the cost of computers is halved. Moore's Law states that we can expect the speed and capability of our computers to increase every couple of years, and we will pay less for them. Another tenet of Moore's Law asserts that this growth is exponential. 
+    \subsection{Some terms}
+        %\subsubsection{Introduction to Rules}
+        \begin{itemize}
+	        \item {\textbf{Pipelining}: overlap steps in execution; watch out for dependencies}
+	        \item {\textbf{Parallelism}: execute independent tasks in parallel}
+	        \item {\textbf{Prediction}: better to ask for forgiveness than permission...}
+	        \item {\textbf{Caching}: keep close a copy of frequently used information}
+	        \item {\textbf{Indirection}: go through a translation step to allow intervention}
+	        \item {\textbf{Amortization}: coarse-grain actions to amortize start/end overheads}
+	        \item {\textbf{Redundancy}: extra information or resources to recover from errors}
+	        \item {\textbf{Specialization}: trim overheads of general-purpose systems}
+	        \item {\textbf{Focus on the common case}: optimize only the critical aspects of the system}
+        \end{itemize}
+
+    \section{Implement}
+    
+    \subsection{File Composition}
+        \begin{enumerate}
+	        \item [\textbf{1.}] {\textbf{DESIGN.pdf}}
+	        \item [\textbf{2.}] {\textbf{DESIGN.tex}}
+        \end{enumerate}
+
+\end{document}
