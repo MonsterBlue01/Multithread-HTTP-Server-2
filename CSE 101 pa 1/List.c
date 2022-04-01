@@ -70,7 +70,22 @@ int get(List L) {
 }
 
 bool equals(List A, List B) {
-    return A == B;
+    if ((A->length != B->length) || (A->index != B->index)) {
+        return false;
+    }
+
+    Node fA = A->front;
+    Node fB = B->front;
+
+    while ((fA != A->back) && (fB != B->back)) {
+        if (fA->data != fB->data) {
+            return false;
+        }
+        fA = fA->next;
+        fB = fB->next;
+    }
+
+    return true;
 }
 
 // Manipulation procedures ----------------------------------------------------

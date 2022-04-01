@@ -8,6 +8,8 @@
 #include "List.h"
 
 int main(int argc, char* argv[]){
+    FILE *out = NULL;
+    out = fopen("output.txt", "w");
    
     List A = newList();
     List B = newList();
@@ -35,10 +37,9 @@ int main(int argc, char* argv[]){
     printf("\n");
 
     C = copyList(A);
-    printf("%s\n", equals(A,B)?"true":"false");
-    printf("%s\n", equals(B,C)?"true":"false");
-    printf("%s\n", equals(C,A)?"true":"false");
-
+    printf("%s\n", equals(A, B) ? "true":"false");
+    printf("%s\n", equals(B, C) ? "true":"false");
+    printf("%s\n", equals(C, A) ? "true":"false");
 
     /*moveFront(A);
     for(i=0; i<5; i++) moveNext(A); // at index 5
@@ -57,6 +58,7 @@ int main(int argc, char* argv[]){
     freeList(&B);
     freeList(&C);*/
 
+    fclose(out);
     return(0);
 }
 
