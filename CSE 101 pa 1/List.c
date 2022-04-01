@@ -217,7 +217,7 @@ void insertAfter(List L, int x) {
 void deleteFront(List L) {
     if (L->length <= 0) {
         printf("List Error: calling deleteFront() with List with invalid length or index\n");
-        return;
+        exit(1);
     }
 
     Node tmp = L->front;                                        //Checked
@@ -231,7 +231,7 @@ void deleteFront(List L) {
 void deleteBack(List L) {
     if (L->length <= 0) {
         printf("List Error: calling deleteFront() with List with invalid length or index\n");
-        return;
+        exit(1);
     }
 
     Node tmp = L->back;                                         //Checked
@@ -255,41 +255,47 @@ void delete(List L) {
 void printList(FILE* out, List L) {
     Node head = L->front;
 
-    while (head->next != NULL) {
-        printf("%d ", head->data);
-        head = head->next;
+    do {
+        if (head->next != NULL) {
+            printf("%d ", head->data);
+            head = head->next;
+        }
         if (head -> next == NULL) {
             printf("%d", head->data);
         }
-    }
+    } while (head->next != NULL);
 }
 
 List copyList(List L) {
+    if (L == NULL) {
+        printf("List Error: calling copyList() with nothing\n");
+        exit(1);
+    }
+
+    if (!(L->length > 0)) {
+        printf("List Error: calling copyList() with invlid List length\n");
+        exit(1);
+    }
+
+    if (L->length == 1) {
+        List new = newList();
+        append(new, L->front->data);
+        if (L->cursor != NULL) {
+            moveFront(new);
+        }
+        return new;
+    }
     List new = newList();
+    Node tmp = L->front;
 
-    new->front = L->front;
-    new->back = L->back;
-    new->index = L->index;
-    new->length = L->length;
-    
-    Node old = L->front;
-    Node newn = new->front;
-
-    while (old->next != NULL) {
-        Node tmp;
-        tmp = old->next;
-
-        tmp->prev = newn;
-        tmp->next = NULL;
-        newn->next = tmp;
-
-        old = old->next;
-        newn = newn->next;
+    while (tmp != NULL) {
+        append(new, tmp->data);
+        tmp = tmp->next;
     }
 
     if (L->cursor != NULL) {
         moveFront(new);
-        while (L->index != new->index) {
+        while (new->index < L->index) {
             moveNext(new);
         }
     }
@@ -318,6 +324,11 @@ List copyList(List L) {
     prepend(head, 3);
     printf("index: %d\n", head->index);
     printList(out, head);
+    printf("\n");
+
+    List new = copyList(head);
+    printList(out, new);
+    printf("\n");
 
     fclose(out);
 }*/
