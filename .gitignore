@@ -4,3 +4,13 @@
 
 *.out
 *.o
+
+######################
+# For LaTeX file
+######################
+
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz

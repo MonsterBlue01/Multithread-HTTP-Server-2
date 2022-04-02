@@ -3,7 +3,7 @@
 \documentclass[12pt]{article}
 \usepackage{booktabs,fullpage,amsmath,minted,graphicx,fourier,comment,listings,fancyhdr,tikz,array,hyperref, geometry}
 
-\title{The note of CSE 120}
+\title{The Note of CSE 120}
 \author{Dongjing Wang}
 \date{Created date: 03/31/2022}
 
@@ -25,12 +25,151 @@
 	        \item {\textbf{Focus on the common case}: optimize only the critical aspects of the system}
         \end{itemize}
 
-    \section{Implement}
+    \section{Lecture II}
     
-    \subsection{File Composition}
-        \begin{enumerate}
-	        \item [\textbf{1.}] {\textbf{DESIGN.pdf}}
-	        \item [\textbf{2.}] {\textbf{DESIGN.tex}}
-        \end{enumerate}
+    \subsection{Performance}
+        \subsubsection{Performance Basics: Latency}
+        - How long it takes to do X?\\
+        - Latency: the Base Units\\
+        \begin{itemize}
+            \item {Clock period: duration of a clock cycle}\\
+            E.g., 250ps = 0.25ns = 250×${10^–12}$s\\
+            - This is the basic unit of time in all computers
+            \item {Clock frequency (rate): cycles per second}\\
+            E.g., 4.0GHz = 4000MHz = 4.0×$10^9$Hz
+        \end{itemize}
+        \subsubsection{Performance Basics: Throughput}
+        The rate that a unit of work is completed or started by a mechanism\\
+        - How much X work is done in a given time?
+        \subsubsection{Performance: Latency vs Throughput}
+        -Latency improves by speeding up a core?\\
+        -Throughput improves by adding more cores?
+        \subsubsection{Execution (or CPU) Time}
+        \begin{itemize}
+            \item {Execution time improved by}\\
+            -Reducing number of clock cycles\\
+            -Or Increasing clock rate
+            \item {These two goals are not always compatible}\\
+            -Must often trade off clock rate against cycle count
+            \item {Execution Time}\\
+            -Execution Time = Cycles $x$ Period =“cycles per program” / “clock rate”
+        \end{itemize}
+        \subsubsection{Performance Definition}
+        \begin{itemize}
+            \item {For a machine A running a program P:}\\
+            - Perf(A,P) = 1/(Time(A,P))
+            \item {For two computer A and B, on the same program P:}\\
+            - IF Perf(A,P) > Perf(B,P) \textbf{THEN} Time(A,P) < Time(B,P)
+        \end{itemize}
+        \subsubsection{Speedup or “relative performance”}
+        - Speedup = Time(OLD) / Time(NEW)
+        \subsubsection{Relative Performance}
+        \begin{itemize}
+            \item {Latency:}\\
+            - Time(A,P) = 1 hour, Time(B,P) = 2 hour\\
+            - A is 2 times faster
+            \item {Bandwidth/Throughput:}\\
+            E.g., A fab can start one new chip per minute and takes 1 month to complete
+                \begin{itemize}
+                    \item {Latency is 1 month}\\
+                    \item {Throughput is 1 chip/minute}\\
+                \end{itemize}
+            \item {More common architecture names:}\\
+            - Instructions per cycle\\
+            - Nanoseconds (or picoseconds) cycle time\\
+            - Frequency (inverse of cycle time)
+        \end{itemize}
+        \subsection{Different Laws}
+            \subsubsection{Bell’s Law}
+                - Smaller form factors are initially slower, but more common and cheaper. Eventually they become the dominant form.
+            \subsubsection{Iron Law}
+                - Also known as the "CPU performance equation"\\
+                - Execution Time =“Instruction Count” × “Cycles Per Instruction” × “Clock Period”\\
+                - [(Implementation) (architecture) (realization)]
+            \subsubsection{Amdahl’s Law}
+                \begin{itemize}
+                    \item {Partial Speedup}
+                        \begin{itemize}
+                            \item {Performance gain limited by the fraction of improved}
+                            \item {$\text{Speedup}=\frac{\text{CPUTime}_{\text{old}}}{\text{CPUTime}_{\text{new}}}=\frac{\text{CPUTime}_{\text{old}}}{\text{CPUTime}_{\text{old}}\left[\left(1-f_x\right)+\frac{f_x}{S_x}\right]}=\frac{1}{\left(1-f_x\right)+\frac{f_x}{S_x}}$}
+                        \end{itemize}
+                    \item {Make Common Case Efficient}
+                        \begin{itemize}
+                            \item {Lesson’s from Amdahl’s law} 
+                                \begin{itemize}
+                                    \item {Make common cases fast: as $f_x$→1, Speedup→$S_x$}
+                                    \item {But don’t over-optimize common case: as $S_x$→ $\infty$, Speedup→ 1 $/$ (1-$f_x$)}
+                                        \begin{itemize}
+                                            \item {Speedup is limited by the fraction of the code         accelerated}
+                                            \item {Uncommon case will eventually become the common one}
+                                        \end{itemize}
+                                \end{itemize}
+                            \item {Amdahl’s law applies to cost, power consumption, energy...}
+                        \end{itemize}
+                    \item {Multiple Fractions}
+                        \begin{itemize}
+                            \item {Do not memorize equation (many uses cases will not have what you need)}
+                        \end{itemize}
+                \end{itemize}
+            \subsubsection{little’s Law}
+                Parallelism (or occupancy) = Throughput × Latency
+                \begin{itemize}
+                    \item {Little’s law or flow balance formula}
+                        \begin{itemize}
+                            \item {The average number of transactions in a stable system is equal to their average arrival rate, multiplied by their average time in the system}
+                        \end{itemize}
+                    \item {Captures the relation between}
+                        \begin{itemize}
+                            \item {Latency – how long it takes to do one thing}
+                            \item {Throughput – the rate which things get done}
+                            \item {Parallelism – how many things get done at a time}
+                        \end{itemize}
+                    \item {Implications}
+                        \begin{itemize}
+                            \item {Typically, want to improve one thing while another is constant}
+                            \item {Example: want to improve throughput but latency is fixed}
+                                \begin{itemize}
+                                    \item {Implies must improve parallelism}
+                                \end{itemize}
+                        \end{itemize}
+                \end{itemize}
+        \subsection{CPI \& IPC}
+            \subsubsection{Example}
+                \begin{table}[]
+                    \centering
+                    \begin{tabular}{|c|c|c|}
+                        \hline
+                        ALU      & 50\% & 1 \\ \hline
+                        Branches & 15\% & 2 \\ \hline
+                        Loads    & 20\% & 2 \\ \hline
+                        Stores   & 15\% & 1 \\ \hline
+                    \end{tabular}
+                    \caption{An example}
+                    \label{tab:my_label}
+                \end{table}
+                In the case of \textbf{Table 1}, CPI = $50\%\times 1+15\%\times 2+20\%\times 2+15\%\times 1 = 1.35$, IPC = $1/1.35\approx 0.741$.
+            \subsubsection{Two Common Usages}
+                \begin{itemize}
+                    \item {Instruction CPI}\\
+                         \begin{itemize}
+                            \item {Each instruction has a fix CPI}
+                            \item {E.g: load takes 7 cycles, adds 5 cycles}
+                            \begin{itemize}
+                                \item {CPI\_load = 7}
+                                \item {CPI\_add = 5}
+                            \end{itemize}
+                        \end{itemize} 
+                    \item {Average CPI (most common meaning)}
+                        \begin{itemize}
+                            \item {Depends on the program or instruction}\\
+                            \item {Lower CPI means better performan}
+                                \begin{itemize}
+                                    \item CPI$\:=\:\sum _{i=1}^n\:\frac{\text{IC}_i}{\text{IC}}\times   \text{CPI}_i$
+                                \end{itemize}
+                        \end{itemize}
+                    \item {IPC (Instructions Per Cycle) is the inverse of CPI}
+                \end{itemize} 
+        
+        
 
 \end{document}
