@@ -18,7 +18,7 @@ ListClient: ListClient.o List.o
 	gcc -std=c17 -Wall -o ListClient ListClient.o List.o
 
 ListClient.o : ListClient.c List.h
-	gcc -std=c17 -Wall -c ListClient.c
+	gcc -std=c17 -Wall -c ListClient.c -g
 
 List.o : List.c List.h
 	gcc -std=c17 -Wall -c List.c

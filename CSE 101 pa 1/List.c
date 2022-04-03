@@ -91,12 +91,6 @@ bool equals(List A, List B) {
 // Manipulation procedures ----------------------------------------------------
 
 void clear(List L) {
-    while (L->front != L->back) {
-        L->front->next = L->front;
-        free(L->front);
-    }
-    free(L->front);
-
     L->back = L->cursor = L->front = NULL;
     L->length = 0;
     L->index = -1;
@@ -209,6 +203,8 @@ void insertBefore(List L, int x) {
 
         L->cursor->prev = N;
         N->next = L->cursor;
+
+        L->length++;
     }
 }
 
@@ -226,6 +222,8 @@ void insertAfter(List L, int x) {
 
         L->cursor->next = N;
         N->prev = L->cursor;
+
+        L->length++;
     }
 }
 
@@ -235,9 +233,16 @@ void deleteFront(List L) {
         exit(1);
     }
 
-    Node tmp = L->front;                                        //Checked
-    L->front = tmp->next;
-    tmp->next->prev = NULL;
+    if (L == NULL) {
+        return;
+    }
+
+    if (L->front == NULL) {
+        return;
+    }
+
+    Node tmp = L->front;
+    L->front = L->front->next;
     free(tmp);
 
     L->length--;
@@ -245,8 +250,16 @@ void deleteFront(List L) {
 
 void deleteBack(List L) {
     if (L->length <= 0) {
-        printf("List Error: calling deleteFront() with List with invalid length or index\n");
+        printf("List Error: calling deleteFront() with List with invalid length\n");
         exit(1);
+    }
+
+    if (L == NULL) {
+        return;
+    }
+
+    if (L->back == NULL) {
+        return;
     }
 
     Node tmp = L->back;                                         //Checked
@@ -263,6 +276,7 @@ void delete(List L) {
     tmp->prev->next = tmp->next;
 
     free(tmp);
+    L->length--;
 }
 
 // Other operations -----------------------------------------------------------

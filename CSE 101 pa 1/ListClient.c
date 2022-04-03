@@ -41,9 +41,9 @@ int main(int argc, char* argv[]){
     printf("%s\n", equals(B, C) ? "true":"false");
     printf("%s\n", equals(C, A) ? "true":"false");
 
-    /*moveFront(A);
-    for(i=0; i<5; i++) moveNext(A); // at index 5
-    insertBefore(A, -1);            // at index 6
+    moveFront(A);
+    for(i = 0; i < 5; i++) moveNext(A); // at index 5
+    insertBefore(A, -1);          // at index 6
     for(i=0; i<9; i++) moveNext(A); // at index 15
     insertAfter(A, -2);
     for(i=0; i<5; i++) movePrev(A); // at index 10
@@ -56,7 +56,7 @@ int main(int argc, char* argv[]){
 
     freeList(&A);
     freeList(&B);
-    freeList(&C);*/
+    freeList(&C);
 
     fclose(out);
     return(0);
@@ -74,9 +74,4 @@ true
 1 2 3 4 5 -1 6 7 8 9 11 12 13 14 15 -2 16 17 18 19 20
 21
 0
-*/
-
-/*
-Note: Now I can see some results now! Hooray! But I still need to adjust my functions to 
-let it work well
 */
