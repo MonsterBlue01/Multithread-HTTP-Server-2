@@ -43,10 +43,10 @@ int main(int argc, char* argv[]){
 
     moveFront(A);
     for(i = 0; i < 5; i++) moveNext(A); // at index 5
-    insertBefore(A, -1);          // at index 6
-    for(i=0; i<9; i++) moveNext(A); // at index 15
+    insertBefore(A, -1);                // at index 6
+    for(i = 0; i < 9; i++) moveNext(A); // at index 15
     insertAfter(A, -2);
-    for(i=0; i<5; i++) movePrev(A); // at index 10
+    for(i = 0; i < 5; i++) movePrev(A); // at index 10
     delete(A);
     printList(stdout,A);
     printf("\n");

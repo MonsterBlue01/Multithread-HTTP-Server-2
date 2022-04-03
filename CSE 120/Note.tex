@@ -109,6 +109,7 @@
                     \item {Multiple Fractions}
                         \begin{itemize}
                             \item {Do not memorize equation (many uses cases will not have what you need)}
+                            \item {E.g: 2 partial speedup fractions}
                         \end{itemize}
                 \end{itemize}
             \subsubsection{little’s Law}
@@ -132,7 +133,131 @@
                                     \item {Implies must improve parallelism}
                                 \end{itemize}
                         \end{itemize}
+                    \item {Example}
+                        \begin{itemize}
+                            \item {Suppose you can make a sandwich in 2 minutes}
+                                \begin{itemize}
+                                   \item{Latencysandwich = 2min}
+                                   \item{Throughputsandwich = (1 sandwich / 2min) = 0.5 sandwiches / minute = 30 sandwiches / hour}
+                                \end{itemize}
+                            \item{Suppose that you need 30 minutes to each a sanwidth}
+                                \begin{itemize}
+                                    \item {How many tables do you need? (#tables == parallelism eating)}
+                                    \item{Latencysandwich = 30min}
+                                    \item{Throughputsandwich = 0.5 sandwich / minute}
+                                    \item{Parallelism = 30 * 0.5 = 15 tables is the minimum}
+                                    \item{What if you have 5 tables?}
+                                    \begin{itemize}
+                                        \item{5 = 30 * x -> If you do more than ~0.16 (5/30) sandwich per minute, you can not sell more}
+                                    \end{itemize}
+                                \end{itemize}
+                        \end{itemize}
+                    \item {Data Anlysis}
+                        \begin{table}[]
+                            \begin{tabular}{|c|c|c|c|}
+                            \hline
+                                             & Computer A & Computer B & Computer C \\ \hline
+                            Program P1(secs) & 1          & 10         & 20         \\ \hline
+                            Program P2(secs) & 1000       & 100        & 20         \\ \hline
+                            Program P3(secs) & 1001       & 110        & 40         \\ \hline
+                            \end{tabular}
+                            \caption{Data Anlysis}
+                        \end{table}
+                        \\People have different ways to analyze the data in Table 1
+                            \begin{itemize}
+                                \item {Idea 1: (not great but some people use it)}
+                                    \begin{table}[]
+                                        \centering
+                                        \begin{tabular}{cccc}
+\hline
+\multicolumn{1}{|c|}{}                & \multicolumn{1}{c|}{Computer A} & \multicolumn{1}{c|}{Computer B}         & \multicolumn{1}{c|}{Computer C}           \\ \hline
+\multicolumn{1}{|c|}{Program P1(sec)} & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{10}                 & \multicolumn{1}{c|}{20}                   \\ \hline
+\multicolumn{1}{|c|}{Program P2(sec)} & \multicolumn{1}{c|}{1000}       & \multicolumn{1}{c|}{100}                & \multicolumn{1}{c|}{20}                   \\ \hline
+\multicolumn{1}{|c|}{Program P3(sec)} & \multicolumn{1}{c|}{1001}       & \multicolumn{1}{c|}{110}                & \multicolumn{1}{c|}{40}                   \\ \hline
+                                      &                                 &                                         &                                           \\ \hline
+\multicolumn{1}{|c|}{Arithmetic Mean} & \multicolumn{1}{c|}{$\sim$667}  & \multicolumn{1}{c|}{$\sim$73.3}         & \multicolumn{1}{c|}{$\sim$26.6}           \\ \hline
+\multicolumn{1}{|c|}{Speedup vs. A}   & \multicolumn{1}{c|}{1}          & \multicolumn{1}{c|}{667/73 = $\sim$9.1} & \multicolumn{1}{c|}{667/26 = $\sim$25.01} \\ \hline
+\end{tabular}
+                                        \caption{Idea 1}
+                                        \label{tab:my_label}
+                                    \end{table}
+                                    \\- (The way to analysis in \textbf{Table 2}). Bad idea because programs can execute for very different times. If a program runs for 1h, and the rest for few seconds. The small become irrelevant.
+                                \item {Idea 2: Normalize against A, then “fake unit times” (A bit better but not great))}
+                                    \begin{table}[]
+                                        \centering
+                                        \begin{tabular}{cccc}
+\hline
+\multicolumn{1}{|c|}{}                & \multicolumn{1}{c|}{Computer A}    & \multicolumn{1}{c|}{Computer B}            & \multicolumn{1}{c|}{Computer C}           \\ \hline
+\multicolumn{1}{|c|}{Program P1(sec)} & \multicolumn{1}{c|}{1/1 = 1}       & \multicolumn{1}{c|}{10 / 1 = 10}           & \multicolumn{1}{c|}{20 / 1 = 20}          \\ \hline
+\multicolumn{1}{|c|}{Program P2(sec)} & \multicolumn{1}{c|}{1000/1000 = 1} & \multicolumn{1}{c|}{100/1000 = 0.1}        & \multicolumn{1}{c|}{20/1000 = 0.2}        \\ \hline
+\multicolumn{1}{|c|}{Program P3(sec)} & \multicolumn{1}{c|}{1001/1001 = 1} & \multicolumn{1}{c|}{110/1001 = $\sim$0.11} & \multicolumn{1}{c|}{40/1001 = $\sim$0.04} \\ \hline
+                                      &                                    &                                            &                                           \\ \hline
+\multicolumn{1}{|c|}{Arithmetic Mean} & \multicolumn{1}{c|}{$\sim$667}     & \multicolumn{1}{c|}{$\sim$3.4}             & \multicolumn{1}{c|}{$\sim$6.68}           \\ \hline
+\multicolumn{1}{|c|}{Speedup vs. A}   & \multicolumn{1}{c|}{1}             & \multicolumn{1}{c|}{1/3.4 = $\sim$0.3}     & \multicolumn{1}{c|}{1/6.68 = $\sim$0.15}  \\ \hline
+\end{tabular}
+                                        \caption{Idea 2}
+                                        \label{tab:my_label}
+                                    \end{table}
+                                    \\- (The way to analysis in \textbf{Table 3}). A bit better but not great.
+                                \item {Idea 3: $1^{\text{st}}$ speedup, then average (look similiar idea, no?)}
+                                    \begin{table}[]
+                                        \centering
+                                        \begin{tabular}{cccc}
+\hline
+\multicolumn{1}{|c|}{}                & \multicolumn{1}{c|}{Computer A}    & \multicolumn{1}{c|}{Computer B}           & \multicolumn{1}{c|}{Computer C}         \\ \hline
+\multicolumn{1}{|c|}{Program P1(sec)} & \multicolumn{1}{c|}{1/1 = 1}       & \multicolumn{1}{c|}{1 / 10 = 0.1}         & \multicolumn{1}{c|}{1 / 20 = 0.05}      \\ \hline
+\multicolumn{1}{|c|}{Program P2(sec)} & \multicolumn{1}{c|}{1000/1000 = 1} & \multicolumn{1}{c|}{1000/100 = 10}        & \multicolumn{1}{c|}{1000/20 = 50}       \\ \hline
+\multicolumn{1}{|c|}{Program P3(sec)} & \multicolumn{1}{c|}{1001/1001 = 1} & \multicolumn{1}{c|}{1001/110 = $\sim$9.1} & \multicolumn{1}{c|}{1001/40 = $\sim$25} \\ \hline
+                                      &                                    &                                           &                                         \\ \hline
+\multicolumn{1}{|c|}{Speedup vs. A}   & \multicolumn{1}{c|}{1}             & \multicolumn{1}{c|}{$\sim$6.4}            & \multicolumn{1}{c|}{$\sim$25.01}        \\ \hline
+\end{tabular}
+                                        \caption{Idea 3}
+                                        \label{tab:my_label}
+                                    \end{table}
+                                    \\- (The way to analysis in \textbf{Table 4}). What??? idea 2 and idea 3 “look reasonable” but they are very different?
+                            \end{itemize}
                 \end{itemize}
+            - Not let's use geo mean and try again. (Idea 1 is simple and inaccurate, so we skip that one).
+            \begin{itemize}
+                \item {Idea 2 + Geo Mean}
+                    \begin{table}[]
+                        \centering
+                        \begin{tabular}{cccc}
+\hline
+\multicolumn{1}{|c|}{}                & \multicolumn{1}{c|}{Computer A}    & \multicolumn{1}{c|}{Computer B}            & \multicolumn{1}{c|}{Computer C}           \\ \hline
+\multicolumn{1}{|c|}{Program P1(sec)} & \multicolumn{1}{c|}{1/1 = 1}       & \multicolumn{1}{c|}{10/1 = 10}             & \multicolumn{1}{c|}{20/1 = 20}            \\ \hline
+\multicolumn{1}{|c|}{Program P2(sec)} & \multicolumn{1}{c|}{1000/1000 = 1} & \multicolumn{1}{c|}{100/1000 = 0.1}        & \multicolumn{1}{c|}{20/1000 = 0.02}       \\ \hline
+\multicolumn{1}{|c|}{Program P3(sec)} & \multicolumn{1}{c|}{1001/1001 = 1} & \multicolumn{1}{c|}{110/1001 = $\sim$0.11} & \multicolumn{1}{c|}{40/1001 = $\sim$0.04} \\ \hline
+                                      &                                    &                                            &                                           \\ \hline
+\multicolumn{1}{|c|}{Geo Mean}        & \multicolumn{1}{c|}{1}             & \multicolumn{1}{c|}{$\sim$0.47}            & \multicolumn{1}{c|}{$\sim$0.252}          \\ \hline
+\multicolumn{1}{|c|}{Geo Speedup}     & \multicolumn{1}{c|}{1}             & \multicolumn{1}{c|}{1/0.47 = $\sim$2.1}    & \multicolumn{1}{c|}{1/0.252 = $\sim$3.97} \\ \hline
+\multicolumn{1}{|c|}{Avg(Idea 2)}     & \multicolumn{1}{c|}{1}             & \multicolumn{1}{c|}{1/3.4 = $\sim$0.3}     & \multicolumn{1}{c|}{1/6.68 = $\sim$0.15}  \\ \hline
+\end{tabular}
+                        \caption{Idea 2 + Geo mean}
+                        \label{tab:my_label}
+                    \end{table}
+                \item {Idea 3 + Geo Mean}
+                    \begin{table}[]
+                        \centering
+                        \begin{tabular}{cccc}
+\hline
+\multicolumn{1}{|c|}{}                & \multicolumn{1}{c|}{Computer A}    & \multicolumn{1}{c|}{Computer B}           & \multicolumn{1}{c|}{Computer C}           \\ \hline
+\multicolumn{1}{|c|}{Program P1(sec)} & \multicolumn{1}{c|}{1/1 = 1}       & \multicolumn{1}{c|}{1/10 = 0.1}           & \multicolumn{1}{c|}{1/20 = 0.05}          \\ \hline
+\multicolumn{1}{|c|}{Program P2(sec)} & \multicolumn{1}{c|}{1000/1000 = 1} & \multicolumn{1}{c|}{1000/100 = 10}        & \multicolumn{1}{c|}{1000/20 = 50}         \\ \hline
+\multicolumn{1}{|c|}{Program P3(sec)} & \multicolumn{1}{c|}{1001/1001 = 1} & \multicolumn{1}{c|}{1001/110 = $\sim$9.1} & \multicolumn{1}{c|}{1001/40 = $\sim$25}   \\ \hline
+                                      &                                    &                                           &                                           \\ \hline
+\multicolumn{1}{|c|}{Idea 3 + Geo}    & \multicolumn{1}{c|}{1}             & \multicolumn{1}{c|}{$\sim$2.1}            & \multicolumn{1}{c|}{$\sim$3.97}           \\ \hline
+\multicolumn{1}{|c|}{Idea 2 + Geo}    & \multicolumn{1}{c|}{1}             & \multicolumn{1}{c|}{1/0.47 = $\sim$2.1}   & \multicolumn{1}{c|}{1/0.252 = $\sim$3.97} \\ \hline
+\end{tabular}
+                        \caption{Idea 3 + Geo mean}
+                        \label{tab:my_label}
+                    \end{table}
+                        \\- With Geo Mean, Idea2 or Idea3 yield the same result. Geo is more consistent, base independent and recommended.
+                \item {Summary}
+                    \\- Arith < Geo < Harmonic
+                    \\- Geo and Harmonic must be normalized or weird
+                    \\- Geo is the most fair as it is base independent
+            \end{itemize}
         \subsection{CPI \& IPC}
             \subsubsection{Example}
                 \begin{table}[]
@@ -147,7 +272,7 @@
                     \caption{An example}
                     \label{tab:my_label}
                 \end{table}
-                In the case of \textbf{Table 1}, CPI = $50\%\times 1+15\%\times 2+20\%\times 2+15\%\times 1 = 1.35$, IPC = $1/1.35\approx 0.741$.
+                In the case of \textbf{Table 5}, CPI = $50\%\times 1+15\%\times 2+20\%\times 2+15\%\times 1 = 1.35$, IPC = $1/1.35\approx 0.741$.
             \subsubsection{Two Common Usages}
                 \begin{itemize}
                     \item {Instruction CPI}\\
@@ -162,11 +287,50 @@
                     \item {Average CPI (most common meaning)}
                         \begin{itemize}
                             \item {Depends on the program or instruction}\\
-                            \item {Lower CPI means better performan}
+                            \item {Lower CPI means better performance}
                                 \begin{itemize}
                                     \item CPI$\:=\:\sum _{i=1}^n\:\frac{\text{IC}_i}{\text{IC}}\times   \text{CPI}_i$
                                 \end{itemize}
                         \end{itemize}
                     \item {IPC (Instructions Per Cycle) is the inverse of CPI}
                 \end{itemize} 
+        \subsection{Benchmark}
+            \begin{itemize}
+                \item {Programs used to measure performance: Supposedly typical of actual workload}
+                \item {Benchmark suite: collection of benchmarks}
+                    \begin{itemize}
+                        \item {Plus datasets, metrics, and rules for evaluation}
+                        \item {Plus a way to summarize performance in one number}
+                    \end{itemize}
+                \item {Examples}
+                    \begin{itemize}
+                        \item {SPEC CPU2006 (integer and FP benchmarks)}
+                        \item {TPC-H and TCP-W (database benchmarks)}
+                        \item {EEMBC (embedded benchmarks)}
+                    \end{itemize}
+                \item {Warning}
+                    \begin{itemize}
+                        \item {Different benchmarks focus on different workloads}
+                        \item {All benchmarks have shortcomings}
+                        \item {Your design will be as good as the benchmarks you use}
+                    \end{itemize}
+                \item {Instruction count and mix is very important}
+                \item {Performance is best determined by running real applications}
+                    \begin{itemize}
+                        \item {M1 may be faster with chess games than M2, but M2 may be faster with vim}
+                            \begin{itemize}
+                                \item {I do not play chess in my computer, so M2 is better for me}
+                                \item {If you do not use vim (poor you), M1 may be better for you}
+                            \end{itemize}
+                    \end{itemize}
+                \item {“Standard” sets of benchmarks tend to be domain specific}
+                    \begin{itemize}
+                        \item {SPECint and SPECfp for single core performance}
+                        \item {SPECrate, parsec, splash2… for multicore}
+                        \item {Rodinia for GPUs}
+                        \item {TCP for databases}
+                        \item {Dhrystone and EMMBC for embedded cores}
+                        \item {...}
+                    \end{itemize}
+            \end{itemize}
 \end{document}

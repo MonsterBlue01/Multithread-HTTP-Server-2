@@ -19,9 +19,9 @@ typedef struct ListObj{
 } ListObj;
 
 // Constructors-Destructors ---------------------------------------------------
-List newList(void); // Creates and returns a new empty List.
-void freeList(List* pL); // Frees all heap memory associated with *pL, and sets
-    // *pL to NULL.
+List newList(void);         // Creates and returns a new empty List.
+void freeList(List* pL);    // Frees all heap memory associated with *pL, and sets
+                            // *pL to NULL.
 
 // Access functions -----------------------------------------------------------
 int length(List L); // Returns the number of elements in L.
