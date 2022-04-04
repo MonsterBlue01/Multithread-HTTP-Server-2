@@ -2,6 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+void insertionSort(int *arr, int len) {
+    for (int i = 0; i < len; i++) {
+        int preIndex = i - 1;
+        int current = arr[i];
+        while ((preIndex >= 0) && (arr[preIndex] > current)) {
+            arr[preIndex + 1] = arr[preIndex];
+            preIndex--;
+        }
+        arr[preIndex + 1] = current;
+    }
+}
+
 int main(int argc, char *argv[]) {
     int i;
     char buffer[1024];
@@ -45,6 +57,12 @@ int main(int argc, char *argv[]) {
     }
 
     fclose(fp1);
+
+    int arr[5] = {7, 1, 4, 10, 5};
+    insertionSort(arr, 5);
+    for (int i = 0; i < 5; i++) {
+        printf("%d\n", arr[i]);
+    }
     return 0;
 }
 
