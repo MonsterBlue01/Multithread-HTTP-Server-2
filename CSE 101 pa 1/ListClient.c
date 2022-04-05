@@ -10,7 +10,7 @@
 int main(int argc, char* argv[]){
     FILE *out = NULL;
     out = fopen("output.txt", "w");
-   
+    
     List A = newList();
     List B = newList();
     List C = NULL;
