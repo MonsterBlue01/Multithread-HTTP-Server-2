@@ -75,11 +75,12 @@ int main(int argc, char *argv[]) {
                 printf("index: %d\n", index(l));
                 if (l->cursor == l->back) {
                     append(l, i);
+                    moveNext(l);
                 }
                 if ((strcmp(array[i], array[l->cursor->data]) > 0) && (strcmp(array[i], array[l->cursor->next->data]) < 0)) {
                     insertAfter(l, i);
+                    moveNext(l);
                 }
-                moveNext(l);
             }
         }
     }
