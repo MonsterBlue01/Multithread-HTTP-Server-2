@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
     printf("%d\n", l->front->next->data);
     printf("%d\n", l->front->next->next->data);
     printf("%d\n", l->front->next->next->next->data);
-    //printf("%d\n", l->front->next->next->next->next->data);
+    printf("%d\n", l->front->next->next->next->next->data);
 
     freeList(&l);
     return 0;
