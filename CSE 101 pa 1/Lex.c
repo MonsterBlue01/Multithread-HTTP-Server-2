@@ -71,9 +71,6 @@ int main(int argc, char *argv[]) {
                 continue;
             }
             while (index(l) >= 0) {
-                printf("Example: %d\n", l->cursor->data);
-                printf("s: %s", array[l->cursor->data]);
-                printf("index: %d\n", index(l));
                 if (l->cursor == l->back) {
                     append(l, i);
                     break;
