@@ -7,12 +7,13 @@
 
 int main(int argc, char *argv[]) {
     char buffer[1024];
-    /*if(argc != 3) {
+    if(argc != 3) {
         fprintf(stderr, "Error: Fewer or more than two arguments were passed in.\n");
         exit(1);
     } else {
-        printf("Good. \n");
-    }*/
+        printf("argv[1]: %s", argv[1]);
+        printf("argv[2]: %s", argv[2]);
+    }
 
     FILE *fp;
     fp = fopen("input.txt", "r");
