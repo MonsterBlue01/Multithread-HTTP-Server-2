@@ -66,24 +66,8 @@ int main(int argc, char *argv[]) {
         if (l->length >= 2) {
             moveFront(l);
             while (l->cursor != l->back) {
-                if (l->cursor == l->front) {
-                    if (strcmp(array[i], array[l->cursor->data]) < 0) {
-                        printf("array[i]: %s\n", array[i]);
-                        printf("array[0]: %s\n", array[l->cursor->data]);
-                        printf("strcmp(array[i], array[l->cursor->data]) < 0? %d\n", strcmp(array[i], array[l->cursor->data]) < 0);
-                        insertBefore(l, i);
-                        break;
-                    } else if ((strcmp(array[i], array[l->cursor->data]) > 0) && (strcmp(array[i], array[1]) < 0)) {
-                        printf("array[i]: %s\n", array[i]);
-                        printf("array[0]: %s\n", array[l->cursor->data]);
-                        printf("strcmp(array[i], array[l->cursor->data]) > 0? %d\n", strcmp(array[i], array[l->cursor->data]) > 0);
-                        insertAfter(l, i);
-                        break;
-                    } else {
-                        printf("a\n");
-                        moveNext(l);
-                    }
-                }
+                printf("Example: %d\n", l->cursor->data);
+                moveNext(l);
             }
         }
     }
