@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
         if (l->length >= 2) {
             moveFront(l);
             while (l->cursor != l->back) {
-                if (l->cursor == l->front) {
+                if (l->cursor != l->back) {
                     if (strcmp(array[i], array[0]) < 0) {
                         prepend(l, i);
                         break;
