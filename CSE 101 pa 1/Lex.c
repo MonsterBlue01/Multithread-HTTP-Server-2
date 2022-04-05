@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
     List l = newList();
 
-    for (int i = 0; i < 6/*file_row - 1*/; i++) {
+    for (int i = 0; i < 2/*file_row - 1*/; i++) {
         printf("%s", array[i]);
         if (l->length == 0) {
             append(l, i);
@@ -90,9 +90,9 @@ int main(int argc, char *argv[]) {
 
     printf("%d\n", l->front->data);
     printf("%d\n", l->front->next->data);
-    printf("%d\n", l->front->next->next->data);
-    printf("%d\n", l->front->next->next->next->data);
-    printf("%d\n", l->front->next->next->next->next->data);
+    //printf("%d\n", l->front->next->next->data);
+    //printf("%d\n", l->front->next->next->next->data);
+    //printf("%d\n", l->front->next->next->next->next->data);
 
     freeList(&l);
     return 0;
