@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 
         if (l->length >= 2) {
             moveFront(l);
-            while (l->index >= 0) {
+            while (index(l) > 0) {
                 printf("Example: %d\n", l->cursor->data);
                 moveNext(l);
             }
