@@ -35,11 +35,11 @@ int main(int argc, char *argv[]) {
     FILE *fp1;
     fp1 = fopen("input.txt", "r");
     char* array[file_row];
-    int index = 0;
+    int in = 0;
 
     while (fgets(buffer, sizeof(buffer), fp1) != NULL) {
-        array[index] = (char *)malloc(100 * sizeof(char));
-        strcpy(array[index++], buffer);
+        array[in] = (char *)malloc(100 * sizeof(char));
+        strcpy(array[in++], buffer);
     }
 
     fclose(fp1);
