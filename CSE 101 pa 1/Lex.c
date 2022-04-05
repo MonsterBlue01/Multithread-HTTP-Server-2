@@ -89,8 +89,11 @@ int main(int argc, char *argv[]) {
 
     Node new = l->front;
     while (new != l->back) {
-        printf("%s\n", array[new->data]);
+        printf("%s", array[new->data]);
         new = new->next;
+        if (new == l->back) {
+            printf("%s", array[new->data]);
+        }
     }
 
     freeList(&l);
