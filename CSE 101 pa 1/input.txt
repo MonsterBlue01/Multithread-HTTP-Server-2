@@ -1,7 +1,6 @@
 one
 two
 three
-zoo
 four
 five
 six
