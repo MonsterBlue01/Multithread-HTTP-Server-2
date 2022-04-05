@@ -82,14 +82,19 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    FILE *fp2 = NULL;
+    fp2 = fopen("output.txt", "w+");
+
     Node new = l->front;
     while (new != l->back) {
-        printf("%s", array[new->data]);
+        fprintf("%s", array[new->data]);
         new = new->next;
         if (new == l->back) {
-            printf("%s", array[new->data]);
+            fprintf("%s", array[new->data]);
         }
     }
+
+    fclose(fp2);
 
     freeList(&l);
     return 0;
