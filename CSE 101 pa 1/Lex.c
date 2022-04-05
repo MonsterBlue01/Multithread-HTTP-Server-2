@@ -87,11 +87,11 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    printf("%d\n", l->front->data);
-    printf("%d\n", l->front->next->data);
-    printf("%d\n", l->front->next->next->data);
-    printf("%d\n", l->front->next->next->next->data);
-    printf("%d\n", l->front->next->next->next->next->data);
+    Node new = l->front;
+    while (new != l->back) {
+        printf("%s\n", array[new->data]);
+        new = new->next;
+    }
 
     freeList(&l);
     return 0;
