@@ -68,6 +68,7 @@ int main(int argc, char *argv[]) {
             moveFront(l);
             if (strcmp(array[i], array[l->cursor->data]) < 0) {
                 prepend(l, i);
+                continue;
             }
             while (index(l) >= 0) {
                 printf("Example: %d\n", l->cursor->data);
@@ -75,9 +76,11 @@ int main(int argc, char *argv[]) {
                 printf("index: %d\n", index(l));
                 if (l->cursor == l->back) {
                     append(l, i);
+                    break;
                 }
                 if ((strcmp(array[i], array[l->cursor->data]) > 0) && (strcmp(array[i], array[l->cursor->next->data]) < 0)) {
                     insertAfter(l, i);
+                    break;
                 }
                 printf("moved\n");
                 moveNext(l);
