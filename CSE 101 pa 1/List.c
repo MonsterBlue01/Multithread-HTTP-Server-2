@@ -120,8 +120,10 @@ void movePrev(List L) {
     }
 
     if (L->cursor != NULL) {
-        if (L->cursor != L->front) {
+        if ((L->cursor->data != L->front->data) && (L->cursor->prev != NULL)) {
             L->cursor = L->cursor->prev;
+            L->index--;
+        } else {
             L->index--;
         }
     }
