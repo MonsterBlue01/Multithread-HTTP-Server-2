@@ -69,6 +69,7 @@ int main(int argc, char *argv[]) {
                 printf("Example: %d\n", l->cursor->data);
                 moveNext(l);
             }
+            printf("Example: %d\n", l->back->data);
         }
     }
 
