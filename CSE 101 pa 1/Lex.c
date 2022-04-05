@@ -83,6 +83,11 @@ int main(int argc, char *argv[]) {
     FILE *fp2 = NULL;
     fp2 = fopen("output.txt", "w+");
 
+    if (fp2 == NULL) { 
+        fprintf(stderr, "Error: Attempting to access a file that does not exist.\n"); 
+        exit(1); 
+    }
+
     Node new = l->front;
     while (new != l->back) {
         fprintf(fp2, "%s", array[new->data]);
