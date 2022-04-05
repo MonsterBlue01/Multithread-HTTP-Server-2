@@ -74,7 +74,6 @@ int main(int argc, char *argv[]) {
                 printf("s: %s", array[l->cursor->data]);
                 if (l->cursor == l->back) {
                     append(l, i);
-                    break;
                 }
                 if ((strcmp(array[i], array[l->cursor->data]) > 0) && (strcmp(array[i], array[l->cursor->next->data]) < 0)) {
                     insertAfter(l, i);
