@@ -64,10 +64,11 @@ int main(int argc, char *argv[]) {
         }
 
         if (l->length >= 2) {
+            printf("Comparing: %s", array[i]);
             moveFront(l);
             while (index(l) >= 0) {
                 printf("Example: %d\n", l->cursor->data);
-                printf("s: %s\n", array[l->cursor->data]);
+                printf("s: %s", array[l->cursor->data]);
                 moveNext(l);
             }
         }
