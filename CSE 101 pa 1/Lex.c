@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
             while (l->cursor != l->back) {
                 if (l->cursor != l->back) {
                     if (strcmp(array[i], array[0]) < 0) {
-                        prepend(l, i);
+                        insertBefore(l, i);
                         break;
                     } else if ((strcmp(array[i], array[0]) > 0) && (strcmp(array[i], array[1]) < 0)) {
                         printf("array[i]: %s\n", array[i]);
