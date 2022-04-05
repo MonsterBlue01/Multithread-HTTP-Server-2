@@ -71,6 +71,9 @@ int main(int argc, char *argv[]) {
                         prepend(l, i);
                         break;
                     } else if ((strcmp(array[i], array[0]) > 0) && (strcmp(array[i], array[1]) < 0)) {
+                        printf("%s", array[i]);
+                        printf("%s", array[0]);
+                        printf("array[i] > array[0]? %d", strcmp(array[i], array[0]) > 0);
                         insertAfter(l, i);
                         break;
                     } else {
