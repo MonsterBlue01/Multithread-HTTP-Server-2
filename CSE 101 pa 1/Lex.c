@@ -74,6 +74,7 @@ int main(int argc, char *argv[]) {
                         printf("array[i]: %s\n", array[i]);
                         printf("array[0]: %s\n", array[0]);
                         printf("array[i] > array[0]? %d\n", strcmp(array[i], array[0]) > 0);
+                        printf("cursor: %d\n", l->cursor->data);
                         insertAfter(l, i);
                         break;
                     } else {
