@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     fclose(fp);
 
     FILE *fp1;
-    fp1 = fopen(argv[2], "r");
+    fp1 = fopen(argv[1], "r");
     char* array[file_row];
     int in = 0;
 
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
     }
 
     FILE *fp2 = NULL;
-    fp2 = fopen("output.txt", "w+");
+    fp2 = fopen(argv[2], "w+");
 
     if (fp2 == NULL) { 
         fprintf(stderr, "Error: Attempting to access a file that does not exist.\n"); 
