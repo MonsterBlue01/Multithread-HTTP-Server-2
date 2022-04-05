@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
     List l = newList();
 
-    for (int i = 0; i < 6/*file_row - 1*/; i++) {
+    for (int i = 0; i < 5/*file_row - 1*/; i++) {
         printf("%s", array[i]);
         if (l->length == 0) {
             append(l, i);
@@ -66,15 +66,11 @@ int main(int argc, char *argv[]) {
         if (l->length >= 2) {
             moveFront(l);
             while (l->cursor != l->back) {
-                if (l->cursor != l->back) {
+                if (l->cursor == l->front) {
                     if (strcmp(array[i], array[0]) < 0) {
-                        insertBefore(l, i);
+                        prepend(l, i);
                         break;
                     } else if ((strcmp(array[i], array[0]) > 0) && (strcmp(array[i], array[1]) < 0)) {
-                        printf("array[i]: %s\n", array[i]);
-                        printf("array[0]: %s\n", array[0]);
-                        printf("array[i] > array[0]? %d\n", strcmp(array[i], array[0]) > 0);
-                        printf("cursor: %d\n", l->cursor->data);
                         insertAfter(l, i);
                         break;
                     } else {
