@@ -136,6 +136,8 @@ void moveNext(List L) {
         if ((L->cursor->data != L->back->data) && (L->cursor->next != NULL)) {
             L->cursor = L->cursor->next;
             L->index++;
+        } else {
+            L->index++;
         }
     }
 }
@@ -150,7 +152,7 @@ void prepend(List L, int x) {
         printf("List Error: calling prepend() on NULL List reference\n");
         exit(EXIT_FAILURE);
     }
-   
+    
     if(L->length == 0) { 
         L->front = L->back = N; 
     } else { 
@@ -176,7 +178,6 @@ void append(List L, int x) {
         printf("List Error: calling append() on NULL List reference\n");
         exit(1);
     }
-   
 
     if(L->length == 0) { 
         L->front = L->back = N; 
