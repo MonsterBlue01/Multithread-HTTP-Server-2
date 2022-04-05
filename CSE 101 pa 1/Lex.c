@@ -70,13 +70,13 @@ int main(int argc, char *argv[]) {
                     if (strcmp(array[i], array[0]) < 0) {
                         printf("array[i]: %s\n", array[i]);
                         printf("array[0]: %s\n", array[0]);
-                        printf("strcmp(array[i], array[0]) < 0?", strcmp(array[i], array[0]) < 0);
+                        printf("strcmp(array[i], array[0]) < 0? %d\n", strcmp(array[i], array[0]) < 0);
                         insertBefore(l, i);
                         break;
                     } else if ((strcmp(array[i], array[0]) > 0) && (strcmp(array[i], array[1]) < 0)) {
                         printf("array[i]: %s\n", array[i]);
                         printf("array[0]: %s\n", array[0]);
-                        printf("strcmp(array[i], array[0]) > 0?", strcmp(array[i], array[0]) > 0);
+                        printf("strcmp(array[i], array[0]) > 0? %d\n", strcmp(array[i], array[0]) > 0);
                         insertAfter(l, i);
                         break;
                     } else {
