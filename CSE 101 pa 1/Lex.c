@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
             while (index(l) >= 0) {
                 printf("Example: %d\n", l->cursor->data);
                 printf("s: %s", array[l->cursor->data]);
-                if (l->index == l->back) {
+                if (l->cursor == l->back) {
                     append(l, i);
                 }
                 if ((strcmp(array[i], array[l->cursor->data]) > 0) && (strcmp(array[i], array[l->cursor->next->data]) < 0)) {
