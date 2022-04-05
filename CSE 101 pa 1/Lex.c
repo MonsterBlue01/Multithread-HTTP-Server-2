@@ -47,7 +47,6 @@ int main(int argc, char *argv[]) {
     List l = newList();
 
     for (int i = 0; i < file_row - 1; i++) {
-        printf("%s", array[i]);
         if (l->length == 0) {
             append(l, i);
             continue;
@@ -64,7 +63,6 @@ int main(int argc, char *argv[]) {
         }
 
         if (l->length >= 2) {
-            printf("Comparing: %s", array[i]);
             moveFront(l);
             if (strcmp(array[i], array[l->cursor->data]) < 0) {
                 prepend(l, i);
