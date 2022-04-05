@@ -66,6 +66,9 @@ int main(int argc, char *argv[]) {
         if (l->length >= 2) {
             printf("Comparing: %s", array[i]);
             moveFront(l);
+            if (strcmp(array[i], array[l->cursor->data]) < 0) {
+                prepend(l, i);
+            }
             while (index(l) >= 0) {
                 printf("Example: %d\n", l->cursor->data);
                 printf("s: %s", array[l->cursor->data]);
