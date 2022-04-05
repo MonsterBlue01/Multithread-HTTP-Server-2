@@ -10,13 +10,10 @@ int main(int argc, char *argv[]) {
     if(argc != 3) {
         fprintf(stderr, "Error: Fewer or more than two arguments were passed in.\n");
         exit(1);
-    } else {
-        printf("argv[1]: %s", argv[1]);
-        printf("argv[2]: %s", argv[2]);
     }
 
     FILE *fp;
-    fp = fopen("input.txt", "r");
+    fp = fopen(argv[1], "r");
     int flag = 0, file_row = 0;
     
     if (fp == NULL) { 
@@ -34,7 +31,7 @@ int main(int argc, char *argv[]) {
     fclose(fp);
 
     FILE *fp1;
-    fp1 = fopen("input.txt", "r");
+    fp1 = fopen(argv[2], "r");
     char* array[file_row];
     int in = 0;
 
