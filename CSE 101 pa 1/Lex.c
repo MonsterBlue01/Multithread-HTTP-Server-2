@@ -75,7 +75,6 @@ int main(int argc, char *argv[]) {
                         break;
                     } else {
                         moveNext(l);
-                        continue;
                     }
                 }
             }
