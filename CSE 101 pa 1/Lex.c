@@ -72,6 +72,9 @@ int main(int argc, char *argv[]) {
             while (index(l) >= 0) {
                 printf("Example: %d\n", l->cursor->data);
                 printf("s: %s", array[l->cursor->data]);
+                if ((strcmp(array[i], array[l->cursor->data]) > 0) && (strcmp(array[i], array[l->cursor->next->data]) < 0)) {
+                    insertAfter(l, i);
+                }
                 moveNext(l);
             }
         }
