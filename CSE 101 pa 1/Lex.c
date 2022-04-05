@@ -87,10 +87,10 @@ int main(int argc, char *argv[]) {
 
     Node new = l->front;
     while (new != l->back) {
-        fprintf("%s", array[new->data]);
+        fprintf(fp2, "%s", array[new->data]);
         new = new->next;
         if (new == l->back) {
-            fprintf("%s", array[new->data]);
+            fprintf(fp2, "%s", array[new->data]);
         }
     }
 
