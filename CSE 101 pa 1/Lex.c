@@ -1,21 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
-void insertionSort(int *arr, int len) {
-    for (int i = 0; i < len; i++) {
-        int preIndex = i - 1;
-        int current = arr[i];
-        while ((preIndex >= 0) && (arr[preIndex] > current)) {
-            arr[preIndex + 1] = arr[preIndex];
-            preIndex--;
-        }
-        arr[preIndex + 1] = current;
-    }
-}
+#include "List.h"
 
 int main(int argc, char *argv[]) {
-    int i;
     char buffer[1024];
     /*if(argc != 3) {
         fprintf(stderr, "Error: Fewer or more than two arguments were passed in.\n");
@@ -52,17 +42,54 @@ int main(int argc, char *argv[]) {
         strcpy(array[index++], buffer);
     }
 
-    for (int i = 0; i < file_row - 1; i++) {
-        printf("%s", array[i]);
-    }
-
     fclose(fp1);
 
-    int arr[5] = {7, 1, 4, 10, 5};
-    insertionSort(arr, 5);
-    for (int i = 0; i < 5; i++) {
-        printf("%d\n", arr[i]);
+    List l = newList();
+
+    for (int i = 0; i < 5/*file_row - 1*/; i++) {
+        printf("%s", array[i]);
+        if (l->length == 0) {
+            append(l, i);
+            continue;
+        }
+
+        if (l->length == 1) {
+            if (strcmp(array[1], array[0]) > 0) {
+                append(l, i);
+                continue;
+            } else {
+                prepend(l, i);
+                continue;
+            }
+        }
+
+        if (l->length >= 2) {
+            moveFront(l);
+            while (l->cursor != l->back) {
+                if (l->cursor == l->front) {
+                    if (strcmp(array[i], array[0]) < 0) {
+                        prepend(l, i);
+                        break;
+                    } else if ((strcmp(array[i], array[0]) > 0) && (strcmp(array[i], array[1]) < 0)) {
+                        insertAfter(l, i);
+                        break;
+                    } else {
+                        moveNext(l);
+                        continue;
+                    }
+                }
+                break;
+            }
+        }
     }
+
+    printf("%d\n", l->front->data);
+    printf("%d\n", l->front->next->data);
+    printf("%d\n", l->front->next->next->data);
+    printf("%d\n", l->front->next->next->next->data);
+    //printf("%d\n", l->front->next->next->next->next->data);
+
+    freeList(&l);
     return 0;
 }
 
