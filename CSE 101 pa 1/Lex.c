@@ -67,9 +67,9 @@ int main(int argc, char *argv[]) {
             moveFront(l);
             while (index(l) >= 0) {
                 printf("Example: %d\n", l->cursor->data);
+                printf("s: %d\n", array[l->cursor->data]);
                 moveNext(l);
             }
-            printf("Example: %d\n", l->back->data);
         }
     }
 
