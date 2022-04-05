@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
     List l = newList();
 
-    for (int i = 0; i < 5/*file_row - 1*/; i++) {
+    for (int i = 0; i < 6/*file_row - 1*/; i++) {
         printf("%s", array[i]);
         if (l->length == 0) {
             append(l, i);
