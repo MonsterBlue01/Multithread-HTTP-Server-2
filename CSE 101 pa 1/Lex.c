@@ -74,6 +74,7 @@ int main(int argc, char *argv[]) {
                         insertAfter(l, i);
                         break;
                     } else {
+                        printf("a\n");
                         moveNext(l);
                     }
                 }
