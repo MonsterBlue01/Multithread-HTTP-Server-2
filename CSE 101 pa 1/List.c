@@ -215,8 +215,8 @@ void insertBefore(List L, int x) {
                 N->next = L->cursor;
                 L->front = N;
             }
-
             L->length++;
+            L->index++;
         }
     }
 }
@@ -236,7 +236,6 @@ void insertAfter(List L, int x) {
             if (L->cursor != L->back) {
                 L->cursor->next->prev = N;
                 N->next = L->cursor->next;
-
                 L->cursor->next = N;
                 N->prev = L->cursor;
             } else {
@@ -244,8 +243,6 @@ void insertAfter(List L, int x) {
                 N->prev = L->cursor;
                 L->back= N;
             }
-            
-
             L->length++;
         }
     }
