@@ -233,16 +233,11 @@ void insertAfter(List L, int x) {
             N->next = NULL;
             N->prev = NULL;
 
-            if (L->cursor != L->back) {
-                L->cursor->next->prev = N;
-                N->next = L->cursor->next;
-                L->cursor->next = N;
-                N->prev = L->cursor;
-            } else {
-                L->cursor->next = N;
-                N->prev = L->cursor;
-                L->back= N;
-            }
+            L->cursor->next->prev = N;
+            N->next = L->cursor->next;
+            L->cursor->next = N;
+            N->prev = L->cursor;
+
             L->length++;
         }
     }
