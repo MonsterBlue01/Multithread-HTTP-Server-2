@@ -257,15 +257,14 @@ void deleteFront(List L) {
         return;
     }
 
-    if (L->cursor != L->front) {
-        L->index--;
-    }
-
     Node tmp = L->front;
     L->front = L->front->next;
     free(tmp);
 
     L->length--;
+    if (L->index >= 0) {
+        L->index--;
+    }
 }
 
 void deleteBack(List L) {
