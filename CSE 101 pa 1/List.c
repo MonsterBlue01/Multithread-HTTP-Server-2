@@ -350,5 +350,5 @@ List copyList(List L) {
 
 int main() {
     List new = newList();
-    freeList(new);
+    freeList(*new);
 }
