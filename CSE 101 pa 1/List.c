@@ -347,8 +347,3 @@ List copyList(List L) {
 
     return new;
 }
-
-int main() {
-    List new = newList();
-    freeList(*new);
-}
