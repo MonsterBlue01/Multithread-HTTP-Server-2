@@ -349,5 +349,6 @@ List copyList(List L) {
 }
 
 int main() {
-    printf("a\n");
+    List new = newList();
+    freeList(new);
 }
