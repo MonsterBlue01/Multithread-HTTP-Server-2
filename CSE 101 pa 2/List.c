@@ -8,7 +8,7 @@
 
 List newList(void) {
     List l = (List)malloc(5 * sizeof(ListObj));
-    l->back = l->front = l->cursor = NULL;                  //Checked
+    l->back = l->front = l->cursor = NULL;
     l->length = 0;
     l->index = -1;
     return l;
@@ -196,24 +196,28 @@ void insertBefore(List L, int x) {
     if ((L->length <= 0) || (L->index < 0)) {
         printf("List Error: calling insertBefore() with List with invalid length or index\n");
     } else {
-        Node N = malloc(sizeof(NodeObj));
-        N->data = x;
-        N->next = NULL;
-        N->prev = NULL;
-
-        if (L->cursor != L->front) {
-            L->cursor->prev->next = N;
-            N->prev = L->cursor->prev;
-
-            L->cursor->prev = N;
-            N->next = L->cursor;
+        if (L->cursor == L->front) {
+            prepend(L, x);
         } else {
-            L->cursor->prev = N;
-            N->next = L->cursor;
-            L->front = N;
-        }
+            Node N = malloc(sizeof(NodeObj));
+            N->data = x;
+            N->next = NULL;
+            N->prev = NULL;
 
-        L->length++;
+            if (L->cursor != L->front) {
+                L->cursor->prev->next = N;
+                N->prev = L->cursor->prev;
+
+                L->cursor->prev = N;
+                N->next = L->cursor;
+            } else {
+                L->cursor->prev = N;
+                N->next = L->cursor;
+                L->front = N;
+            }
+            L->length++;
+            L->index++;
+        }
     }
 }
 
@@ -221,25 +225,21 @@ void insertAfter(List L, int x) {
     if ((L->length <= 0) || (L->index < 0)) {
         printf("List Error: calling insertBefore() with List with invalid length or index\n");
     } else {
-        Node N = malloc(sizeof(NodeObj));
-        N->data = x;
-        N->next = NULL;
-        N->prev = NULL;
+        if (L->cursor == L->back) {
+            append(L, x);
+        } else {
+            Node N = malloc(sizeof(NodeObj));
+            N->data = x;
+            N->next = NULL;
+            N->prev = NULL;
 
-        if (L->cursor != L->back) {
             L->cursor->next->prev = N;
             N->next = L->cursor->next;
+            L->cursor->next = N;
+            N->prev = L->cursor;
 
-            L->cursor->next = N;
-            N->prev = L->cursor;
-        } else {
-            L->cursor->next = N;
-            N->prev = L->cursor;
-            L->back= N;
+            L->length++;
         }
-        
-
-        L->length++;
     }
 }
 
@@ -262,6 +262,9 @@ void deleteFront(List L) {
     free(tmp);
 
     L->length--;
+    if (L->index >= 0) {
+        L->index--;
+    }
 }
 
 void deleteBack(List L) {
@@ -279,20 +282,28 @@ void deleteBack(List L) {
     }
 
     Node tmp = L->back;                                         //Checked
-    L->back = tmp->prev;
-    tmp->prev->next = NULL;
+    L->back = L->back->prev;
     free(tmp);
 
     L->length--;
 }
 
 void delete(List L) {
-    Node tmp = L->cursor;
-    tmp->next->prev = tmp->prev;
-    tmp->prev->next = tmp->next;
+    if (L->length == 1) {
+        free(L->cursor);
+        L->length--;
+    } else if (L->cursor == L->front) {
+        deleteFront(L);
+    } else if (L->cursor == L->back) {
+        deleteBack(L);
+    } else {
+        Node tmp = L->cursor;
+        tmp->next->prev = tmp->prev;
+        tmp->prev->next = tmp->next;
 
-    free(tmp);
-    L->length--;
+        free(tmp);
+        L->length--;
+    }
 }
 
 // Other operations -----------------------------------------------------------
@@ -317,9 +328,14 @@ List copyList(List L) {
         exit(1);
     }
 
-    if (!(L->length > 0)) {
+    if (!(L->length >= 0)) {
         printf("List Error: calling copyList() with invlid List length\n");
         exit(1);
+    }
+
+    if (L->length == 0) {
+        List new = newList();
+        return new;
     }
 
     if (L->length == 1) {
