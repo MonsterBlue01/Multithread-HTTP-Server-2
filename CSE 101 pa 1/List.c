@@ -257,6 +257,10 @@ void deleteFront(List L) {
         return;
     }
 
+    if (L->cursor != L->front) {
+        L->index--;
+    }
+
     Node tmp = L->front;
     L->front = L->front->next;
     free(tmp);
