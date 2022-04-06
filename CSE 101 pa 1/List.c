@@ -196,24 +196,28 @@ void insertBefore(List L, int x) {
     if ((L->length <= 0) || (L->index < 0)) {
         printf("List Error: calling insertBefore() with List with invalid length or index\n");
     } else {
-        Node N = malloc(sizeof(NodeObj));
-        N->data = x;
-        N->next = NULL;
-        N->prev = NULL;
-
-        if (L->cursor != L->front) {
-            L->cursor->prev->next = N;
-            N->prev = L->cursor->prev;
-
-            L->cursor->prev = N;
-            N->next = L->cursor;
+        if (L->cursor == L->front) {
+            prepend(L, x);
         } else {
-            L->cursor->prev = N;
-            N->next = L->cursor;
-            L->front = N;
-        }
+            Node N = malloc(sizeof(NodeObj));
+            N->data = x;
+            N->next = NULL;
+            N->prev = NULL;
 
-        L->length++;
+            if (L->cursor != L->front) {
+                L->cursor->prev->next = N;
+                N->prev = L->cursor->prev;
+
+                L->cursor->prev = N;
+                N->next = L->cursor;
+            } else {
+                L->cursor->prev = N;
+                N->next = L->cursor;
+                L->front = N;
+            }
+
+            L->length++;
+        }
     }
 }
 
@@ -221,25 +225,29 @@ void insertAfter(List L, int x) {
     if ((L->length <= 0) || (L->index < 0)) {
         printf("List Error: calling insertBefore() with List with invalid length or index\n");
     } else {
-        Node N = malloc(sizeof(NodeObj));
-        N->data = x;
-        N->next = NULL;
-        N->prev = NULL;
-
-        if (L->cursor != L->back) {
-            L->cursor->next->prev = N;
-            N->next = L->cursor->next;
-
-            L->cursor->next = N;
-            N->prev = L->cursor;
+        if (L->cursor == L->back) {
+            append(L, x);
         } else {
-            L->cursor->next = N;
-            N->prev = L->cursor;
-            L->back= N;
-        }
-        
+            Node N = malloc(sizeof(NodeObj));
+            N->data = x;
+            N->next = NULL;
+            N->prev = NULL;
 
-        L->length++;
+            if (L->cursor != L->back) {
+                L->cursor->next->prev = N;
+                N->next = L->cursor->next;
+
+                L->cursor->next = N;
+                N->prev = L->cursor;
+            } else {
+                L->cursor->next = N;
+                N->prev = L->cursor;
+                L->back= N;
+            }
+            
+
+            L->length++;
+        }
     }
 }
 
@@ -325,9 +333,14 @@ List copyList(List L) {
         exit(1);
     }
 
-    if (!(L->length > 0)) {
+    if (!(L->length >= 0)) {
         printf("List Error: calling copyList() with invlid List length\n");
         exit(1);
+    }
+
+    if (L->length == 0) {
+        List new = newList();
+        return new;
     }
 
     if (L->length == 1) {
