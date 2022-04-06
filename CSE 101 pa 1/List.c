@@ -286,6 +286,12 @@ void deleteBack(List L) {
 }
 
 void delete(List L) {
+    if (L->cursor == L->front) {
+        deleteFront(L);
+    } else if (L->cursor == L->back) {
+        deleteBack(L);
+    }
+
     Node tmp = L->cursor;
     tmp->next->prev = tmp->prev;
     tmp->prev->next = tmp->next;
