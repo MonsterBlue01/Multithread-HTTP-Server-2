@@ -279,8 +279,7 @@ void deleteBack(List L) {
     }
 
     Node tmp = L->back;                                         //Checked
-    L->back = tmp->prev;
-    tmp->prev->next = NULL;
+    L->back = L->back->prev;
     free(tmp);
 
     L->length--;
