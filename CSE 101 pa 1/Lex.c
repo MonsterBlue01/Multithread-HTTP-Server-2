@@ -102,6 +102,3 @@ int main(int argc, char *argv[]) {
     freeList(&l);
     return 0;
 }
-
-//Note: I almost done this project, but I still need to finish the last part - SORTING!!! But I think it's not so hard. I am so tired
-//now, so I think I am going to do that later. Buenas noches.
