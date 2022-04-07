@@ -4,20 +4,12 @@
 
 typedef struct GraphObj* Graph;
 
-typedef struct VertexObj* Vertex;
-
-typedef struct VertexObj{
-    int data;
-    Vertex Child;
-    Vertex parent;
-} VertexObj;
-
 typedef struct GraphObj{
     List* neighbor;
     int* color;
     int* parent;
     int* distance;
-    Vertex used;
+    int source;
     int order;
     int size;
 } GraphObj;

@@ -10,9 +10,10 @@ Graph newGraph(int n) {
     new->color = NULL;
     new->distance = NULL;
     new->neighbor = NULL;
+    new->parent = NULL;
     new->order = 0;
     new->size = 0;
-    new->used = NULL;
+    new->source = 0;
 
     return new;
 }
@@ -27,7 +28,11 @@ int getSize(Graph G) {
 }
 
 int getSource(Graph G) {
-    return G->used;
+    return G->source;
+}
+
+int getParent(Graph G, int u) {
+    
 }
 
 int main() {
