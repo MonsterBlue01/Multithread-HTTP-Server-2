@@ -18,8 +18,8 @@ typedef struct GraphObj{
     int* parent;
     int* distance;
     Vertex used;
-    int NoV;
-    int NoE;
+    int order;
+    int size;
 } GraphObj;
 
 /*** Constructors-Destructors ***/

@@ -10,11 +10,24 @@ Graph newGraph(int n) {
     new->color = NULL;
     new->distance = NULL;
     new->neighbor = NULL;
-    new->NoE = 0;
-    new->NoV = 0;
+    new->order = 0;
+    new->size = 0;
     new->used = NULL;
 
     return new;
+}
+
+/*** Access functions ***/
+int getOrder(Graph G) {
+    return G->order;
+}
+
+int getSize(Graph G) {
+    return G->size;
+}
+
+int getSource(Graph G) {
+    return G->used;
 }
 
 int main() {
