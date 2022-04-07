@@ -50,5 +50,13 @@ void addEdge(Graph G, int u, int v) {
     append(G->neighbor[v], u);
 }
 
+void addArc(Graph G, int u, int v) {
+    if (G->neighbor[u] == NULL) {
+        G->neighbor[u] = newList();
+    }
+
+    append(G->neighbor[u], v);
+}
+
 void addArc(Graph G, int u, int v);
 void BFS(Graph G, int s);
