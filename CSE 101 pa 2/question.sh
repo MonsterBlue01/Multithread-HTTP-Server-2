@@ -3,3 +3,4 @@
 #3. Each node has unique value?
 #4. Should we use append twice? (bi-direction graph?)
 #5. How to use 'n' that in the newGraph?
+#6. Do we need to allocate the space for neighbor in newGraph? or allocate it when we need that later?

@@ -10,7 +10,7 @@ Graph newGraph(int n) {
 
     new->color = NULL;
     new->distance = NULL;
-    new->neighbor = NULL;
+    new->neighbor = malloc(sizeof(List));
     new->parent = NULL;
     new->order = 0;
     new->size = 0;
