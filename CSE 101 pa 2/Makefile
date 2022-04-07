@@ -11,8 +11,8 @@
 BASE_SOURCES   = Graph.c List.c
 BASE_OBJECTS   = Graph.o List.o
 HEADERS        = Graph.h List.h
-COMPILE        = gcc -std=c17 -Wall -c
-LINK           = gcc -std=c17 -Wall -o
+COMPILE        = gcc -std=c17 -Wall -c -g
+LINK           = gcc -std=c17 -Wall -o -g
 REMOVE         = rm -f
 MEMCHECK       = valgrind --leak-check=full
 
@@ -32,13 +32,13 @@ GraphClient.o : GraphClient.c $(HEADERS)
 	$(COMPILE) GraphClient.c
 
 GraphTest.o : GraphTest.c $(HEADERS)
-	$(COMPILE) GraphTest.c -g
+	$(COMPILE) GraphTest.c
 
 $(BASE_OBJECTS) : $(BASE_SOURCES) $(HEADERS)
 	$(COMPILE) $(BASE_SOURCES)
 
 clean :
-	$(REMOVE) FindPath GraphClient FindPath.o GraphClient.o $(BASE_OBJECTS)
+	$(REMOVE) FindPath GraphClient GraphTest GraphTest.o FindPath.o GraphClient.o $(BASE_OBJECTS)
 
 checkFind : FindPath
 	$(MEMCHECK) FindPath in7 junk7
