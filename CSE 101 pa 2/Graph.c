@@ -60,7 +60,13 @@ void addArc(Graph G, int u, int v) {
     append(G->neighbor[u], v);
 }
 
-void BFS(Graph G, int s);
+void BFS(Graph G, int s) {
+    for (int i = 1; i < G->order; i++) {
+        G->distance = INF;
+        G->parent = NIL;
+    }
+    (void)s;
+}
 
 /*** Other operations ***/
 void printGraph(FILE* out, Graph G) {
