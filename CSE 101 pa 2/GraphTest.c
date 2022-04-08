@@ -34,6 +34,7 @@ int main() {
     BFS(G, 1);
     printf("G->distance[1]: %d\n", G->distance[1]);
     printf("G->parent[1]: %d\n", G->parent[1]);
+    printf("G->color[1]: %d\n", G->color[1]);
 
     fclose(fp);
 }

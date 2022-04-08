@@ -9,7 +9,7 @@ typedef struct GraphObj* Graph;
 
 typedef struct GraphObj{
     List* neighbor;
-    int* color;
+    int* color;                         //0: white, 1: gray, 2: black
     int* parent;
     int* distance;
     int source;

@@ -64,8 +64,11 @@ void BFS(Graph G, int s) {
     for (int i = 1; i < G->order; i++) {
         G->distance[i] = INF;
         G->parent[i] = NIL;
+        G->color[i] = 0;
     }
-    (void)s;
+    G->color[s] = 1;
+    G->distance[s] = 0;
+    G->parent[s] = NIL;
 }
 
 /*** Other operations ***/
