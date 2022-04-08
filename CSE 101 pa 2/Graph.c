@@ -9,9 +9,9 @@ Graph newGraph(int n) {
     Graph new = malloc(sizeof(GraphObj));
 
     new->color = NULL;
-    new->distance = malloc(n * sizeof(int));
-    new->neighbor = malloc(n * sizeof(List));
-    new->parent = malloc(n * sizeof(int));
+    new->distance = malloc((n + 1) * sizeof(int));
+    new->neighbor = malloc((n + 1) * sizeof(List));
+    new->parent = malloc((n + 1) * sizeof(int));
     new->order = n;
     new->size = 0;
     new->source = 0;
