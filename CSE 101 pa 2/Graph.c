@@ -32,7 +32,9 @@ int getSource(Graph G) {
     return G->source;
 }
 
-int getParent(Graph G, int u);
+int getParent(Graph G, int u) {
+    return G->parent[u];
+}
 
 /*** Manipulation procedures ***/
 void makeNull(Graph G);
@@ -48,6 +50,7 @@ void addEdge(Graph G, int u, int v) {
 
     append(G->neighbor[u], v);
     append(G->neighbor[v], u);
+    G->order++;
 }
 
 void addArc(Graph G, int u, int v) {
@@ -56,7 +59,26 @@ void addArc(Graph G, int u, int v) {
     }
 
     append(G->neighbor[u], v);
+    G->order++;
 }
 
-void addArc(Graph G, int u, int v);
-void BFS(Graph G, int s);
+void BFS(Graph G, int s) {
+    for x in V(G)-{s}
+        color[x] = white
+        d[x] = inf
+        p[x] = nil 
+   color[s] = gray       // discover the source s
+   d[s] = 0
+   p[s] = nil 
+   Q = { }               // construct a new empty queue
+   Enqueue(Q,s)
+   while Q 鈮� { }
+        x = Dequeue(Q) 
+        for y in adj[x]
+             if color[y] == white         // y is undiscovered
+                  color[y] = gray         // discover y
+                  d[y] = d[x]+1
+                  p[y] = x
+                  Enqueue(Q,y)
+        color[x] = black                  // finish x
+}
