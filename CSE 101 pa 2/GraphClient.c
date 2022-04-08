@@ -32,18 +32,17 @@ int main(int argc, char* argv[]){
     List P = newList(); // peripheral vertices 
     List E = newList(); // eccentricities */
     Graph G = NULL;
-    
     // Build graph G 
     G = newGraph(n);
     for (i = 1; i < 3; i++){
         if(i % 7 != 0 ) addEdge(G, i, i+1);
         if(i <= 28) addEdge(G, i, i+7);
     }
-    /*addEdge(G, 9, 31);
+    addEdge(G, 9, 31);
     addEdge(G, 17, 13);
     addEdge(G, 14, 33);
 
-   // Print adjacency list representation of G
+   /*// Print adjacency list representation of G
    printGraph(stdout, G);
 
    // Calculate the eccentricity of each vertex 

@@ -10,9 +10,9 @@ Graph newGraph(int n) {
 
     new->color = NULL;
     new->distance = NULL;
-    new->neighbor = malloc(sizeof(List));
+    new->neighbor = malloc(n * sizeof(List));
     new->parent = NULL;
-    new->order = 0;
+    new->order = n;
     new->size = 0;
     new->source = 0;
 
@@ -50,7 +50,6 @@ void addEdge(Graph G, int u, int v) {
 
     append(G->neighbor[u], v);
     append(G->neighbor[v], u);
-    G->order++;
 }
 
 void addArc(Graph G, int u, int v) {
@@ -59,26 +58,17 @@ void addArc(Graph G, int u, int v) {
     }
 
     append(G->neighbor[u], v);
-    G->order++;
 }
 
-void BFS(Graph G, int s) {
-    for x in V(G)-{s}
-        color[x] = white
-        d[x] = inf
-        p[x] = nil 
-   color[s] = gray       // discover the source s
-   d[s] = 0
-   p[s] = nil 
-   Q = { }               // construct a new empty queue
-   Enqueue(Q,s)
-   while Q 鈮� { }
-        x = Dequeue(Q) 
-        for y in adj[x]
-             if color[y] == white         // y is undiscovered
-                  color[y] = gray         // discover y
-                  d[y] = d[x]+1
-                  p[y] = x
-                  Enqueue(Q,y)
-        color[x] = black                  // finish x
+void BFS(Graph G, int s);
+
+/*** Other operations ***/
+void printGraph(FILE* out, Graph G) {
+    for (int i = 1; i < G->order; i++) {
+        if (G->neighbor[i] != NULL) {
+            fprintf(out, "%d: ", i);
+            printList(out, G->neighbor[i]);
+            fprintf(out, "\n");
+        }
+    }
 }
