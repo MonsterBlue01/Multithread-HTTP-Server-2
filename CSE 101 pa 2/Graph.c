@@ -62,8 +62,8 @@ void addArc(Graph G, int u, int v) {
 
 void BFS(Graph G, int s) {
     for (int i = 1; i < G->order; i++) {
-        G->distance = INF;
-        G->parent = NIL;
+        G->distance[i] = INF;
+        G->parent[i] = NIL;
     }
     (void)s;
 }
