@@ -8,7 +8,7 @@
 Graph newGraph(int n) {
     Graph new = malloc(sizeof(GraphObj));
 
-    new->color = NULL;
+    new->color = malloc((n + 1) * sizeof(int));
     new->distance = malloc((n + 1) * sizeof(int));
     new->neighbor = malloc((n + 1) * sizeof(List));
     new->parent = malloc((n + 1) * sizeof(int));
