@@ -31,6 +31,8 @@ int main() {
 
     //printf("%d\n", G->order);
     printGraph(stdout, G);
+    printf("G->distance[1]: %d\n", G->distance[1]);
+    printf("G->parent[1]: %d\n", G->parent[1]);
 
     fclose(fp);
 }
