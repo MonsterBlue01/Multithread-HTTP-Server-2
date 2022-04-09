@@ -144,6 +144,11 @@ void addArc(Graph G, int u, int v) {
             }
         }
     }
+    moveFront(G->neighbor[v]);
+    while (index(G->neighbor[v]) >= 0) {
+        printf("The data: %d\n", G->neighbor[v]->cursor->data);
+        moveNext(G->neighbor[v]);
+    }
     G->size++;
 }
 

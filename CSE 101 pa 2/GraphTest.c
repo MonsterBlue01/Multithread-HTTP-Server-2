@@ -7,9 +7,9 @@
 int main() {
     Graph G = newGraph(2);
     addEdge(G, 1, 2);
-    printf("The size: %d", G->size);
+    printf("The size: %d\n", G->size);
     addEdge(G, 2, 1);
-    printf("The size: %d", G->size);
+    printf("The size: %d\n", G->size);
 
     /*Graph G = newGraph(8);
     addEdge(G, 1, 2);
