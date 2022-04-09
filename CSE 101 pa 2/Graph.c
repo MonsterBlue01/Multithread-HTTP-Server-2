@@ -85,6 +85,8 @@ void addEdge(Graph G, int u, int v) {
 }
 
 void addArc(Graph G, int u, int v) {
+    int acted = 0;
+
     if (G->neighbor[u] == NULL) {
         G->neighbor[u] = newList();
     }
@@ -101,13 +103,16 @@ void addArc(Graph G, int u, int v) {
                 printf("Got it\n");
                 if (G->neighbor[u]->cursor == G->neighbor[u]->back) {
                     append(G->neighbor[u], v);
+                    acted = 1;
                     break;
                 } else {
                     moveNext(G->neighbor[u]);
                 }
             }
-            printf("The value of cursor: %d\n", G->neighbor[u]->cursor->data);
-            insertAfter(G->neighbor[u], v);
+            if (acted == 0) {
+                printf("The value of cursor: %d\n", G->neighbor[u]->cursor->data);
+                insertAfter(G->neighbor[u], v);
+            }
         }
     }
     printList(stdout, G->neighbor[u]);
