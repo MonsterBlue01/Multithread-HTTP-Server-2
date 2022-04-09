@@ -13,7 +13,6 @@ int main() {
     addArc(G, 100, 60);
     addArc(G, 100, 300);
     printGraph(stdout, G);
-    printf("a\n");
     /*FILE *fp = NULL;
     fp = fopen("output.sh", "w+");
     
