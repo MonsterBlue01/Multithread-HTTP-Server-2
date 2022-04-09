@@ -18,7 +18,7 @@ int main() {
     printGraph(stdout, G);
 
     List L = newList();
-    getPath(L, G, 3);
+    getPath(L, G, 4);
 
     printList(stdout, L);
     printf("\n");
