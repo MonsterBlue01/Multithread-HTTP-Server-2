@@ -5,7 +5,13 @@
 #include "Graph.h"
 
 int main() {
-    Graph G = newGraph(8);
+    Graph G = newGraph(2);
+    addEdge(G, 1, 2);
+    printf("The size: %d", G->size);
+    addEdge(G, 2, 1);
+    printf("The size: %d", G->size);
+
+    /*Graph G = newGraph(8);
     addEdge(G, 1, 2);
     addEdge(G, 1, 3);
     addEdge(G, 2, 3);
@@ -22,7 +28,7 @@ int main() {
     getPath(L, G, 4);
 
     printList(stdout, L);
-    printf("\n");
+    printf("\n");*/
 
     //printf("G->distance: %d\n", G->distance[1]);
     //printf("G->distance: %d\n", G->distance[2]);

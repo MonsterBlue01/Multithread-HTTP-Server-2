@@ -113,6 +113,7 @@ void addEdge(Graph G, int u, int v) {
             }
         }
     }
+    G->size++;
 }
 
 void addArc(Graph G, int u, int v) {
@@ -143,6 +144,7 @@ void addArc(Graph G, int u, int v) {
             }
         }
     }
+    G->size++;
 }
 
 void BFS(Graph G, int s) {
