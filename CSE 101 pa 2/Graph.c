@@ -106,7 +106,7 @@ void addArc(Graph G, int u, int v) {
                     moveNext(G->neighbor[u]);
                 }
             }
-            append(G->neighbor[u], v);
+            insertAfter(G->neighbor[u], v);
         }
     }
     printList(stdout, G->neighbor[u]);
