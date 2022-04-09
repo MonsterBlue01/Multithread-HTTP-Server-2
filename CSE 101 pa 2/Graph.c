@@ -100,6 +100,7 @@ void addArc(Graph G, int u, int v) {
             while (G->neighbor[u]->cursor->data < v) {
                 printf("Got it\n");
                 if (G->neighbor[u]->cursor == G->neighbor[u]->back) {
+                    append(G->neighbor[u], v);
                     break;
                 } else {
                     moveNext(G->neighbor[u]);
