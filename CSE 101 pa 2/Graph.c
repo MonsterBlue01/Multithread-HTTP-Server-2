@@ -57,7 +57,7 @@ void addEdge(Graph G, int u, int v) {
     }
 
     moveFront(G->neighbor[v]);
-    while (G->neighbor[v]->index >= 0) {
+    while (index(G->neighbor[v]) >= 0) {
         printf("data: %d\n", G->neighbor[v]->cursor->data);
         moveNext(G->neighbor[v]);
     }
