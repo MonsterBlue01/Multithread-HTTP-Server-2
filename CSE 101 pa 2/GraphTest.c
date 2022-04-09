@@ -13,6 +13,7 @@ int main() {
     addEdge(G, 100, 60);
     addEdge(G, 100, 300);
     printGraph(stdout, G);
+    
     /*FILE *fp = NULL;
     fp = fopen("output.sh", "w+");
     
