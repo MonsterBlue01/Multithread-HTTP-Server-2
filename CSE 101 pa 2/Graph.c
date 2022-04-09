@@ -97,7 +97,7 @@ void addArc(Graph G, int u, int v) {
         if (v < G->neighbor[u]->cursor->data) {
             prepend(G->neighbor[u], v);
         } else {
-            while (G->neighbor[u]->cursor->data > v) {
+            while (G->neighbor[u]->cursor->data < v) {
                 printf("Got it\n");
                 break;
             }
