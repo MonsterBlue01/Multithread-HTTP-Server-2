@@ -5,7 +5,7 @@
 #include "Graph.h"
 
 int main() {
-    Graph G = newGraph(2);
+    Graph G = newGraph(3);
     addArc(G, 1, 2);
     printGraph(stdout, G);
     printf("\n");
