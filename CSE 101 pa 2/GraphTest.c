@@ -17,14 +17,14 @@ int main() {
     BFS(G, 1);
     printGraph(stdout, G);
 
-    printf("G->color: %d\n", G->color[1]);
-    printf("G->color: %d\n", G->color[2]);
-    printf("G->color: %d\n", G->color[3]);
-    printf("G->color: %d\n", G->color[4]);
-    printf("G->color: %d\n", G->color[5]);
-    printf("G->color: %d\n", G->color[6]);
-    printf("G->color: %d\n", G->color[7]);
-    printf("G->color: %d\n", G->color[8]);
+    printf("G->distance: %d\n", G->distance[1]);
+    printf("G->distance: %d\n", G->distance[2]);
+    printf("G->distance: %d\n", G->distance[3]);
+    printf("G->distance: %d\n", G->distance[4]);
+    printf("G->distance: %d\n", G->distance[5]);
+    printf("G->distance: %d\n", G->distance[6]);
+    printf("G->distance: %d\n", G->distance[7]);
+    printf("G->distance: %d\n", G->distance[8]);
 
     /*FILE *fp = NULL;
     fp = fopen("output.sh", "w+");
