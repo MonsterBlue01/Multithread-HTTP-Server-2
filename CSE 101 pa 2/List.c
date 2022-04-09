@@ -311,7 +311,7 @@ void delete(List L) {
 void printList(FILE* out, List L) {
     if (L == NULL) {
         printf("List is NULL.\n");
-    } (L->front == NULL) {
+    } else if (L->front == NULL) {
         printf("The front of List is NULL. Not be able to print.");
     }
 
