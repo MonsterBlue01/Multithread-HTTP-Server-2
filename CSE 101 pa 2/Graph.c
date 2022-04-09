@@ -90,6 +90,7 @@ void addArc(Graph G, int u, int v) {
     }
 
     append(G->neighbor[u], v);
+    printList(stdout, G->neighbor[u]);
 }
 
 void BFS(Graph G, int s) {
