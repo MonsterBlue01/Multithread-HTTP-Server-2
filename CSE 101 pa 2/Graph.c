@@ -110,7 +110,6 @@ void addArc(Graph G, int u, int v) {
                 }
             }
             if (acted == 0) {
-                moveFront(G->neighbor[u]);
                 printf("The value of the node before cursor: %d\n", G->neighbor[u]->cursor->data);
                 insertAfter(G->neighbor[u], v);
             }
