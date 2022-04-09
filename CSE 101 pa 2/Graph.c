@@ -99,7 +99,11 @@ void addArc(Graph G, int u, int v) {
         } else {
             while (G->neighbor[u]->cursor->data < v) {
                 printf("Got it\n");
-                break;
+                if (G->neighbor[u]->cursor == G->neighbor[u]->back) {
+                    break;
+                } else {
+                    moveNext(G->neighbor[u]);
+                }
             }
             append(G->neighbor[u], v);
         }
