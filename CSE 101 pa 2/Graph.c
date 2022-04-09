@@ -48,39 +48,59 @@ int getDist(Graph G, int u) {
 void makeNull(Graph G);
 
 void addEdge(Graph G, int u, int v) {
+    int actedu = 0;
+    int actedv = 0;
+
     if (G->neighbor[u] == NULL) {
         G->neighbor[u] = newList();
+    }
+
+    if (G->neighbor[u]->front == NULL) {
+        append(G->neighbor[u], v);
+    } else {
+        moveFront(G->neighbor[u]);
+        if (v < G->neighbor[u]->cursor->data) {
+            prepend(G->neighbor[u], v);
+        } else {
+            while (G->neighbor[u]->cursor->data < v) {
+                if (G->neighbor[u]->cursor == G->neighbor[u]->back) {
+                    append(G->neighbor[u], v);
+                    actedu = 1;
+                    break;
+                } else {
+                    moveNext(G->neighbor[u]);
+                }
+            }
+            if (actedu == 0) {
+                insertBefore(G->neighbor[u], v);
+            }
+        }
     }
 
     if (G->neighbor[v] == NULL) {
         G->neighbor[v] = newList();
     }
 
-    moveFront(G->neighbor[v]);
-    while (index(G->neighbor[v]) >= 0) {
-        printf("data: %d\n", G->neighbor[v]->cursor->data);
-        printf("end\n");
-        moveNext(G->neighbor[v]);
-    }
     if (G->neighbor[v]->front == NULL) {
         append(G->neighbor[v], u);
-    } else if (u < G->neighbor[v]->front->data) {
-        prepend(G->neighbor[v], u);
     } else {
-        append(G->neighbor[v], u);
-    }
-
-    moveFront(G->neighbor[u]);
-    while (G->neighbor[u]->index > 0) {
-        printf("data: %d\n", G->neighbor[u]->cursor->data);
-        moveNext(G->neighbor[u]);
-    }
-    if (G->neighbor[u]->front == NULL) {
-        append(G->neighbor[u], v);
-    } else if (v < G->neighbor[u]->front->data) {
-        prepend(G->neighbor[u], v);
-    } else {
-        append(G->neighbor[u], v);
+        moveFront(G->neighbor[v]);
+        if (u < G->neighbor[v]->cursor->data) {
+            prepend(G->neighbor[v], u);
+        } else {
+            while (G->neighbor[v]->cursor->data < u) {
+                if (G->neighbor[v]->cursor == G->neighbor[v]->back) {
+                    append(G->neighbor[v], u);
+                    actedu = 1;
+                    break;
+                } else {
+                    moveNext(G->neighbor[v]);
+                }
+            }
+            if (actedu == 0) {
+                insertBefore(G->neighbor[v], u);
+            }
+        }
     }
 }
 
