@@ -148,15 +148,6 @@ void addArc(Graph G, int u, int v) {
             }
         }
     }
-    if ((G->neighbor[v]) == NULL) {
-        G->size++;
-        return;
-    } else if ((G->neighbor[v]->front) == NULL) {
-        G->size++;
-        return;
-    } else {
-        printf("Front: %d\n", G->neighbor[v]->front->data);
-    }
 }
 
 void BFS(Graph G, int s) {
