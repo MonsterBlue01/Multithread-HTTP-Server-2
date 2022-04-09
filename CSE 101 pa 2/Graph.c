@@ -110,13 +110,10 @@ void addArc(Graph G, int u, int v) {
                 }
             }
             if (acted == 0) {
-                printf("The value of the node before cursor: %d\n", G->neighbor[u]->cursor->data);
                 insertBefore(G->neighbor[u], v);
             }
         }
     }
-    printList(stdout, G->neighbor[u]);
-    printf("\n");
 }
 
 void BFS(Graph G, int s) {
