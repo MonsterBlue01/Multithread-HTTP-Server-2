@@ -106,6 +106,7 @@ void addArc(Graph G, int u, int v) {
                     moveNext(G->neighbor[u]);
                 }
             }
+            printf("The value of cursor: %d\n", G->neighbor[u]->cursor->data);
             insertAfter(G->neighbor[u], v);
         }
     }
