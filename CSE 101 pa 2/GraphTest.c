@@ -7,10 +7,13 @@
 int main() {
     Graph G = newGraph(2);
     addArc(G, 1, 2);
+    printGraph(stdout, G);
+    printf("\n");
     printf("The size: %d\n", G->size);
     //addArc(G, 2, 1);
     //printf("The size: %d\n", G->size);
     addArc(G, 1, 3);
+    printGraph(stdout, G);
     printf("The size: %d\n", G->size);
     //addArc(G, 3, 1);
     //printf("The size: %d\n", G->size);
