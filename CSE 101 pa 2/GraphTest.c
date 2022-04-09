@@ -17,14 +17,20 @@ int main() {
     BFS(G, 1);
     printGraph(stdout, G);
 
-    printf("G->distance: %d\n", G->distance[1]);
-    printf("G->distance: %d\n", G->distance[2]);
-    printf("G->distance: %d\n", G->distance[3]);
-    printf("G->distance: %d\n", G->distance[4]);
-    printf("G->distance: %d\n", G->distance[5]);
-    printf("G->distance: %d\n", G->distance[6]);
-    printf("G->distance: %d\n", G->distance[7]);
-    printf("G->distance: %d\n", G->distance[8]);
+    List L = newList();
+    getPath(L, G, 3);
+
+    printList(stdout, L);
+    printf("\n");
+
+    //printf("G->distance: %d\n", G->distance[1]);
+    //printf("G->distance: %d\n", G->distance[2]);
+    //printf("G->distance: %d\n", G->distance[3]);
+    //printf("G->distance: %d\n", G->distance[4]);
+    //printf("G->distance: %d\n", G->distance[5]);
+    //printf("G->distance: %d\n", G->distance[6]);
+    //printf("G->distance: %d\n", G->distance[7]);
+    //printf("G->distance: %d\n", G->distance[8]);
 
     /*FILE *fp = NULL;
     fp = fopen("output.sh", "w+");

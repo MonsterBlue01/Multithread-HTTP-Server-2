@@ -44,6 +44,17 @@ int getDist(Graph G, int u) {
     return G->distance[u];
 }
 
+void getPath(List L, Graph G, int u) {
+    if (G->source == u) {
+        append(L, NIL);
+    } else if (G->parent[u] == NIL) {
+        print("%d is not reachable from %d\n", u, G->source);
+    } else {
+        getPath(L, G, G->parent[u]);
+        append(L, u);
+    }
+}
+
 /*** Manipulation procedures ***/
 void makeNull(Graph G);
 
