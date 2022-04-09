@@ -14,7 +14,10 @@ int main() {
     addEdge(G, 6, 7);
     addEdge(G, 4, 6);
     addEdge(G, 7, 8);
+    BFS(G, 1);
     printGraph(stdout, G);
+
+    printf("G->color: %d\n", G->color[1]);
 
     /*FILE *fp = NULL;
     fp = fopen("output.sh", "w+");
