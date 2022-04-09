@@ -177,6 +177,7 @@ void BFS(Graph G, int s) {
         //printf("The result List: ");
         //printList(stdout, L);
         //printf("\n");
+        G->source = s;
     }
 }
 
