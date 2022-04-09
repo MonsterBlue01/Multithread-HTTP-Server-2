@@ -91,6 +91,7 @@ void addArc(Graph G, int u, int v) {
 
     append(G->neighbor[u], v);
     printList(stdout, G->neighbor[u]);
+    printf("\n");
 }
 
 void BFS(Graph G, int s) {
