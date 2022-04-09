@@ -5,11 +5,19 @@
 #include "Graph.h"
 
 int main() {
-    FILE *fp = NULL;
+    Graph G = newGraph(200);
+    addEdge(G, 100, 200);
+    addEdge(G, 1, 100);
+    printGraph(stdout, G);
+    printf("a\n");
+    /*FILE *fp = NULL;
     fp = fopen("output.sh", "w+");
     
-    int n = 35;
-    int i = 35;
+    int i, s, max, min, d, n=35;
+    List  C = newList(); // central vertices 
+    List  P = newList(); // peripheral vertices 
+    List  E = newList(); // eccentricities 
+    Graph G = NULL;
 
     Graph G = newGraph(n);
     for (i = 1; i < 3; i++){
@@ -30,11 +38,21 @@ int main() {
     }*/
 
     //printf("%d\n", G->order);
-    printGraph(stdout, G);
-    BFS(G, 1);
-    printf("G->distance[1]: %d\n", G->distance[1]);
-    printf("G->parent[1]: %d\n", G->parent[1]);
-    printf("G->color[1]: %d\n", G->color[1]);
+    /*printGraph(stdout, G);
+    BFS(G, 1);*/
+    //printf("G->distance[1]: %d\n", G->distance[1]);
+    //printf("G->parent[1]: %d\n", G->parent[1]);
+    //printf("G->color[1]: %d\n", G->color[1]);
+    
+    /*printf("Distance of 1 from 1: %d\n", G->distance[1]);
+    printf("Distance of 13 from 1: %d\n", G->distance[13]);
 
-    fclose(fp);
+    printf("The parent of 1: %d\n", G->parent[1]);
+    printf("The parent of 8: %d\n", G->parent[8]);
+    printf("The parent of 31: %d\n", G->parent[31]);
+
+    printf("The color of 1: %d\n", G->color[1]);
+    printf("The color of 8: %d\n", G->color[8]);
+
+    fclose(fp);*/
 }

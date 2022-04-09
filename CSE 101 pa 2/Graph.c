@@ -19,6 +19,10 @@ Graph newGraph(int n) {
     return new;
 }
 
+void freeGraph(Graph* pG) {
+    free(*pG);
+}
+
 /*** Access functions ***/
 int getOrder(Graph G) {
     return G->order;
@@ -36,6 +40,10 @@ int getParent(Graph G, int u) {
     return G->parent[u];
 }
 
+int getDist(Graph G, int u) {
+    return G->distance[u];
+}
+
 /*** Manipulation procedures ***/
 void makeNull(Graph G);
 
@@ -48,8 +56,23 @@ void addEdge(Graph G, int u, int v) {
         G->neighbor[v] = newList();
     }
 
-    append(G->neighbor[u], v);
-    append(G->neighbor[v], u);
+    moveFront(G->neighbor[v]);
+    if (G->neighbor[v]->front == NULL) {
+        append(G->neighbor[v], u);
+    } else if (u < G->neighbor[v]->front->data) {
+        prepend(G->neighbor[v], u);
+    } else {
+        append(G->neighbor[v], u);
+    }
+
+    moveFront(G->neighbor[u]);
+    if (G->neighbor[u]->front == NULL) {
+        append(G->neighbor[u], v);
+    } else if (v < G->neighbor[u]->front->data) {
+        prepend(G->neighbor[u], v);
+    } else {
+        append(G->neighbor[u], v);
+    }
 }
 
 void addArc(Graph G, int u, int v) {
@@ -69,11 +92,35 @@ void BFS(Graph G, int s) {
     G->color[s] = 1;
     G->distance[s] = 0;
     G->parent[s] = NIL;
+
+    List L = newList();
+    append(L, s);
+    while (L->length != 0) {
+        int x = front(L);
+        //printf("The origin List: ");
+        //printList(stdout, L);
+        //printf("\n");
+        deleteFront(L);
+        Node tmp = G->neighbor[x]->front;
+        while (tmp != NULL) {
+            if (G->color[tmp->data] == 0) {
+                G->color[tmp->data] = 1;
+                G->distance[tmp->data] = G->distance[x] + 1;
+                G->parent[tmp->data] = x;
+                append(L, tmp->data);
+            }
+            tmp = tmp->next;
+        }
+        G->color[x] = 2;
+        //printf("The result List: ");
+        //printList(stdout, L);
+        //printf("\n");
+    }
 }
 
 /*** Other operations ***/
 void printGraph(FILE* out, Graph G) {
-    for (int i = 1; i < G->order; i++) {
+    for (int i = 1; i <= G->order; i++) {
         if (G->neighbor[i] != NULL) {
             fprintf(out, "%d: ", i);
             printList(out, G->neighbor[i]);

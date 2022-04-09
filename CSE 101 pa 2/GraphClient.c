@@ -25,27 +25,26 @@
 #include"Graph.h"
 
 int main(int argc, char* argv[]){
-    //int s, max, min, d, n, i = 35;
-    int n = 35;
-    int i = 35;
-    /*List C = newList(); // central vertices 
-    List P = newList(); // peripheral vertices 
-    List E = newList(); // eccentricities */
-    Graph G = NULL;
-    // Build graph G 
-    G = newGraph(n);
-    for (i = 1; i < 3; i++){
-        if(i % 7 != 0 ) addEdge(G, i, i+1);
-        if(i <= 28) addEdge(G, i, i+7);
-    }
-    addEdge(G, 9, 31);
-    addEdge(G, 17, 13);
-    addEdge(G, 14, 33);
+   int i, s, max, min, d, n=35;
+   List  C = newList(); // central vertices 
+   List  P = newList(); // peripheral vertices 
+   List  E = newList(); // eccentricities 
+   Graph G = NULL;
 
-   /*// Print adjacency list representation of G
+   // Build graph G 
+   G = newGraph(n);
+   for(i=1; i<n; i++){
+      if( i%7!=0 ) addEdge(G, i, i+1);
+      if( i<=28  ) addEdge(G, i, i+7);
+   }
+   addEdge(G, 9, 31);
+   addEdge(G, 17, 13);
+   addEdge(G, 14, 33);
+
+   // Print adjacency list representation of G
    printGraph(stdout, G);
 
-   // Calculate the eccentricity of each vertex 
+   /*// Calculate the eccentricity of each vertex 
    for(s=1; s<=n; s++){
       BFS(G, s);
       max = getDist(G, 1);
