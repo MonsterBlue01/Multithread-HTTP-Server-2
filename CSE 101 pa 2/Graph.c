@@ -150,6 +150,8 @@ void addArc(Graph G, int u, int v) {
     } else if ((G->neighbor[v]->front) == NULL) {
         G->size++;
         return;
+    } else {
+        printf("Front: %d\n", G->neighbor[v]->front->data);
     }
 }
 
