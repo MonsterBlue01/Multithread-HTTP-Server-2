@@ -91,13 +91,13 @@ void addEdge(Graph G, int u, int v) {
             while (G->neighbor[v]->cursor->data < u) {
                 if (G->neighbor[v]->cursor == G->neighbor[v]->back) {
                     append(G->neighbor[v], u);
-                    actedu = 1;
+                    actedv = 1;
                     break;
                 } else {
                     moveNext(G->neighbor[v]);
                 }
             }
-            if (actedu == 0) {
+            if (actedv == 0) {
                 insertBefore(G->neighbor[v], u);
             }
         }
