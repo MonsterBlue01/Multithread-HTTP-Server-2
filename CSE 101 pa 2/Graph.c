@@ -104,6 +104,9 @@ void addArc(Graph G, int u, int v) {
                     break;
                 } else {
                     moveNext(G->neighbor[u]);
+                    if (G->neighbor[u]->cursor->data > v) {
+                        insertBefore(G->neighbor[u], v);
+                    }
                 }
             }
             append(G->neighbor[u], v);
