@@ -15,6 +15,7 @@ int main() {
     addEdge(G, 4, 6);
     addEdge(G, 7, 8);
     BFS(G, 1);
+    printf("The source: %d\n", G->source);
     printGraph(stdout, G);
 
     List L = newList();
