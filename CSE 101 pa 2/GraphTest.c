@@ -10,6 +10,7 @@ int main() {
     addArc(G, 100, 50);
     addArc(G, 100, 75);
     addArc(G, 100, 25);
+    addArc(G, 100, 60);
     printGraph(stdout, G);
     printf("a\n");
     /*FILE *fp = NULL;
