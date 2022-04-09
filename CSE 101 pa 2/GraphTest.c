@@ -8,6 +8,7 @@ int main() {
     Graph G = newGraph(200);
     addEdge(G, 100, 200);
     addEdge(G, 100, 50);
+    addEdge(G, 100, 75);
     addEdge(G, 1, 100);
     printGraph(stdout, G);
     printf("a\n");
