@@ -123,6 +123,10 @@ void addArc(Graph G, int u, int v) {
         G->neighbor[u] = newList();
     }
 
+    if (G->neighbor[v] == NULL) {
+        G->neighbor[v] = newList();
+    }
+
     if (G->neighbor[u]->front == NULL) {
         append(G->neighbor[u], v);
     } else {
