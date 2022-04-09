@@ -5,15 +5,17 @@
 #include "Graph.h"
 
 int main() {
-    Graph G = newGraph(200);
-    addEdge(G, 100, 200);
-    addEdge(G, 100, 50);
-    addEdge(G, 100, 75);
-    addEdge(G, 100, 25);
-    addEdge(G, 100, 60);
-    addEdge(G, 100, 300);
+    Graph G = newGraph(8);
+    addEdge(G, 1, 2);
+    addEdge(G, 1, 3);
+    addEdge(G, 2, 3);
+    addEdge(G, 1, 5);
+    addEdge(G, 5, 7);
+    addEdge(G, 6, 7);
+    addEdge(G, 4, 6);
+    addEdge(G, 7, 8);
     printGraph(stdout, G);
-    
+
     /*FILE *fp = NULL;
     fp = fopen("output.sh", "w+");
     
