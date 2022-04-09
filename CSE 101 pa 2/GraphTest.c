@@ -9,7 +9,7 @@ int main() {
     addArc(G, 100, 200);
     addArc(G, 100, 50);
     addArc(G, 100, 75);
-    addArc(G, 1, 100);
+    addArc(G, 100, 25);
     printGraph(stdout, G);
     printf("a\n");
     /*FILE *fp = NULL;
