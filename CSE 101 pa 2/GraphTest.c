@@ -18,6 +18,13 @@ int main() {
     printGraph(stdout, G);
 
     printf("G->color: %d\n", G->color[1]);
+    printf("G->color: %d\n", G->color[2]);
+    printf("G->color: %d\n", G->color[3]);
+    printf("G->color: %d\n", G->color[4]);
+    printf("G->color: %d\n", G->color[5]);
+    printf("G->color: %d\n", G->color[6]);
+    printf("G->color: %d\n", G->color[7]);
+    printf("G->color: %d\n", G->color[8]);
 
     /*FILE *fp = NULL;
     fp = fopen("output.sh", "w+");
