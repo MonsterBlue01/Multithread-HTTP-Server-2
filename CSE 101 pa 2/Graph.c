@@ -129,7 +129,7 @@ void BFS(Graph G, int s) {
         int x = front(L);
         //printf("The origin List: ");
         //printList(stdout, L);
-        //printf("\n");
+        //printf("\n"); 
         deleteFront(L);
         Node tmp = G->neighbor[x]->front;
         while (tmp != NULL) {
