@@ -46,8 +46,7 @@ int getDist(Graph G, int u) {
 
 void getPath(List L, Graph G, int u) {
     if (G->source == u) {
-        append(L, NIL);
-        printf("Never\n");
+        append(L, u);
     } else if (G->parent[u] == NIL) {
         printf("%d is not reachable from %d\n", u, G->source);
     } else {
