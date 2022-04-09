@@ -89,7 +89,12 @@ void addArc(Graph G, int u, int v) {
         G->neighbor[u] = newList();
     }
 
-    append(G->neighbor[u], v);
+    if (G->neighbor[u]->front == NULL) {
+        append(G->neighbor[u], v);
+        printf("It's NULL!\n");
+    } else {
+        append(G->neighbor[u], v);
+    }
     printList(stdout, G->neighbor[u]);
     printf("\n");
 }
