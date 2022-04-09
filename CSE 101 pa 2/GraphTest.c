@@ -13,7 +13,7 @@ int main() {
     addArc(G, 1, 3);
     printf("The size: %d\n", G->size);
     //addArc(G, 3, 1);
-    /printf("The size: %d\n", G->size);
+    //printf("The size: %d\n", G->size);
 
     /*Graph G = newGraph(8);
     addEdge(G, 1, 2);
