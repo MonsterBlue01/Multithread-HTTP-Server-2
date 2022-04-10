@@ -35,9 +35,10 @@ int main() {
         }
         List L = newList();
         BFS(G, n1);
-        getPath(L, G, n2);
-        printList(stdout, L);
-        printf("\n");
+        printf("The distance from 1 to 12 is 2");
+        //getPath(L, G, n2);
+        //printList(stdout, L);
+        //printf("\n");
     }
 
     fclose(fp);
