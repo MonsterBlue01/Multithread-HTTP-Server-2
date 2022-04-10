@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     int n1, n2;
 
     fp1 = fopen(argv[1], "r");
-    fp2 = fopen(argv[2], "r");
+    fp2 = fopen(argv[2], "w+");
     if ((fp1 == NULL) || (fp2 == NULL)) {
         fprintf(stderr, "main function Error: Can't find corresponding files.\n");
         exit(1);
