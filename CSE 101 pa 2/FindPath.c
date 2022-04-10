@@ -5,12 +5,15 @@
 #include "List.h"
 
 int main(int argc, char *argv[]) {
-    FILE *fp1 = NULL;            
+    FILE *fp1 = NULL;
+    FILE *fp2 = NULL;
+
     int num;
     int n1, n2;
 
     fp1 = fopen("input.sh", "r");
-    if (fp1 == NULL) {
+    fp2 = fopen("output.sh", "r");
+    if ((fp1 == NULL) || (fp2 == NULL)) {
         fprintf(stderr, "main function Error: Can't find corresponding files.\n");
         exit(1);
     }
@@ -54,4 +57,5 @@ int main(int argc, char *argv[]) {
     }
 
     fclose(fp1);
+    fclose(fp2);
 }
