@@ -219,7 +219,9 @@ void printGraph(FILE* out, Graph G) {
         if (G->neighbor[i] != NULL) {
             fprintf(out, "%d: ", i);
             printList(out, G->neighbor[i]);
-            fprintf(out, "\n");
+            if (i < G->order) {
+                fprintf(out, "\n");
+            }
         }
     }
 }

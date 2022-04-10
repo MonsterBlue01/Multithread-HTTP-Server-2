@@ -1,11 +1,50 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "List.h"
 #include "Graph.h"
 
 int main() {
-    Graph G = newGraph(4);
+    Graph G = newGraph(15);
+    addEdge(G, 1, 2);
+    addEdge(G, 1, 7);
+    addEdge(G, 1, 10);
+    addEdge(G, 1, 14);
+    addEdge(G, 2, 5);
+    addEdge(G, 2, 10);
+    addEdge(G, 2, 13);
+    addEdge(G, 3, 7);
+    addEdge(G, 4, 6);
+    addEdge(G, 4, 7);
+    addEdge(G, 4, 10);
+    addEdge(G, 4, 11);
+    addEdge(G, 4, 12);
+    addEdge(G, 5, 8);
+    addEdge(G, 5, 9);
+    addEdge(G, 5, 10);
+    addEdge(G, 6, 9);
+    addEdge(G, 6, 11);
+    addEdge(G, 6, 13);
+    addEdge(G, 7, 10);
+    addEdge(G, 7, 13);
+    addEdge(G, 7, 14);
+    addEdge(G, 8, 10);
+    addEdge(G, 8, 13);
+    addEdge(G, 9, 15);
+    addEdge(G, 10, 13);
+    addEdge(G, 10, 14);
+    addEdge(G, 11, 14);
+    addEdge(G, 11, 15);
+    addEdge(G, 13, 14);
+    BFS(G, 12);
+    List L = newList();
+    printf("Distance: %d\n", getDist(G, 15));
+    getPath(L, G, 15);
+    printf("Path: ");
+    printList(stdout, L);
+    printf("\n");
+
+    /*Graph G = newGraph(4);
     addArc(G, 1, 2);
     printf("The size: %d\n", G->size);
     printf("The neighbor List of 1: ");
@@ -29,7 +68,7 @@ int main() {
     printf("The size: %d\n", G->size);
     printf("The neighbor List of 2: ");
     printf("%d ", G->neighbor[2]->front->data);
-    printf("%d\n", G->neighbor[2]->front->next->data);
+    printf("%d\n", G->neighbor[2]->front->next->data);*/
 
     /*Graph G = newGraph(8);
     addEdge(G, 1, 2);

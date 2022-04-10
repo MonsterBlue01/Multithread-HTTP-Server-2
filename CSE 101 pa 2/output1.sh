@@ -21,10 +21,10 @@ The distance from 1 to 15 is infinity
 No 1-15 path exists
 
 The distance from 4 to 8 is 5
-A shortest 1-12 path is: 4 10 5 9 13 8
+A shortest 4-8 path is: 4 10 5 9 13 8
 
 The distance from 9 to 6 is infinity
 No 9-6 path exists
 
 The distance from 15 to 8 is 4
-A shortest 1-12 path is: 15 14 9 13 8
+A shortest 15-8 path is: 15 14 9 13 8

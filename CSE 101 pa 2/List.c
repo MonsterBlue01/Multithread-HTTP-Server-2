@@ -309,6 +309,14 @@ void delete(List L) {
 // Other operations -----------------------------------------------------------
 
 void printList(FILE* out, List L) {
+    if (L == NULL) {
+        return;
+    }
+
+    if (L->front == NULL) {
+        return;
+    }
+
     Node head = L->front;
 
     do {
