@@ -44,18 +44,18 @@ int index(List L) {
 
 int front(List L) {
     if (L->length <= 0) {
-        printf("List Error: calling front() on NULL List or empty List reference\n");
+        fprintf(stderr, "List Error: calling front() on NULL List or empty List reference\n");
         exit(1);
-    } else {                                                //Checked
+    } else {
         return L->front->data;
     }
 }
 
 int back(List L) {
     if (L->length <= 0) {
-        printf("List Error: calling back() on NULL List or empty List reference\n");
+        fprintf(stderr, "List Error: calling back() on NULL List or empty List reference\n");
         exit(1);
-    } else {                                                //Checked
+    } else {
         return L->back->data;
     }
 }
@@ -64,7 +64,7 @@ int get(List L) {
     if ((L->length > 0) && (L->index >= 0)) {
         return (L->cursor->data);
     } else {
-        printf("List Error: calling front() on NULL List or with invalid index\n");
+        fprintf(stderr, "List Error: calling front() on NULL List or with invalid index\n");
         exit(1);
     }
 }
@@ -151,7 +151,7 @@ void prepend(List L, int x) {
     N->prev = NULL;
 
     if(L == NULL){
-        printf("List Error: calling prepend() on NULL List reference\n");
+        fprintf(stderr, "List Error: calling prepend() on NULL List reference\n");
         exit(EXIT_FAILURE);
     }
     
@@ -177,7 +177,7 @@ void append(List L, int x) {
     N->prev = NULL;
 
     if(L == NULL){
-        printf("List Error: calling append() on NULL List reference\n");
+        fprintf(stderr, "List Error: calling append() on NULL List reference\n");
         exit(1);
     }
 
@@ -194,7 +194,7 @@ void append(List L, int x) {
 
 void insertBefore(List L, int x) {
     if ((L->length <= 0) || (L->index < 0)) {
-        printf("List Error: calling insertBefore() with List with invalid length or index\n");
+        fprintf(stderr, "List Error: calling insertBefore() with List with invalid length or index\n");
     } else {
         if (L->cursor == L->front) {
             prepend(L, x);
@@ -223,7 +223,7 @@ void insertBefore(List L, int x) {
 
 void insertAfter(List L, int x) {
     if ((L->length <= 0) || (L->index < 0)) {
-        printf("List Error: calling insertBefore() with List with invalid length or index\n");
+        fprintf(stderr, "List Error: calling insertAfter() with List with invalid length or index\n");
     } else {
         if (L->cursor == L->back) {
             append(L, x);
@@ -245,7 +245,7 @@ void insertAfter(List L, int x) {
 
 void deleteFront(List L) {
     if (L->length <= 0) {
-        printf("List Error: calling deleteFront() with List with invalid length or index\n");
+        fprintf(stderr, "List Error: calling deleteFront() with List with invalid length or index\n");
         exit(1);
     }
 
@@ -269,7 +269,7 @@ void deleteFront(List L) {
 
 void deleteBack(List L) {
     if (L->length <= 0) {
-        printf("List Error: calling deleteFront() with List with invalid length\n");
+        fprintf(stderr, "List Error: calling deleteBack() with List with invalid length or index\n");
         exit(1);
     }
 
@@ -281,7 +281,7 @@ void deleteBack(List L) {
         return;
     }
 
-    Node tmp = L->back;                                         //Checked
+    Node tmp = L->back;
     L->back = L->back->prev;
     free(tmp);
 
@@ -324,12 +324,12 @@ void printList(FILE* out, List L) {
 
 List copyList(List L) {
     if (L == NULL) {
-        printf("List Error: calling copyList() with nothing\n");
+        fprintf(stderr, "List Error: calling copyList() with nothing\n");
         exit(1);
     }
 
     if (!(L->length >= 0)) {
-        printf("List Error: calling copyList() with invlid List length\n");
+        fprintf(stderr, "List Error: calling copyList() with invlid List length\n");
         exit(1);
     }
 

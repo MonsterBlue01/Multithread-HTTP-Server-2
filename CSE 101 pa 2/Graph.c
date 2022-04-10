@@ -37,18 +37,31 @@ int getSource(Graph G) {
 }
 
 int getParent(Graph G, int u) {
+    if ((u < 1) && (u > G->order)) {
+        printf("Graph Error: calling getParent() with invalid parameters.\n");
+        exit(1);
+    }
     return G->parent[u];
 }
 
 int getDist(Graph G, int u) {
+    if ((u < 1) && (u > G->order)) {
+        printf("Graph Error: calling getDist() with invalid parameters.\n");
+        exit(1);
+    }
     return G->distance[u];
 }
 
 void getPath(List L, Graph G, int u) {
+    if ((u < 1) && (u > G->order)) {
+        printf("Graph Error: calling getPath() with invalid parameters.\n");
+        exit(1);
+    }
     if (G->source == u) {
         append(L, u);
     } else if (G->parent[u] == NIL) {
         printf("%d is not reachable from %d\n", u, G->source);
+        append(L, NIL);
     } else {
         getPath(L, G, G->parent[u]);
         append(L, u);
@@ -56,9 +69,21 @@ void getPath(List L, Graph G, int u) {
 }
 
 /*** Manipulation procedures ***/
-void makeNull(Graph G);
+void makeNull(Graph G) {
+    G->color = malloc(((G->order) + 1) * sizeof(int));
+    G->distance = malloc(((G->order) + 1) * sizeof(int));
+    G->neighbor = malloc(((G->order) + 1) * sizeof(List));
+    G->parent = malloc(((G->order) + 1) * sizeof(int));
+    G->size = 0;
+    G->source = 0;
+}
 
 void addEdge(Graph G, int u, int v) {
+    if ((u < 1) && (u > G->order)) {
+        printf("Graph Error: calling addEdge() with invalid parameters.\n");
+        exit(1);
+    }
+
     int actedu = 0;
     int actedv = 0;
 
@@ -113,18 +138,19 @@ void addEdge(Graph G, int u, int v) {
             }
         }
     }
-    G->size++;
+    G->size += 2;
 }
 
 void addArc(Graph G, int u, int v) {
+    if ((u < 1) && (u > G->order)) {
+        printf("Graph Error: calling addArc() with invalid parameters.\n");
+        exit(1);
+    }
+
     int acted = 0;
 
     if (G->neighbor[u] == NULL) {
         G->neighbor[u] = newList();
-    }
-
-    if (G->neighbor[v] == NULL) {
-        G->neighbor[v] = newList();
     }
 
     if (G->neighbor[u]->front == NULL) {
@@ -148,15 +174,7 @@ void addArc(Graph G, int u, int v) {
             }
         }
     }
-    if ((G->neighbor[v]) == NULL) {
-        G->size++;
-        return;
-    } else if ((G->neighbor[v]->front) == NULL) {
-        G->size++;
-        return;
-    } else {
-        printf("Front: %d\n", G->neighbor[v]->front->data);
-    }
+    G->size++;
 }
 
 void BFS(Graph G, int s) {

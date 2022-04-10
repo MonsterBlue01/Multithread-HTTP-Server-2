@@ -5,18 +5,31 @@
 #include "Graph.h"
 
 int main() {
-    Graph G = newGraph(3);
+    Graph G = newGraph(4);
     addArc(G, 1, 2);
-    printGraph(stdout, G);
-    printf("\n");
     printf("The size: %d\n", G->size);
-    //addArc(G, 2, 1);
-    //printf("The size: %d\n", G->size);
+    printf("The neighbor List of 1: ");
+    printf("%d\n", G->neighbor[1]->front->data);
     addArc(G, 1, 3);
-    printGraph(stdout, G);
     printf("The size: %d\n", G->size);
-    //addArc(G, 3, 1);
-    //printf("The size: %d\n", G->size);
+    printf("The neighbor List of 1: ");
+    printf("%d ", G->neighbor[1]->front->data);
+    printf("%d\n", G->neighbor[1]->front->next->data);
+    addArc(G, 2, 1);
+    printf("The size: %d\n", G->size);
+    printf("The neighbor List of 2: ");
+    printf("%d\n", G->neighbor[2]->front->data);
+    addArc(G, 1, 4);
+    printf("The size: %d\n", G->size);
+    printf("The neighbor List of 1: ");
+    printf("%d ", G->neighbor[1]->front->data);
+    printf("%d ", G->neighbor[1]->front->next->data);
+    printf("%d\n", G->neighbor[1]->front->next->next->data);
+    addArc(G, 2, 3);
+    printf("The size: %d\n", G->size);
+    printf("The neighbor List of 2: ");
+    printf("%d ", G->neighbor[2]->front->data);
+    printf("%d\n", G->neighbor[2]->front->next->data);
 
     /*Graph G = newGraph(8);
     addEdge(G, 1, 2);
