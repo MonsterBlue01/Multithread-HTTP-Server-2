@@ -29,6 +29,7 @@ int main() {
     printGraph(stdout, G);
 
     while (fscanf(fp, "%d", &n1) != EOF) {
+        printf("\n");
         fscanf(fp, "%d", &n2);
         if ((n1 == 0) && (n2 == 0)) {
             break;
