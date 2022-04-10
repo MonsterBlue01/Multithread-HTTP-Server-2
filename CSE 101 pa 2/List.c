@@ -313,11 +313,11 @@ void printList(FILE* out, List L) {
 
     do {
         if (head->next != NULL) {
-            printf("%d ", head->data);
+            fprintf(out, "%d ", head->data);
             head = head->next;
         }
         if (head -> next == NULL) {
-            printf("%d", head->data);
+            fprintf(out, "%d", head->data);
         }
     } while (head->next != NULL);
 }
