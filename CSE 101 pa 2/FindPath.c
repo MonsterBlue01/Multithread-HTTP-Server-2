@@ -41,7 +41,7 @@ int main() {
             printf("No %d-%d path exists\n", n1, n2);
         } else {
             printf("The distance from %d to %d is %d\n", n1, n2, getDist(G, n2));
-            printf("A shortest 1-12 path is: \n");
+            printf("A shortest 1-12 path is: ");
             getPath(L, G, n2);
             printList(stdout, L);
             printf("\n");
