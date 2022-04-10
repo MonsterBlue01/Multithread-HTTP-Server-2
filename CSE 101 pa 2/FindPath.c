@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
             fprintf(fp2, "A shortest 1-12 path is: ");
             getPath(L, G, n2);
             printList(fp2, L);
-            printf("\n");
+            fprintf(fp2, "\n");
         }
     }
 
