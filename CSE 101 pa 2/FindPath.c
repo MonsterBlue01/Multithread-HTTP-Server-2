@@ -43,6 +43,7 @@ int main() {
             printf("The distance from %d to %d is %d\n", n1, n2, getDist(G, n2));
             printf("A shortest 1-12 path is: \n");
             getPath(L, G, n2);
+            printList(L);
             printf("\n");
         }
 
