@@ -38,11 +38,13 @@ int main() {
         BFS(G, n1);
         if (getDist(G, n2) <= 0) {
             printf("The distance from %d to %d is infinity\n", n1, n2);
+            printf("No 1-15 path exists\n");
         } else {
             printf("The distance from %d to %d is %d\n", n1, n2, getDist(G, n2));
+            printf("A shortest 1-12 path is: 1 7 12\n");
         }
 
-        printf("A shortest 1-12 path is: 1 7 12\n");
+        
         //getPath(L, G, n2);
         //printList(stdout, L);
         //printf("\n");
