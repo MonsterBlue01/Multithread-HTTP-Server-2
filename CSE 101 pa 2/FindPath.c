@@ -36,7 +36,11 @@ int main() {
         printf("\n");
         List L = newList();
         BFS(G, n1);
-        printf("The distance from %d to %d is %d\n", n1, n2, getDist(G, n2));
+        if (getDist(G, n2) <= 0) {
+            printf("The distance from %d to %d is infinity", n1, n2);
+        } else {
+            printf("The distance from %d to %d is %d\n", n1, n2, getDist(G, n2));
+        }
         //getPath(L, G, n2);
         //printList(stdout, L);
         //printf("\n");
