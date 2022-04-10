@@ -5,14 +5,19 @@
 #include "List.h"
 
 int main(int argc, char *argv[]) {
+    if(argc != 3) {
+        fprintf(stderr, "main function Error: Fewer or more than two arguments were passed in.\n");
+        exit(1);
+    }
+
     FILE *fp1 = NULL;
     FILE *fp2 = NULL;
 
     int num;
     int n1, n2;
 
-    fp1 = fopen("input.sh", "r");
-    fp2 = fopen("output.sh", "r");
+    fp1 = fopen(argv[1], "r");
+    fp2 = fopen(argv[2], "r");
     if ((fp1 == NULL) || (fp2 == NULL)) {
         fprintf(stderr, "main function Error: Can't find corresponding files.\n");
         exit(1);
@@ -29,31 +34,26 @@ int main(int argc, char *argv[]) {
         addEdge(G, n1, n2);
     }
 
-    printGraph(stdout, G);
+    printGraph(fp2, G);
 
     while (fscanf(fp1, "%d", &n1) != EOF) {
         fscanf(fp1, "%d", &n2);
         if ((n1 == 0) && (n2 == 0)) {
             break;
         }
-        printf("\n");
+        fprintf(fp2, "\n");
         List L = newList();
         BFS(G, n1);
         if (getDist(G, n2) <= 0) {
-            printf("The distance from %d to %d is infinity\n", n1, n2);
-            printf("No %d-%d path exists\n", n1, n2);
+            fprintf(fp2, "The distance from %d to %d is infinity\n", n1, n2);
+            fprintf(fp2, "No %d-%d path exists\n", n1, n2);
         } else {
-            printf("The distance from %d to %d is %d\n", n1, n2, getDist(G, n2));
-            printf("A shortest 1-12 path is: ");
+            fprintf(fp2, "The distance from %d to %d is %d\n", n1, n2, getDist(G, n2));
+            fprintf(fp2, "A shortest 1-12 path is: ");
             getPath(L, G, n2);
-            printList(stdout, L);
+            printList(fp2, L);
             printf("\n");
         }
-
-        
-        //getPath(L, G, n2);
-        //printList(stdout, L);
-        //printf("\n");
     }
 
     fclose(fp1);
