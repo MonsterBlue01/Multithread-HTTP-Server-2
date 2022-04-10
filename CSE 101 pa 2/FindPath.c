@@ -37,7 +37,7 @@ int main() {
         List L = newList();
         BFS(G, n1);
         if (getDist(G, n2) <= 0) {
-            printf("The distance from %d to %d is infinity", n1, n2);
+            printf("The distance from %d to %d is infinity\n", n1, n2);
         } else {
             printf("The distance from %d to %d is %d\n", n1, n2, getDist(G, n2));
         }
