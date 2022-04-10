@@ -29,11 +29,11 @@ int main() {
     printGraph(stdout, G);
 
     while (fscanf(fp, "%d", &n1) != EOF) {
-        printf("\n");
         fscanf(fp, "%d", &n2);
         if ((n1 == 0) && (n2 == 0)) {
             break;
         }
+        printf("\n");
         List L = newList();
         BFS(G, n1);
         printf("The distance from 1 to 12 is 2");
