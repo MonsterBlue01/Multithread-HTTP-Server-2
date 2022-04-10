@@ -4,22 +4,22 @@
 #include "Graph.h"
 #include "List.h"
 
-int main() {
-    FILE *fp = NULL;            
+int main(int argc, char *argv[]) {
+    FILE *fp1 = NULL;            
     int num;
     int n1, n2;
 
-    fp = fopen("input.sh", "r");
-    if (fp == NULL) {
+    fp1 = fopen("input.sh", "r");
+    if (fp1 == NULL) {
         fprintf(stderr, "main function Error: Can't find corresponding files.\n");
         exit(1);
     }
 
-    fscanf(fp, "%d", &num);
+    fscanf(fp1, "%d", &num);
     Graph G = newGraph(num);
 
-    while (fscanf(fp, "%d", &n1) != EOF) {
-        fscanf(fp, "%d", &n2);
+    while (fscanf(fp1, "%d", &n1) != EOF) {
+        fscanf(fp1, "%d", &n2);
         if ((n1 == 0) && (n2 == 0)) {
             break;
         }
@@ -28,8 +28,8 @@ int main() {
 
     printGraph(stdout, G);
 
-    while (fscanf(fp, "%d", &n1) != EOF) {
-        fscanf(fp, "%d", &n2);
+    while (fscanf(fp1, "%d", &n1) != EOF) {
+        fscanf(fp1, "%d", &n2);
         if ((n1 == 0) && (n2 == 0)) {
             break;
         }
@@ -53,5 +53,5 @@ int main() {
         //printf("\n");
     }
 
-    fclose(fp);
+    fclose(fp1);
 }

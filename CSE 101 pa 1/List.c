@@ -8,7 +8,7 @@
 
 List newList(void) {
     List l = (List)malloc(5 * sizeof(ListObj));
-    l->back = l->front = l->cursor = NULL;                  //Checked
+    l->back = l->front = l->cursor = NULL;
     l->length = 0;
     l->index = -1;
     return l;
