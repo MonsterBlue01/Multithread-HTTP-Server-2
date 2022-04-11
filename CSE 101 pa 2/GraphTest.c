@@ -24,18 +24,18 @@ int main() {
         printf("Error 2.\n");
     }
     if (getDist(A, 2) != 2) {
-        return 3;
+        printf("Error 3.\n");
     }
     BFS(A, 4);
     if (getDist(A, 42) != 4) {
-        return 4;
+        printf("Error 4.\n");
     }
     if (getDist(A, 43) != INF) {
-        return 5;
+        printf("Error 5.\n");
     }
     BFS(A, 99);
     if (getDist(A, 64) != INF) {
-        return 6;
+        printf("Error 6.\n");
     }
     return 0;
 
