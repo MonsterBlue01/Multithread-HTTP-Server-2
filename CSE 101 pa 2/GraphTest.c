@@ -21,7 +21,7 @@ int main() {
     addArc(A, 3, 42);
     BFS(A, 64);
     if (getDist(A, 64) != 0) {
-        return 2;
+        printf("Error 2.\n");
     }
     if (getDist(A, 2) != 2) {
         return 3;
