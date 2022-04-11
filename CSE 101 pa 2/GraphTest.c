@@ -6,7 +6,7 @@
 #include "Graph.h"
 
 int main() {
-    Graph A = newGraph;
+    Graph A = newGraph(100);
 
     for (uint8_t i = 1; i <= 100; i++)
         if (getDist(A, i) != INF) {
