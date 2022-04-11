@@ -22,6 +22,9 @@ FindPath : FindPath.o $(BASE_OBJECTS)
 GraphClient : GraphClient.o $(BASE_OBJECTS)
 	$(LINK) GraphClient GraphClient.o $(BASE_OBJECTS)
 
+ModelGraphTest : ModelGraphTest.o $(BASE_OBJECTS)
+	$(LINK) ModelGraphTest ModelGraphTest.o $(BASE_OBJECTS)
+
 GraphTest : GraphTest.o $(BASE_OBJECTS)
 	$(LINK) GraphTest GraphTest.o $(BASE_OBJECTS)
 
@@ -30,6 +33,9 @@ FindPath.o : FindPath.c $(HEADERS)
 
 GraphClient.o : GraphClient.c $(HEADERS)
 	$(COMPILE) GraphClient.c
+
+ModelGraphTest.o : ModelGraphTest.c $(HEADERS)
+	$(COMPILE) ModelGraphTest.c
 
 GraphTest.o : GraphTest.c $(HEADERS)
 	$(COMPILE) GraphTest.c
