@@ -225,14 +225,14 @@ void BFS(Graph G, int s) {
 void printGraph(FILE* out, Graph G) {
     for (int i = 1; i <= G->order; i++) {
         if (G->neighbor[i] != NULL) {
-            if (G->neighbor[i]->front == NULL) {
-                continue;
-            }
             fprintf(out, "%d: ", i);
             printList(out, G->neighbor[i]);
             if (i < G->order) {
                 fprintf(out, "\n");
             }
+        } else {
+            fprintf(out, "%d: ", i);
+            fprintf(out, "\n");
         }
     }
 }
