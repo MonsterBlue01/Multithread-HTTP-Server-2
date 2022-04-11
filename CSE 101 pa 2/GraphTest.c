@@ -10,7 +10,7 @@ int main() {
 
     for (uint8_t i = 1; i <= 100; i++)
         if (getDist(A, i) != INF) {
-            return 1;
+            printf("Error 1.\n");
         }
     addArc(A, 64, 4);
     addArc(A, 64, 3);
