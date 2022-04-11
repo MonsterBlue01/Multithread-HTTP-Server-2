@@ -64,7 +64,6 @@ void getPath(List L, Graph G, int u) {
     if (G->source == u) {
         append(L, u);
     } else if (G->parent[u] == NIL) {
-        printf("%d is not reachable from %d\n", u, G->source);
         append(L, NIL);
     } else {
         getPath(L, G, G->parent[u]);
@@ -142,7 +141,7 @@ void addEdge(Graph G, int u, int v) {
             }
         }
     }
-    G->size += 2;
+    G->size++;
 }
 
 void addArc(Graph G, int u, int v) {
