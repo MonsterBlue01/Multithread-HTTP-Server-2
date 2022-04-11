@@ -5,7 +5,7 @@
 #include "Graph.h"
 
 int main() {
-    Graph G = newGraph(15);
+    /*Graph G = newGraph(15);
     addEdge(G, 1, 2);
     addEdge(G, 1, 7);
     addEdge(G, 1, 10);
@@ -42,7 +42,7 @@ int main() {
     getPath(L, G, 15);
     printf("Path: ");
     printList(stdout, L);
-    printf("\n");
+    printf("\n");*/
 
     /*Graph G = newGraph(4);
     addArc(G, 1, 2);
