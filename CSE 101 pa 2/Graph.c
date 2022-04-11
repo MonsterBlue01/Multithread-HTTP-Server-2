@@ -215,7 +215,7 @@ void BFS(Graph G, int s) {
 
 /*** Other operations ***/
 void printGraph(FILE* out, Graph G) {
-    for (int i = 1; i <= G->order; i++) {
+    /*for (int i = 1; i <= G->order; i++) {
         if (G->neighbor[i] != NULL) {
             fprintf(out, "%d: ", i);
             printList(out, G->neighbor[i]);
@@ -223,5 +223,6 @@ void printGraph(FILE* out, Graph G) {
                 fprintf(out, "\n");
             }
         }
-    }
+    }*/
+    printf("a\n");
 }
