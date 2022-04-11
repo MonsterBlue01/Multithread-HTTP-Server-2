@@ -15,15 +15,15 @@
     \subsection{Some terms}
         %\subsubsection{Introduction to Rules}
         \begin{itemize}
-            \item {\textbf{Pipelining}: overlap steps in execution; watch out for dependencies}
-            \item {\textbf{Parallelism}: execute independent tasks in parallel}
-            \item {\textbf{Prediction}: better to ask for forgiveness than permission...}
-            \item {\textbf{Caching}: keep close a copy of frequently used information}
-            \item {\textbf{Indirection}: go through a translation step to allow intervention}
-            \item {\textbf{Amortization}: coarse-grain actions to amortize start/end overheads}
-            \item {\textbf{Redundancy}: extra information or resources to recover from errors}
-            \item {\textbf{Specialization}: trim overheads of general-purpose systems}
-            \item {\textbf{Focus on the common case}: optimize only the critical aspects of the system}
+	        \item {\textbf{Pipelining}: overlap steps in execution; watch out for dependencies}
+	        \item {\textbf{Parallelism}: execute independent tasks in parallel}
+	        \item {\textbf{Prediction}: better to ask for forgiveness than permission...}
+	        \item {\textbf{Caching}: keep close a copy of frequently used information}
+	        \item {\textbf{Indirection}: go through a translation step to allow intervention}
+	        \item {\textbf{Amortization}: coarse-grain actions to amortize start/end overheads}
+	        \item {\textbf{Redundancy}: extra information or resources to recover from errors}
+	        \item {\textbf{Specialization}: trim overheads of general-purpose systems}
+	        \item {\textbf{Focus on the common case}: optimize only the critical aspects of the system}
         \end{itemize}
 
     \section{Lecture II}
@@ -334,4 +334,69 @@
                         \item {...}
                     \end{itemize}
             \end{itemize}
+    \section{Lecture III}
+        \subsection{ISA}
+            \subsubsection{Time Table}
+                \begin{itemize}
+                    \item Accumulator
+                        \begin{itemize}
+                            \item One implicit register (<1960)
+                            \item Good: Simple hardware
+                            \item Bad: Lots of memory traffic
+                        \end{itemize}
+                    \item Stack - LIFO (1960-1970, hp48, and Java Virtual Machine!)
+                        \begin{itemize}
+                            \item Smaller is faster (100-1000x)
+                            \item Shorter names (fewer bits to encode)
+                        \end{itemize}
+                    \item Registers (1960 - now)
+                        \begin{itemize}
+                            \item Most popular architecture (RISC and CISC)
+                        \end{itemize}
+                \end{itemize}
+            \subsubsection{Different ways}
+                \begin{itemize}
+                    \item Stack Architecture
+                    \item Accumulator Architecture
+                    \item Register Memory Architecture (CISC)
+                    \item Load-Store Architecture (RISC)
+                \end{itemize}
+            \subsubsection{RISC vs. CISC (Complex/Reduced Instruction Set)}
+                \begin{itemize}
+                    \item Hot debate in the 80s
+                    \item CISC (Complex Instruction Set Computer)
+                    \item RISC (Reduce Instruction Set Computer)
+                    \item Multiple comparisons (In Table 8)
+                        \begin{table}[]
+                            \centering
+                            \begin{tabular}{cc}
+CISC                                                                                                                & RISC                                                                                                                  \\ \hline
+\multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}Memory-to-Memory load/store \\ incorporated in instr.\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Register-to-Register Separate \\ load/store instructions\end{tabular}} \\ \hline
+\multicolumn{1}{|c|}{HW difficult to implement}                                                                     & \multicolumn{1}{c|}{HW easy to implement}                                                                             \\ \hline
+\multicolumn{1}{|c|}{Multi-cycle complex instructions}                                                              & \multicolumn{1}{c|}{Simple (single clock) instructions}                                                               \\ \hline
+\multicolumn{1}{|c|}{Small code size}                                                                               & \multicolumn{1}{c|}{Large code size}                                                                                  \\ \hline
+\multicolumn{1}{|c|}{High CPI}                                                                                      & \multicolumn{1}{c|}{Low CPI}                                                                                          \\ \hline
+\multicolumn{1}{|c|}{Low clock frequency}                                                                           & \multicolumn{1}{c|}{High clock frequency}                                                                             \\ \hline
+\multicolumn{1}{|c|}{Variable length instructions}                                                                  & \multicolumn{1}{c|}{Same length instructions}                                                                         \\ \hline
+\multicolumn{1}{|c|}{Complex instruction decode}                                                                    & \multicolumn{1}{c|}{Simple instruction decode}                                                                        \\ \hline
+\end{tabular}
+                            \caption{CISC vs. RISC}
+                        \end{table}
+                \end{itemize}
+        \subsection{Generic RISC}
+            \subsubsection{Instruction Types}
+                \begin{itemize}
+                    \item {Arithmetic and logical: add, and, or, sub, xor, ...}
+                    \item {Data movement: loads/stores, register-to-register}
+                    \item {Control}
+                        \begin{itemize}
+                            \item {compares}
+                            \item {conditional branches}
+                            \item {unconditional jumps/syscall}
+                            \item {procedure call/return}
+                        \end{itemize}
+                    \item {Floating point}
+                    \item {Miscellanea and extensions (Vector, string, BCD)}
+                \end{itemize}
+            \subsubsection{Control Instructions}
 \end{document}
