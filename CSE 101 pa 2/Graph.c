@@ -195,7 +195,11 @@ void BFS(Graph G, int s) {
         //printList(stdout, L);
         //printf("\n"); 
         deleteFront(L);
-        Node tmp = G->neighbor[x]->front;
+        if (G->neighbor[x] == NULL) {
+            Node tmp = NULL;
+        } else {
+            Node tmp = G->neighbor[x]->front;
+        }
         while (tmp != NULL) {
             if (G->color[tmp->data] == 0) {
                 G->color[tmp->data] = 1;
