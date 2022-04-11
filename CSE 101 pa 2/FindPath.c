@@ -43,7 +43,14 @@ int main(int argc, char *argv[]) {
         }
         List L = newList();
         BFS(G, n1);
-        if (getDist(G, n2) <= 0) {
+        if (n1 == n2) {
+            fprintf(fp2, "\n\n");
+            fprintf(fp2, "The distance from %d to %d is 0\n", n1, n2);
+            fprintf(fp2, "A shortest %d-%d path is: %d", n1, n2, n1);
+            for (int i = 1; i <= G->order; i++) {
+                G->color[i] = 0;
+            }
+        } else if (getDist(G, n2) <= 0) {
             fprintf(fp2, "\n\n");
             fprintf(fp2, "The distance from %d to %d is infinity\n", n1, n2);
             fprintf(fp2, "No %d-%d path exists", n1, n2);
