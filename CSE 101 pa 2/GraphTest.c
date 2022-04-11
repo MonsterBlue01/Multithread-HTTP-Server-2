@@ -8,10 +8,11 @@
 int main() {
     Graph A = newGraph(100);
 
-    for (uint8_t i = 1; i <= 100; i++)
+    for (uint8_t i = 1; i <= 100; i++) {
         if (getDist(A, i) != INF) {
             printf("Error 1.\n");
         }
+    }
     addArc(A, 64, 4);
     addArc(A, 64, 3);
     addArc(A, 42, 2);

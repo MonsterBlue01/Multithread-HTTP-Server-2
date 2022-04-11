@@ -16,6 +16,10 @@ Graph newGraph(int n) {
     new->size = 0;
     new->source = 0;
 
+    for (int i = 1; i <= n; i++) {
+        new->distance[i] = INF;
+    }
+
     return new;
 }
 
