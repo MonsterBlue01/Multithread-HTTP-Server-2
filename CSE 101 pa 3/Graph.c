@@ -84,7 +84,69 @@ void addArc(Graph G, int u, int v) {
     G->size++;
 }
 
-void addEdge(Graph G, int u, int v); /* Pre: 1<=u<=n, 1<=v<=n */
+void addEdge(Graph G, int u, int v) {
+    if ((u < 1) && (u > G->order)) {
+        printf("Graph Error: calling addEdge() with invalid parameters.\n");
+        exit(1);
+    }
+
+    int actedu = 0;
+    int actedv = 0;
+
+    if (G->neighbor[u] == NULL) {
+        G->neighbor[u] = newList();
+    }
+
+    if (G->neighbor[u]->front == NULL) {
+        append(G->neighbor[u], v);
+    } else {
+        moveFront(G->neighbor[u]);
+        if (v < G->neighbor[u]->cursor->data) {
+            prepend(G->neighbor[u], v);
+        } else {
+            while (G->neighbor[u]->cursor->data < v) {
+                if (G->neighbor[u]->cursor == G->neighbor[u]->back) {
+                    append(G->neighbor[u], v);
+                    actedu = 1;
+                    break;
+                } else {
+                    moveNext(G->neighbor[u]);
+                }
+            }
+            if (actedu == 0) {
+                insertBefore(G->neighbor[u], v);
+            }
+        }
+    }
+
+    if (G->neighbor[v] == NULL) {
+        G->neighbor[v] = newList();
+    }
+
+    if (G->neighbor[v]->front == NULL) {
+        append(G->neighbor[v], u);
+    } else {
+        moveFront(G->neighbor[v]);
+        if (u < G->neighbor[v]->cursor->data) {
+            prepend(G->neighbor[v], u);
+        } else {
+            while (G->neighbor[v]->cursor->data < u) {
+                if (G->neighbor[v]->cursor == G->neighbor[v]->back) {
+                    append(G->neighbor[v], u);
+                    actedv = 1;
+                    break;
+                } else {
+                    moveNext(G->neighbor[v]);
+                }
+            }
+            if (actedv == 0) {
+                insertBefore(G->neighbor[v], u);
+            }
+        }
+    }
+    G->size++;
+}
+
 void DFS(Graph G, List S); /* Pre: length(S)==getOrder(G) */
 
 // Other Functions
