@@ -399,4 +399,58 @@ CISC                                                                            
                     \item {Miscellanea and extensions (Vector, string, BCD)}
                 \end{itemize}
             \subsubsection{Control Instructions}
+                \begin{itemize}
+                    \item {Branches(conditional)}
+                    \begin{itemize}
+                        \item {branch <cond><target>}
+                        \item {typical conditions are eq and ne}
+                            \begin{itemize}
+                                \item {bne r1,r2,target}
+                                \item {beq r3,r7,target}
+                                \item {beq target}
+                            \end{itemize}
+                        \item {Branches vs Jumps}
+                            \begin{itemize}
+                                \item {Branches, conditional control flow transfer}
+                                \item {Jumps, unconditional control flow transfer}
+                            \end{itemize}
+                        \item {Jumps (unconditional)}
+                            \begin{itemize}
+                                \item {jump <target>}
+                            \end{itemize}
+                        \item {Function calls and returns}
+                            \begin{itemize}
+                                \item {Typically implemented with jump instructions}
+                            \end{itemize}
+                        \item {Targets are often PC-relative}
+                            \begin{itemize}
+                                \item {fewer bits (target is typically close by)}
+                                \item{position independence}
+                            \end{itemize}
+                        \item {Jumpl}
+                            \begin{itemize}
+                                \item {Jump and link}
+                            \end{itemize}
+                    \end{itemize}
+                \end{itemize}
+            \subsubsection{ISA vs ABI}
+                \begin{itemize}
+                    \item {ISA: Instruction Set Architecture}
+                        \begin{itemize}
+                            \item {Instructions, encoding, instructions meaning}
+                        \end{itemize}
+                    \item {ABI: Application Binary Interface}
+                        \begin{itemize}
+                            \item {Conventions that the “compiler” or “app writer” has for a given ISA}
+                                \begin{itemize}
+                                    \item {E.g.}
+                                        \begin{itemize}
+                                            \item {When doing a fcall, save to stack regs from x18 to x27}
+                                            \item {Callee or caller saves}
+                                        \end{itemize}
+                                \end{itemize}
+                            \item {In this class, you need to worry about ISA not ABI}
+                        \end{itemize}
+                \end{itemize}
+                
 \end{document}
