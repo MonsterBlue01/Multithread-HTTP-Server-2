@@ -86,7 +86,23 @@ void addArc(Graph G, int u, int v) {
 
 void addEdge(Graph G, int u, int v); /* Pre: 1<=u<=n, 1<=v<=n */
 void DFS(Graph G, List S); /* Pre: length(S)==getOrder(G) */
+
 // Other Functions
+
 Graph transpose(Graph G);
 Graph copyGraph(Graph G);
-void printGraph(FILE* out , Graph G);
+
+void printGraph(FILE* out, Graph G) {
+    for (int i = 1; i <= G->order; i++) {
+        if (G->neighbor[i] != NULL) {
+            fprintf(out, "%d: ", i);
+            printList(out, G->neighbor[i]);
+            if (i < G->order) {
+                fprintf(out, "\n");
+            }
+        } else {
+            fprintf(out, "%d: ", i);
+            fprintf(out, "\n");
+        }
+    }
+}
