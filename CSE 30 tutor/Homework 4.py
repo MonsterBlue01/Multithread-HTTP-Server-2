@@ -38,3 +38,14 @@ if __name__ == '__main__':
         idx += 1
         if idx == len(initial_primes):
             break
+
+    c = 0
+    for n in prime_number_generator():
+        if n > 900:
+            c += 1
+        if n in [32, 88, 99, 231, 1000]:
+            print("bad:", n)
+            raise Exception()
+        if n > 1000:
+            break
+    assert c == 15
