@@ -37,6 +37,7 @@ int main() {
     if (getDist(A, 64) != INF) {
         printf("Error 6.\n");
     }
+    freeGraph(&A);
     return 0;
 
     /*Graph G = newGraph(15);
