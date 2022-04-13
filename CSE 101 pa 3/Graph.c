@@ -147,19 +147,6 @@ void addEdge(Graph G, int u, int v) {
     G->size++;
 }
 
-void DFS(Graph G, List S) {
-    for (int i = 1; i <= G->order; i++) {
-        G->color[i] = 0;
-        G->parent[i] = NIL;
-    }
-    int time = 0;
-    for (int i = 1; i <= G->order; i++) {
-        if (G->color[i] == 0) {
-            printf("a");
-        }
-    }
-}
-
 void visit(Graph G, int x, int time) {
     G->discover_time[x] = ++time;
     G->color[x] = 1;
@@ -178,6 +165,19 @@ void visit(Graph G, int x, int time) {
     }
     G->color[x] = 2;
     G->finish_time[x] = ++time;
+}
+
+void DFS(Graph G, List S) {
+    for (int i = 1; i <= G->order; i++) {
+        G->color[i] = 0;
+        G->parent[i] = NIL;
+    }
+    int time = 0;
+    for (int i = 1; i <= G->order; i++) {
+        if (G->color[i] == 0) {
+            printf("a");
+        }
+    }
 }
 
 // Other Functions
