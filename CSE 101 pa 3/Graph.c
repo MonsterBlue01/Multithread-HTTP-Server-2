@@ -170,10 +170,11 @@ void visit(Graph G, int x) {
     }
     while (N != NULL) {
         if (G->color[N->data] == 0) {
-            printf("The white data: %d\n", N->data);
+            G->parent[N->data] = x;
         }
         N = N->next;
     }
+    G->color[x] = 2;
 }
 
 // Other Functions
