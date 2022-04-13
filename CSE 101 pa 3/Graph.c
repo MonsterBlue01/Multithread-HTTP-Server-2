@@ -171,6 +171,7 @@ void visit(Graph G, int x) {
     while (N != NULL) {
         if (G->color[N->data] == 0) {
             G->parent[N->data] = x;
+            visit(G, N->data);
         }
         N = N->next;
     }

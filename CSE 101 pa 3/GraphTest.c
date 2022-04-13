@@ -4,7 +4,7 @@
 #include "List.h"
 
 int main() {
-    Graph G = newGraph(10);
+    Graph G = newGraph(15);
     List L = newList();
     printf("\n");
     addArc(G, 1, 2);
