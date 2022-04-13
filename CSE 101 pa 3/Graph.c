@@ -168,8 +168,9 @@ void visit(Graph G, int x) {
     } else {
         N = G->neighbor[x]->front;
     }
-    while () {
-        
+    while (N != NULL) {
+        printf("The data: %d\n", N->data);
+        N = N->next;
     }
 }
 
