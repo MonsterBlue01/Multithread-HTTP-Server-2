@@ -27,7 +27,6 @@ int getFinish(Graph G, int u); /* Pre: 1<=u<=n=getOrder(G) */
 void addArc(Graph G, int u, int v); /* Pre: 1<=u<=n, 1<=v<=n */
 void addEdge(Graph G, int u, int v); /* Pre: 1<=u<=n, 1<=v<=n */
 void DFS(Graph G, List S); /* Pre: length(S)==getOrder(G) */
-void visit(Graph G, int x, int time);
 // Other Functions
 Graph transpose(Graph G);
 Graph copyGraph(Graph G);
