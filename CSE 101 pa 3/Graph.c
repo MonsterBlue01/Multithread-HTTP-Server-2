@@ -177,6 +177,7 @@ void visit(Graph G, int x, int time) {
         N = N->next;
     }
     G->color[x] = 2;
+    G->finish_time[x] = ++time;
 }
 
 // Other Functions
