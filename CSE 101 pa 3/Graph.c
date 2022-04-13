@@ -156,7 +156,7 @@ void visit(Graph G, int x, int time) {
     } else {
         N = G->neighbor[x]->front;
     }
-    while (N != NULL) {
+    while (N != NULL) { 
         if (G->color[N->data] == 0) {
             G->parent[N->data] = x;
             visit(G, N->data, time);

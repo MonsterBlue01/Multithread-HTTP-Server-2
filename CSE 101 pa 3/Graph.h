@@ -10,7 +10,7 @@ typedef struct GraphObj{
     int* finish_time;
     int order;
     int size;
-} GraphObj;
+} GraphObj; 
 
 // Constructors-Destructors
 

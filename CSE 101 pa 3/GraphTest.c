@@ -8,7 +8,7 @@ int main() {
     List L = newList();
     int time = 0;
     printf("\n");
-    addArc(G, 1, 2);
+    addArc(G, 1, 2); 
     addArc(G, 1, 3);
     addArc(G, 2, 4);
     addArc(G, 2, 5);
