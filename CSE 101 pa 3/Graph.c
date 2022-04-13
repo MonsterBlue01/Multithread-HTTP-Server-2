@@ -155,7 +155,7 @@ void DFS(Graph G, List S) {
     int time = 0;
     for (int i = 1; i <= G->order; i++) {
         if (G->color[i] == 0) {
-            visit(i, time, G);
+            printf("a");
         }
     }
 }
