@@ -6,6 +6,7 @@
 int main() {
     Graph G = newGraph(15);
     List L = newList();
+    int time = 0;
     printf("\n");
     addArc(G, 1, 2);
     addArc(G, 1, 3);
@@ -22,7 +23,7 @@ int main() {
     addArc(G, 7, 14);
     addArc(G, 7, 15);
     printGraph(stdout, G);
-    visit(G, 1);
+    visit(G, 1, time);
     //printf("The size: %d\n", G->size);
     //printf("The graph: %d\n", G->order);
     return 0;
