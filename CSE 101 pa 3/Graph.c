@@ -147,7 +147,31 @@ void addEdge(Graph G, int u, int v) {
     G->size++;
 }
 
-void DFS(Graph G, List S); /* Pre: length(S)==getOrder(G) */
+void DFS(Graph G, List S) {
+    for (int i = 1; i <= G->order; i++) {
+        G->color[i] = 0;
+        G->parent[i] = NIL;
+    }
+    int time = 0;
+    for (int i = 1; i <= G->order; i++) {
+        if (G->color[i] == 0) {
+            visit(i, time, G);
+        }
+    }
+}
+
+void visit(Graph G, int x) {
+    G->color[x] = 1;
+    Node N;
+    if (G->neighbor[x] == NULL) {
+        N = NULL;
+    } else {
+        N = G->neighbor[x]->front;
+    }
+    while () {
+        
+    }
+}
 
 // Other Functions
 
