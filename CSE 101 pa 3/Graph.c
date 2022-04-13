@@ -169,7 +169,9 @@ void visit(Graph G, int x) {
         N = G->neighbor[x]->front;
     }
     while (N != NULL) {
-        printf("The data: %d\n", N->data);
+        if (G->color[N->data] == 0) {
+            printf("The white data: %d\n", N->data);
+        }
         N = N->next;
     }
 }
