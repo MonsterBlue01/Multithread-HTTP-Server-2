@@ -160,7 +160,8 @@ void DFS(Graph G, List S) {
     }
 }
 
-void visit(Graph G, int x) {
+void visit(Graph G, int x, int time) {
+    G->discover_time[x] = ++time;
     G->color[x] = 1;
     Node N;
     if (G->neighbor[x] == NULL) {
@@ -171,12 +172,11 @@ void visit(Graph G, int x) {
     while (N != NULL) {
         if (G->color[N->data] == 0) {
             G->parent[N->data] = x;
-            visit(G, N->data);
+            visit(G, N->data, time);
         }
         N = N->next;
     }
     G->color[x] = 2;
-    printf("%d got accessed.\n", x);
 }
 
 // Other Functions
