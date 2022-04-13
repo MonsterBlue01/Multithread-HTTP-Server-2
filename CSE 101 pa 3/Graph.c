@@ -175,6 +175,7 @@ void visit(Graph G, int x) {
         N = N->next;
     }
     G->color[x] = 2;
+    printf("%d got accessed.", x);
 }
 
 // Other Functions
