@@ -23,6 +23,7 @@ int main() {
     addArc(G, 7, 14);
     addArc(G, 7, 15);
     printGraph(stdout, G);
+    visit(G, 1, time);
     printf("%d\n", G->discover_time[1]);
     printf("%d\n", G->discover_time[2]);
     printf("%d\n", G->discover_time[4]);
@@ -38,7 +39,6 @@ int main() {
     printf("%d\n", G->discover_time[7]);
     printf("%d\n", G->discover_time[14]);
     printf("%d\n", G->discover_time[15]);
-    visit(G, 1, time);
     //printf("The size: %d\n", G->size);
     //printf("The graph: %d\n", G->order);
     return 0;
