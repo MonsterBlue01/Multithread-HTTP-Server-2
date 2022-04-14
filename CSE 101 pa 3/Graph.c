@@ -2,9 +2,7 @@
 #include <stdlib.h>
 
 #include "Graph.h"
-
-#define UNDEF -1
-#define NIL 0
+#include "List.h"
 
 // Constructors-Destructors
 
@@ -177,6 +175,43 @@ void DFS(Graph G, List S) {
         if (G->color[i] == 0) {
             visit(G, i, time);
         }
+    }
+}
+
+void BFS(Graph G, int s) {
+    for (int i = 1; i < G->order; i++) {
+        G->parent[i] = NIL;
+        G->color[i] = 0;
+    }
+    G->color[s] = 1;
+    G->parent[s] = NIL;
+
+    List L = newList();
+    append(L, s);
+    while (L->length != 0) {
+        int x = front(L);
+        printf("The origin List: ");
+        printList(stdout, L);
+        printf("\n"); 
+        deleteFront(L);
+        Node tmp;
+        if (G->neighbor[x] == NULL) {
+            tmp = NULL;
+        } else {
+            tmp = G->neighbor[x]->front;
+        }
+        while (tmp != NULL) {
+            if (G->color[tmp->data] == 0) {
+                G->color[tmp->data] = 1;
+                G->parent[tmp->data] = x;
+                append(L, tmp->data);
+            }
+            tmp = tmp->next;
+        }
+        G->color[x] = 2;
+        printf("The result List: ");
+        printList(stdout, L);
+        printf("\n");
     }
 }
 

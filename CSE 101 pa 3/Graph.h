@@ -1,5 +1,8 @@
 #include "List.h"
 
+#define UNDEF -1
+#define NIL 0
+
 typedef struct GraphObj* Graph;
 
 typedef struct GraphObj{
