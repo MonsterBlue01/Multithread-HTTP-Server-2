@@ -47,7 +47,7 @@ int main() {
     addArc(G, 8, 8);
     printGraph(stdout, Gt);
     printf("\n");
-    DFS(G, L);
+    DFS(Gt, Lt);
     for (int i = 1; i <= Gt->order; i++) {
         printf("The d: %d\n", Gt->discover_time[i]);
     }
