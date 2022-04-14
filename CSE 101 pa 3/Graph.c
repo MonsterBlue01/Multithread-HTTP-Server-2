@@ -145,7 +145,7 @@ void addEdge(Graph G, int u, int v) {
     G->size++;
 }
 
-void visit(Graph G, int x, int* time) {
+void visit(Graph G, int x, int* time, List S) {
     G->discover_time[x] = ++(*time);
     G->color[x] = 1;
     Node N;
@@ -157,12 +157,13 @@ void visit(Graph G, int x, int* time) {
     while (N != NULL) { 
         if (G->color[N->data] == 0) {
             G->parent[N->data] = x;
-            visit(G, N->data, time);
+            visit(G, N->data, time, S);
         }
         N = N->next;
     }
     G->color[x] = 2;
     G->finish_time[x] = ++(*time);
+    append(S, x);
 }
 
 void DFS(Graph G, List S) {
@@ -173,7 +174,7 @@ void DFS(Graph G, List S) {
     int time = 0;
     for (int i = 1; i <= G->order; i++) {
         if (G->color[i] == 0) {
-            visit(G, i, &time);
+            visit(G, i, &time, S);
         }
     }
 }

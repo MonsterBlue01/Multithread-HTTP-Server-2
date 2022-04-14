@@ -26,6 +26,8 @@ int main() {
     for (int i = 1; i <= G->order; i++) {
         printf("The d: %d\n", G->discover_time[i]);
     }
+    printList(stdout, L);
+    printf("\n");
     // ----------------------------------
     
     // ----------------------------------
