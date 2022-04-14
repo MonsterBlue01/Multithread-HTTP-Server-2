@@ -24,8 +24,7 @@ int main() {
     printf("\n");
     DFS(G, L);
     for (int i = 1; i <= G->order; i++) {
-        printf("The d: %d\n
-        ", G->discover_time[i]);
+        printf("The d: %d\n", G->discover_time[i]);
     }
     // ----------------------------------
     
