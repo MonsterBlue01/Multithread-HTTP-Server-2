@@ -218,7 +218,14 @@ void BFS(Graph G, int s) {
 
 // Other Functions
 
-Graph transpose(Graph G);
+Graph transpose(Graph G) {
+    Graph new = newGraph(G->order);
+    for (int i = 1; i <= G->order; i++) {
+        printf("%d\n", i);
+    }
+    return new;
+}
+
 Graph copyGraph(Graph G);
 
 void printGraph(FILE* out, Graph G) {

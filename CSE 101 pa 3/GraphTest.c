@@ -4,55 +4,58 @@
 #include "List.h"
 
 int main() {
-    Graph G = newGraph(8);
-    List L = newList();
-    addArc(G, 1, 5);
-    addArc(G, 2, 1);
-    addArc(G, 5, 2);
-    addArc(G, 3, 2);
-    addArc(G, 3, 4);
-    addArc(G, 7, 3);
-    addArc(G, 7, 6);
-    addArc(G, 6, 2);
-    addArc(G, 6, 5);
-    addArc(G, 6, 7);
-    addArc(G, 4, 3);
-    addArc(G, 8, 4);
-    addArc(G, 8, 7);
-    addArc(G, 8, 8);
-    printGraph(stdout, G);
-    printf("\n");
-    DFS(G, L);
-    for (int i = 1; i <= G->order; i++) {
-        printf("The d: %d\n", G->discover_time[i]);
-    }
-    printList(stdout, L);
-    printf("\n");
-    // ----------------------------------
-    Graph Gt = newGraph(8);
-    List Lt = newList();
-    addArc(Gt, 5, 1);
-    addArc(Gt, 1, 2);
-    addArc(Gt, 2, 5);
-    addArc(Gt, 2, 3);
-    addArc(Gt, 4, 3);
-    addArc(Gt, 3, 7);
-    addArc(Gt, 6, 7);
-    addArc(Gt, 2, 6);
-    addArc(Gt, 5, 6);
-    addArc(Gt, 7, 6);
-    addArc(Gt, 3, 4);
-    addArc(Gt, 4, 8);
-    addArc(Gt, 7, 8);
-    addArc(Gt, 8, 8);
-    printGraph(stdout, Gt);
-    printf("\n");
-    DFS(Gt, Lt);
-    for (int i = 1; i <= Gt->order; i++) {
-        printf("The d: %d\n", Gt->discover_time[i]);
-    }
-    printList(stdout, Lt);
-    printf("\n");
+    
+
+    // Graph G = newGraph(8);
+    // List L = newList();
+    // addArc(G, 1, 5);
+    // addArc(G, 2, 1);
+    // addArc(G, 5, 2);
+    // addArc(G, 3, 2);
+    // addArc(G, 3, 4);
+    // addArc(G, 7, 3);
+    // addArc(G, 7, 6);
+    // addArc(G, 6, 2);
+    // addArc(G, 6, 5);
+    // addArc(G, 6, 7);
+    // addArc(G, 4, 3);
+    // addArc(G, 8, 4);
+    // addArc(G, 8, 7);
+    // addArc(G, 8, 8);
+    // printGraph(stdout, G);
+    // printf("\n");
+    // DFS(G, L);
+    // for (int i = 1; i <= G->order; i++) {
+    //     printf("The d: %d\n", G->discover_time[i]);
+    // }
+    // printList(stdout, L);
+    // printf("\n");
+    // // ----------------------------------
+    // Graph Gt = newGraph(8);
+    // List Lt = newList();
+    // addArc(Gt, 5, 1);
+    // addArc(Gt, 1, 2);
+    // addArc(Gt, 2, 5);
+    // addArc(Gt, 2, 3);
+    // addArc(Gt, 4, 3);
+    // addArc(Gt, 3, 7);
+    // addArc(Gt, 6, 7);
+    // addArc(Gt, 2, 6);
+    // addArc(Gt, 5, 6);
+    // addArc(Gt, 7, 6);
+    // addArc(Gt, 3, 4);
+    // addArc(Gt, 4, 8);
+    // addArc(Gt, 7, 8);
+    // addArc(Gt, 8, 8);
+    // printGraph(stdout, Gt);
+    // printf("\n");
+    // DFS(Gt, Lt);
+    // for (int i = 1; i <= Gt->order; i++) {
+    //     printf("The d: %d\n", Gt->discover_time[i]);
+    // }
+    // printList(stdout, Lt);
+    // printf("\n");
+
     // int time = 0;
     // printf("\n");
     // addArc(G, 1, 2); 
