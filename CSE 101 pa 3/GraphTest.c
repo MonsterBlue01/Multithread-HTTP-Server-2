@@ -42,7 +42,7 @@ int main() {
         } else {
             tmp = G->neighbor[x]->front;
         }
-        int a = 0
+        int a = 0;
         int *time = &a;
         while (tmp != NULL) {
             if (G->color[tmp->data] == 0) {
