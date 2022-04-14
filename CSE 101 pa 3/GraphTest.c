@@ -42,18 +42,25 @@ int main() {
         } else {
             tmp = G->neighbor[x]->front;
         }
+        int time = 0;
         while (tmp != NULL) {
             if (G->color[tmp->data] == 0) {
                 G->color[tmp->data] = 1;
+                G->discover_time[tmp->data] = ++time;
                 G->parent[tmp->data] = x;
                 append(L, tmp->data);
             }
             tmp = tmp->next;
         }
         G->color[x] = 2;
+        G->finish_time[tmp->data] = ++time;
         printf("The result List: ");
         printList(stdout, L);
         printf("\n");
+        printf("----------------------------------\n");
+        for (int i = 1; i <= G->order; i++) {
+            printf("The discover time of %d is %d.\n", i, G->discover_time[i]);
+        }
     }
     // ----------------------------------
     // int time = 0;
