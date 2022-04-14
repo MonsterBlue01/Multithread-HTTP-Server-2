@@ -5,6 +5,7 @@
 
 int main() {
     Graph G = newGraph(8);
+    List L = newList();
     addArc(G, 1, 2);
     addArc(G, 1, 5);
     addArc(G, 2, 5);
@@ -19,50 +20,12 @@ int main() {
     addArc(G, 8, 4);
     addArc(G, 8, 7);
     printGraph(stdout, G);
-    // ----------------------------------
-    int s = 1;
-    for (int i = 1; i < G->order; i++) {
-        G->parent[i] = NIL;
-        G->color[i] = 0;
-    }
-    G->color[s] = 1;
-    G->parent[s] = NIL;
-
-    List L = newList();
-    append(L, s);
-    while (L->length != 0) {
-        int x = back(L);
-        printf("The origin List: ");
-        printList(stdout, L);
-        printf("\n"); 
-        deleteBack(L);
-        Node tmp;
-        if (G->neighbor[x] == NULL) {
-            tmp = NULL;
-        } else {
-            tmp = G->neighbor[x]->front;
-        }
-        int a = 0;
-        int *time = &a;
-        while (tmp != NULL) {
-            if (G->color[tmp->data] == 0) {
-                G->color[tmp->data] = 1;
-                G->discover_time[tmp->data] = ++(*time);
-                G->parent[tmp->data] = x;
-                append(L, tmp->data);
-            }
-            tmp = tmp->next;
-        }
-        G->color[x] = 2;
-        G->finish_time[x] = ++(*time);
-        printf("The result List: ");
-        printList(stdout, L);
-        printf("\n");
-    }
-    printf("----------------------------------\n");
+    DFS(G, L);
     for (int i = 1; i <= G->order; i++) {
-        printf("The discover time of %d is %d.\n", i, G->discover_time[i]);
+        printf("The d: %d", G->discover_time[i]);
     }
+    // ----------------------------------
+    
     // ----------------------------------
     // int time = 0;
     // printf("\n");
