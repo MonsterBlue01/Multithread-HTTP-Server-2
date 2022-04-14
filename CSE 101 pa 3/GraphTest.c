@@ -29,8 +29,30 @@ int main() {
     printList(stdout, L);
     printf("\n");
     // ----------------------------------
-    
-    // ----------------------------------
+    Graph Gt = newGraph(8);
+    List Lt = newList();
+    addArc(G, 5, 1);
+    addArc(G, 1, 2);
+    addArc(G, 2, 5);
+    addArc(G, 2, 3);
+    addArc(G, 4, 3);
+    addArc(G, 3, 7);
+    addArc(G, 6, 7);
+    addArc(G, 2, 6);
+    addArc(G, 5, 6);
+    addArc(G, 7, 6);
+    addArc(G, 3, 4);
+    addArc(G, 4, 8);
+    addArc(G, 7, 8);
+    addArc(G, 8, 8);
+    printGraph(stdout, Gt);
+    printf("\n");
+    DFS(G, L);
+    for (int i = 1; i <= Gt->order; i++) {
+        printf("The d: %d\n", Gt->discover_time[i]);
+    }
+    printList(stdout, Lt);
+    printf("\n");
     // int time = 0;
     // printf("\n");
     // addArc(G, 1, 2); 
