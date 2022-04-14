@@ -184,12 +184,38 @@ void DFS(Graph G, List S) {
 Graph transpose(Graph G) {
     Graph new = newGraph(G->order);
     for (int i = 1; i <= G->order; i++) {
-        printf("%d\n", i);
+        Node tmp;
+        if (G->neighbor[i] == NULL) {
+            tmp = NULL;
+        } else {
+            tmp = G->neighbor[i]->front;
+        }
+
+        while (tmp != NULL) {
+            addArc(new, tmp->data, i);
+            tmp = tmp->next;
+        }
     }
     return new;
 }
 
-Graph copyGraph(Graph G);
+Graph copyGraph(Graph G) {
+    Graph new = newGraph(G->order);
+    for (int i = 1; i <= G->order; i++) {
+        Node tmp;
+        if (G->neighbor[i] == NULL) {
+            tmp = NULL;
+        } else {
+            tmp = G->neighbor[i]->front;
+        }
+
+        while (tmp != NULL) {
+            addArc(new, i, tmp->data);
+            tmp = tmp->next;
+        }
+    }
+    return new;
+}
 
 void printGraph(FILE* out, Graph G) {
     for (int i = 1; i <= G->order; i++) {
