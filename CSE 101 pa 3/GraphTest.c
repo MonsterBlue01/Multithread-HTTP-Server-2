@@ -22,7 +22,7 @@ int main() {
     printGraph(stdout, G);
     DFS(G, L);
     for (int i = 1; i <= G->order; i++) {
-        printf("The d: %d", G->discover_time[i]);
+        printf("The d: %d\n", G->discover_time[i]);
     }
     // ----------------------------------
     
