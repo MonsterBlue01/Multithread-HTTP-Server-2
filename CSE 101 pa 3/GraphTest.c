@@ -4,10 +4,9 @@
 #include "List.h"
 
 int main() {
-    
-
-    // Graph G = newGraph(8);
-    // List L = newList();
+    Graph G = newGraph(8);
+    List L = newList();
+    Graph Gt = transpose(G);
     // addArc(G, 1, 5);
     // addArc(G, 2, 1);
     // addArc(G, 5, 2);
