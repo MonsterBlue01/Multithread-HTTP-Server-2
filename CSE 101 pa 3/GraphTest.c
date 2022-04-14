@@ -53,7 +53,7 @@ int main() {
             tmp = tmp->next;
         }
         G->color[x] = 2;
-        G->finish_time[tmp->data] = ++time;
+        G->finish_time[x] = ++time;
         printf("The result List: ");
         printList(stdout, L);
         printf("\n");
