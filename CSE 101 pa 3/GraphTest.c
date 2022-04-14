@@ -6,23 +6,26 @@
 int main() {
     Graph G = newGraph(8);
     List L = newList();
-    addArc(G, 1, 2);
     addArc(G, 1, 5);
-    addArc(G, 2, 5);
-    addArc(G, 2, 6);
+    addArc(G, 2, 1);
+    addArc(G, 5, 2);
     addArc(G, 3, 2);
     addArc(G, 3, 4);
-    addArc(G, 3, 6);
-    addArc(G, 3, 7);
-    addArc(G, 3, 8);
+    addArc(G, 7, 3);
+    addArc(G, 7, 6);
+    addArc(G, 6, 2);
     addArc(G, 6, 5);
     addArc(G, 6, 7);
+    addArc(G, 4, 3);
     addArc(G, 8, 4);
     addArc(G, 8, 7);
+    addArc(G, 8, 8);
     printGraph(stdout, G);
+    printf("\n");
     DFS(G, L);
     for (int i = 1; i <= G->order; i++) {
-        printf("The d: %d\n", G->discover_time[i]);
+        printf("The d: %d\n
+        ", G->discover_time[i]);
     }
     // ----------------------------------
     
