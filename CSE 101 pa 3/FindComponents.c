@@ -41,7 +41,6 @@ int main(int argc, char **argv) {
 
     for (int i = 1; i <= G->order; i++) {
         if (Gt->parent[i] == 0) {
-            printf("Im: %d\n", i);
             snum++;
         }
     }
@@ -77,8 +76,6 @@ int main(int argc, char **argv) {
         }
         m++;
     }
-    printList(stdout, Lt);
-    fprintf(fp1, "\n");
     fclose(fp);
     fclose(fp1);
 }
