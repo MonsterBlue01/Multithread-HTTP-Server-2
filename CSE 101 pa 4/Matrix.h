@@ -1,15 +1,19 @@
 #pragma once
 
+#include "List.h"
+
 typedef struct MatrixObj* Matrix;
 
 typedef struct EntryObj* Entry;
 
 typedef struct EntryObj{
-    
+    int column;
+    List data;
 } EntryObj;
 
 typedef struct MatrixObj{
-    
+    Entry content;
+    int size;
 } MatrixObj;
 
 // newMatrix()
