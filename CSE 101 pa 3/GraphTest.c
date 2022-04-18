@@ -7,6 +7,7 @@ int main() {
     Graph G = newGraph(8);
     List L = newList();
     append(L, 1);
+    append(L, 2);
     addArc(G, 1, 2);
     addArc(G, 2, 5);
     addArc(G, 2, 3);
@@ -22,7 +23,7 @@ int main() {
     addArc(G, 7, 8);
     addArc(G, 8, 8);
     Graph Gt = transpose(G);
-    aDFS(Gt, L);
+    DFS(G, L);
     // printGraph(stdout, Gt);
     // printGraph(stdout, G);
     // printf("\n");

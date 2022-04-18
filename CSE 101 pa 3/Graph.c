@@ -174,12 +174,24 @@ void DFS(Graph G, List S) {
         G->parent[i] = NIL;
     }
     int time = 0;
+    Node tmp;
+    if (S != NULL) {
+        if (S->back != NULL) {
+            tmp = S->back;
+        }
+    }
+
+    while (tmp != NULL) {
+        printf("The data: %d\n", tmp->data);
+        tmp = tmp->prev;
+    }
 
     for (int i = 1; i <= G->order; i++) {
         if (G->color[i] == 0) {
             visit(G, i, &time, S);
         }
     }
+    printList(stdout, S);
 }
 
 void aDFS(Graph G, List S) {
