@@ -184,6 +184,7 @@ void DFS(Graph G, List S) {
 
 void aDFS(Graph G, List S) {
     List L = newList();
+    List t = newList();
     for (int i = 1; i < G->order; i++) {
         G->color[i] = 0;
     }
@@ -195,17 +196,15 @@ void aDFS(Graph G, List S) {
             return;
         } else {
             prepend(L, S->front->data);
+            prepend(t, S->front->data);
         }
     }
 
-    int i = 0;
     while (L->length != 0) {
         int u = front(L);
         printList(stdout, L);
         printf("\n");
         deleteFront(L);
-        printList(stdout, L);
-        printf("\n");
         if (G->color[u] == 0) {
             G->color[u] = 2;
             Node tmp;
@@ -218,12 +217,22 @@ void aDFS(Graph G, List S) {
             while (tmp != NULL) {
                 if (G->color[tmp->data] == 0) {
                     prepend(L, tmp->data);
+                    prepend(t, tmp->data);
                 }
                 tmp = tmp->next;
             }
         }
-        i++;
+        if (L->length == 0) {
+            for (int i = 1; i <= G->order; i++) {
+                if (G->color[i] == 0) {
+                    prepend(L, i);
+                    prepend(t, i);
+                    break;
+                }
+            }
+        }
     }
+    printList(stdout, t);
 }
 
 // Other Functions

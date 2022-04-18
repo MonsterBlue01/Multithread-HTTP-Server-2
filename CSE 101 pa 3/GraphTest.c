@@ -4,25 +4,25 @@
 #include "List.h"
 
 int main() {
-    Graph G = newGraph(9);
+    Graph G = newGraph(8);
     List L = newList();
     append(L, 1);
     addArc(G, 1, 2);
-    addArc(G, 2, 1);
+    addArc(G, 2, 5);
     addArc(G, 2, 3);
-    addArc(G, 3, 5);
-    addArc(G, 5, 4);
+    addArc(G, 2, 6);
+    addArc(G, 3, 4);
+    addArc(G, 3, 7);
     addArc(G, 4, 3);
-    addArc(G, 7, 6);
-    addArc(G, 6, 2);
-    addArc(G, 6, 5);
+    addArc(G, 4, 8);
+    addArc(G, 5, 1);
+    addArc(G, 5, 6);
     addArc(G, 6, 7);
-    addArc(G, 4, 3);
-    addArc(G, 8, 4);
-    addArc(G, 8, 7);
+    addArc(G, 7, 6);
+    addArc(G, 7, 8);
     addArc(G, 8, 8);
-    Graph Gt = copyGraph(G);
-    aDFS(G, L);
+    Graph Gt = transpose(G);
+    aDFS(Gt, L);
     // printGraph(stdout, Gt);
     // printGraph(stdout, G);
     // printf("\n");
