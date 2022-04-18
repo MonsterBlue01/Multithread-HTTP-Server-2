@@ -20,7 +20,9 @@ Graph newGraph(int n) {
     return new;
 }
 
-void freeGraph(Graph* pG);
+void freeGraph(Graph* pG) {
+    free(*pG);
+}
 
 // Access functions 
 
@@ -177,6 +179,50 @@ void DFS(Graph G, List S) {
         if (G->color[i] == 0) {
             visit(G, i, &time, S);
         }
+    }
+}
+
+void aDFS(Graph G, List S) {
+    List L = newList();
+    for (int i = 1; i < G->order; i++) {
+        G->color[i] = 0;
+    }
+
+    if (S == NULL) {
+        return;
+    } else {
+        if (S->front == NULL) {
+            return;
+        } else {
+            prepend(L, S->front->data);
+        }
+    }
+
+    int i = 0;
+    while (L->length != 0) {
+        int u = front(L);
+        printList(stdout, L);
+        printf("\n");
+        deleteFront(L);
+        printList(stdout, L);
+        printf("\n");
+        if (G->color[u] == 0) {
+            G->color[u] = 2;
+            Node tmp;
+            if (G->neighbor[u] != NULL) {
+                if (G->neighbor[u]->front != NULL) {
+                    tmp = G->neighbor[u]->front;
+                }
+            }
+
+            while (tmp != NULL) {
+                if (G->color[tmp->data] == 0) {
+                    prepend(L, tmp->data);
+                }
+                tmp = tmp->next;
+            }
+        }
+        i++;
     }
 }
 

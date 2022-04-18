@@ -6,6 +6,7 @@
 int main() {
     Graph G = newGraph(9);
     List L = newList();
+    append(L, 1);
     addArc(G, 1, 2);
     addArc(G, 2, 1);
     addArc(G, 2, 3);
@@ -21,8 +22,8 @@ int main() {
     addArc(G, 8, 7);
     addArc(G, 8, 8);
     Graph Gt = copyGraph(G);
-    printGraph(stdout, Gt);
-    printf("\n");
+    aDFS(G, L);
+    // printGraph(stdout, Gt);
     // printGraph(stdout, G);
     // printf("\n");
     // DFS(G, L);
