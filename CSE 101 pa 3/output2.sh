@@ -13,7 +13,3 @@ Adjacency list representation of G:
 12: 7
 
 G contains 4 strongly connected components:
-Component 1: 1 5 2 6 
-Component 2: 3 8 4 
-Component 3: 7 12 11 10 
-Component 4: 9 

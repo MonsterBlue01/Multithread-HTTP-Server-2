@@ -5,14 +5,14 @@
 #include "Graph.h"
 
 int main(int argc, char **argv) {
-    // if (argc != 3) {
-    //     fprintf(stderr, "Main function Error: Fewer or more than two arguments were passed in.\n");
-    //     exit(1);
-    // }
+    if (argc != 3) {
+        fprintf(stderr, "Main function Error: Fewer or more than two arguments were passed in.\n");
+        exit(1);
+    }
     FILE *fp = NULL;
     FILE *fp1 = NULL;
-    fp = fopen("input1.sh", "r");
-    fp1 = fopen("output1.sh", "w+");
+    fp = fopen(argv[1], "r");
+    fp1 = fopen(argv[2], "w+");
     if ((fp == NULL) || (fp1 == NULL)) {
         fprintf(stderr, "File Error: invalid files input!\n");
         exit(1);
@@ -27,7 +27,6 @@ int main(int argc, char **argv) {
     List L = newList();
 
     for (int i = 1; i <= G->order; i++) {
-        printf("data: %d\n", i);
         prepend(L, i);
     }
     
@@ -49,38 +48,56 @@ int main(int argc, char **argv) {
         }
     }
     int array[snum];
-    printf("The number: %d\n", snum);
 
-    // for (int i = 1; i <= G->order; i++) {
-    //     if (Gt->parent[i] == 0) {
-    //         array[in++] = i;
-    //     }
-    // }
+    fprintf(fp1, "\nG contains %d strongly connected components:", snum);
+    int m = 0;
+    int n = 0;
 
-    // fprintf(fp1, "\nG contains %d strongly connected components:", snum);
-    // int m = 0;
-    // int n = 0;
+    Node N;
 
-    // while (m != snum) {
-    //     while (true) {
-    //         moveBack(L);
-    //         while (L->cursor->data != array[m]) {
-    //             movePrev(L);
-    //         }
-    //         fprintf(fp1, "\nComponent %d: ", ++n);
-    //         while (index(L) >= 0) {
-    //             fprintf(fp1, "%d ", L->cursor->data);
-    //             movePrev(L);
-    //             if (m != 0) {
-    //                 if (L->cursor->data == array[m - 1]) {
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //         break;
-    //     }
-    //     m++;
-    // }
+    if (L != NULL) {
+        if (L->front != NULL) {
+            N = L->front;
+        } else {
+            return;
+        }
+    } else {
+        return;
+    }
+
+    while (N != NULL) {
+        if (Gt->parent[N->data] == NIL) {
+            if (Gt->parent[N->data] == 0) {
+                array[in++] = N->data;
+            }
+        }
+        N = N->next;
+    }
+
+    while (m != snum) {
+        while (true) {
+            moveBack(L);
+            while (L->cursor->data != array[m]) {
+                movePrev(L);
+            }
+            fprintf(fp1, "\nComponent %d: ", ++n);
+            while (index(L) >= 0) {
+                fprintf(fp1, "%d", L->cursor->data);
+                movePrev(L);
+                if (m != 0) {
+                    if (L->cursor->data == array[m - 1]) {
+                        break;
+                    }
+                }
+
+                if (index(L) >= 0) {
+                    fprintf(fp1, " ");
+                }
+            }
+            break;
+        }
+        m++;
+    }
     fclose(fp);
     fclose(fp1);
 }
