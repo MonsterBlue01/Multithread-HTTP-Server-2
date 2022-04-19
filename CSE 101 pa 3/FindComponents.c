@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
     List L = newList();
 
     for (int i = 1; i <= G->order; i++) {
-        prepend(L, i);
+        append(L, i);
     }
     
     while (fscanf(fp, "%d", &a) != EOF) {
@@ -47,7 +47,14 @@ int main(int argc, char **argv) {
             snum++;
         }
     }
+
     int array[snum];
+
+    for (int i = 1; i <= Gt->order; i++) {
+        if (Gt->parent[i] == 0) {
+            array[in++] = i;
+        }
+    }
 
     fprintf(fp1, "\nG contains %d strongly connected components:", snum);
     int m = 0;
@@ -56,8 +63,8 @@ int main(int argc, char **argv) {
     Node N;
 
     if (L != NULL) {
-        if (L->front != NULL) {
-            N = L->front;
+        if (L->back != NULL) {
+            N = L->back;
         } else {
             return;
         }
@@ -71,7 +78,7 @@ int main(int argc, char **argv) {
                 array[in++] = N->data;
             }
         }
-        N = N->next;
+        N = N->prev;
     }
 
     while (m != snum) {
@@ -83,7 +90,7 @@ int main(int argc, char **argv) {
             fprintf(fp1, "\nComponent %d: ", ++n);
             while (index(L) >= 0) {
                 fprintf(fp1, "%d", L->cursor->data);
-                movePrev(L);
+                moveNext(L);
                 if (m != 0) {
                     if (L->cursor->data == array[m - 1]) {
                         break;

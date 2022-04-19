@@ -6,33 +6,35 @@
 int main() {
     Graph A = newGraph(100);
     List L = newList();
-    if (getSize(A) != 0) {
-        printf("%d\n", getSize(A));
-    }
-    addArc(A, 54, 1);
-    addArc(A, 54, 2);
-    addArc(A, 54, 2);
-    addArc(A, 54, 3);
-    addArc(A, 1, 54);
-    addArc(A, 1, 54);
-    addArc(A, 1, 55);
-    addArc(A, 1, 55);
-    if (getSize(A) != 5) {
-        printf("2\n");
-    }
+    for (int i = 1; i <= 100; i++)
+      if (getParent(A, i) != NIL)
+        return 1;
+    addArc(A, 64, 4);
+    addArc(A, 64, 3);
+    addArc(A, 42, 2);
+    addArc(A, 2, 64);
+    addArc(A, 4, 2);
+    addArc(A, 3, 42);
     for (int i = 1; i <= 100; i++) {
-        append(L, i);
+      append(L, i);
     }
-
+    printGraph(stdout, A);
+    printList(stdout, L);
+    printf("\n");
     DFS(A, L);
-    // if (getSize(A) != 5) {
-    //     printf("3\n");
-    // }
-    // printf("a\n");
-    // addArc(A, 55, 1);
-    // if (getSize(A) != 6)
-    //   return 4;
-    // return 0;
+    printList(stdout, L);
+    printf("\n");
+    if (getParent(A, 100) != NIL)
+      return 2;
+    if (getParent(A, 2) != NIL)
+        printf("%d\n", getParent(A, 2));
+    if (getParent(A, 42) != 3)
+      return 4;
+    if (getParent(A, 3) != 64)
+      return 5;
+    if (getParent(A, 4) != 64)
+      return 6;
+    return 0;
     // prepend(L, 1);
     // prepend(L, 2);
     // prepend(L, 3);

@@ -10,3 +10,7 @@ Adjacency list representation of G:
 9: 9
 
 G contains 4 strongly connected components:
+Component 1: 1 2
+Component 2: 3 4 5
+Component 3: 6 7 8
+Component 4: 9

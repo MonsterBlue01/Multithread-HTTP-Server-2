@@ -169,7 +169,6 @@ void visit(Graph G, int x, int* time, List S, List temp) {
         G->color[x] = 2;
         G->finish_time[x] = ++(*time);
         append(temp, x);
-        return;
     }
 
     Node N;
@@ -200,8 +199,8 @@ void DFS(Graph G, List S) {
     int time = 0;
     Node tmp;
     if (S != NULL) {
-        if (S->back != NULL) {
-            tmp = S->back;
+        if (S->front != NULL) {
+            tmp = S->front;
         } else {
             return;
         }
@@ -213,13 +212,13 @@ void DFS(Graph G, List S) {
         if (G->color[tmp->data] == 0) {
             visit(G, tmp->data, &time, S, temp);
         }
-        tmp = tmp->prev;
+        tmp = tmp->next;
     }
 
     clear(S);
     Node a = temp->back;
     while (a != NULL) {
-        prepend(S, a->data);
+        append(S, a->data);
         a = a->prev;
     }
 
