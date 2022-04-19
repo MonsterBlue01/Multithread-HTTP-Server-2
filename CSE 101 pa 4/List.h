@@ -7,7 +7,7 @@ typedef struct ListObj* List;
 typedef struct NodeObj* Node;
 
 typedef struct NodeObj{
-    int data;
+    void* entry;
     Node next;
     Node prev;
 } NodeObj;

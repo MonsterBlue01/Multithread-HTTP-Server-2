@@ -180,22 +180,30 @@ void DFS(Graph G, List S) {
     if (S != NULL) {
         if (S->back != NULL) {
             tmp = S->back;
+        } else {
+            return;
         }
+    } else {
+        return;
     }
 
     while (tmp != NULL) {
-        printf("The data: %d\n", tmp->data);
+        if (G->color[tmp->data] == 0) {
+            visit(G, tmp->data, &time, S, temp);
+        }
         tmp = tmp->prev;
     }
 
-    for (int i = 1; i <= G->order; i++) {
-        if (G->color[i] == 0) {
-            visit(G, i, &time, S, temp);
-        }
+    clear(S);
+    Node a = temp->back;
+    while (a != NULL) {
+        prepend(S, a->data);
+        a = a->prev;
     }
-    printList(stdout, temp);
-    printf("\n");
-    printList(stdout, S);
+
+    // printList(stdout, temp);
+    // printf("\n");
+    // printList(stdout, S);
 }
 
 void aDFS(Graph G, List S) {

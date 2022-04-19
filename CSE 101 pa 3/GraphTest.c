@@ -29,7 +29,14 @@ int main() {
     addArc(G, 7, 8);
     addArc(G, 8, 8);
     Graph Gt = transpose(G);
+    printList(stdout, L);
+    printf("\n");
     DFS(G, L);
+    printList(stdout, L);
+    printf("\n");
+    DFS(Gt, L);
+    printList(stdout, L);
+    printf("\n");
     // printGraph(stdout, Gt);
     // printGraph(stdout, G);
     // printf("\n");
