@@ -4,39 +4,66 @@
 #include "List.h"
 
 int main() {
-    Graph G = newGraph(8);
+    Graph A = newGraph(100);
     List L = newList();
-    prepend(L, 1);
-    prepend(L, 2);
-    prepend(L, 3);
-    prepend(L, 4);
-    prepend(L, 5);
-    prepend(L, 6);
-    prepend(L, 7);
-    prepend(L, 8);
-    addArc(G, 1, 2);
-    addArc(G, 2, 5);
-    addArc(G, 2, 3);
-    addArc(G, 2, 6);
-    addArc(G, 3, 4);
-    addArc(G, 3, 7);
-    addArc(G, 4, 3);
-    addArc(G, 4, 8);
-    addArc(G, 5, 1);
-    addArc(G, 5, 6);
-    addArc(G, 6, 7);
-    addArc(G, 7, 6);
-    addArc(G, 7, 8);
-    addArc(G, 8, 8);
-    Graph Gt = transpose(G);
-    printList(stdout, L);
-    printf("\n");
-    DFS(G, L);
-    printList(stdout, L);
-    printf("\n");
-    DFS(Gt, L);
-    printList(stdout, L);
-    printf("\n");
+    if (getSize(A) != 0) {
+        printf("%d\n", getSize(A));
+    }
+    addArc(A, 54, 1);
+    addArc(A, 54, 2);
+    addArc(A, 54, 2);
+    addArc(A, 54, 3);
+    addArc(A, 1, 54);
+    addArc(A, 1, 54);
+    addArc(A, 1, 55);
+    addArc(A, 1, 55);
+    if (getSize(A) != 5) {
+        printf("2\n");
+    }
+    for (int i = 1; i <= 100; i++) {
+        append(L, i);
+    }
+
+    DFS(A, L);
+    // if (getSize(A) != 5) {
+    //     printf("3\n");
+    // }
+    // printf("a\n");
+    // addArc(A, 55, 1);
+    // if (getSize(A) != 6)
+    //   return 4;
+    // return 0;
+    // prepend(L, 1);
+    // prepend(L, 2);
+    // prepend(L, 3);
+    // prepend(L, 4);
+    // prepend(L, 5);
+    // prepend(L, 6);
+    // prepend(L, 7);
+    // prepend(L, 8);
+    // addArc(G, 1, 2);
+    // addArc(G, 2, 5);
+    // addArc(G, 2, 3);
+    // addArc(G, 2, 6);
+    // addArc(G, 3, 4);
+    // addArc(G, 3, 7);
+    // addArc(G, 4, 3);
+    // addArc(G, 4, 8);
+    // addArc(G, 5, 1);
+    // addArc(G, 5, 6);
+    // addArc(G, 6, 7);
+    // addArc(G, 7, 6);
+    // addArc(G, 7, 8);
+    // addArc(G, 8, 8);
+    // Graph Gt = transpose(G);
+    // printList(stdout, L);
+    // printf("\n");
+    // DFS(G, L);
+    // printList(stdout, L);
+    // printf("\n");
+    // DFS(Gt, L);
+    // printList(stdout, L);
+    // printf("\n");
     // printGraph(stdout, Gt);
     // printGraph(stdout, G);
     // printf("\n");

@@ -31,7 +31,7 @@ int getOrder(Graph G) {
 }
 
 int getSize(Graph G) {
-    return G->order;
+    return G->size;
 }
 
 int getParent(Graph G, int u) {
@@ -59,6 +59,20 @@ void addArc(Graph G, int u, int v) {
     if (G->neighbor[u] == NULL) {
         G->neighbor[u] = newList();
     }
+
+    if (G->neighbor[u]->length == 1) {
+        if (v == G->neighbor[u]->front->data) {
+            return;
+        }
+    } else if (G->neighbor[u]->length >= 2) {
+        moveBack(G->neighbor[u]);
+        while (G->neighbor[u]->index >= 0) {
+            if (G->neighbor[u]->cursor->data == v) {
+                return;
+            }
+            movePrev(G->neighbor[u]);
+        }
+    } 
 
     if (G->neighbor[u]->front == NULL) {
         append(G->neighbor[u], v);
@@ -150,13 +164,21 @@ void addEdge(Graph G, int u, int v) {
 void visit(Graph G, int x, int* time, List S, List temp) {
     G->discover_time[x] = ++(*time);
     G->color[x] = 1;
-    Node N;
+
     if (G->neighbor[x] == NULL) {
-        N = NULL;
-    } else {
-        N = G->neighbor[x]->front;
+        G->color[x] = 2;
+        G->finish_time[x] = ++(*time);
+        append(temp, x);
+        return;
     }
-    while (N != NULL) { 
+
+    Node N;
+    if (G->neighbor[x] != NULL) {
+        if (G->neighbor[x]->front != NULL) {
+            N = G->neighbor[x]->front;
+        }
+    }
+    while (N != NULL) {
         if (G->color[N->data] == 0) {
             G->parent[N->data] = x;
             visit(G, N->data, time, S, temp);
