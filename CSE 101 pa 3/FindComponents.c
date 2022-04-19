@@ -5,14 +5,14 @@
 #include "Graph.h"
 
 int main(int argc, char **argv) {
-    if (argc != 3) {
-        fprintf(stderr, "Main function Error: Fewer or more than two arguments were passed in.\n");
-        exit(1);
-    }
+    // if (argc != 3) {
+    //     fprintf(stderr, "Main function Error: Fewer or more than two arguments were passed in.\n");
+    //     exit(1);
+    // }
     FILE *fp = NULL;
     FILE *fp1 = NULL;
-    fp = fopen(argv[1], "r");
-    fp1 = fopen(argv[2], "w+");
+    fp = fopen("input8.sh", "r");
+    fp1 = fopen("output8.sh", "w+");
     if ((fp == NULL) || (fp1 == NULL)) {
         fprintf(stderr, "File Error: invalid files input!\n");
         exit(1);
@@ -49,12 +49,7 @@ int main(int argc, char **argv) {
     }
 
     int array[snum];
-
-    for (int i = 1; i <= Gt->order; i++) {
-        if (Gt->parent[i] == 0) {
-            array[in++] = i;
-        }
-    }
+    printf("%d\n", snum);
 
     fprintf(fp1, "\nG contains %d strongly connected components:", snum);
     int m = 0;
