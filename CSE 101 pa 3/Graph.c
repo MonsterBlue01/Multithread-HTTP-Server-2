@@ -147,7 +147,7 @@ void addEdge(Graph G, int u, int v) {
     G->size++;
 }
 
-void visit(Graph G, int x, int* time, List S) {
+void visit(Graph G, int x, int* time, List S, List temp) {
     G->discover_time[x] = ++(*time);
     G->color[x] = 1;
     Node N;
@@ -159,20 +159,22 @@ void visit(Graph G, int x, int* time, List S) {
     while (N != NULL) { 
         if (G->color[N->data] == 0) {
             G->parent[N->data] = x;
-            visit(G, N->data, time, S);
+            visit(G, N->data, time, S, temp);
         }
         N = N->next;
     }
     G->color[x] = 2;
     G->finish_time[x] = ++(*time);
-    append(S, x);
+    append(temp, x);
 }
 
 void DFS(Graph G, List S) {
+    List temp = newList();
     for (int i = 1; i <= G->order; i++) {
         G->color[i] = 0;
         G->parent[i] = NIL;
     }
+    
     int time = 0;
     Node tmp;
     if (S != NULL) {
@@ -188,63 +190,42 @@ void DFS(Graph G, List S) {
 
     for (int i = 1; i <= G->order; i++) {
         if (G->color[i] == 0) {
-            visit(G, i, &time, S);
+            visit(G, i, &time, S, temp);
         }
     }
+    printList(stdout, temp);
+    printf("\n");
     printList(stdout, S);
 }
 
 void aDFS(Graph G, List S) {
-    List L = newList();
-    List t = newList();
-    for (int i = 1; i < G->order; i++) {
+    List temp = newList();
+    for (int i = 1; i <= G->order; i++) {
         G->color[i] = 0;
+        G->parent[i] = NIL;
     }
-
-    if (S == NULL) {
-        return;
-    } else {
-        if (S->front == NULL) {
-            return;
-        } else {
-            prepend(L, S->front->data);
-            prepend(t, S->front->data);
+    
+    int time = 0;
+    Node tmp;
+    if (S != NULL) {
+        if (S->back != NULL) {
+            tmp = S->back;
         }
     }
 
-    while (L->length != 0) {
-        int u = front(L);
-        printList(stdout, L);
-        printf("\n");
-        deleteFront(L);
-        if (G->color[u] == 0) {
-            G->color[u] = 2;
-            Node tmp;
-            if (G->neighbor[u] != NULL) {
-                if (G->neighbor[u]->front != NULL) {
-                    tmp = G->neighbor[u]->front;
-                }
-            }
+    while (tmp != NULL) {
+        printf("The data: %d\n", tmp->data);
+        tmp = tmp->prev;
+    }
 
-            while (tmp != NULL) {
-                if (G->color[tmp->data] == 0) {
-                    prepend(L, tmp->data);
-                    prepend(t, tmp->data);
-                }
-                tmp = tmp->next;
-            }
-        }
-        if (L->length == 0) {
-            for (int i = 1; i <= G->order; i++) {
-                if (G->color[i] == 0) {
-                    prepend(L, i);
-                    prepend(t, i);
-                    break;
-                }
-            }
+    for (int i = 1; i <= G->order; i++) {
+        if (G->color[i] == 0) {
+            visit(G, i, &time, S, temp);
         }
     }
-    printList(stdout, t);
+    printList(stdout, temp);
+    printf("\n");
+    printList(stdout, S);
 }
 
 // Other Functions

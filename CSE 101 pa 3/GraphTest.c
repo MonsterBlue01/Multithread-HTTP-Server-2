@@ -6,8 +6,14 @@
 int main() {
     Graph G = newGraph(8);
     List L = newList();
-    append(L, 1);
-    append(L, 2);
+    prepend(L, 1);
+    prepend(L, 2);
+    prepend(L, 3);
+    prepend(L, 4);
+    prepend(L, 5);
+    prepend(L, 6);
+    prepend(L, 7);
+    prepend(L, 8);
     addArc(G, 1, 2);
     addArc(G, 2, 5);
     addArc(G, 2, 3);
