@@ -49,7 +49,6 @@ int main(int argc, char **argv) {
     }
 
     int array[snum];
-    printf("%d\n", snum);
 
     fprintf(fp1, "\nG contains %d strongly connected components:", snum);
     int m = 0;
