@@ -169,6 +169,7 @@ void visit(Graph G, int x, int* time, List S, List temp) {
         G->color[x] = 2;
         G->finish_time[x] = ++(*time);
         append(temp, x);
+        return;
     }
 
     Node N;

@@ -19,8 +19,6 @@ int main() {
       append(L, i);
     }
     printGraph(stdout, A);
-    printList(stdout, L);
-    printf("\n");
     DFS(A, L);
     printList(stdout, L);
     printf("\n");
