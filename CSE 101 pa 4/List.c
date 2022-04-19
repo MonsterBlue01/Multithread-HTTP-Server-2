@@ -8,14 +8,14 @@
 
 List newList(void) {
     List l = (List)malloc(5 * sizeof(ListObj));
-    l->back = l->front = l->cursor = NULL;                  //Checked
+    l->back = l->front = l->cursor = NULL;
     l->length = 0;
     l->index = -1;
     return l;
 }
 
 void freeList(List* pL) {
-    if(pL!=NULL && *pL!=NULL) { 
+    if(pL != NULL && *pL != NULL) { 
         while((*pL)->length > 0) { 
             deleteFront(*pL); 
         }
@@ -27,7 +27,7 @@ void freeList(List* pL) {
 // Access functions -----------------------------------------------------------
 
 int length(List L) {
-    return L->length;                                       //Checked
+    return L->length;
 }
 
 int index(List L) {
@@ -42,7 +42,7 @@ int index(List L) {
     }
 }
 
-int front(List L) {
+void *front(List L) {
     if (L->length <= 0) {
         fprintf(stderr, "List Error: calling front() on NULL List or empty List reference\n");
         exit(1);
@@ -51,7 +51,7 @@ int front(List L) {
     }
 }
 
-int back(List L) {
+void *back(List L) {
     if (L->length <= 0) {
         fprintf(stderr, "List Error: calling back() on NULL List or empty List reference\n");
         exit(1);
@@ -60,32 +60,13 @@ int back(List L) {
     }
 }
 
-int get(List L) {
+void *get(List L) {
     if ((L->length > 0) && (L->index >= 0)) {
         return (L->cursor->data);
     } else {
         fprintf(stderr, "List Error: calling front() on NULL List or with invalid index\n");
         exit(1);
     }
-}
-
-bool equals(List A, List B) {
-    if (A->length != B->length) {
-        return false;
-    }
-
-    Node fA = A->front;
-    Node fB = B->front;
-
-    while ((fA != A->back) && (fB != B->back)) {
-        if (fA->data != fB->data) {
-            return false;
-        }
-        fA = fA->next;
-        fB = fB->next;
-    }
-
-    return true;
 }
 
 // Manipulation procedures ----------------------------------------------------
@@ -96,7 +77,7 @@ void clear(List L) {
     L->index = -1;
 }
 
-void set(List L, int x) {
+void set(List L, void* x) {
     L->cursor->data = x;
 }
 
@@ -144,7 +125,7 @@ void moveNext(List L) {
     }
 }
 
-void prepend(List L, int x) {
+void prepend(List L, void* x) {
     Node N = malloc(sizeof(NodeObj));
     N->data = x;
     N->next = NULL;
@@ -170,7 +151,7 @@ void prepend(List L, int x) {
     L->length++;
 }
 
-void append(List L, int x) {
+void append(List L, void* x) {
     Node N = malloc(sizeof(NodeObj));
     N->data = x;
     N->next = NULL;
@@ -192,7 +173,7 @@ void append(List L, int x) {
     L->length++;
 }
 
-void insertBefore(List L, int x) {
+void insertBefore(List L, void* x) {
     if ((L->length <= 0) || (L->index < 0)) {
         fprintf(stderr, "List Error: calling insertBefore() with List with invalid length or index\n");
     } else {
@@ -221,7 +202,7 @@ void insertBefore(List L, int x) {
     }
 }
 
-void insertAfter(List L, int x) {
+void insertAfter(List L, void* x) {
     if ((L->length <= 0) || (L->index < 0)) {
         fprintf(stderr, "List Error: calling insertAfter() with List with invalid length or index\n");
     } else {
@@ -304,70 +285,4 @@ void delete(List L) {
         free(tmp);
         L->length--;
     }
-}
-
-// Other operations -----------------------------------------------------------
-
-void printList(FILE* out, List L) {
-    if (L == NULL) {
-        return;
-    }
-
-    if (L->front == NULL) {
-        return;
-    }
-
-    Node head = L->front;
-
-    do {
-        if (head->next != NULL) {
-            fprintf(out, "%d ", head->data);
-            head = head->next;
-        }
-        if (head -> next == NULL) {
-            fprintf(out, "%d", head->data);
-        }
-    } while (head->next != NULL);
-}
-
-List copyList(List L) {
-    if (L == NULL) {
-        fprintf(stderr, "List Error: calling copyList() with nothing\n");
-        exit(1);
-    }
-
-    if (!(L->length >= 0)) {
-        fprintf(stderr, "List Error: calling copyList() with invlid List length\n");
-        exit(1);
-    }
-
-    if (L->length == 0) {
-        List new = newList();
-        return new;
-    }
-
-    if (L->length == 1) {
-        List new = newList();
-        append(new, L->front->data);
-        if (L->cursor != NULL) {
-            moveFront(new);
-        }
-        return new;
-    }
-    List new = newList();
-    Node tmp = L->front;
-
-    while (tmp != NULL) {
-        append(new, tmp->data);
-        tmp = tmp->next;
-    }
-
-    if (L->cursor != NULL) {
-        moveFront(new);
-        while (new->index < L->index) {
-            moveNext(new);
-        }
-    }
-
-    return new;
 }

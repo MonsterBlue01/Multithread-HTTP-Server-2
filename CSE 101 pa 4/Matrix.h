@@ -12,7 +12,7 @@ typedef struct EntryObj{
 } EntryObj;
 
 typedef struct MatrixObj{
-    Entry content;
+    List* Entries;
     int size;
 } MatrixObj;
 
