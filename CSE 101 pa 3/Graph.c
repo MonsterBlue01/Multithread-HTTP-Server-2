@@ -17,6 +17,11 @@ Graph newGraph(int n) {
     new->size = 0;
     new->finish_time = malloc((n + 1) * sizeof(int));
 
+    for (int i = 1; i <= new->order; i++) {
+        new->discover_time[i] = UNDEF;
+        new->finish_time[i] = UNDEF;
+    }
+
     return new;
 }
 
