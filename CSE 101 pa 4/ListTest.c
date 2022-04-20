@@ -4,11 +4,12 @@
 #include "List.h"
 
 int main() {
-    int* temp = (int *)malloc(5 * sizeof(int));
-    temp[0] = 1;
-    temp[2] = 3;
-    temp[4] = 5;
+    int one = -1;
+    int two = -2;
     List new = newList();
-    append(new, temp);
+    append(new, &one);
+    append(new, &two);
     printf("The length: %d\n", length(new));
+    Node tmp = new->front;
+    printf("The number: %d\n", (*((int*)tmp->next->data)));
 }

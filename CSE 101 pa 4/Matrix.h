@@ -1,8 +1,8 @@
 #pragma once
 
-#include "List.h"
+#include <stdio.h>
 
-typedef struct MatrixObj* Matrix;
+#include "List.h"
 
 typedef struct EntryObj* Entry;
 
@@ -18,6 +18,7 @@ typedef struct MatrixObj{
 
 // newMatrix()
 // Returns a reference to a new nXn Matrix object in the zero state. Matrix newMatrix(int n)
+Matrix newMatrix(int n);
 // freeMatrix()
 // Frees heap memory associated with *pM, sets *pM to NULL.
 void freeMatrix(Matrix* pM);
@@ -52,7 +53,7 @@ Matrix scalarMult(double x, Matrix A);
 // Returns a reference to a new
 // pre: size(A)==size(B)
 Matrix sum(Matrix A, Matrix B);
-Matrix
+// Matrix
 // diff()
 // Returns a reference to a new Matrix
 // pre: size(A)==size(B)
@@ -61,17 +62,17 @@ Matrix diff(Matrix A, Matrix B);
 // Returns a reference to a new Matrix
 // pre: size(A)==size(B)
 Matrix product(Matrix A, Matrix B);
-to a new
-Matrix
-Matrix
-object having the same entries as A.
-object representing the transpose
-object representing xA.
-object representing A+B.
-object representing A-B.
-object representing AB
-to a new
-Matrix
+// to a new
+// Matrix
+// Matrix
+// object having the same entries as A.
+// object representing the transpose
+// object representing xA.
+// object representing A+B.
+// object representing A-B.
+// object representing AB
+// to a new
+// Matrix
 // printMatrix()
 // Prints a string representation of Matrix M to filestream out. Zero rows // are not printed. Each non-zero row is represented as one line consisting // of the row number, followed by a colon, a space, then a space separated // list of pairs "(col, val)" giving the column numbers and non-zero values // in that row. The double val will be rounded to 1 decimal point.
 void printMatrix(FILE* out, Matrix M);

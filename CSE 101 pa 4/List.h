@@ -60,9 +60,4 @@ void deleteFront(List L); // Delete the front element. Pre: length()>0
 void deleteBack(List L); // Delete the back element. Pre: length()>0
 void delete(List L); // Delete cursor element, making cursor undefined.
     // Pre: length()>0, index()>=0
-
-// Other operations -----------------------------------------------------------
-void printList(FILE* out, List L); // Prints to the file pointed to by out, a 
-    // string representation of L consisting 
-    // of a space separated sequence of integers,
-    // with front on left.
+    
