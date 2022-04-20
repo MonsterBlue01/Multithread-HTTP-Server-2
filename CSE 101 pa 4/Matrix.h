@@ -1,10 +1,13 @@
 #pragma once
 
+#include <stdlib.h>
 #include <stdio.h>
 
 #include "List.h"
 
 typedef struct EntryObj* Entry;
+
+typedef struct MatrixObj* Matrix;
 
 typedef struct EntryObj{
     int column;
@@ -12,7 +15,7 @@ typedef struct EntryObj{
 } EntryObj;
 
 typedef struct MatrixObj{
-    List* Entries;
+    List* row;
     int size;
 } MatrixObj;
 
