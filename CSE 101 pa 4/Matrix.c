@@ -9,3 +9,11 @@ Matrix newMatrix(int n) {
     a->Entries = (List *)malloc(n * sizeof(List));
     return a;
 }
+
+void freeMatrix(Matrix* pM) {
+    free(*pM);
+}
+
+int size(Matrix M) {
+    return M->size;
+}
