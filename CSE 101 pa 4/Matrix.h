@@ -11,7 +11,7 @@ typedef struct MatrixObj* Matrix;
 
 typedef struct EntryObj{
     int column;
-    List data;
+    double num;
 } EntryObj;
 
 typedef struct MatrixObj{

@@ -18,3 +18,22 @@ void freeMatrix(Matrix* pM) {
 int size(Matrix M) {
     return M->size;
 }
+
+void changeEntry(Matrix M, int i, int j, double x) {
+    Entry new = (Entry)malloc(sizeof(EntryObj));
+    new->column = j;
+    new->num = x;
+    Node tmp = M->row[i]->front;
+    if (tmp == NULL) {
+        append(M->row[i], new);
+    } else {
+        if (j < ((Entry)(M->row[i]->front->data))->column) {
+            prepend(M->row[i], new);
+        } else {
+            while (tmp != NULL) {
+                printf("%d\n", ((Entry)(M->row[1]->front->next->data))->column);
+                tmp = tmp->next;
+            }
+        }
+    }
+}
