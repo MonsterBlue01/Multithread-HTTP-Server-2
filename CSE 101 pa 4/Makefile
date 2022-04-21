@@ -23,7 +23,7 @@ ADT2_TEST      = $(ADT2)Test
 ADT2_SOURCE    = $(ADT2).c
 ADT2_OBJECT    = $(ADT2).o
 ADT2_HEADER    = $(ADT2).h
-COMPILE        = gcc -std=c17 -Wall -c
+COMPILE        = gcc -std=c17 -Wall -c -g
 LINK           = gcc -std=c17 -Wall -o
 REMOVE         = rm -f
 MEMCHECK       = valgrind --leak-check=full
