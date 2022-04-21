@@ -27,13 +27,20 @@ void changeEntry(Matrix M, int i, int j, double x) {
     if (tmp == NULL) {
         append(M->row[i], new);
     } else {
-        if (j < ((Entry)(M->row[i]->front->data))->column) {
+        if (j < ((Entry)(M->row[i]->front->data))->column) {                        // Still need to deal with the case when x = 0.
             prepend(M->row[i], new);
         } else {
-            while (tmp != NULL) {
-                printf("%d\n", ((Entry)(M->row[1]->front->next->data))->column);
-                tmp = tmp->next;
+            moveFront(M->row[i]);
+            while (index(M->row[i]) >= 0) {
+                if ((((Entry)(M->row[i]->cursor->data))->column) > j) {
+                    insertBefore(M->row[i], new);
+                } else if ((((Entry)(M->row[i]->cursor->data))->column) == j){
+                    ((Entry)(M->row[i]->cursor->data))->num = x;
+                    return;
+                }
+                moveNext(M->row[i]);
             }
+            append(M->row[i], new);
         }
     }
 }
