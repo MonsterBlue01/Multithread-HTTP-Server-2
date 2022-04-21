@@ -30,7 +30,7 @@ int main() {
             prepend(M->row[1], new);
         } else {
             while (tmp != NULL) {
-                printf("%d\n", ((Entry)(M->row[1]->front->next->data))->column);
+                printf("%d\n", ((Entry)(tmp->data))->column);
                 tmp = tmp->next;
             }
         }
