@@ -20,6 +20,12 @@ int size(Matrix M) {
 }
 
 void changeEntry(Matrix M, int i, int j, double x) {
+    if (x == 0) {
+        printf("It's Zero\n");
+        return;
+        moveFront(M->row[i]);
+        printf("The value: %f", ((Entry)(M->row[i]->cursor->data))->num);
+    }
     Entry new = (Entry)malloc(sizeof(EntryObj));
     new->column = j;
     new->num = x;

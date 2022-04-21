@@ -18,7 +18,7 @@ int main() {
     double c = 3.0;
     
     changeEntry(M, 1, 1, 1.0);
-    changeEntry(M, 1, 2, 2.0);
+    changeEntry(M, 1, 1, 0.0);
     changeEntry(M, 1, 3, 3.0);
     // Entry new = (Entry)malloc(sizeof(EntryObj));
     // new->column = 3;
