@@ -5,7 +5,7 @@ Matrix newMatrix(int n) {
     Matrix a = (Matrix)malloc(2 * sizeof(MatrixObj));
     a->size = n;
     a->row = (List *)malloc(n * sizeof(List));
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         a->row[i] = newList();
     }
     return a;
@@ -64,10 +64,15 @@ void makeZero(Matrix M) {
 }
 
 int NNZ(Matrix M) {
-    for (int i = 0; i < M->size; i++) {
+    for (int i = 1; i <= M->size; i++) {
         printf("The number: %d\n", i);
-        if (M->row[i] == NULL) {
-            printf("That is NULL\n");
+        if (M->row[i]->front != NULL) {         // If there is a segmentation fault in this line, it means that there is a problem with the initialization of 
+            printf("That isn't NULL\n");        // the List.
+            moveFront(M->row[i]);
+            while (index(M->row[i]) >= 0) {
+                printf("%f\n", ((Entry)M->row[i]->cursor->data)->num);
+                moveNext(M->row[i]);
+            }
         }
     }
 }
