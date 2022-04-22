@@ -11,12 +11,20 @@ Terms:
 8. Clock Cycles Per Instruction (CPI): Average number of clock cycles per instruction for a program or program fragment.
 9. Instruction mix: A measure of the dynamic frequency of instructions across one or many programs.
 10. Workload: A set of programs run on a computer that is either the actual collection of applications run by a user or constructed from real programs to 
-  approximate such a mix. A typical workload specifies both the programs and the relative frequencies.
+    approximate such a mix. A typical workload specifies both the programs and the relative frequencies.
 11. Benchmark: A program selected for use in comparing computer performance.
 12. Amdahl’s Law: A rule stating thatthe performance enhancement possible with a given improvement is limited by the amount that the improved 
 feature is used. It is a quantitative version of the law of diminishing returns.
 13. Million Instructions Per Second (MIPS): A measurement of program execution speed based on the number of millions of instructions. MIPS is 
   computed as the instruction count divided by the product of the execution time and 106.
+14. Instruction set: The vocabulary of commands understood by a given architecture
+15. Stored-program Concept: The idea that instructions and data of many types can be stored in memory as numbers and thus be easy to change, leading to 
+    the stored-program computer.
+16. Doubleword: Another natural unit of access in a computer, usually a group of 64 bits; corresponds to the size of a register in the RISC-V architecture.
+17. Word: A natural unit of access in a computer, usually a group of 32 bits.
+18. Data transfer instruction: A command that moves data between memory and registers.
+19. Address: A value used to delineate the location of a specific data element within a memory array.
+20: Alignment Restriction: A requirement that data be aligned in memory on natural boundaries.
 
 Formulas:
 1. Performance = 1 / Excution time
