@@ -1,4 +1,2 @@
-// 3. Do we still need printList for debugging?
-// 4. Check my functions 
-// 5. How to check functions by myself?
-// 6. I can't access the content in void*
+// 7. Should I add a field for NNZ or I just simply do iteration?
+// 8. Do we need helper function to print everything out?

@@ -21,10 +21,15 @@ int size(Matrix M) {
 
 void changeEntry(Matrix M, int i, int j, double x) {
     if (x == 0) {
-        printf("It's Zero\n");
-        return;
         moveFront(M->row[i]);
-        printf("The value: %f", ((Entry)(M->row[i]->cursor->data))->num);
+        while (index(M->row[i]) >= 0) {
+            if (((Entry)(M->row[i]->cursor->data))->column == j) {
+                delete(M->row[i]);
+                return;
+            }
+            moveNext(M->row[i]);
+        }
+        return;
     }
     Entry new = (Entry)malloc(sizeof(EntryObj));
     new->column = j;
@@ -47,6 +52,22 @@ void changeEntry(Matrix M, int i, int j, double x) {
                 moveNext(M->row[i]);
             }
             append(M->row[i], new);
+        }
+    }
+}
+
+void makeZero(Matrix M) {
+    M->row = (List *)malloc(M->size * sizeof(List));
+    for (int i = 0; i < M->size; i++) {
+        M->row[i] = newList();
+    }
+}
+
+int NNZ(Matrix M) {
+    for (int i = 0; i < M->size; i++) {
+        printf("The number: %d\n", i);
+        if (M->row[i] == NULL) {
+            printf("That is NULL\n");
         }
     }
 }
