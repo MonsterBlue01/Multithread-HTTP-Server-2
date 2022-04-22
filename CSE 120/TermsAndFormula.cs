@@ -25,6 +25,15 @@ feature is used. It is a quantitative version of the law of diminishing returns.
 18. Data transfer instruction: A command that moves data between memory and registers.
 19. Address: A value used to delineate the location of a specific data element within a memory array.
 20: Alignment Restriction: A requirement that data be aligned in memory on natural boundaries.
+21: Least Significant Bit: The rightmost bit in an RISC-V doubleword.
+22: Most significant bit: The leftmost bit in an RISC-V doubleword.
+23: One’s complement A notation that represents the most negative value by 10 ... 000two and the most positive value by01 ... 11two, leaving an equal 
+    number of negatives and positives but ending up with two zeros, one positive (00 ... 00two) and one negative (11 ... 11two). The term is also used to 
+    mean the inversion of every bit in a pattern: 0 to 1 and 1 to 0.
+24: Based notation A notation that represents the most negative value by 00 ... 000two and the most positive value by 11 ... 11two , with 0 typically 
+    having the value 10 ... 00two, thereby biasing the number such that the number plus the bias has a non-negative representation.
+25: Instruction format: A form of representation of an instruction composed of fields of binary numbers.
+26: Machine Language: Binary representation used for communication within a computer system.
 
 Formulas:
 1. Performance = 1 / Excution time
