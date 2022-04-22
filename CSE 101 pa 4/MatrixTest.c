@@ -2,20 +2,10 @@
 #include "Matrix.h"
 
 int main() {
-    Matrix M = (Matrix)malloc(sizeof(MatrixObj));
-    // input = 3;
-    M->size = 3;
-    M->row = (List *)malloc(3 * sizeof(List));
-    for (int i = 0; i < 3; i++) {
-        M->row[i] = newList();
-    }
+    Matrix M = newMatrix(3);
     // if (M->row[0]->front == NULL) {
     //     printf("It's NULL\n");
     // }
-
-    int a = 1;
-    int b = 2;
-    double c = 3.0;
     
     changeEntry(M, 1, 1, 1.0);
     changeEntry(M, 2, 2, 2.0);
