@@ -17,7 +17,15 @@ int main() {
     changeEntry(M, 3, 2, 8.0);
     changeEntry(M, 3, 3, 9.0);
     Matrix N = copy(M);
-    printf("The size of N: %d\n", N->size);
+    for (int i = 1; i <= N->size; i++) {
+        moveFront(N->row[i]);
+        while (index(N->row[i]) >= 0) {
+            // printf("The row and column: (%d, %d)\n", i, ((Entry)N->row[i]->cursor->data)->column);
+            printf("The value: %f\n", ((Entry)N->row[i]->cursor->data)->num);
+            moveNext(N->row[i]);
+        }
+    }
+    printf("The number of all non-zero elements: %d\n", NNZ(N));
     // Entry new = (Entry)malloc(sizeof(EntryObj));
     // new->column = 3;
     // new->num = 3.0;

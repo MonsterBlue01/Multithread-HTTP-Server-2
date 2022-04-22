@@ -84,6 +84,8 @@ Matrix copy(Matrix A) {
         moveFront(A->row[i]);
         while (index(A->row[i]) >= 0) {
             printf("The row and column: (%d, %d)\n", i, ((Entry)A->row[i]->cursor->data)->column);
+            printf("The value: %f\n", ((Entry)A->row[i]->cursor->data)->num);
+            changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, ((Entry)A->row[i]->cursor->data)->num);
             moveNext(A->row[i]);
         }
     }
