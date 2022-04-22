@@ -45,6 +45,7 @@ void changeEntry(Matrix M, int i, int j, double x) {
             while (index(M->row[i]) >= 0) {
                 if ((((Entry)(M->row[i]->cursor->data))->column) > j) {
                     insertBefore(M->row[i], new);
+                    return;
                 } else if ((((Entry)(M->row[i]->cursor->data))->column) == j){
                     ((Entry)(M->row[i]->cursor->data))->num = x;
                     return;
@@ -64,15 +65,15 @@ void makeZero(Matrix M) {
 }
 
 int NNZ(Matrix M) {
+    int num = 0;
     for (int i = 1; i <= M->size; i++) {
-        printf("The number: %d\n", i);
         if (M->row[i]->front != NULL) {         // If there is a segmentation fault in this line, it means that there is a problem with the initialization of 
-            printf("That isn't NULL\n");        // the List.
-            moveFront(M->row[i]);
+            moveFront(M->row[i]);               // the List.
             while (index(M->row[i]) >= 0) {
-                printf("%f\n", ((Entry)M->row[i]->cursor->data)->num);
+                num++;
                 moveNext(M->row[i]);
             }
         }
     }
+    return num;
 }

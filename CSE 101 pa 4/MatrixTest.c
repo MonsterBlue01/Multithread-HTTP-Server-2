@@ -9,8 +9,13 @@ int main() {
     
     changeEntry(M, 1, 1, 1.0);
     changeEntry(M, 2, 2, 2.0);
-    // changeEntry(M, 3, 3, 3.0);
-    NNZ(M);
+    changeEntry(M, 3, 3, 3.0);
+    changeEntry(M, 1, 3, 3.0);
+    changeEntry(M, 1, 2, 2.0);
+    changeEntry(M, 1, 3, 4.0);
+    changeEntry(M, 2, 1, 1.0);
+    changeEntry(M, 1, 1, 0.0);
+    printf("The number: %d\n", NNZ(M));
     // Entry new = (Entry)malloc(sizeof(EntryObj));
     // new->column = 3;
     // new->num = 3.0;
