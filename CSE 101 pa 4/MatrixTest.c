@@ -8,14 +8,16 @@ int main() {
     // }
     
     changeEntry(M, 1, 1, 1.0);
-    changeEntry(M, 2, 2, 2.0);
-    changeEntry(M, 3, 3, 3.0);
-    changeEntry(M, 1, 3, 3.0);
     changeEntry(M, 1, 2, 2.0);
-    changeEntry(M, 1, 3, 4.0);
-    changeEntry(M, 2, 1, 1.0);
-    changeEntry(M, 1, 1, 0.0);
-    printf("The number: %d\n", NNZ(M));
+    changeEntry(M, 1, 3, 3.0);
+    changeEntry(M, 2, 1, 4.0);
+    changeEntry(M, 2, 2, 5.0);
+    changeEntry(M, 2, 3, 6.0);
+    changeEntry(M, 3, 1, 7.0);
+    changeEntry(M, 3, 2, 8.0);
+    changeEntry(M, 3, 3, 9.0);
+    Matrix N = copy(M);
+    printf("The size of N: %d\n", N->size);
     // Entry new = (Entry)malloc(sizeof(EntryObj));
     // new->column = 3;
     // new->num = 3.0;
