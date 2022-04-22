@@ -77,3 +77,15 @@ int NNZ(Matrix M) {
     }
     return num;
 }
+
+Matrix copy(Matrix A) {
+    Matrix new = newMatrix(A->size);
+    for (int i = 1; i <= A->size; i++) {
+        moveFront(A->row[i]);
+        while (index(A->row[i]) >= 0) {
+            printf("The row and column: (%d, %d)\n", i, ((Entry)A->row[i]->cursor->data)->column);
+            moveNext(A->row[i]);
+        }
+    }
+    return new;
+}
