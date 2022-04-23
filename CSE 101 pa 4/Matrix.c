@@ -38,7 +38,7 @@ void changeEntry(Matrix M, int i, int j, double x) {
     if (tmp == NULL) {
         append(M->row[i], new);
     } else {
-        if (j < ((Entry)(M->row[i]->front->data))->column) {                        // Still need to deal with the case when x = 0.
+        if (j < ((Entry)(M->row[i]->front->data))->column) {
             prepend(M->row[i], new);
         } else {
             moveFront(M->row[i]);
@@ -124,22 +124,63 @@ Matrix sum(Matrix A, Matrix B) {
     Matrix new = newMatrix(A->size);
     for (int i = 1; i <= A->size; i++) {
         for (int j = 1; j <= A->size; j++) {
-            int a = 0;
-            int b = 0;
+            double a = 0;
+            double b = 0;
             if (A->row[i]->front != NULL) {
                 moveFront(A->row[i]);
-                while (index(A->row[i]->index >= 0)) {
+                while (index(A->row[i]) >= 0) {
+                    if (((Entry)A->row[i]->cursor->data)->column == j) {
+                        a = ((Entry)A->row[i]->cursor->data)->num;
+                        break;
+                    }
                     moveNext(A->row[i]);
                 }
             }
 
             if (B->row[i]->front != NULL) {
                 moveFront(B->row[i]);
-                while (index(B->row[i]->index >= 0)) {
+                while (index(B->row[i]) >= 0) {
+                    if (((Entry)B->row[i]->cursor->data)->column == j) {
+                        b = ((Entry)B->row[i]->cursor->data)->num;
+                        break;
+                    }
                     moveNext(B->row[i]);
                 }
             }
-            printf("The coordinate: (%d. %d)\n", i, j);
+            changeEntry(new, i, j, a + b);
+        }
+    }
+    return new;
+}
+
+Matrix diff(Matrix A, Matrix B) {
+    Matrix new = newMatrix(A->size);
+    for (int i = 1; i <= A->size; i++) {
+        for (int j = 1; j <= A->size; j++) {
+            double a = 0;
+            double b = 0;
+            if (A->row[i]->front != NULL) {
+                moveFront(A->row[i]);
+                while (index(A->row[i]) >= 0) {
+                    if (((Entry)A->row[i]->cursor->data)->column == j) {
+                        a = ((Entry)A->row[i]->cursor->data)->num;
+                        break;
+                    }
+                    moveNext(A->row[i]);
+                }
+            }
+
+            if (B->row[i]->front != NULL) {
+                moveFront(B->row[i]);
+                while (index(B->row[i]) >= 0) {
+                    if (((Entry)B->row[i]->cursor->data)->column == j) {
+                        b = ((Entry)B->row[i]->cursor->data)->num;
+                        break;
+                    }
+                    moveNext(B->row[i]);
+                }
+            }
+            changeEntry(new, i, j, a - b);
         }
     }
     return new;
