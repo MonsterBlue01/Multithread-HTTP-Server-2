@@ -9,19 +9,20 @@ int main() {
     
     changeEntry(M, 1, 1, 1.0);
     changeEntry(M, 1, 2, 2.0);
-    changeEntry(M, 1, 3, 3.0);
+    // changeEntry(M, 1, 3, 3.0);
     changeEntry(M, 2, 1, 4.0);
-    changeEntry(M, 2, 2, 5.0);
+    // changeEntry(M, 2, 2, 5.0);
     changeEntry(M, 2, 3, 6.0);
-    changeEntry(M, 3, 1, 7.0);
+    // changeEntry(M, 3, 1, 7.0);
     changeEntry(M, 3, 2, 8.0);
     changeEntry(M, 3, 3, 9.0);
-    Matrix N = copy(M);
+    Matrix N = transpose(M);
+    Matrix O = copy(N);
     for (int i = 1; i <= N->size; i++) {
         moveFront(N->row[i]);
         while (index(N->row[i]) >= 0) {
             // printf("The row and column: (%d, %d)\n", i, ((Entry)N->row[i]->cursor->data)->column);
-            printf("The value: %f\n", ((Entry)N->row[i]->cursor->data)->num);
+            // printf("The value: %f\n", ((Entry)N->row[i]->cursor->data)->num);
             moveNext(N->row[i]);
         }
     }

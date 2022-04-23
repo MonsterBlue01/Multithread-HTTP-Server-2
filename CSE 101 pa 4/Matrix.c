@@ -91,3 +91,17 @@ Matrix copy(Matrix A) {
     }
     return new;
 }
+
+Matrix transpose(Matrix A) {
+    Matrix new = newMatrix(A->size);
+    for (int i = 1; i <= A->size; i++) {
+        moveFront(A->row[i]);
+        while (index(A->row[i]) >= 0) {
+            printf("The row and column: (%d, %d)\n", i, ((Entry)A->row[i]->cursor->data)->column);
+            printf("The value: %f\n", ((Entry)A->row[i]->cursor->data)->num);
+            changeEntry(new, ((Entry)A->row[i]->cursor->data)->column, i, ((Entry)A->row[i]->cursor->data)->num);
+            moveNext(A->row[i]);
+        }
+    }
+    return new;
+}
