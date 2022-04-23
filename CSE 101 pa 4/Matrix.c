@@ -81,10 +81,12 @@ int NNZ(Matrix M) {
 Matrix copy(Matrix A) {
     Matrix new = newMatrix(A->size);
     for (int i = 1; i <= A->size; i++) {
-        moveFront(A->row[i]);
-        while (index(A->row[i]) >= 0) {
-            changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, ((Entry)A->row[i]->cursor->data)->num);
-            moveNext(A->row[i]);
+        if (A->row[i]->front != NULL) {
+            moveFront(A->row[i]);
+            while (index(A->row[i]) >= 0) {
+                changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, ((Entry)A->row[i]->cursor->data)->num);
+                moveNext(A->row[i]);
+            }
         }
     }
     return new;
@@ -93,10 +95,12 @@ Matrix copy(Matrix A) {
 Matrix transpose(Matrix A) {
     Matrix new = newMatrix(A->size);
     for (int i = 1; i <= A->size; i++) {
-        moveFront(A->row[i]);
-        while (index(A->row[i]) >= 0) {
-            changeEntry(new, ((Entry)A->row[i]->cursor->data)->column, i, ((Entry)A->row[i]->cursor->data)->num);
-            moveNext(A->row[i]);
+        if (A->row[i]->front != NULL) {
+            moveFront(A->row[i]);
+            while (index(A->row[i]) >= 0) {
+                changeEntry(new, ((Entry)A->row[i]->cursor->data)->column, i, ((Entry)A->row[i]->cursor->data)->num);
+                moveNext(A->row[i]);
+            }
         }
     }
     return new;
@@ -105,12 +109,37 @@ Matrix transpose(Matrix A) {
 Matrix scalarMult(double x, Matrix A) {
     Matrix new = newMatrix(A->size);
     for (int i = 1; i <= A->size; i++) {
-        moveFront(A->row[i]);
-        while (index(A->row[i]) >= 0) {
-            printf("The row and column: (%d, %d)\n", i, ((Entry)A->row[i]->cursor->data)->column);
-            printf("The value: %f\n", ((Entry)A->row[i]->cursor->data)->num);
-            changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, x * ((Entry)A->row[i]->cursor->data)->num);
-            moveNext(A->row[i]);
+        if (A->row[i]->front != NULL) {
+            moveFront(A->row[i]);
+            while (index(A->row[i]) >= 0) {
+                changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, x * ((Entry)A->row[i]->cursor->data)->num);
+                moveNext(A->row[i]);
+            }
+        }
+    }
+    return new;
+}
+
+Matrix sum(Matrix A, Matrix B) {
+    Matrix new = newMatrix(A->size);
+    for (int i = 1; i <= A->size; i++) {
+        for (int j = 1; j <= A->size; j++) {
+            int a = 0;
+            int b = 0;
+            if (A->row[i]->front != NULL) {
+                moveFront(A->row[i]);
+                while (index(A->row[i]->index >= 0)) {
+                    moveNext(A->row[i]);
+                }
+            }
+
+            if (B->row[i]->front != NULL) {
+                moveFront(B->row[i]);
+                while (index(B->row[i]->index >= 0)) {
+                    moveNext(B->row[i]);
+                }
+            }
+            printf("The coordinate: (%d. %d)\n", i, j);
         }
     }
     return new;
