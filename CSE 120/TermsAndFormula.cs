@@ -34,6 +34,22 @@ feature is used. It is a quantitative version of the law of diminishing returns.
     having the value 10 ... 00two, thereby biasing the number such that the number plus the bias has a non-negative representation.
 25: Instruction format: A form of representation of an instruction composed of fields of binary numbers.
 26: Machine Language: Binary representation used for communication within a computer system.
+27. Conditional Branch: An instruction that tests a value and that allows for a subsequent transfer of control to a new address in the program based on the 
+    outcome of the test.
+28. Branch Address Table: Also called branch table. A table of addresses of alternative instruction sequences.
+29: Procedure: A stored subroutine that performs a specific task based on the parameters with which it is provided.
+30: jump-and-link instruction An instruction that branches to an address and simultaneously saves the address of the following instruction in a register 
+    (usually x1 in RISC-V).
+31: Return Address: A link to the calling site that allows a procedure to return to the proper address; in RISC-V it is stored in register x1.
+32: Caller: The program that instigates a procedure and provides the necessary parameter values.
+33: Callee: A procedure that executes a series of stored instructions basedon parameters provided by the caller and then returns control to the caller.
+34: Program Counter (PC): The register containing the address of the instruction in the program being executed.
+35: Global Pointer: The register that is reserved to point to the static area.
+36: Procedure Frame: Also called activation record. The segment of the stack containing a procedure’s saved registers and local variables.
+37: Frame Pointer: A value denoting the location of the saved registers and local variables for a given procedure.
+38: Text Segment: The segment of a UNIX object file that contains the machine language code for routines in the source file.
+39: PC-relative Addressing: An addressing regime in which the address is the sum of the program counter (PC) and a constant in the instruction.
+40: Addressing Mode: One of several addressing regimes delimited by their varied use of operands and/or addresses.
 
 Formulas:
 1. Performance = 1 / Excution time
