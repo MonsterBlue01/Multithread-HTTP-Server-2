@@ -16,13 +16,12 @@ int main() {
     // changeEntry(M, 3, 1, 7.0);
     changeEntry(M, 3, 2, 8.0);
     changeEntry(M, 3, 3, 9.0);
-    Matrix N = transpose(M);
-    Matrix O = copy(N);
+    Matrix N = scalarMult(1.5, M);
     for (int i = 1; i <= N->size; i++) {
         moveFront(N->row[i]);
         while (index(N->row[i]) >= 0) {
-            // printf("The row and column: (%d, %d)\n", i, ((Entry)N->row[i]->cursor->data)->column);
-            // printf("The value: %f\n", ((Entry)N->row[i]->cursor->data)->num);
+            printf("The row and column: (%d, %d)\n", i, ((Entry)N->row[i]->cursor->data)->column);
+            printf("The value: %f\n", ((Entry)N->row[i]->cursor->data)->num);
             moveNext(N->row[i]);
         }
     }

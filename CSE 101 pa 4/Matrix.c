@@ -83,8 +83,6 @@ Matrix copy(Matrix A) {
     for (int i = 1; i <= A->size; i++) {
         moveFront(A->row[i]);
         while (index(A->row[i]) >= 0) {
-            printf("The row and column: (%d, %d)\n", i, ((Entry)A->row[i]->cursor->data)->column);
-            printf("The value: %f\n", ((Entry)A->row[i]->cursor->data)->num);
             changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, ((Entry)A->row[i]->cursor->data)->num);
             moveNext(A->row[i]);
         }
@@ -97,9 +95,21 @@ Matrix transpose(Matrix A) {
     for (int i = 1; i <= A->size; i++) {
         moveFront(A->row[i]);
         while (index(A->row[i]) >= 0) {
+            changeEntry(new, ((Entry)A->row[i]->cursor->data)->column, i, ((Entry)A->row[i]->cursor->data)->num);
+            moveNext(A->row[i]);
+        }
+    }
+    return new;
+}
+
+Matrix scalarMult(double x, Matrix A) {
+    Matrix new = newMatrix(A->size);
+    for (int i = 1; i <= A->size; i++) {
+        moveFront(A->row[i]);
+        while (index(A->row[i]) >= 0) {
             printf("The row and column: (%d, %d)\n", i, ((Entry)A->row[i]->cursor->data)->column);
             printf("The value: %f\n", ((Entry)A->row[i]->cursor->data)->num);
-            changeEntry(new, ((Entry)A->row[i]->cursor->data)->column, i, ((Entry)A->row[i]->cursor->data)->num);
+            changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, x * ((Entry)A->row[i]->cursor->data)->num);
             moveNext(A->row[i]);
         }
     }
