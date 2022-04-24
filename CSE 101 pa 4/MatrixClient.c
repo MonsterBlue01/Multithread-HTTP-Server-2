@@ -32,7 +32,6 @@ int main(){
    printf("\n");
 
    C = scalarMult(1.5, A);
-   printf("the bug\n");
    printf("%d\n", NNZ(C));
    printMatrix(stdout, C);
    printf("\n");
