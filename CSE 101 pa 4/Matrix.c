@@ -80,6 +80,12 @@ int NNZ(Matrix M) {
     return num;
 }
 
+int equals(Matrix A, Matrix B) {
+    for (int i = 1; i <= A->size; i++) {
+        printf("%d\n", i);
+    }
+}
+
 Matrix copy(Matrix A) {
     Matrix new = newMatrix(A->size);
     for (int i = 1; i <= A->size; i++) {

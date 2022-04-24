@@ -33,9 +33,9 @@ int size(Matrix M);
 // Return the number of non-zero elements in M.
 int NNZ(Matrix M);
 // equals()
-// Return true (1) if matrices A and B are equal, false (0) otherwise. int equals(Matrix A, Matrix B);
-// Manipulation procedures
+// Return true (1) if matrices A and B are equal, false (0) otherwise. 
 int equals(Matrix A, Matrix B);
+// Manipulation procedures
 // makeZero()
 // Re-sets M to the zero Matrix state.
 void makeZero(Matrix M);

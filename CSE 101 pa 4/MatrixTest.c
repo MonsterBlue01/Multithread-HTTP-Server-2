@@ -18,15 +18,16 @@ int main() {
     changeEntry(M, 3, 2, 8.0);
     changeEntry(M, 3, 3, 9.0);
     changeEntry(O, 1, 1, 1.0);
-    changeEntry(O, 1, 2, 0.0);
-    changeEntry(O, 1, 3, 1.0);
-    changeEntry(O, 2, 1, 0.0);
-    changeEntry(O, 2, 2, 0.0);
-    changeEntry(O, 2, 3, 0.0);
-    changeEntry(O, 3, 1, 1.0);
-    changeEntry(O, 3, 2, 1.0);
-    changeEntry(O, 3, 3, 1.0);
+    changeEntry(O, 1, 2, 2.0);
+    changeEntry(O, 1, 3, 3.0);
+    changeEntry(O, 2, 1, 4.0);
+    changeEntry(O, 2, 2, 6.0);
+    changeEntry(O, 2, 3, 6.0);
+    changeEntry(O, 3, 1, 7.0);
+    changeEntry(O, 3, 2, 8.0);
+    changeEntry(O, 3, 3, 9.0);
     Matrix N = product(O, M);
+    equals(M, O);
     // for (int i = 1; i <= N->size; i++) {
     //     if (N->row[i]->front != NULL) {
     //     moveFront(N->row[i]);
