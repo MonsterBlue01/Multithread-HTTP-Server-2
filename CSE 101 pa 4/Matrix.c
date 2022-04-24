@@ -88,7 +88,6 @@ int equals(Matrix A, Matrix B) {
             moveFront(A->row[i]);
             while (index(A->row[i]) >= 0) {
                 if (((Entry)(A->row[i]->cursor->data))->column == j) {
-                    printf("The value of A: %f\n", ((Entry)(A->row[i]->cursor->data))->num);
                     a = ((Entry)(A->row[i]->cursor->data))->num;
                     break;
                 }
@@ -98,7 +97,6 @@ int equals(Matrix A, Matrix B) {
             moveFront(B->row[i]);
             while (index(B->row[i]) >= 0) {
                 if (((Entry)(B->row[i]->cursor->data))->column == j) {
-                    printf("The value of B: %f\n", ((Entry)(B->row[i]->cursor->data))->num);
                     b = ((Entry)(B->row[i]->cursor->data))->num;
                     break;
                 }
