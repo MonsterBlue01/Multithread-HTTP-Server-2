@@ -8,36 +8,37 @@ int main() {
     // }
     Matrix O = newMatrix(3);
     
-    // changeEntry(M, 1, 1, 1.0);
-    // changeEntry(M, 1, 2, 2.0);
-    // changeEntry(M, 1, 3, 3.0);
+    changeEntry(M, 1, 1, 1.0);
+    changeEntry(M, 1, 2, 2.0);
+    changeEntry(M, 1, 3, 3.0);
     changeEntry(M, 2, 1, 4.0);
     changeEntry(M, 2, 2, 5.0);
     changeEntry(M, 2, 3, 6.0);
     changeEntry(M, 3, 1, 7.0);
     changeEntry(M, 3, 2, 8.0);
     changeEntry(M, 3, 3, 9.0);
-    // changeEntry(O, 1, 1, 9.0);
-    // changeEntry(O, 1, 2, 8.0);
-    // changeEntry(O, 1, 3, 7.0);
-    changeEntry(O, 2, 1, 6.0);
-    changeEntry(O, 2, 2, 5.0);
-    changeEntry(O, 2, 3, 4.0);
-    changeEntry(O, 3, 1, 3.0);
-    changeEntry(O, 3, 2, 2.0);
+    changeEntry(O, 1, 1, 1.0);
+    changeEntry(O, 1, 2, 0.0);
+    changeEntry(O, 1, 3, 1.0);
+    changeEntry(O, 2, 1, 0.0);
+    changeEntry(O, 2, 2, 0.0);
+    changeEntry(O, 2, 3, 0.0);
+    changeEntry(O, 3, 1, 1.0);
+    changeEntry(O, 3, 2, 1.0);
     changeEntry(O, 3, 3, 1.0);
-    Matrix N = sum(M, O);
-    for (int i = 1; i <= N->size; i++) {
-        if (N->row[i]->front != NULL) {
-        moveFront(N->row[i]);
-            while (index(N->row[i]) >= 0) {
-                printf("The row and column: (%d, %d)\n", i, ((Entry)N->row[i]->cursor->data)->column);
-                printf("The value: %f\n", ((Entry)N->row[i]->cursor->data)->num);
-                moveNext(N->row[i]);
-            }
-        }
-    }
-    printf("The number of all non-zero elements: %d\n", NNZ(N));
+    Matrix N = product(O, M);
+    // for (int i = 1; i <= N->size; i++) {
+    //     if (N->row[i]->front != NULL) {
+    //     moveFront(N->row[i]);
+    //         while (index(N->row[i]) >= 0) {
+    //             printf("The row and column: (%d, %d)\n", i, ((Entry)N->row[i]->cursor->data)->column);
+    //             printf("The value: %f\n", ((Entry)N->row[i]->cursor->data)->num);
+    //             moveNext(N->row[i]);
+    //         }
+    //     }
+    // }
+    printMatrix(stdout, M);
+    // printf("The number of all non-zero elements: %d\n", NNZ(N));
     // Entry new = (Entry)malloc(sizeof(EntryObj));
     // new->column = 3;
     // new->num = 3.0;

@@ -35,6 +35,7 @@ int NNZ(Matrix M);
 // equals()
 // Return true (1) if matrices A and B are equal, false (0) otherwise. int equals(Matrix A, Matrix B);
 // Manipulation procedures
+int equals(Matrix A, Matrix B);
 // makeZero()
 // Re-sets M to the zero Matrix state.
 void makeZero(Matrix M);

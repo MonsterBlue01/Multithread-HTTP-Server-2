@@ -185,3 +185,63 @@ Matrix diff(Matrix A, Matrix B) {
     }
     return new;
 }
+
+Matrix product(Matrix A, Matrix B) {
+    Matrix new = newMatrix(B->size);
+    int i = 1;
+    int m = A->size;
+    double s = 0;
+    while (i <= A->size) {
+        float *storeA = (float *)malloc((A->size + 1) * sizeof(float));
+        float *storeB = (float *)malloc((B->size + 1) * sizeof(float));
+        for (int k = 1; k <= A->size; k++) {
+            moveFront(A->row[i]);
+            while (index(A->row[i]) >= 0) {
+                if (((Entry)(A->row[i]->cursor->data))->column == k) {
+                    storeA[k] = ((Entry)(A->row[i]->cursor->data))->num;
+                }
+                moveNext(A->row[i]);
+            }
+        }
+
+        for (int l = 1; l <= B->size; l++) {
+            moveFront(B->row[l]);
+            while (index(B->row[l]) >= 0) {
+                if (((Entry)(B->row[l]->cursor->data))->column == m) {
+                    storeB[l] = ((Entry)(B->row[l]->cursor->data))->num;
+                }
+                moveNext(B->row[l]);
+            }
+        }
+        for (int i = 1; i <= A->size; i++) {
+            s += storeA[i] * storeB[i];
+        }
+
+        // printf("The sum: %f\n", s);
+        // printf("The row: %d\n", i);
+        // printf("The column: %d\n", A->size - m + 1);
+        changeEntry(new, i, m, s);
+        s = 0;
+
+        m--;
+        if (m == 0) {
+            i++;
+            m = A->size;
+        }
+    }
+    return new;
+}
+
+void printMatrix(FILE* out, Matrix M) {
+    for (int i = 1; i <= M->size; i++) {
+        if (M->row[i]->front != NULL) {
+            printf("%d: ", i);
+            moveFront(M->row[i]);
+            while (index(M->row[i]) >= 0) {
+                printf("(%d, %.1f) ",((Entry)(M->row[i]->cursor->data))->column, ((Entry)(M->row[i]->cursor->data))->num);
+                moveNext(M->row[i]);
+            }
+            printf("\n");
+        }
+    }
+}
