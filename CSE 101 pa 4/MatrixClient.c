@@ -6,9 +6,9 @@
 #include<stdio.h>
 #include<stdbool.h>
 #include"Matrix.h"
-     
+
 int main(){
-   int n=100000;
+   int n=10;
    Matrix A = newMatrix(n);
    Matrix B = newMatrix(n);
    Matrix C, D, E, F, G, H;
@@ -36,30 +36,30 @@ int main(){
    printMatrix(stdout, C);
    printf("\n");
 
-//    D = sum(A, B);
-//    printf("%d\n", NNZ(D));
-//    printMatrix(stdout, D);
-//    printf("\n");
+   D = sum(A, B);
+   printf("%d\n", NNZ(D));
+   printMatrix(stdout, D);
+   printf("\n");
 
-//    E = diff(A, A);
-//    printf("%d\n", NNZ(E));
-//    printMatrix(stdout, E);
-//    printf("\n");
+   E = diff(A, A);
+   printf("%d\n", NNZ(E));
+   printMatrix(stdout, E);
+   printf("\n");
 
-//    F = transpose(B);
-//    printf("%d\n", NNZ(F));
-//    printMatrix(stdout, F);
-//    printf("\n");
+   F = transpose(B);
+   printf("%d\n", NNZ(F));
+   printMatrix(stdout, F);
+   printf("\n");
 
-//    G = product(B, B);
-//    printf("%d\n", NNZ(G));
-//    printMatrix(stdout, G);
-//    printf("\n");
+   G = product(B, B);
+   printf("%d\n", NNZ(G));
+   printMatrix(stdout, G);
+   printf("\n");
 
-//    H = copy(A);
-//    printf("%d\n", NNZ(H));
-//    printMatrix(stdout, H);
-//    printf("\n");
+   H = copy(A);
+   printf("%d\n", NNZ(H));
+   printMatrix(stdout, H);
+   printf("\n");
 
 //    printf("%s\n", equals(A, H)?"true":"false" );
 //    printf("%s\n", equals(A, B)?"true":"false" );

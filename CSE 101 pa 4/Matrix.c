@@ -67,11 +67,13 @@ void makeZero(Matrix M) {
 int NNZ(Matrix M) {
     int num = 0;
     for (int i = 1; i <= M->size; i++) {
-        if (M->row[i]->front != NULL) {         // If there is a segmentation fault in this line, it means that there is a problem with the initialization of 
-            moveFront(M->row[i]);               // the List.
-            while (index(M->row[i]) >= 0) {
-                num++;
-                moveNext(M->row[i]);
+        if (M->row[i] != NULL) {
+            if (M->row[i]->front != NULL) {         // If there is a segmentation fault in this line, it means that there is a problem with the initialization of 
+                moveFront(M->row[i]);               // the List.
+                while (index(M->row[i]) >= 0) {
+                    num++;
+                    moveNext(M->row[i]);
+                }
             }
         }
     }
@@ -123,7 +125,7 @@ Matrix scalarMult(double x, Matrix A) {
 Matrix sum(Matrix A, Matrix B) {
     Matrix new = newMatrix(A->size);
     for (int i = 1; i <= A->size; i++) {
-        for (int j = 1; j <= A->size; j++) {
+        for (int j = 1; j <= B->size; j++) {
             double a = 0;
             double b = 0;
             if (A->row[i]->front != NULL) {
@@ -234,14 +236,16 @@ Matrix product(Matrix A, Matrix B) {
 
 void printMatrix(FILE* out, Matrix M) {
     for (int i = 1; i <= M->size; i++) {
-        if (M->row[i]->front != NULL) {
-            printf("%d: ", i);
-            moveFront(M->row[i]);
-            while (index(M->row[i]) >= 0) {
-                printf("(%d, %.1f) ",((Entry)(M->row[i]->cursor->data))->column, ((Entry)(M->row[i]->cursor->data))->num);
-                moveNext(M->row[i]);
+        if (M->row[i] != NULL) {
+            if (M->row[i]->front != NULL) {
+                printf("%d:", i);
+                moveFront(M->row[i]);
+                while (index(M->row[i]) >= 0) {
+                    printf(" (%d, %.1f)",((Entry)(M->row[i]->cursor->data))->column, ((Entry)(M->row[i]->cursor->data))->num);
+                    moveNext(M->row[i]);
+                }
+                printf("\n");
             }
-            printf("\n");
         }
     }
 }

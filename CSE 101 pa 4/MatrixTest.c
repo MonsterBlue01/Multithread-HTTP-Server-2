@@ -3,9 +3,9 @@
 
 int main() {
     Matrix M = newMatrix(3);
-    // if (M->row[0]->front == NULL) {
-    //     printf("It's NULL\n");
-    // }
+    if (M->row[0]->front == NULL) {
+        printf("It's NULL\n");
+    }
     Matrix O = newMatrix(3);
     
     changeEntry(M, 1, 1, 1.0);
