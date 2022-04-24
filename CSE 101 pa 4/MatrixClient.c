@@ -61,9 +61,9 @@ int main(){
    printMatrix(stdout, H);
    printf("\n");
 
-   // printf("%s\n", equals(A, H)?"true":"false" );
-   // printf("%s\n", equals(A, B)?"true":"false" );
-   // printf("%s\n", equals(A, A)?"true":"false" );
+   printf("%s\n", equals(A, H)?"true":"false" );
+   printf("%s\n", equals(A, B)?"true":"false" );
+   printf("%s\n", equals(A, A)?"true":"false" );
 
    makeZero(A);
    printf("%d\n", NNZ(A));
