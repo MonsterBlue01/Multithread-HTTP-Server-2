@@ -250,6 +250,8 @@ Matrix product(Matrix A, Matrix B) {
         }
         for (int i = 1; i <= A->size; i++) {
             s += storeA[i] * storeB[i];
+            printf("%lf\n", storeA[i]);
+            printf("%lf\n", storeB[i]);
         }
 
         changeEntry(new, i, m, s);
