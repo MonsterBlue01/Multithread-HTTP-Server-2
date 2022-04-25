@@ -249,6 +249,8 @@ Matrix product(Matrix A, Matrix B) {
             }
         }
         for (int i = 1; i <= A->size; i++) {
+            double aa = (int)(storeA[i] * 10.0 + 0.5) / 10.0;
+            double bb = (int)(storeB[i] * 10.0 + 0.5) / 10.0;
             s += storeA[i] * storeB[i];
             if (((int)storeA[i] != 0) && ((int)storeB[i] != 0)) {
                 printf("%lf\n", (int)(storeA[i] * 10.0 + 0.5) / 10.0);
