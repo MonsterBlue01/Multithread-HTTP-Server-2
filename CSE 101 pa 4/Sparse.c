@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
     FILE *fp1 = NULL;
     fp = fopen("input4.sh", "r");
     fp1 = fopen("output4.sh", "w+");
-    char buff[256];
+    char buff[1024];
     
     int a = 0;
     int b = 0;
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     int in = 0;
  
     while(!feof(fp)) { 
-        fgets(buff, 256, fp);   
+        fgets(buff, 1024, fp);   
         sscanf(buff, "%d %d %lf\n", &a, &b, &c);
         if (buff[0] == '\n') {
             in++;
