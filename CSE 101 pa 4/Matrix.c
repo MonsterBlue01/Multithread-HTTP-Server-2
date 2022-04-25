@@ -146,7 +146,8 @@ Matrix scalarMult(double x, Matrix A) {
         if (A->row[i]->front != NULL) {
             moveFront(A->row[i]);
             while (index(A->row[i]) >= 0) {
-                changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, x * ((Entry)A->row[i]->cursor->data)->num);
+                double z = 1.5 * ((Entry)A->row[i]->cursor->data)->num;
+                changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, z);
                 moveNext(A->row[i]);
             }
         }
@@ -251,9 +252,6 @@ Matrix product(Matrix A, Matrix B) {
             s += storeA[i] * storeB[i];
         }
 
-        // printf("The sum: %f\n", s);
-        // printf("The row: %d\n", i);
-        // printf("The column: %d\n", A->size - m + 1);
         changeEntry(new, i, m, s);
         s = 0;
 
@@ -270,13 +268,13 @@ void printMatrix(FILE* out, Matrix M) {
     for (int i = 1; i <= M->size; i++) {
         if (M->row[i] != NULL) {
             if (M->row[i]->front != NULL) {
-                printf("%d:", i);
+                fprintf(out, "%d: ", i);
                 moveFront(M->row[i]);
                 while (index(M->row[i]) >= 0) {
-                    printf(" (%d, %.1f)",((Entry)(M->row[i]->cursor->data))->column, ((Entry)(M->row[i]->cursor->data))->num);
+                    fprintf(out, "(%d, %.1lf) ",((Entry)(M->row[i]->cursor->data))->column, ((Entry)(M->row[i]->cursor->data))->num);
                     moveNext(M->row[i]);
                 }
-                printf("\n");
+                fprintf(out, "\n");
             }
         }
     }
