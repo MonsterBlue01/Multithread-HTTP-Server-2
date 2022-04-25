@@ -81,3 +81,10 @@ Formulas:
 12. Seconds / Program = (Instructions / Program) * (Clock cycles / Instructions) * (Seconds / Clock Cycle)
 13: Machine A is n times faster than machine B means: 
     Speedup = performance_A / Performance_B = Execution time_B/ Excution time_A
+
+Machine code <-> Assembly code:
+    Immediate; 12 bits
+    Register: 5 bits
+    funct7: 7 bits
+    funct3: 3 bits
+    opcode: 7 bits
