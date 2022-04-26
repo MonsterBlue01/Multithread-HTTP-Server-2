@@ -249,8 +249,20 @@ Matrix product(Matrix A, Matrix B) {
             }
         }
         for (int i = 1; i <= A->size; i++) {
-            double aa = (int)(storeA[i] * 10.0 + 0.5) / 10.0;
-            double bb = (int)(storeB[i] * 10.0 + 0.5) / 10.0;
+            double aa;
+            double bb;
+            if (storeA[i] > 0) {
+                aa = (int)(storeA[i] * 10.0 + 0.5) / 10.0;
+            } else {
+                aa = (int)(storeA[i] * 10.0 - 0.5) / 10.0;
+            }
+
+            if (storeB[i] > 0) {
+                bb = (int)(storeB[i] * 10.0 + 0.5) / 10.0;
+            } else {
+                bb = (int)(storeB[i] * 10.0 - 0.5) / 10.0;
+            }
+            
             s += aa * bb;
             if (((int)storeA[i] != 0) && ((int)storeB[i] != 0)) {
                 printf("A: %lf\n", storeA[i]);
