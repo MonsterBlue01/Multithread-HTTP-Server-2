@@ -6,8 +6,8 @@
 int main(int argc, char *argv[]) {
     FILE *fp = NULL;
     FILE *fp1 = NULL;
-    fp = fopen("input5.sh", "r");
-    fp1 = fopen("output5.sh", "w+");
+    fp = fopen("input6.sh", "r");
+    fp1 = fopen("output6.sh", "w+");
     char buff[1024];
     
     int a = 0;
