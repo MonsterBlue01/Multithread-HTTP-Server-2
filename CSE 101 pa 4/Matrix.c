@@ -253,7 +253,9 @@ Matrix product(Matrix A, Matrix B) {
             double bb = (int)(storeB[i] * 10.0 + 0.5) / 10.0;
             s += aa * bb;
             if (((int)storeA[i] != 0) && ((int)storeB[i] != 0)) {
-                printf("%lf\n", s);
+                printf("A: %lf\n", aa);
+                printf("B: %lf\n", bb);
+                printf("The product: %lf\n", s);
             }
         }
 
