@@ -4,6 +4,11 @@
 int main() {
     Matrix A;
     Matrix B;
+    if(A == NULL) {
+        printf("is\n");
+    } else {
+        printf("not\n");
+    }
     Matrix C = newMatrix(15);
     if (!equals(A, B))
         printf("1\n");
