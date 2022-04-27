@@ -81,7 +81,7 @@ int NNZ(Matrix M) {
 }
 
 int equals(Matrix A, Matrix B) {
-    if (A == NULL) {
+    if (A->row[1] == NULL) {
         printf("A\n");
     }
 
