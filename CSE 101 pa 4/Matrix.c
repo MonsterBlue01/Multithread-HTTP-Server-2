@@ -58,10 +58,7 @@ void changeEntry(Matrix M, int i, int j, double x) {
 }
 
 void makeZero(Matrix M) {
-    M->row = (List *)malloc(M->size * sizeof(List));
-    for (int i = 0; i < M->size; i++) {
-        M->row[i] = newList();
-    }
+    M = newMatrix(M->size);
 }
 
 int NNZ(Matrix M) {
