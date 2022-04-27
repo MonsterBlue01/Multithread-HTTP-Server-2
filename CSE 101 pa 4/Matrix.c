@@ -81,10 +81,12 @@ int NNZ(Matrix M) {
 }
 
 int equals(Matrix A, Matrix B) {
-    if (A->size != B->size) {
+    if (((A == NULL) && (B != NULL)) && ((A != NULL) && (B == NULL))) {
         return 0;
+    } else if ((A == NULL) && (B == NULL)) {
+        return 1;
     }
-    
+
     for (int i = 1; i <= A->size; i++) {
         for (int j = 1; j <= A->size; j++) {
             double a = 0;
