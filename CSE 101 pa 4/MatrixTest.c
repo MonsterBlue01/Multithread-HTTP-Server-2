@@ -5,9 +5,6 @@ int main() {
     Matrix A;
     Matrix B;
     Matrix C = newMatrix(15);
-    if (C == NULL) {
-        printf("NULL\n");
-    }
     if (!equals(A, B))
         printf("1\n");
     if (equals(A, C))
