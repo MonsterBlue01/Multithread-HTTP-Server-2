@@ -124,6 +124,8 @@ int equals(Matrix A, Matrix B) {
         return 1;
     } else if (((a0 == 1) && (a1 != 1)) || ((a0 != 1) && (a1 == 1))) {
         return 0;
+    } else {
+        return 1;
     }
 }
 

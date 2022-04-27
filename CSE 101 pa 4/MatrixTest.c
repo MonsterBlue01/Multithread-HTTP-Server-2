@@ -2,18 +2,18 @@
 #include "Matrix.h"
 
 int main() {
-    Matrix A = newMatrix(15);
-    Matrix B = newMatrix(15);
+    Matrix A;
+    Matrix B;
     Matrix C = newMatrix(15);
     if (!equals(A, B))
-        return 1;
+        printf("1\n");
     if (equals(A, C))
-        return 2;
+        printf("2\n");
     Matrix D = newMatrix(10);
     changeEntry(D, 5, 5, 5);
     makeZero(D);
     if (!equals(A, D))
-        return 3;
+        printf("3\n");
     return 0;
     // Matrix A = newMatrix(10); 
     // Matrix C = newMatrix(10); 
