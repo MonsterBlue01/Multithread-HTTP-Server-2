@@ -53,7 +53,7 @@ int main() {
     //         }
     //     }
     // }
-    printMatrix(stdout, M);
+    // printMatrix(stdout, M);
     // printf("The number of all non-zero elements: %d\n", NNZ(N));
     // Entry new = (Entry)malloc(sizeof(EntryObj));
     // new->column = 3;
