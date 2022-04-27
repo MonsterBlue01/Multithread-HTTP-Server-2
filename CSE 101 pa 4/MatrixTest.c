@@ -4,12 +4,10 @@
 int main() {
     Matrix A;
     Matrix B;
-    if(A == NULL) {
-        printf("is\n");
-    } else {
-        printf("not\n");
-    }
     Matrix C = newMatrix(15);
+    if (C == NULL) {
+        printf("NULL\n");
+    }
     if (!equals(A, B))
         printf("1\n");
     if (equals(A, C))
@@ -20,6 +18,7 @@ int main() {
     if (!equals(A, D))
         printf("3\n");
     return 0;
+
     // Matrix A = newMatrix(10); 
     // Matrix C = newMatrix(10); 
     // Matrix D = newMatrix(10); 
