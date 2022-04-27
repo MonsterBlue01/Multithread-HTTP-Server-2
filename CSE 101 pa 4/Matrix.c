@@ -81,13 +81,12 @@ int NNZ(Matrix M) {
 }
 
 int equals(Matrix A, Matrix B) {
-    if (A == NULL) {
-        printf("A is NULL\n");
+    if (((A == NULL) && (B != NULL)) || ((A != NULL) && (B == NULL))) {
+        return 0;
+    } else if ((A == NULL) && (B == NULL)) {
+        return 1;
     }
 
-    if (B == NULL) {
-        printf("B is NULL\n");
-    }
     for (int i = 1; i <= A->size; i++) {
         for (int j = 1; j <= A->size; j++) {
             double a = 0;
