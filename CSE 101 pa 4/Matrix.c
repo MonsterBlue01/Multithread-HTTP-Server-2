@@ -88,6 +88,12 @@ int equals(Matrix A, Matrix B) {
         for (int j = 1; j <= A->size; j++) {
             double a = 0;
             double b = 0;
+            if (A->row[i]->front != NULL) {
+                a0 = 1;
+            }
+            if (B->row[i]->front != NULL) {
+                a1 = 1;
+            }
             moveFront(A->row[i]);
             while (index(A->row[i]) >= 0) {
                 if (((Entry)(A->row[i]->cursor->data))->column == j) {
@@ -104,14 +110,6 @@ int equals(Matrix A, Matrix B) {
                     break;
                 }
                 moveNext(B->row[i]);
-            }
-
-            if (a != 0) {
-                a0 = 1;
-            }
-
-            if (b != 0) {
-                a1 = 1;
             }
 
             if (a != b) {
