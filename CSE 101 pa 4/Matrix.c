@@ -81,9 +81,6 @@ int NNZ(Matrix M) {
 }
 
 int equals(Matrix A, Matrix B) {
-    int a0 = 0;
-    int a1 = 0;
-
     if (A == NULL) {
         printf("A is NULL\n");
     }
@@ -96,12 +93,6 @@ int equals(Matrix A, Matrix B) {
         for (int j = 1; j <= A->size; j++) {
             double a = 0;
             double b = 0;
-            if (A->row[i] != NULL) {
-                a0 = 1;
-            }
-            if (B->row[i] != NULL) {
-                a1 = 1;
-            }
             moveFront(A->row[i]);
             while (index(A->row[i]) >= 0) {
                 if (((Entry)(A->row[i]->cursor->data))->column == j) {
@@ -126,13 +117,7 @@ int equals(Matrix A, Matrix B) {
         }
     }
 
-    if ((a0 == 1) && (a1 == 1)) {
-        return 1;
-    } else if (((a0 == 1) && (a1 != 1)) || ((a0 != 1) && (a1 == 1))) {
-        return 0;
-    } else {
-        return 1;
-    }
+    return 1;
 }
 
 Matrix copy(Matrix A) {
