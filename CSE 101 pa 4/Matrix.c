@@ -81,11 +81,8 @@ int NNZ(Matrix M) {
 }
 
 int equals(Matrix A, Matrix B) {
-    if (((A == NULL) && (B != NULL)) && ((A != NULL) && (B == NULL))) {
-        return 0;
-    } else if ((A == NULL) && (B == NULL)) {
-        return 1;
-    }
+    int a0 = 0;
+    int a1 = 0;
 
     for (int i = 1; i <= A->size; i++) {
         for (int j = 1; j <= A->size; j++) {
@@ -109,13 +106,25 @@ int equals(Matrix A, Matrix B) {
                 moveNext(B->row[i]);
             }
 
+            if (a != 0) {
+                a0 = 1;
+            }
+
+            if (b != 0) {
+                a1 = 1;
+            }
+
             if (a != b) {
                 return 0;
             }
         }
     }
 
-    return 1;
+    if ((a0 == 1) && (a1 == 1)) {
+        return 1;
+    } else if (((a0 == 1) && (a1 != 1)) || ((a0 != 1) && (a1 == 1))) {
+        return 0;
+    }
 }
 
 Matrix copy(Matrix A) {
