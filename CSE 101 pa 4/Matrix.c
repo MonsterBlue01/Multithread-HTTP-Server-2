@@ -80,7 +80,7 @@ int NNZ(Matrix M) {
     return num;
 }
 
-int equals(Matrix A, Matrix B) {
+int equals(Matrix A, Matrix B) {//
     for (int i = 1; i <= A->size; i++) {
         for (int j = 1; j <= A->size; j++) {
             double a = 0;
