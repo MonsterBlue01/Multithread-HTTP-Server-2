@@ -81,6 +81,9 @@ int NNZ(Matrix M) {
 }
 
 int equals(Matrix A, Matrix B) {
+    printMatrix(stdout, A);
+    printf("\n");
+    printMatrix(stdout, B);
     for (int i = 1; i <= A->size; i++) {
         for (int j = 1; j <= A->size; j++) {
             double a = 0;
