@@ -4,10 +4,18 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        fprintf(stderr, "Main function Error: Fewer or more than two arguments were passed in.\n");
+        exit(1);
+    }
     FILE *fp = NULL;
     FILE *fp1 = NULL;
-    fp = fopen("input4.sh", "r");
-    fp1 = fopen("output4.sh", "w+");
+    fp = fopen(argv[1], "r");
+    fp1 = fopen(argv[2], "w+");
+    if ((fp == NULL) || (fp1 == NULL)) {
+        fprintf(stderr, "File Error: invalid files input!\n");
+        exit(1);
+    }
     char buff[1024];
     
     int a = 0;
