@@ -2,29 +2,47 @@
 #include "Matrix.h"
 
 int main() {
-    Matrix M = newMatrix(3);
-    Matrix O = newMatrix(3);
+    Matrix A = newMatrix(10); 
+    Matrix C = newMatrix(10); 
+    Matrix D = newMatrix(10); 
+    changeEntry(A, 1, 1, 4);
+    changeEntry(A, 1, 2, 2);
+    changeEntry(A, 1, 3, 0);
+    changeEntry(A, 2, 1, 2);
+    changeEntry(A, 3, 1, 0);
+    changeEntry(A, 2, 2, 2);
+    changeEntry(A, 3, 3, 0);
+    C = scalarMult(-20, A);
+    if (NNZ(C) != 4)
+        return 1;
+    makeZero(A);
+    D = scalarMult(-20, A);
+    if (NNZ(D) != 0)
+        return 2;
+    return 0;
+    // Matrix M = newMatrix(3);
+    // Matrix O = newMatrix(3);
     
-    changeEntry(M, 1, 1, 1.0);
-    changeEntry(M, 1, 2, 2.0);
-    changeEntry(M, 1, 3, 3.0);
-    changeEntry(M, 2, 1, 4.0);
-    changeEntry(M, 2, 2, 5.0);
-    changeEntry(M, 2, 3, 6.0);
-    changeEntry(M, 3, 1, 7.0);
-    changeEntry(M, 3, 2, 8.0);
-    changeEntry(M, 3, 3, 9.0);
-    changeEntry(O, 1, 1, 1.0);
-    changeEntry(O, 1, 2, 2.0);
-    changeEntry(O, 1, 3, 3.0);
-    changeEntry(O, 2, 1, 4.0);
-    changeEntry(O, 2, 2, 6.0);
-    changeEntry(O, 2, 3, 6.0);
-    changeEntry(O, 3, 1, 7.0);
-    changeEntry(O, 3, 2, 8.0);
-    changeEntry(O, 3, 3, 9.0);
-    Matrix N = product(O, M);
-    equals(M, O);
+    // changeEntry(M, 1, 1, 1.0);
+    // changeEntry(M, 1, 2, 2.0);
+    // changeEntry(M, 1, 3, 3.0);
+    // changeEntry(M, 2, 1, 4.0);
+    // changeEntry(M, 2, 2, 5.0);
+    // changeEntry(M, 2, 3, 6.0);
+    // changeEntry(M, 3, 1, 7.0);
+    // changeEntry(M, 3, 2, 8.0);
+    // changeEntry(M, 3, 3, 9.0);
+    // changeEntry(O, 1, 1, 1.0);
+    // changeEntry(O, 1, 2, 2.0);
+    // changeEntry(O, 1, 3, 3.0);
+    // changeEntry(O, 2, 1, 4.0);
+    // changeEntry(O, 2, 2, 6.0);
+    // changeEntry(O, 2, 3, 6.0);
+    // changeEntry(O, 3, 1, 7.0);
+    // changeEntry(O, 3, 2, 8.0);
+    // changeEntry(O, 3, 3, 9.0);
+    // Matrix N = product(O, M);
+    // equals(M, O);
     // for (int i = 1; i <= N->size; i++) {
     //     if (N->row[i]->front != NULL) {
     //     moveFront(N->row[i]);
