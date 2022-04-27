@@ -143,12 +143,14 @@ Matrix transpose(Matrix A) {
 Matrix scalarMult(double x, Matrix A) {
     Matrix new = newMatrix(A->size);
     for (int i = 1; i <= A->size; i++) {
-        if (A->row[i]->front != NULL) {
-            moveFront(A->row[i]);
-            while (index(A->row[i]) >= 0) {
-                double z = 1.5 * ((Entry)A->row[i]->cursor->data)->num;
-                changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, z);
-                moveNext(A->row[i]);
+        if (A->row[i] != NULL) {
+            if (A->row[i]->front != NULL) {
+                moveFront(A->row[i]);
+                while (index(A->row[i]) >= 0) {
+                    double z = 1.5 * ((Entry)A->row[i]->cursor->data)->num;
+                    changeEntry(new, i, ((Entry)A->row[i]->cursor->data)->column, z);
+                    moveNext(A->row[i]);
+                }
             }
         }
     }
