@@ -2,24 +2,37 @@
 #include "Matrix.h"
 
 int main() {
-    Matrix A = newMatrix(10); 
-    Matrix C = newMatrix(10); 
-    Matrix D = newMatrix(10); 
-    changeEntry(A, 1, 1, 4);
-    changeEntry(A, 1, 2, 2);
-    changeEntry(A, 1, 3, 0);
-    changeEntry(A, 2, 1, 2);
-    changeEntry(A, 3, 1, 0);
-    changeEntry(A, 2, 2, 2);
-    changeEntry(A, 3, 3, 0);
-    C = scalarMult(-20, A);
-    if (NNZ(C) != 4)
+    Matrix A = newMatrix(15);
+    Matrix B = newMatrix(15);
+    Matrix C = newMatrix(15);
+    if (!equals(A, B))
         return 1;
-    makeZero(A);
-    D = scalarMult(-20, A);
-    if (NNZ(D) != 0)
+    if (equals(A, C))
         return 2;
+    Matrix D = newMatrix(10);
+    changeEntry(D, 5, 5, 5);
+    makeZero(D);
+    if (!equals(A, D))
+        return 3;
     return 0;
+    // Matrix A = newMatrix(10); 
+    // Matrix C = newMatrix(10); 
+    // Matrix D = newMatrix(10); 
+    // changeEntry(A, 1, 1, 4);
+    // changeEntry(A, 1, 2, 2);
+    // changeEntry(A, 1, 3, 0);
+    // changeEntry(A, 2, 1, 2);
+    // changeEntry(A, 3, 1, 0);
+    // changeEntry(A, 2, 2, 2);
+    // changeEntry(A, 3, 3, 0);
+    // C = scalarMult(-20, A);
+    // if (NNZ(C) != 4)
+    //     return 1;
+    // makeZero(A);
+    // D = scalarMult(-20, A);
+    // if (NNZ(D) != 0)
+    //     return 2;
+    // return 0;
     // Matrix M = newMatrix(3);
     // Matrix O = newMatrix(3);
     
