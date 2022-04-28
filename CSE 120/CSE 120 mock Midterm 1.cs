@@ -2,6 +2,7 @@
 //     1: How to check the value in Control Unit?
 //     2: How to check the output from ALU?
 //     3: How to get the value for third one in INST 2?
+//     4. What type of quiz about the pipeline will be out next week?
 
 // 1. IPC = 1 / CPI = 1 / (0.2 * 1 + 0.4 * 2 + 0.1 * 3 + 0.3 * 4) = 1 / 2.5 = 0.4
 
