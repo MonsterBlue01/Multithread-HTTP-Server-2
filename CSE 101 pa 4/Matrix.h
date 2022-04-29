@@ -1,3 +1,9 @@
+// -----------------------------
+// Name: Dongjing Wang
+// CruzID: 1823945
+// Assignment: pa4
+// -----------------------------
+
 #pragma once
 
 #include <stdlib.h>

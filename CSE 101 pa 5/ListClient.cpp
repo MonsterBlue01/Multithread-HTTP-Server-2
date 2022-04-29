@@ -58,29 +58,29 @@ int main(){
     }
     cout << endl << "C.position() = " << C.position() << endl;
 
-    // cout << endl;
-    // cout << "A==B is " << (A==B?"true":"false") << endl;
-    // cout << "B==C is " << (B==C?"true":"false") << endl;
-    // cout << "C==D is " << (C==D?"true":"false") << endl;
-    // cout << "D==A is " << (D==A?"true":"false") << endl;
-    // cout << endl;
+    cout << endl;
+    cout << "A==B is " << (A==B?"true":"false") << endl;
+    cout << "B==C is " << (B==C?"true":"false") << endl;
+    cout << "C==D is " << (C==D?"true":"false") << endl;
+    cout << "D==A is " << (D==A?"true":"false") << endl;
+    cout << endl;
 
-    // cout << B.findNext(5) << endl;
-    // cout << B << endl;
-    // B.eraseBefore();
-    // B.eraseAfter();
-    // cout << B << endl;
-    // cout << B.position() << endl;
-    // cout << B.findPrev(2) << endl;
-    // B.eraseBefore();
-    // B.eraseAfter();
-    // cout << B << endl;
-    // cout << B.position() << endl; 
-    // cout << B.findNext(20) << endl; 
-    // cout << B.position() << endl;
-    // cout << B.findPrev(20) << endl;
-    // cout << B.position() << endl;
-    // cout << endl;
+    cout << B.findNext(5) << endl;
+    cout << B << endl;
+    B.eraseBefore();
+    B.eraseAfter();
+    cout << B << endl;
+    cout << B.position() << endl;
+    cout << B.findPrev(2) << endl;
+    B.eraseBefore();
+    B.eraseAfter();
+    cout << B << endl;
+    cout << B.position() << endl; 
+    cout << B.findNext(20) << endl; 
+    cout << B.position() << endl;
+    cout << B.findPrev(20) << endl;
+    cout << B.position() << endl;
+    cout << endl;
 
     // for( i=10; i>=1; i--){
     //     A.insertAfter(i);

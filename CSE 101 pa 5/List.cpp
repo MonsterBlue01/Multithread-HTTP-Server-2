@@ -50,12 +50,20 @@ int List::length() const{
 
 void List::moveFront() {
     this->afterCursor = this->frontDummy->next;
+    this->afterCursor->prev = this->frontDummy;
+    this->afterCursor->next = this->frontDummy->next->next;
     this->beforeCursor = this->frontDummy;
+    this->beforeCursor->prev = nullptr;
+    this->beforeCursor->next = this->frontDummy->next;
 }
 
 void List::moveBack() {
     this->afterCursor = this->backDummy;
+    this->afterCursor->next = nullptr;
+    this->afterCursor->prev = this->backDummy->prev;
     this->beforeCursor = this->backDummy->prev;
+    this->beforeCursor->next = this->backDummy;
+    this->beforeCursor->prev = this->backDummy->prev->prev;
 }
 
 ListElement List::moveNext() {
@@ -103,6 +111,7 @@ void List::insertAfter(ListElement x){
     this->beforeCursor->next = N;
     this->afterCursor->prev = N;
     this->afterCursor = N;
+    this->num_elements++;
 }
 
 void List::insertBefore(ListElement x){
@@ -125,6 +134,42 @@ void List::insertBefore(ListElement x){
     this->num_elements++;
 }
 
+void List::eraseAfter(){
+    this->beforeCursor->next = this->afterCursor->next;
+    this->afterCursor->next->prev = this->beforeCursor;
+    delete this->afterCursor;
+    this->afterCursor = this->beforeCursor->next;
+}
+
+void List::eraseBefore(){
+    this->beforeCursor->prev->next= this->afterCursor;
+    this->afterCursor->prev = this->beforeCursor->prev;
+    delete this->beforeCursor;
+    this->beforeCursor = this->afterCursor->prev;
+}
+
+int List::findNext(ListElement x){
+    for (;afterCursor != backDummy; moveNext()) {
+        if (this->afterCursor->data == x) {
+            moveNext();
+            return this->position();
+        }
+    }
+
+    return -1;
+}
+
+int List::findPrev(ListElement x) {
+    for (;beforeCursor != frontDummy; movePrev()) {
+        if (this->beforeCursor->data == x) {
+            movePrev();
+            return this->position();
+        }
+    }
+
+    return -1;
+}
+
 std::string List::to_string() const{
     Node* N = nullptr;
     std::string s = "(";
@@ -142,6 +187,26 @@ std::string List::to_string() const{
     return s;
 }
 
+bool List::equals(const List& Q) const{
+    bool eq = false;
+    Node* N = nullptr;
+    Node* M = nullptr;
+
+    eq = (this->num_elements == Q.num_elements);
+    N = this->frontDummy->next;
+    M = Q.frontDummy->next;
+    while( eq && N!=nullptr){
+        eq = (N->data==M->data);
+        N = N->next;
+        M = M->next;
+    }
+    return eq;
+}
+
 std::ostream& operator<< ( std::ostream& stream,  const List& Q ) {
     return stream << Q.List::to_string();
+}
+
+bool operator== (const List& A, const List& B){
+   return A.List::equals(B);
 }
