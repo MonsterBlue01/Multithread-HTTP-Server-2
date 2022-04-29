@@ -15,6 +15,10 @@ List::List(){
     backDummy = new Node(INT32_MAX);
     beforeCursor = frontDummy;
     afterCursor = backDummy;
+    frontDummy->prev = nullptr;
+    frontDummy->next = backDummy;
+    backDummy->prev = frontDummy;
+    backDummy->next = nullptr;
     pos_cursor = 0;
     num_elements = 0;
 }
@@ -49,6 +53,11 @@ void List::moveFront() {
     this->beforeCursor = this->frontDummy;
 }
 
+void List::moveBack() {
+    this->afterCursor = this->backDummy;
+    this->beforeCursor = this->backDummy->prev;
+}
+
 ListElement List::front() const{
     return this->frontDummy->next->data;
 }
@@ -58,28 +67,22 @@ ListElement List::back() const{
 }
 
 int List::position() const{
+    int num = 0;
     Node *tmp = this->frontDummy->next;
-    return 0;
+    while (tmp != this->afterCursor) {
+        num++;
+        tmp = tmp->next;
+    }
+    return num;
 }
 
 void List::insertAfter(ListElement x){
     Node* N = new Node(x);
-    if (this->afterCursor == this->backDummy) {
-        this->afterCursor = N;
-        this->backDummy->prev = N;
-        N->next = this->afterCursor;
-        N->prev = this->beforeCursor;
-        this->beforeCursor->next = N;
-        this->num_elements++;
-        return;
-    }
-
-    this->afterCursor->next->prev = N;
-    N->next = this->afterCursor->next;
-    this->afterCursor = N;
+    N->next = this->afterCursor;
     N->prev = this->beforeCursor;
     this->beforeCursor->next = N;
-    this->num_elements++;
+    this->afterCursor->prev = N;
+    this->afterCursor = N;
 }
 
 void List::insertBefore(ListElement x){
@@ -100,4 +103,25 @@ void List::insertBefore(ListElement x){
     this->beforeCursor->next = N;
     this->beforeCursor = N;
     this->num_elements++;
+}
+
+std::string List::to_string() const{
+    Node* N = nullptr;
+    std::string s = "(";
+
+    for(N=this->frontDummy->next; N!=this->backDummy; N=N->next){
+        if (N != this->backDummy->prev) {
+            s += std::to_string(N->data)+", ";
+        } else if (N == this->backDummy->prev)
+        {
+            s += std::to_string(N->data)+")";
+        }
+        
+    }
+    
+    return s;
+}
+
+std::ostream& operator<< ( std::ostream& stream,  const List& Q ) {
+    return stream << Q.List::to_string();
 }

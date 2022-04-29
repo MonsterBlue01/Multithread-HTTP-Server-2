@@ -12,6 +12,7 @@ int main() {
     cout << a.front() << "\n";
     cout << a.back() << "\n";
     cout << a.length() << "\n";
+    cout << a.position() << "\n";
     cout << "Hello World" << "\n"; //
     return 0;
 }
