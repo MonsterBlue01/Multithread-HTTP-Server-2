@@ -58,6 +58,26 @@ void List::moveBack() {
     this->beforeCursor = this->backDummy->prev;
 }
 
+ListElement List::moveNext() {
+    if (this->afterCursor == backDummy) {
+        std::cout << "Warning: You already reached the end." << std::endl;
+        return 0;
+    }
+    this->beforeCursor = this->afterCursor;
+    this->afterCursor = this->afterCursor->next;
+    return this->beforeCursor->data;
+}
+
+ListElement List::movePrev() {
+    if (this->afterCursor == frontDummy) {
+        std::cout << "Warning: You already reached the head." << std::endl;
+        return 0;
+    }
+    this->afterCursor = this->beforeCursor;
+    this->beforeCursor = this->beforeCursor->prev;
+    return this->afterCursor->data;
+}
+
 ListElement List::front() const{
     return this->frontDummy->next->data;
 }

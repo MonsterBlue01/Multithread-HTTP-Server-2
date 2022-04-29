@@ -46,17 +46,17 @@ int main(){
     cout << "D = " << D << endl;
     cout << "D.position() = " << D.position() << endl;
 
-    // cout << endl << "B: ";
-    // for(i=1; i<=7; i++){
-    //     cout << B.movePrev() << " ";
-    // }
-    // cout << endl << "B.position() = " << B.position() << endl;
+    cout << endl << "B: ";
+    for(i=1; i<=7; i++){
+        cout << B.movePrev() << " ";
+    }
+    cout << endl << "B.position() = " << B.position() << endl;
     
-    // cout << endl << "C: ";
-    // for(i=1; i<=7; i++){
-    //     cout << C.moveNext() << " ";
-    // }
-    // cout << endl << "C.position() = " << C.position() << endl;
+    cout << endl << "C: ";
+    for(i=1; i<=7; i++){
+        cout << C.moveNext() << " ";
+    }
+    cout << endl << "C.position() = " << C.position() << endl;
 
     // cout << endl;
     // cout << "A==B is " << (A==B?"true":"false") << endl;
