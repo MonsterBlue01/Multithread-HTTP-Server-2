@@ -40,6 +40,10 @@ List::~List(){
     num_elements = 0;
 }
 
+int List::length() const{
+    return this->num_elements;
+}
+
 void List::moveFront() {
     this->afterCursor = this->frontDummy->next;
     this->beforeCursor = this->frontDummy;
@@ -53,6 +57,11 @@ ListElement List::back() const{
     return this->backDummy->prev->data;
 }
 
+int List::position() const{
+    Node *tmp = this->frontDummy->next;
+    return 0;
+}
+
 void List::insertAfter(ListElement x){
     Node* N = new Node(x);
     if (this->afterCursor == this->backDummy) {
@@ -61,6 +70,7 @@ void List::insertAfter(ListElement x){
         N->next = this->afterCursor;
         N->prev = this->beforeCursor;
         this->beforeCursor->next = N;
+        this->num_elements++;
         return;
     }
 
@@ -69,7 +79,7 @@ void List::insertAfter(ListElement x){
     this->afterCursor = N;
     N->prev = this->beforeCursor;
     this->beforeCursor->next = N;
-
+    this->num_elements++;
 }
 
 void List::insertBefore(ListElement x){
@@ -80,6 +90,7 @@ void List::insertBefore(ListElement x){
         N->next = this->backDummy;
         this->frontDummy->next = N;
         N->prev = this->frontDummy;
+        this->num_elements++;
         return;
     }
 
@@ -88,5 +99,5 @@ void List::insertBefore(ListElement x){
     this->afterCursor->prev = N;
     this->beforeCursor->next = N;
     this->beforeCursor = N;
-
+    this->num_elements++;
 }
