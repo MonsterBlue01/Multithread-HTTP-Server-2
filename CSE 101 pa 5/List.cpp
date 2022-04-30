@@ -67,20 +67,12 @@ void List::moveBack() {
 }
 
 ListElement List::moveNext() {
-    if (this->afterCursor == backDummy) {
-        std::cout << "Warning: You already reached the end." << std::endl;
-        return 0;
-    }
     this->beforeCursor = this->afterCursor;
     this->afterCursor = this->afterCursor->next;
     return this->beforeCursor->data;
 }
 
 ListElement List::movePrev() {
-    if (this->afterCursor == frontDummy) {
-        std::cout << "Warning: You already reached the head." << std::endl;
-        return 0;
-    }
     this->afterCursor = this->beforeCursor;
     this->beforeCursor = this->beforeCursor->prev;
     return this->afterCursor->data;
@@ -173,11 +165,17 @@ int List::findPrev(ListElement x) {
 void List::cleanup() {
     int pos = this->position();
     for (Node* N = this->frontDummy->next; N->next != this->backDummy; N = N->next) {
-        for (this->moveFront(); this->afterCursor != backDummy; this->moveNext()) {
+        this->moveFront();
+        while (this->beforeCursor != N) {
+            this->moveNext();
+        }
+
+        while (this->afterCursor != this->backDummy) {
+            std::cout << "The value after cursor: " << this->afterCursor->data << std::endl;
             if (this->afterCursor->data == N->data) {
-                std::cout << "Cursor: " << this->afterCursor->data << ", Node: " << N->data << std::endl;
                 this->eraseAfter();
             }
+            this->moveNext();
         }
     }
     // std::cout << "The element after cursor: " << this->afterCursor->data << std::endl;
