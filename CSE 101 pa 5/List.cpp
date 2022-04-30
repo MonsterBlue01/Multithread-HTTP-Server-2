@@ -173,13 +173,10 @@ int List::findPrev(ListElement x) {
 void List::cleanup() {
     int pos = this->position();
     for (Node* N = this->frontDummy->next; N->next != this->backDummy; N = N->next) {
-        int dup = 0;
         for (this->moveFront(); this->afterCursor != backDummy; this->moveNext()) {
             if (this->afterCursor->data == N->data) {
-                dup += 1;
-                if (dup > 1) {
-                    this->eraseAfter();
-                }
+                std::cout << "Cursor: " << this->afterCursor->data << ", Node: " << N->data << std::endl;
+                this->eraseAfter();
             }
         }
     }
