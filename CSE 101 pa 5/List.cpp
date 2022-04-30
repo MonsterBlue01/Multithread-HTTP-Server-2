@@ -171,7 +171,6 @@ void List::cleanup() {
         }
 
         while (this->afterCursor != this->backDummy) {
-            std::cout << "The value after cursor: " << this->afterCursor->data << std::endl;
             if (this->afterCursor->data == N->data) {
                 this->eraseAfter();
             }
