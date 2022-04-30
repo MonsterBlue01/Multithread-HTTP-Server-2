@@ -172,14 +172,14 @@ int List::findPrev(ListElement x) {
 
 void List::cleanup() {
     int pos = this->position();
-    for (Node* N = this->frontDummy->next; N != this->backDummy; N = N->next) {
+    for (Node* N = this->frontDummy->next; N->next != this->backDummy; N = N->next) {
         for (this->moveFront(); this->afterCursor != backDummy; this->moveNext()) {
             if (this->afterCursor->data == N->data) {
                 this->eraseAfter();
             }
         }
     }
-    std::cout << "The element after cursor: " << this->afterCursor->data << std::endl;
+    // std::cout << "The element after cursor: " << this->afterCursor->data << std::endl;
 }
 
 std::string List::to_string() const{
