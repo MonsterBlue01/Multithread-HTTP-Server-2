@@ -127,21 +127,17 @@ void List::insertBefore(ListElement x){
 }
 
 void List::eraseAfter(){
-    Node* tmp = afterCursor;
-    this->beforeCursor->next = tmp->next;
-    tmp->next->prev = this->beforeCursor;
-    tmp = this->beforeCursor->next;
-    delete tmp;
-    this->num_elements--;
+    beforeCursor->next = afterCursor->next;
+    afterCursor->next->prev = beforeCursor;
+    delete afterCursor;
+    afterCursor = beforeCursor->next;
 }
 
 void List::eraseBefore(){
-    this->beforeCursor->prev->next= this->afterCursor;
-    this->afterCursor->prev = this->beforeCursor->prev;
-    Node* tmp = beforeCursor;
-    this->beforeCursor = this->afterCursor->prev;
-    delete tmp;
-    this->num_elements--;
+    afterCursor->prev = beforeCursor->prev;
+    beforeCursor->prev->next = afterCursor;
+    delete beforeCursor;
+    beforeCursor = afterCursor->prev;
 }
 
 int List::findNext(ListElement x){
@@ -151,7 +147,6 @@ int List::findNext(ListElement x){
             return this->position();
         }
     }
-
     return -1;
 }
 
@@ -162,7 +157,6 @@ int List::findPrev(ListElement x) {
             return this->position();
         }
     }
-
     return -1;
 }
 
