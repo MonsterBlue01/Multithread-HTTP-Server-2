@@ -127,17 +127,21 @@ void List::insertBefore(ListElement x){
 }
 
 void List::eraseAfter(){
-    this->beforeCursor->next = this->afterCursor->next;
-    this->afterCursor->next->prev = this->beforeCursor;
-    delete this->afterCursor;
-    this->afterCursor = this->beforeCursor->next;
+    Node* tmp = afterCursor;
+    this->beforeCursor->next = tmp->next;
+    tmp->next->prev = this->beforeCursor;
+    tmp = this->beforeCursor->next;
+    delete tmp;
+    this->num_elements--;
 }
 
 void List::eraseBefore(){
     this->beforeCursor->prev->next= this->afterCursor;
     this->afterCursor->prev = this->beforeCursor->prev;
-    delete this->beforeCursor;
+    Node* tmp = beforeCursor;
     this->beforeCursor = this->afterCursor->prev;
+    delete tmp;
+    this->num_elements--;
 }
 
 int List::findNext(ListElement x){
@@ -164,20 +168,14 @@ int List::findPrev(ListElement x) {
 
 void List::cleanup() {
     int pos = this->position();
-    for (Node* N = this->frontDummy->next; N->next != this->backDummy; N = N->next) {
-        this->moveFront();
-        while (this->beforeCursor != N) {
-            this->moveNext();
+    moveFront();
+    while (afterCursor != backDummy) {
+        std::cout << "num: " << afterCursor->data << std::endl;
+        if (afterCursor->data == 10) {
+            eraseAfter();
         }
-
-        while (this->afterCursor != this->backDummy) {
-            if (this->afterCursor->data == N->data) {
-                this->eraseAfter();
-            }
-            this->moveNext();
-        }
+        moveNext();
     }
-    // std::cout << "The element after cursor: " << this->afterCursor->data << std::endl;
 }
 
 std::string List::to_string() const{

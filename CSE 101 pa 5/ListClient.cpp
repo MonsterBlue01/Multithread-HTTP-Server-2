@@ -76,25 +76,25 @@ int main(){
     B.eraseAfter();
     cout << B << endl;
     cout << B.position() << endl; 
-    cout << B.findNext(20) << endl; 
+    cout << B.findNext(20) << endl;                                 // Continue to debug eraseBefore() and eraseAfter();
     cout << B.position() << endl;
     cout << B.findPrev(20) << endl;
     cout << B.position() << endl;
     cout << endl;
 
-    for( i=10; i>=1; i--){
-        A.insertAfter(i);
-        A.movePrev();
-    }
-    cout << "A = " << A << endl;
-    for( i=1; i<=15; i++){
-        A.moveNext();
-    }
-    cout << A.position() << endl;
-    A.cleanup();
-    cout << "A = " << A << endl;
-    cout << A.position() << endl;
-    cout << endl;
+    // for( i=10; i>=1; i--){
+    //     A.insertAfter(i);
+    //     A.movePrev();
+    // }
+    // cout << "A = " << A << endl;
+    // for( i=1; i<=15; i++){
+    //     A.moveNext();
+    // }
+    // cout << A.position() << endl;
+    // A.cleanup();
+    // cout << "A = " << A << endl;
+    // cout << A.position() << endl;
+    // cout << endl;
 
     // List E = A;
     // cout << "E==A is " << (E==A?"true":"false") << endl;
