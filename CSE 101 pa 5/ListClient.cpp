@@ -82,19 +82,19 @@ int main(){
     cout << B.position() << endl;
     cout << endl;
 
-    // for( i=10; i>=1; i--){
-    //     A.insertAfter(i);
-    //     A.movePrev();
-    // }
-    // cout << "A = " << A << endl;
-    // for( i=1; i<=15; i++){
-    //     A.moveNext();
-    // }
-    // cout << A.position() << endl;
-    // A.cleanup();
-    // cout << "A = " << A << endl;
-    // cout << A.position() << endl;
-    // cout << endl;
+    for( i=10; i>=1; i--){
+        A.insertAfter(i);
+        A.movePrev();
+    }
+    cout << "A = " << A << endl;
+    for( i=1; i<=15; i++){
+        A.moveNext();
+    }
+    cout << A.position() << endl;
+    A.cleanup();
+    cout << "A = " << A << endl;
+    cout << A.position() << endl;
+    cout << endl;
 
     // List E = A;
     // cout << "E==A is " << (E==A?"true":"false") << endl;

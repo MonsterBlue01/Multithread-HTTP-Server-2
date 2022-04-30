@@ -170,6 +170,18 @@ int List::findPrev(ListElement x) {
     return -1;
 }
 
+void List::cleanup() {
+    int pos = this->position();
+    for (Node* N = this->frontDummy->next; N != this->backDummy; N = N->next) {
+        for (this->moveFront(); this->afterCursor != backDummy; this->moveNext()) {
+            if (this->afterCursor->data == N->data) {
+                this->eraseAfter();
+            }
+        }
+    }
+    std::cout << "The element after cursor: " << this->afterCursor->data << std::endl;
+}
+
 std::string List::to_string() const{
     Node* N = nullptr;
     std::string s = "(";
@@ -208,5 +220,5 @@ std::ostream& operator<< ( std::ostream& stream,  const List& Q ) {
 }
 
 bool operator== (const List& A, const List& B){
-   return A.List::equals(B);
+    return A.List::equals(B);
 }
