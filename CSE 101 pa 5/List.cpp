@@ -23,16 +23,35 @@ List::List(){
     num_elements = 0;
 }
 
-List::List(const List& Q){
+List::List(const List& L){
     // make this an empty Queue
-    frontDummy = nullptr;
-    backDummy = nullptr;
-    beforeCursor = nullptr;
-    afterCursor = nullptr;
+    frontDummy = new Node(INT32_MIN);
+    backDummy = new Node(INT32_MAX);
+    beforeCursor = frontDummy;
+    afterCursor = backDummy;
+    frontDummy->prev = nullptr;
+    frontDummy->next = backDummy;
+    backDummy->prev = frontDummy;
+    backDummy->next = nullptr;
     pos_cursor = 0;
     num_elements = 0;
 
     // load elements of Q into this List
+    Node* N = L.frontDummy->next;
+    while(N != L.backDummy){
+        this->insertBefore(N->data);
+        N = N->next;
+    }
+
+    int pos = L.position();
+    moveFront();
+    while (pos != 0) {
+        if (afterCursor == backDummy) {
+            break;
+        }
+        moveNext();
+        pos--;
+    }
 }
 
 List::~List(){
@@ -216,11 +235,14 @@ bool List::equals(const List& Q) const{
     Node* N = nullptr;
     Node* M = nullptr;
 
+    // if (((this->frontDummy == NULL) && (Q.frontDummy != NULL)) || ((this->frontDummy != NULL) && (Q.frontDummy == NULL))) {
+    //     return false;
+    // }
+
     eq = (this->num_elements == Q.num_elements);
     N = this->frontDummy->next;
     M = Q.frontDummy->next;
     while( eq && N!=nullptr){
-        eq = (N->data==M->data);
         N = N->next;
         M = M->next;
     }
@@ -233,4 +255,21 @@ std::ostream& operator<< ( std::ostream& stream,  const List& Q ) {
 
 bool operator== (const List& A, const List& B){
     return A.List::equals(B);
+}
+
+List& List::operator=(const List& L) {
+    if ( this != &L ){
+        List temp = L;
+
+        // then swap the copy's fields with fields of this
+        std::swap(frontDummy, temp.frontDummy);
+        std::swap(backDummy, temp.backDummy);
+        std::swap(beforeCursor, temp.beforeCursor);
+        std::swap(afterCursor, temp.afterCursor);
+        std::swap(pos_cursor, temp.pos_cursor);
+        std::swap(num_elements, temp.num_elements);
+    }
+
+    // return this with the new data installed
+    return *this;
 }
