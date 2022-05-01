@@ -161,14 +161,36 @@ int List::findPrev(ListElement x) {
 }
 
 void List::cleanup() {
-    int pos = this->position();
+    int pos = position();
+    // std::cout << "The position: " << position() << std::endl;
+    for (Node *N = frontDummy->next; N != backDummy->prev; N = N->next) {
+        int exe = 0;
+        for (moveFront(); beforeCursor != N; moveNext()) {
+            if (afterCursor == backDummy) {
+                exe = 1;
+                break;
+            }
+        }
+        if (exe == 1) {
+            break;
+        }
+        for (; afterCursor != backDummy; moveNext()) {
+            if (afterCursor->data == N->data) {
+                eraseAfter();
+                num_elements--;
+                exe = 1;
+                break;
+            }
+        }
+    }
+
     moveFront();
-    while (afterCursor != backDummy) {
-        std::cout << "num: " << afterCursor->data << std::endl;
-        if (afterCursor->data == 10) {
-            eraseAfter();
+    while (pos != 0) {
+        if (afterCursor == backDummy) {
+            break;
         }
         moveNext();
+        pos--;
     }
 }
 
