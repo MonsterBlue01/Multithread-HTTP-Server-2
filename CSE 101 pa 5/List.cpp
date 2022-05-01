@@ -115,6 +115,14 @@ int List::position() const{
     return num;
 }
 
+ListElement List::peekNext() const{
+    return afterCursor->data;
+}
+
+ListElement List::peekPrev() const{
+    return beforeCursor->data;
+}
+
 void List::insertAfter(ListElement x){
     Node* N = new Node(x);
     N->next = this->afterCursor;
@@ -127,22 +135,12 @@ void List::insertAfter(ListElement x){
 
 void List::insertBefore(ListElement x){
     Node* N = new Node(x);
-    if (this->beforeCursor == this->frontDummy) {
-        this->beforeCursor = N;
-        this->backDummy->prev = N;
-        N->next = this->backDummy;
-        this->frontDummy->next = N;
-        N->prev = this->frontDummy;
-        this->num_elements++;
-        return;
-    }
-
-    N->prev = this->beforeCursor;
-    N->next = this->afterCursor;
-    this->afterCursor->prev = N;
-    this->beforeCursor->next = N;
-    this->beforeCursor = N;
-    this->num_elements++;
+    N->prev = beforeCursor;
+    N->next = afterCursor;
+    beforeCursor->next = N;
+    afterCursor->prev = N;
+    beforeCursor = N;
+    num_elements++;
 }
 
 void List::eraseAfter(){
@@ -211,6 +209,22 @@ void List::cleanup() {
         moveNext();
         pos--;
     }
+}
+
+List List::concat(const List& L) const{
+    List K;
+    Node* N = this->frontDummy->next;
+    Node* M = L.frontDummy->next;
+    while(N != this->backDummy){
+        K.insertBefore(N->data);
+        N = N->next;
+    }
+    while(M != L.backDummy){
+        K.insertBefore(M->data);
+        M = M->next;
+    }
+    K.moveFront();
+    return K;
 }
 
 std::string List::to_string() const{

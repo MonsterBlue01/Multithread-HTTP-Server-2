@@ -76,7 +76,7 @@ int main(){
     B.eraseAfter();
     cout << B << endl;
     cout << B.position() << endl; 
-    cout << B.findNext(20) << endl;                                 // Continue to debug eraseBefore() and eraseAfter();
+    cout << B.findNext(20) << endl;
     cout << B.position() << endl;
     cout << B.findPrev(20) << endl;
     cout << B.position() << endl;
@@ -99,20 +99,20 @@ int main(){
     List E = A;
     cout << "E==A is " << (E==A?"true":"false") << endl;
 
-    // cout << endl;
+    cout << endl;
 
-    // List F = A.concat(B);
-    // cout << "F = " << F << endl;
-    // cout << "length: " << F.length() << endl;
-    // cout << "front: " << F.front() << endl;
-    // cout << "back: " << F.back() << endl;
-    // cout << "position: " << F.position() << endl;
-    // for( i=1; i<=7; i++){
-    //     cout << "peekNext: " << F.peekNext() << endl;
-    //     F.insertBefore(-i);
-    //     cout << F.moveNext() << endl; 
-    // }
-    // cout << "F = " << F << endl;
+    List F = A.concat(B);
+    cout << "F = " << F << endl;
+    cout << "length: " << F.length() << endl;
+    cout << "front: " << F.front() << endl;
+    cout << "back: " << F.back() << endl;
+    cout << "position: " << F.position() << endl;
+    for( i=1; i<=7; i++){
+        cout << "peekNext: " << F.peekNext() << endl;
+        F.insertBefore(-i);
+        cout << F.moveNext() << endl; 
+    }
+    cout << "F = " << F << endl;
 
     // cout << endl;
 
