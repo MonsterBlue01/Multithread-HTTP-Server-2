@@ -67,6 +67,13 @@ int List::length() const{
     return this->num_elements;
 }
 
+void List::clear() {
+    moveFront();
+    while (frontDummy->next != backDummy) {
+        eraseAfter();
+    }
+}
+
 void List::moveFront() {
     this->afterCursor = this->frontDummy->next;
     this->afterCursor->prev = this->frontDummy;
@@ -104,10 +111,16 @@ ListElement List::movePrev() {
 }
 
 ListElement List::front() const{
+    if (frontDummy->next == backDummy) {
+        throw std::length_error("List: front(): empty list");
+    }
     return this->frontDummy->next->data;
 }
 
 ListElement List::back() const{
+    if (frontDummy->next == backDummy) {
+        throw std::length_error("List: back(): empty list");
+    }
     return this->backDummy->prev->data;
 }
 
@@ -262,6 +275,10 @@ List List::concat(const List& L) const{
 std::string List::to_string() const{
     Node* N = nullptr;
     std::string s = "(";
+
+    if (frontDummy->next == backDummy) {
+        return "()";
+    }
 
     for(N=this->frontDummy->next; N!=this->backDummy; N=N->next){
         if (N != this->backDummy->prev) {
