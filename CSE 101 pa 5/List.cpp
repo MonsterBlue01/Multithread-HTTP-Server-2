@@ -86,12 +86,18 @@ void List::moveBack() {
 }
 
 ListElement List::moveNext() {
+    if (afterCursor == backDummy){
+        throw std::range_error("List: moveNext(): cursor at back");
+    }
     this->beforeCursor = this->afterCursor;
     this->afterCursor = this->afterCursor->next;
     return this->beforeCursor->data;
 }
 
 ListElement List::movePrev() {
+    if (position() == 0){
+        throw std::range_error("List: movePrev(): cursor at front");
+    }
     this->afterCursor = this->beforeCursor;
     this->beforeCursor = this->beforeCursor->prev;
     return this->afterCursor->data;
@@ -116,10 +122,16 @@ int List::position() const{
 }
 
 ListElement List::peekNext() const{
+    if (afterCursor == backDummy){
+        throw std::range_error("List: peekNext(): cursor at back");
+    }
     return afterCursor->data;
 }
 
 ListElement List::peekPrev() const{
+    if (position() == 0){
+        throw std::range_error("List: peekPrev(): cursor at front");
+    }
     return beforeCursor->data;
 }
 
@@ -143,7 +155,24 @@ void List::insertBefore(ListElement x){
     num_elements++;
 }
 
+void List::setBefore(ListElement x) {
+    if (position() == 0){
+        throw std::range_error("List: setBefore(): cursor at front");
+    }
+    beforeCursor->data = x;
+}
+
+void List::setAfter(ListElement x) {
+    if (afterCursor == backDummy){
+        throw std::range_error("List: setAfter(): cursor at back");
+    }
+    afterCursor->data = x;
+}
+
 void List::eraseAfter(){
+    if (afterCursor == backDummy){
+        throw std::range_error("List: eraseAfter(): cursor at back");
+    }
     beforeCursor->next = afterCursor->next;
     afterCursor->next->prev = beforeCursor;
     delete afterCursor;
@@ -151,6 +180,9 @@ void List::eraseAfter(){
 }
 
 void List::eraseBefore(){
+    if (position() == 0){
+        throw std::range_error("List: eraseBefore(): cursor at front");
+    }
     afterCursor->prev = beforeCursor->prev;
     beforeCursor->prev->next = afterCursor;
     delete beforeCursor;
@@ -244,19 +276,16 @@ std::string List::to_string() const{
     return s;
 }
 
-bool List::equals(const List& Q) const{
+bool List::equals(const List& L) const{
     bool eq = false;
     Node* N = nullptr;
     Node* M = nullptr;
 
-    // if (((this->frontDummy == NULL) && (Q.frontDummy != NULL)) || ((this->frontDummy != NULL) && (Q.frontDummy == NULL))) {
-    //     return false;
-    // }
-
-    eq = (this->num_elements == Q.num_elements);
+    eq = (this->num_elements == L.num_elements);
     N = this->frontDummy->next;
-    M = Q.frontDummy->next;
-    while( eq && N!=nullptr){
+    M = L.frontDummy->next;
+    while(eq && N!=nullptr){
+        eq = (N->data==M->data);
         N = N->next;
         M = M->next;
     }

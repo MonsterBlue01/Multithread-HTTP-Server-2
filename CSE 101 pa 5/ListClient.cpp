@@ -114,60 +114,60 @@ int main(){
     }
     cout << "F = " << F << endl;
 
-    // cout << endl;
+    cout << endl;
 
-    // cout << "test exceptions: " << endl;
-    // cout << "A = " << A << endl;
-    // A.moveFront();
-    // try{
-    //     A.peekPrev();
-    // }catch( std::range_error& e ){
-    //     cout << e.what() << endl;
-    //     cout << "   continuing without interruption" << endl;
-    // }
-    // try{
-    //     A.movePrev();
-    // }catch( std::range_error& e ){
-    //     cout << e.what() << endl;
-    //     cout << "   continuing without interruption" << endl;
-    // }
-    // try{
-    //     A.setBefore(5);
-    // }catch( std::range_error& e ){
-    //     cout << e.what() << endl;
-    //     cout << "   continuing without interruption" << endl;
-    // }
-    // try{
-    //     A.eraseBefore();
-    // }catch( std::range_error& e ){
-    //     cout << e.what() << endl;
-    //     cout << "   continuing without interruption" << endl;
-    // }
-    // A.moveBack();
-    // try{
-    //     A.peekNext();
-    // }catch( std::range_error& e ){
-    //     cout << e.what() << endl;
-    //     cout << "   continuing without interruption" << endl;
-    // }
-    // try{
-    //     A.moveNext();
-    // }catch( std::range_error& e ){
-    //     cout << e.what() << endl;
-    //     cout << "   continuing without interruption" << endl;
-    // }
-    // try{
-    //     A.setAfter(5);
-    // }catch( std::range_error& e ){
-    //     cout << e.what() << endl;
-    //     cout << "   continuing without interruption" << endl;
-    // }
-    // try{
-    //     A.eraseAfter();
-    // }catch( std::range_error& e ){
-    //     cout << e.what() << endl;
-    //     cout << "   continuing without interruption" << endl;
-    // }
+    cout << "test exceptions: " << endl;
+    cout << "A = " << A << endl;
+    A.moveFront();
+    try{
+        A.peekPrev();
+    }catch( std::range_error& e ){
+        cout << e.what() << endl;
+        cout << "   continuing without interruption" << endl;
+    }
+    try{
+        A.movePrev();
+    }catch( std::range_error& e ){
+        cout << e.what() << endl;
+        cout << "   continuing without interruption" << endl;
+    }
+    try{
+        A.setBefore(5);
+    }catch( std::range_error& e ){
+        cout << e.what() << endl;
+        cout << "   continuing without interruption" << endl;
+    }
+    try{
+        A.eraseBefore();
+    }catch( std::range_error& e ){
+        cout << e.what() << endl;
+        cout << "   continuing without interruption" << endl;
+    }
+    A.moveBack();
+    try{
+        A.peekNext();
+    }catch( std::range_error& e ){
+        cout << e.what() << endl;
+        cout << "   continuing without interruption" << endl;
+    }
+    try{
+        A.moveNext();
+    }catch( std::range_error& e ){
+        cout << e.what() << endl;
+        cout << "   continuing without interruption" << endl;
+    }
+    try{
+        A.setAfter(5);
+    }catch( std::range_error& e ){
+        cout << e.what() << endl;
+        cout << "   continuing without interruption" << endl;
+    }
+    try{
+        A.eraseAfter();
+    }catch( std::range_error& e ){
+        cout << e.what() << endl;
+        cout << "   continuing without interruption" << endl;
+    }
     // A.clear();
     // try{
     //     A.front();
