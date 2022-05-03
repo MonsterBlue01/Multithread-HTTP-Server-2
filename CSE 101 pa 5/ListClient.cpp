@@ -168,21 +168,21 @@ int main(){
         cout << e.what() << endl;
         cout << "   continuing without interruption" << endl;
     }
-    // A.clear();
-    // try{
-    //     A.front();
-    // }catch( std::length_error& e ){
-    //     cout << e.what() << endl;
-    //     cout << "   continuing without interruption" << endl;
-    // }
-    // try{
-    //     A.back();
-    // }catch( std::length_error& e ){
-    //     cout << e.what() << endl;
-    //     cout << "   continuing without interruption" << endl;
-    // }
+    A.clear();
+    try{
+        A.front();
+    }catch( std::length_error& e ){
+        cout << e.what() << endl;
+        cout << "   continuing without interruption" << endl;
+    }
+    try{
+        A.back();
+    }catch( std::length_error& e ){
+        cout << e.what() << endl;
+        cout << "   continuing without interruption" << endl;
+    }
 
-    // cout << endl;
+    cout << endl;
 
 
     return( EXIT_SUCCESS );
