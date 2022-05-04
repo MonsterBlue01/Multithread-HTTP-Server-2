@@ -14,22 +14,20 @@ using namespace std;
 int main(){
     string par;
     List L;
-    string a = "-1234567891011121314151617181920212223242526272829303132";
+    string a = "1234567891011121314151617181920212223242526272829303132";
     string n = a.substr(0, 1);
     if (n == "-") {
-        cout << "Correct!" << endl;
         n = a.substr(1);
     } else {
         n = a;
     }
-    cout << n << endl;
     for (int i = 0; i < n.size(); i += 9) {
         par = n.substr(i, 9);
         int tmp = stoi(par);
         L.insertBefore(tmp);
-        cout << L << endl;
     }
 
+    cout << BigInteger(a) << endl;
     return 0;
 /*
    string s1 = "9128734667000004389234563456345619187236478";
