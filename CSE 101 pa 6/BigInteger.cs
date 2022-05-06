@@ -54,7 +54,6 @@ public:
     // greater than N or equal to N, respectively.
     int compare(const BigInteger& N) const;
 
-
     // Manipulation procedures -------------------------------------------------
 
     // makeZero()

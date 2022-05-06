@@ -51,6 +51,66 @@ int BigInteger::sign() const{
     return signum;
 }
 
+int BigInteger::compare(const BigInteger& N) const{
+    BigInteger one = *this;
+    BigInteger two = N;
+    if (one.signum > two.signum) {
+        return 1;
+    } else if (one.signum < two.signum) {
+        return -1;
+    } else {
+        if ((one.signum == 0) && (two.signum == 0)) {
+            return 0;
+        } else if ((one.signum == 1) && (two.signum == 1)) {
+            std::string s1 = one.to_string();
+            std::string s2 = two.to_string();
+            if (s1.length() > s2.length()) {
+                return 1;
+            } else if (s1.length() < s2.length()) {
+                return -1;
+            } else {
+                for (int i = 0; i < s1.length(); i++) {
+                    std::string ch1 = s1.substr(i, 1);
+                    std::string ch2 = s2.substr(i, 1);
+                    if (std::stoi(ch1) > std::stoi(ch2)) {
+                        return 1;
+                    } else if (std::stoi(ch1) < std::stoi(ch2)) {
+                        return -1;
+                    } else {
+                        continue;
+                    }
+                }
+            }
+            return 0;
+        } else if ((one.signum == -1) && (two.signum == -1)) {
+            std::string s1 = one.to_string().substr(1);
+            std::string s2 = two.to_string().substr(1);
+            if (s1.length() > s2.length()) {
+                return -1;
+            } else if (s1.length() < s2.length()) {
+                return 1;
+            } else {
+                for (int i = 0; i < s1.length(); i++) {
+                    std::string ch1 = s1.substr(i, 1);
+                    std::string ch2 = s2.substr(i, 1);
+                    if (std::stoi(ch1) > std::stoi(ch2)) {
+                        return -1;
+                    } else if (std::stoi(ch1) < std::stoi(ch2)) {
+                        return 1;
+                    } else {
+                        continue;
+                    }
+                }
+                return 0;
+            }
+        } else {
+            std::cout << "Something went wrong..." << std::endl;
+            return 0;
+        }
+        return 0;
+    }
+}
+
 BigInteger BigInteger::add(const BigInteger& N) const {
     BigInteger b1 = *this;
     BigInteger b2 = N;
