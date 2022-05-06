@@ -111,6 +111,20 @@ int BigInteger::compare(const BigInteger& N) const{
     }
 }
 
+void BigInteger::makeZero(){
+    signum = 0;
+    List tmp;
+    digits = tmp;
+}
+
+void BigInteger::negate(){
+    if (signum == 0) {
+        return;
+    } else if (abs(signum) == 1) {
+        signum = 0 - signum;
+    }
+}
+
 BigInteger BigInteger::add(const BigInteger& N) const {
     BigInteger b1 = *this;
     BigInteger b2 = N;
@@ -215,6 +229,18 @@ std::string BigInteger::to_string(){
 
 std::ostream& operator<< ( std::ostream& stream, BigInteger N ) {
     return stream << N.BigInteger::to_string();
+}
+
+bool operator== ( const BigInteger& A, const BigInteger& B ) {
+    if (A.signum != B.signum) {
+        return false;
+    } else {
+        if (!(A.digits == B.digits)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
 
 BigInteger operator+( const BigInteger& A, const BigInteger& B ) {
