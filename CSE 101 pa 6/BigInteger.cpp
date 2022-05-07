@@ -6,6 +6,57 @@
 #include"BigInteger.h"
 #include"List.h"
 
+void negateList(List& L) {
+    for (L.moveFront(); L.position() != L.length(); L.moveNext()) {
+        L.setAfter(0 - L.peekNext());
+    }
+}
+
+void sumList(List& S, List A, List B, int sgn) {
+    if (sgn == 1) {
+        std::cout << A << std::endl;
+        std::cout << B << std::endl;
+        A.moveBack();
+        B.moveBack();
+        while ((A.position() != 0) || (B.position() != 0)) {
+            int one = 0;
+            int two = 0;
+            if (A.position() != 0) {
+                one = A.peekPrev();
+                A.movePrev();
+            }
+            if (B.position() != 0) {
+                two = B.peekPrev();
+                B.movePrev();
+            }
+
+            S.insertAfter(one + two);
+        }
+    } else if (sgn == 0) {
+        S = A;
+    } else if (sgn == -1) {
+        negateList(B);
+        std::cout << A << std::endl;
+        std::cout << B << std::endl;
+        A.moveBack();
+        B.moveBack();
+        while ((A.position() != 0) || (B.position() != 0)) {
+            int one = 0;
+            int two = 0;
+            if (A.position() != 0) {
+                one = A.peekPrev();
+                A.movePrev();
+            }
+            if (B.position() != 0) {
+                two = B.peekPrev();
+                B.movePrev();
+            }
+
+            S.insertAfter(one + two);
+        }
+    }
+}
+
 BigInteger::BigInteger(){
     signum = 0;
     List digits;
@@ -13,33 +64,27 @@ BigInteger::BigInteger(){
 
 // Copy Constructor.
 BigInteger::BigInteger(std::string s){
-    signum = 0;
-
-    if (s == "0") {
-        digits.insertAfter(0);
-        return;
-    }
-
-    std::string par;
-    List L;
-    std::string n = s.substr(0, 1);
-    if (n == "-") {
-        n = s.substr(1);
-        signum = -1;
+    std::string a;
+    if ((s.substr(0, 1) == "-") || (s.substr(0, 1) == "+")) {
+        a = s.substr(1);
+        if (s.substr(0, 1) == "-") {
+            this->signum = -1;
+        } else if (s.substr(0, 1) == "+") {
+            this->signum = 1;
+        } else {
+            std::cout << "Something went wrong..." << std::endl;
+        }
     } else {
-        n = s;
-        signum = 1;
+        a = s;
+        this->signum = 1;
     }
-    for (int i = s.length() - 9; i > 0; i -= 9) {
-        L.insertAfter(stoi(s.substr(i, 9)));
+    int i = a.size() - 9;
+    for (; i > 0; i -= 9) {
+        this->digits.insertAfter(std::stoi(a.substr(i, 9)));
     }
-    if (s.length() % 9 != 0) {
-        L.insertAfter(stoi(s.substr(0, s.length() % 9)));
-    } else {
-        L.insertAfter(stoi(s.substr(0, 9)));
+    if (i + 9 > 0) {
+        this->digits.insertAfter(std::stoi(a.substr(0, i + 9)));
     }
-
-    this->digits = L;
 }
 
 BigInteger::BigInteger(const BigInteger& N) {
@@ -126,47 +171,9 @@ void BigInteger::negate(){
 }
 
 BigInteger BigInteger::add(const BigInteger& N) const {
-    BigInteger b1 = *this;
-    BigInteger b2 = N;
-    BigInteger res;
-    int m = 0;
-    int n1, n2, j = 0;
-    
-    b1.digits.moveBack();
-    b2.digits.moveBack();
-
-    if ((this->signum == 1) && (N.signum == 1)) {
-        res.signum = 1;
-        while ((b1.digits.position() != 0) || (b2.digits.position() != 0)) {
-            n1 = 0;
-            n2 = 0;
-            if (b1.digits.position() != 0) {
-                n1 = b1.digits.peekPrev();
-                b1.digits.movePrev();
-            }
-            if (b2.digits.position() != 0) {
-                n2 = b2.digits.peekPrev();
-                b2.digits.movePrev();
-            }
-
-            if (j == 1) {
-                if (n1 + n2 + 1 >= 1000000000) {
-                    std::cout << "sum: " << n1 + n2 + 1 - 1000000000 << std::endl;
-                } else {
-                    std::cout << "sum: " << n1 + n2 + 1 << std::endl;
-                    j = 0;
-                }
-            } else {
-                if (n1 + n2 + 1 >= 1000000000) {
-                    std::cout << "sum: " << n1 + n2 - 1000000000 << std::endl;
-                    j = 1;
-                } else {
-                    std::cout << "sum: " << n1 + n2 << std::endl;
-                }
-            }
-        }
-    }
-    return res;
+    List S;
+    sumList(S, this->digits, N.digits, N.sign());
+    std::cout << S << std::endl;
 }
 
 BigInteger BigInteger::sub(const BigInteger& N) const {
@@ -224,7 +231,11 @@ std::string BigInteger::to_string(){
         }
         s = t + s;
     }
-    return s;
+    if (sign() == -1) {
+        return "-" + s;
+    } else {
+        return s;
+    }
 }
 
 std::ostream& operator<< ( std::ostream& stream, BigInteger N ) {
