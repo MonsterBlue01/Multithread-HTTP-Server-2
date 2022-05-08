@@ -367,14 +367,57 @@ bool operator== ( const BigInteger& A, const BigInteger& B ) {
     }
 }
 
+bool operator<( const BigInteger& A, const BigInteger& B ) {
+    if (A.compare(B) == -1) {
+        return true;
+    }
+    return false;
+}
+
+bool operator<=( const BigInteger& A, const BigInteger& B ) {
+    if (A.compare(B) != 1) {
+        return true;
+    }
+    return false;
+}
+
+bool operator>( const BigInteger& A, const BigInteger& B ) {
+    if (A.compare(B) == 1) {
+        return true;
+    }
+    return false;
+}
+
+bool operator>=( const BigInteger& A, const BigInteger& B ) {
+    if (A.compare(B) != -1) {
+        return true;
+    }
+    return false;
+}
+
 BigInteger operator+( const BigInteger& A, const BigInteger& B ) {
     return A.BigInteger::add(B);
+}
+
+BigInteger operator+=( BigInteger& A, const BigInteger& B ){
+    A = A.BigInteger::add(B);
+    return A;
 }
 
 BigInteger operator-( const BigInteger& A, const BigInteger& B ) {
     return A.BigInteger::sub(B);
 }
 
+BigInteger operator-=( const BigInteger& A, const BigInteger& B ) {
+    A = A.BigInteger::sub(B);
+    return A;
+}
+
 BigInteger operator*( const BigInteger& A, const BigInteger& B ) {
     return A.BigInteger::mult(B);
+}
+
+BigInteger operator*=( BigInteger& A, const BigInteger& B ) {
+    A = A.BigInteger::mult(B);
+    return A;
 }
