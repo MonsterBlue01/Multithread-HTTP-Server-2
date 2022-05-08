@@ -5,19 +5,23 @@ using namespace std;
 #include "BigInteger.h"
 
 int main() {
+    BigInteger A = BigInteger("9128734667000004389234563456345619187236478");
+    BigInteger B = BigInteger("9876545439000000000000000200000000000006543654365346534");
 
-    BigInteger A = BigInteger("-1");
-    BigInteger B = BigInteger("0");
-    BigInteger C = BigInteger("1");
-    BigInteger D = BigInteger("1000000000023456789");
-    BigInteger E = BigInteger("-9876543210987654321000000000");
-    BigInteger H = BigInteger("2222");
-    BigInteger I = BigInteger("-1");
-    BigInteger F = BigInteger("-333333333333");
-    BigInteger J;
-    BigInteger G;
+    cout << A*B << endl;
 
-    cout << D + E << endl;
+    // BigInteger A = BigInteger("-1");
+    // BigInteger B = BigInteger("0");
+    // BigInteger C = BigInteger("1");
+    // BigInteger D = BigInteger("1234567890987654321");
+    // BigInteger E = BigInteger("-9991234567890987654321");
+    // BigInteger H = BigInteger("2222");
+    // BigInteger I = BigInteger("-1");
+    // BigInteger F = BigInteger("-333333333333");
+    // BigInteger J;
+    // BigInteger G;
+
+    // cout << E + D << endl;
 
     // std::cout << "F: " << F << std::endl;
     // std::cout << "H: " << H << std::endl;

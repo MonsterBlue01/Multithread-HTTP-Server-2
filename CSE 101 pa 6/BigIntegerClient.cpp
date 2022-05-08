@@ -5,41 +5,35 @@
 #include<iostream>
 #include<string>
 #include<stdexcept>
-
-#include"List.h"
 #include"BigInteger.h"
 
 using namespace std;
 
 int main(){
-    string s1 = "-9128734667000004389234563456345619187236478";
+
+    string s1 = "9128734667000004389234563456345619187236478";
     //string s2 = "-330293847502398475";
-    string s3 = "-9876545439000000000000000200000000000006543654365346534";
+    string s3 = "9876545439000000000000000200000000000006543654365346534";
     //string s4 = "9876545439000000000000000100000000000006543654365346534";
     //string s5 = "98765454390000000000000000000000000000065436543";
     //string s6 = "9876545439000000000000000000000000000006543";
 
-    BigInteger N;
+    //BigInteger N;
     BigInteger A = BigInteger(s1);
     BigInteger B = BigInteger(s3);
 
     cout << endl;
 
-    cout << "A's signum = " << A.sign() << endl;
     cout << "A = " << A << endl;
-    cout << "B's signum = " << B.sign() << endl;
     cout << "B = " << B << endl;
-    cout << A.compare(B) << endl;
     cout << endl;
 
-    // BigInteger C = B-A;
-    // cout << "C: " << C << endl;
-
-//    BigInteger D = B+A;
-//    BigInteger E = A-A;
-//    BigInteger F = B-A;
-//    BigInteger G = A*B;
-//    BigInteger H = B*A;
+    BigInteger C = A+B;
+    BigInteger D = B+A;
+    BigInteger E = A-A;
+    BigInteger F = B-A;
+    BigInteger G = A*B;
+    BigInteger H = B*A;
 //    BigInteger I = C*E;
 
 //    cout << "(A==B) = " << ((A==B)?"True":"False") << endl;
@@ -48,13 +42,13 @@ int main(){
 //    cout << "(A>B)  = " << ((A>B)? "True":"False") << endl;
 //    cout << "(A>=B) = " << ((A>=B)?"True":"False") << endl << endl;
 
-//    cout << "C = " << C << endl;
-//    cout << "D = " << D << endl;
+    cout << "C = " << C << endl;
+    cout << "D = " << D << endl;
 //    cout << "(C==D) = " << ((C==D)?"True":"False") << endl;
-//    cout << "E = " << E << endl;
-//    cout << "F = " << F << endl;
-//    cout << "G = " << G << endl;
-//    cout << "H = " << H << endl;
+    cout << "E = " << E << endl;
+    cout << "F = " << F << endl;
+    cout << "G = " << G << endl;
+    cout << "H = " << H << endl;
 //    cout << "(G==H) = " << ((G==H)?"True":"False") << endl;
 //    cout << "I = " << I << endl << endl;
 
@@ -100,5 +94,5 @@ int main(){
 
 //    cout << endl;
 
-   return EXIT_SUCCESS; 
+   return EXIT_SUCCESS;
 }

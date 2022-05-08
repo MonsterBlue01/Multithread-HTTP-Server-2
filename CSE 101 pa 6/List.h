@@ -12,7 +12,7 @@
 #define List_H_INCLUDE_
 
 // Exported types -------------------------------------------------------------
-typedef int ListElement;
+typedef long ListElement;
 
 class List{
 
@@ -34,7 +34,7 @@ private:
     Node* beforeCursor;
     Node* afterCursor;
     int pos_cursor;
-    int num_elements;
+    long num_elements;
 
 public:
 
