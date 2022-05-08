@@ -8,7 +8,7 @@ int main() {
     BigInteger A = BigInteger("9128734667000004389234563456345619187236478");
     BigInteger B = BigInteger("9876545439000000000000000200000000000006543654365346534");
 
-    cout << A*B << endl;
+    cout << B * A << endl;
 
     // BigInteger A = BigInteger("-1");
     // BigInteger B = BigInteger("0");

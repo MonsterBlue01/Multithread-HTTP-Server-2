@@ -29,6 +29,7 @@ void sumList(List& S, List A, List B, int sgn) {
     if (sgn == 1) {
         // std::cout << A << std::endl;
         // std::cout << B << std::endl;
+        List tmp;
         A.moveBack();
         B.moveBack();
         while ((A.position() != 0) || (B.position() != 0)) {
@@ -43,11 +44,14 @@ void sumList(List& S, List A, List B, int sgn) {
                 B.movePrev();
             }
 
-            S.insertAfter(one + two);
+            tmp.insertAfter(one + two);
+            // std::cout << S << std::endl;
         }
+        S = tmp;
     } else if (sgn == 0) {
         S = A;
     } else if (sgn == -1) {
+        List tmp;
         negateList(B);
         // std::cout << A << std::endl;
         // std::cout << B << std::endl;
@@ -65,8 +69,9 @@ void sumList(List& S, List A, List B, int sgn) {
                 B.movePrev();
             }
 
-            S.insertAfter(one + two);
+            tmp.insertAfter(one + two);
         }
+        S = tmp;
     }
 }
 
@@ -80,13 +85,17 @@ void scalarMultList(List& L, ListElement m) {
         l.insertAfter(dl);
     }
     L = l;
-    std::cout << L << std::endl;
+    // std::cout << L << std::endl;
 }
 
 int normalizeList(List& L) {
     int num = 1;
     // std::cout << "Before normalizing: " << L << std::endl;
     L.moveFront();
+    while ((L.peekNext() == 0) && (L.length() > 1)) {
+        L.eraseAfter();
+    }
+    // std::cout << L << std::endl;
     // std::cout << L.peekNext() << std::endl;
     if (L.peekNext() < 0) {
         negateList(L);
@@ -109,7 +118,7 @@ int normalizeList(List& L) {
         // std::cout << "The raw number: " << n << std::endl;
         tmp.insertAfter(n);
         if (L.position() == 1) {
-            std::cout << "end: " << j << std::endl;
+            // std::cout << "end: " << j << std::endl;
             if (j > 0) {
                 tmp.insertBefore(j);
             }
@@ -120,35 +129,15 @@ int normalizeList(List& L) {
     return num;
 }
 
-int normalizeMul(List& L) {
-    std::cout << L << std::endl;
-    List tmp = L;
-    long j = 0;
-    List res;
-    for (L.moveBack(); L.position() != 0; L.movePrev()) {
-        std::cout << L.peekPrev() << std::endl;
-        long dl = L.peekPrev();
-        dl += j;
-        if (dl >= 1000000000) {
-            j = dl / 1000000000;
-            std::cout << "Before: " << dl << std::endl;
-            dl = dl % 1000000000;
-            std::cout << "After: " << dl << std::endl;
-        }
-        res.insertAfter(dl);
-    }
-    std::cout << "res: " << res << std::endl;
-}
-
 
 void shiftList(List& L, int p) {
-    std::cout << "shiftList: " << L << std::endl;
-    std::cout << p << std::endl;
+    // std::cout << "shiftList: " << L << std::endl;
+    // std::cout << p << std::endl;
     for (int i = 0; i != p; i++) {
         L.moveBack();
         L.insertBefore(0);
     }
-    std::cout << "After shiftList: " << L << std::endl;
+    // std::cout << "After shiftList: " << L << std::endl;
 }
 
 BigInteger::BigInteger(){
@@ -278,20 +267,25 @@ BigInteger BigInteger::add(const BigInteger& N) const {
         // std::cout << S << std::endl;
         res.signum = sig;
         res.digits = S;
+        return res;
     } else if (this->signum == 1) {
         List tmpthis = this->digits;
+        // std::cout << "this: " << this->digits << std::endl;
+        // std::cout << "N.digits: " << N.digits << std::endl;
+        // std::cout << "Sign: " << N.sign() << std::endl;
         sumList(S, this->digits, N.digits, N.sign());
         // std::cout << "Sum: " << S << std::endl;
         sig = normalizeList(S);
         // std::cout << S << std::endl;
         res.signum = sig;
         res.digits = S;
+        return res;
     } else if (this->signum == 0) {
         res = BigInteger(0);
         res.signum = 0;
         return res;
     } else {
-        std::cout << "Something went wrong..." << std::endl;
+        // std::cout << "Something went wrong..." << std::endl;
     }
 }
 
@@ -303,7 +297,8 @@ BigInteger BigInteger::sub(const BigInteger& N) const {
         tmp = BigInteger("0");
         return tmp;
     }
-
+    // std::cout << "A: " << *this << std::endl;
+    // std::cout << "B: " << tmp << std::endl;
     BigInteger res = add(tmp);
     return res;
 }
@@ -312,20 +307,22 @@ BigInteger BigInteger::mult(const BigInteger& N) const {
     BigInteger tmp = BigInteger("0");
     List one = this->digits;
     List two = N.digits;
-    std::cout << one << std::endl;
-    std::cout << two << std::endl;
+    // std::cout << one << std::endl;
+    // std::cout << two << std::endl;
     int num = 0;
     for (two.moveBack(); two.position() != 0; two.movePrev()) {
         long owt = two.peekPrev();
         one = this->digits;
+        // std::cout << "one: " << one << std::endl;
         // std::cout << "two: " << owt << std::endl;
         scalarMultList(one, owt);
+        // std::cout << "Before normalized: " << one << std::endl;
         normalizeList(one);
-        std::cout << "After normalized: " << one << std::endl;
+        // std::cout << "After normalized: " << one << std::endl;
         shiftList(one, num++);
-        std::cout << "After shifted: " << one << std::endl;
+        // std::cout << "After shifted: " << one << std::endl;
         sumList(tmp.digits, tmp.digits, one, 1);
-        std::cout << "sum: " << tmp.digits << std::endl;
+        // std::cout << "sum: " << tmp.digits << std::endl;
         normalizeList(tmp.digits);
 
     }
