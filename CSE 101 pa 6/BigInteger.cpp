@@ -168,6 +168,8 @@ BigInteger::BigInteger(std::string s){
     if (i + 9 > 0) {
         this->digits.insertAfter(std::stoi(a.substr(0, i + 9)));
     }
+
+    normalizeList(this->digits);
 }
 
 BigInteger::BigInteger(const BigInteger& N) {
@@ -257,6 +259,12 @@ BigInteger BigInteger::add(const BigInteger& N) const {
     List S;
     BigInteger res;
     int sig;
+
+    if ((this->digits == N.digits) && (this->signum + N.signum == 0)) {
+        res = BigInteger("0");
+        res.signum = 0;
+        return res;
+    }
     
     if (this->signum == -1) {
         List tmpthis = this->digits;
@@ -281,8 +289,7 @@ BigInteger BigInteger::add(const BigInteger& N) const {
         res.digits = S;
         return res;
     } else if (this->signum == 0) {
-        res = BigInteger(0);
-        res.signum = 0;
+        res = N;
         return res;
     } else {
         // std::cout << "Something went wrong..." << std::endl;
@@ -293,8 +300,9 @@ BigInteger BigInteger::sub(const BigInteger& N) const {
     BigInteger tmp = N;
     tmp.signum = 0 - tmp.signum;
 
-    if (digits == N.digits) {
+    if ((digits == N.digits) && (this->signum == N.signum)) {
         tmp = BigInteger("0");
+        tmp.signum = 0;
         return tmp;
     }
     // std::cout << "A: " << *this << std::endl;
@@ -326,6 +334,9 @@ BigInteger BigInteger::mult(const BigInteger& N) const {
         normalizeList(tmp.digits);
 
     }
+
+    tmp.signum = this->signum * N.signum;
+
     return tmp;
 }
 
@@ -408,7 +419,7 @@ BigInteger operator-( const BigInteger& A, const BigInteger& B ) {
     return A.BigInteger::sub(B);
 }
 
-BigInteger operator-=( const BigInteger& A, const BigInteger& B ) {
+BigInteger operator-=( BigInteger& A, const BigInteger& B ) {
     A = A.BigInteger::sub(B);
     return A;
 }
