@@ -30,11 +30,7 @@ int Dictionary::size() const{
 
 void Dictionary::setValue(keyType k, valType v) {
     if (num_pairs == 0) {
-        root->key = k;
-        root->val = v;
-        root->left = nullptr;
-        root->right = nullptr;
-        root->parent = nullptr;
+        root = new Node(k, v);
         num_pairs++;
         return;
     }
