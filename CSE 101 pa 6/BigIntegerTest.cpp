@@ -5,10 +5,100 @@ using namespace std;
 #include "BigInteger.h"
 
 int main() {
-    BigInteger A = BigInteger("9128734667000004389234563456345619187236478");
-    BigInteger B = BigInteger("9876545439000000000000000200000000000006543654365346534");
+    BigInteger A = BigInteger("+111122223333");
+    BigInteger B = BigInteger("+111122223333");
 
-    cout << B * A << endl;
+    BigInteger C = A - B;
+    if (C.sign() != 0)
+        std::cout << 1 << std::endl;
+
+    // pos - pos < 0
+    B = BigInteger("121122223333");
+    BigInteger D = BigInteger("-10000000000");
+    C = A - B;
+    if (C.sign() != -1)
+        std::cout << 21 << std::endl;
+    if (!(C == D))
+        std::cout << 22 << std::endl;
+
+    // pos - pos > 0
+    B = BigInteger("101122223333");
+    D = BigInteger("10000000000");
+    C = A - B;
+    if (C.sign() != 1)
+        std::cout << 31 << std::endl;
+    if (!(C == D))
+        std::cout << 32 << std::endl;
+
+    // pos - neg = pos
+    B.negate();
+    D = BigInteger("212244446666");
+    C = A - B;
+    if (C.sign() != 1)
+        std::cout << 41 << std::endl;
+    if (!(C == D))
+        std::cout << 42 << std::endl;
+
+    // neg - pos = neg
+    D.negate();
+    C = B - A;
+    if (C.sign() != -1)
+        std::cout << 51 << std::endl;
+    if (!(C == D))
+        std::cout << 52 << std::endl;
+
+    return 0;
+
+    // BigInteger A = BigInteger("+111122223333");
+    // BigInteger B = BigInteger("+222211110000");
+
+    // // pos + pos = pos
+    // BigInteger D = BigInteger("+333333333333");
+    // BigInteger C = A + B;
+
+    // if (!(C == D))
+    //     std::cout << 1 << std::endl;
+
+    // // add a positive and a negative integer
+    // //-> pos + neg = 0
+    // B = BigInteger("-111122223333");
+    // C = A + B;
+    // // std::cout << A << std::endl;
+    // // std::cout << B << std::endl;
+    // if (C.sign() != 0)
+    //     std::cout << 2 << std::endl;
+    //     // std::cout << C << std::endl;
+
+    // //-> pos + neg > 0
+    // B = BigInteger("-110122223333");
+    // D = BigInteger("1000000000");
+    // C = A + B;
+    // if (C.sign() != 1)
+    //     std::cout << 31 << std::endl;
+    // if (!(C == D))
+    //     std::cout << 32 << std::endl;
+
+    // //-> pos + neg < 0
+    // B = BigInteger("-112122223333");
+    // D = BigInteger("-1000000000");
+    // C = A + B;
+    // if (C.sign() != -1)
+    //     std::cout << 41 << std::endl;
+    // if (!(C == D))
+    //     std::cout << 42 << std::endl;
+
+    // //-> neg + neg = neg
+    // A = BigInteger("-221211110000");
+    // D = BigInteger("-333333333333");
+    // C = A + B;
+    // if (!(C == D))
+    //     std::cout << 5 << std::endl;
+
+    
+    // BigInteger A = BigInteger("9128734667000004389234563456345619187236478");
+    // BigInteger B = BigInteger("9876545439000000000000000200000000000006543654365346534");
+
+    // cout << B * A << endl;
 
     // BigInteger A = BigInteger("-1");
     // BigInteger B = BigInteger("0");
