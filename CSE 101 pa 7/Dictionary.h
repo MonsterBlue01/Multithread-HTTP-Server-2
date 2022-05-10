@@ -45,16 +45,16 @@ private:
     // tree R, arranged in order by keys.
     void inOrderString(std::string& s, Node* R) const;
 
-   // preOrderString()
-   // Appends a string representation of the tree rooted at R to s. The appended
-   // string consists of keys only, separated by "\n", with the order determined
-   // by a pre-order tree walk.
-   void preOrderString(std::string& s, Node* R) const;
+    // preOrderString()
+    // Appends a string representation of the tree rooted at R to s. The appended
+    // string consists of keys only, separated by "\n", with the order determined
+    // by a pre-order tree walk.
+    void preOrderString(std::string& s, Node* R) const;
 
-   // preOrderCopy()
-   // Recursively inserts a deep copy of the subtree rooted at R into this 
-   // Dictionary. Recursion terminates at N.
-   void preOrderCopy(Node* R, Node* N);
+    // preOrderCopy()
+    // Recursively inserts a deep copy of the subtree rooted at R into this 
+    // Dictionary. Recursion terminates at N.
+    void preOrderCopy(Node* R, Node* N);
 
    // postOrderDelete()
    // Deletes all Nodes in the subtree rooted at R, sets R to nil.
@@ -101,16 +101,16 @@ public:
     ~Dictionary();
 
 
-   // Access functions --------------------------------------------------------
+    // Access functions --------------------------------------------------------
 
-   // size()
-   // Returns the size of this Dictionary.
-   int size() const;
+    // size()
+    // Returns the size of this Dictionary.
+    int size() const;
 
-   // contains()
-   // Returns true if there exists a pair such that key==k, and returns false
-   // otherwise.
-   bool contains(keyType k) const;
+    // contains()
+    // Returns true if there exists a pair such that key==k, and returns false
+    // otherwise.
+    bool contains(keyType k) const;
 
    // getValue()
    // Returns a reference to the value corresponding to key k.
@@ -139,10 +139,10 @@ public:
    // Resets this Dictionary to the empty state, containing no pairs.
    void clear();
 
-   // setValue()
-   // If a pair with key==k exists, overwrites the corresponding value with v, 
-   // otherwise inserts the new pair (k, v).
-   void setValue(keyType k, valType v);
+    // setValue()
+    // If a pair with key==k exists, overwrites the corresponding value with v, 
+    // otherwise inserts the new pair (k, v).
+    void setValue(keyType k, valType v);
 
    // remove()
    // Deletes the pair for which key==k. If that pair is current, then current

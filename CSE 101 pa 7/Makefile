@@ -13,6 +13,7 @@ ADT            = Dictionary
 SOURCE         = $(MAIN).cpp
 OBJECT         = $(MAIN).o
 ADT_TEST       = $(ADT)Client
+ADT_OWN        = $(ADT)Test
 ADT_SOURCE     = $(ADT).cpp
 ADT_OBJECT     = $(ADT).o
 ADT_HEADER     = $(ADT).h
@@ -27,17 +28,23 @@ $(MAIN): $(OBJECT) $(ADT_OBJECT)
 $(ADT_TEST): $(ADT_TEST).o $(ADT_OBJECT)
 	$(LINK) $(ADT_TEST) $(ADT_TEST).o $(ADT_OBJECT)
 
+$(ADT_OWN): $(ADT_OWN).o $(ADT_OBJECT)
+	$(LINK) $(ADT_OWN) $(ADT_OWN).o $(ADT_OBJECT)
+
 $(OBJECT): $(SOURCE) $(ADT_HEADER)
 	$(COMPILE) $(SOURCE)
 
 $(ADT_TEST).o: $(ADT_TEST).cpp $(ADT_HEADER)
 	$(COMPILE) $(ADT_TEST).cpp
 
+$(ADT_OWN).o: $(ADT_OWN).cpp $(ADT_HEADER)
+	$(COMPILE) $(ADT_OWN).cpp
+
 $(ADT_OBJECT): $(ADT_SOURCE) $(ADT_HEADER)
 	$(COMPILE) $(ADT_SOURCE)
 
 clean:
-	$(REMOVE) $(MAIN) $(ADT_TEST) $(OBJECT) $(ADT_TEST).o $(ADT_OBJECT)
+	$(REMOVE) $(MAIN) $(ADT_TEST) $(ADT_OWN) $(OBJECT) $(ADT_TEST).o $(ADT_OWN).o $(ADT_OBJECT)
 
 $(MAIN)Check: $(MAIN)
 	$(MEMCHECK) $(MAIN) in5 junk5
