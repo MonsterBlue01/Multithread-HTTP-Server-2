@@ -17,6 +17,13 @@ Dictionary::Dictionary(){
     this->num_pairs = 0;
 }
 
+Dictionary::~Dictionary(){
+    this->nil = nullptr;
+    this->root = nullptr;
+    this->current = nullptr;
+    this->num_pairs = 0;
+}
+
 int Dictionary::size() const{
     return num_pairs;
 }
@@ -28,5 +35,7 @@ void Dictionary::setValue(keyType k, valType v) {
         root->left = nullptr;
         root->right = nullptr;
         root->parent = nullptr;
+        num_pairs++;
+        return;
     }
 }

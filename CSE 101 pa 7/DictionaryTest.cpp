@@ -5,6 +5,8 @@ using namespace std;
 
 int main() {
     Dictionary D;
+    D.setValue("Apple", 1);
+    cout << "The num: " << D.size() << endl;
     cout << "Hello World";
     return 0;
 }
