@@ -5,10 +5,10 @@ using namespace std;
 
 int main() {
     Dictionary D;
-    D.setValue("Apple", 1);
     string s;
-    D.inOrderString(s, D.root);
-    cout << "Hello World";
+    D.setValue("Apple", 1);
+    s = D.to_string();
+    cout << "Hello World" << endl;
     cout << s << endl;
     return 0;
 }
