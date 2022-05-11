@@ -6,7 +6,9 @@ using namespace std;
 int main() {
     Dictionary D;
     D.setValue("Apple", 1);
-    cout << "The num: " << D.size() << endl;
+    string s;
+    D.inOrderString(s, D.root);
     cout << "Hello World";
+    cout << s << endl;
     return 0;
 }

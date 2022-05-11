@@ -10,7 +10,6 @@
 #ifndef DICTIONARY_H_INCLUDE_
 #define DICTIONARY_H_INCLUDE_
 
-
 // Exported types -------------------------------------------------------------
 typedef std::string keyType;  // must be comparable using <, <=, >, >=, ==, !=
 typedef int         valType;
@@ -56,14 +55,14 @@ private:
     // Dictionary. Recursion terminates at N.
     void preOrderCopy(Node* R, Node* N);
 
-   // postOrderDelete()
-   // Deletes all Nodes in the subtree rooted at R, sets R to nil.
-   void postOrderDelete(Node* R);
+    // postOrderDelete()
+    // Deletes all Nodes in the subtree rooted at R, sets R to nil.
+    void postOrderDelete(Node* R);
 
-   // search()
-   // Searches the subtree rooted at R for a Node with key==k. Returns
-   // the address of the Node if it exists, returns nil otherwise.
-   Node* search(Node* R, keyType k) const;
+    // search()
+    // Searches the subtree rooted at R for a Node with key==k. Returns
+    // the address of the Node if it exists, returns nil otherwise.
+    Node* search(Node* R, keyType k) const;
 
    // findMin()
    // If the subtree rooted at R is not empty, returns a pointer to the 
@@ -177,18 +176,18 @@ public:
 
    // Other Functions ---------------------------------------------------------
 
-   // to_string()
-   // Returns a string representation of this Dictionary. Consecutive (key, value)
-   // pairs are separated by a newline "\n" character, and the items key and value 
-   // are separated by the sequence space-colon-space " : ". The pairs are arranged 
-   // in order, as defined by the order operator <.
-   std::string to_string() const;
+    // to_string()
+    // Returns a string representation of this Dictionary. Consecutive (key, value)
+    // pairs are separated by a newline "\n" character, and the items key and value 
+    // are separated by the sequence space-colon-space " : ". The pairs are arranged 
+    // in order, as defined by the order operator <.
+    std::string to_string() const;
 
-   // pre_string()
-   // Returns a string consisting of all keys in this Dictionary. Consecutive
-   // keys are separated by newline "\n" characters. The key order is given
-   // by a pre-order tree walk.
-   std::string pre_string() const;
+    // pre_string()
+    // Returns a string consisting of all keys in this Dictionary. Consecutive
+    // keys are separated by newline "\n" characters. The key order is given
+    // by a pre-order tree walk.
+    std::string pre_string() const;
 
    // equals()
    // Returns true if and only if this Dictionary contains the same (key, value)
