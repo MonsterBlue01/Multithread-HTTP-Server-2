@@ -8,18 +8,19 @@ Dictionary::Node::Node(keyType k, valType v){
     this->left = nullptr;
     this->right = nullptr;
     this->val = v;
+    this->parent = nullptr;
 }
 
 Dictionary::Dictionary(){
     this->nil = new Node("dnE", INT32_MAX);
-    this->root = nullptr;
+    this->root = nil;
     this->current = nullptr;
     this->num_pairs = 0;
 }
 
 Dictionary::~Dictionary(){
     this->nil = nullptr;
-    this->root = nullptr;
+    this->root = nil;
     this->current = nullptr;
     this->num_pairs = 0;
 }
@@ -88,14 +89,11 @@ void Dictionary::setValue(keyType k, valType v) {
     // root->right->right->right = nil;
     // postOrderDelete(root);
     // std::cout << std::endl;
-    if (num_pairs == 0) {
-        root = new Node(k, v);
-    }
-
-    Node* tmp = search(root, k);
-    if (tmp != nil) {
-        tmp->key = k;
-    }
+    
+    // Node* tmp = search(root, k);
+    // if (tmp != nil) {
+    //     tmp->key = k;
+    // }
 
     Node* z = new Node(k, v);
 
