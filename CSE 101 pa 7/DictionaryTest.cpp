@@ -13,7 +13,7 @@ int main() {
     D.setValue("Cat", 5);
     D.setValue("Elon", 6);
     D.setValue("Glad", 7);
-    D.remove("Donkey");
+    // D.remove("Donkey");
     s = D.to_string();
     cout << s << endl;
     s = D.pre_string();
