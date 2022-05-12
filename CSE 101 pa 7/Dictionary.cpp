@@ -94,6 +94,13 @@ void Dictionary::setValue(keyType k, valType v) {
     // if (tmp != nil) {
     //     tmp->key = k;
     // }
+    if (num_pairs != 0) {
+        Node* tmp = search(root, k);
+        if (tmp != nil) {
+            tmp->key = k;
+            return;
+        }
+    }
 
     Node* z = new Node(k, v);
 
@@ -107,7 +114,7 @@ void Dictionary::setValue(keyType k, valType v) {
             x = x->right;
         }
     }
-      
+
     z->parent = y;
     if (y == nil) {
         root = z;
