@@ -40,6 +40,14 @@ void Dictionary::preOrderString(std::string& s, Node* R) const {
     }
 }
 
+void Dictionary::postOrderDelete(Node* R) {
+    if (R != nil) {
+        postOrderDelete(R->left);
+        postOrderDelete(R->right);
+        std::cout << R->key;
+    }
+}
+
 Dictionary::Node* Dictionary::search(Node* R, keyType k) const{
     if (R == nil or R->key == k) {
         return R;
@@ -54,22 +62,62 @@ int Dictionary::size() const{
     return num_pairs;
 }
 
+bool Dictionary::contains(keyType k) const{
+    if (search(root, k) == nil) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 void Dictionary::setValue(keyType k, valType v) {
-    root = new Node ("Donkey", 1);
-    root->left = new Node("Bee", 2);
-    root->right = new Node("Font", 3);
-    root->right->right = new Node("Glad", 7);
-    root->right->left = new Node("Elon", 6);
-    root->left->right = new Node("Cat", 5);
-    root->left->left = new Node("Apple", 4);            //Don't forget parent in this part
-    root->left->left->left = nil;
-    root->left->left->right = nil;
-    root->left->right->left = nil;
-    root->left->right->right = nil;
-    root->right->left->left = nil;
-    root->right->left->right = nil;
-    root->right->right->left = nil;
-    root->right->right->right = nil;
+    // root = new Node ("Donkey", 1);
+    // root->left = new Node("Bee", 2);
+    // root->right = new Node("Font", 3);
+    // root->right->right = new Node("Glad", 7);
+    // root->right->left = new Node("Elon", 6);
+    // root->left->right = new Node("Cat", 5);
+    // root->left->left = new Node("Apple", 4);            //Don't forget parent in this part
+    // root->left->left->left = nil;
+    // root->left->left->right = nil;
+    // root->left->right->left = nil;
+    // root->left->right->right = nil;
+    // root->right->left->left = nil;
+    // root->right->left->right = nil;
+    // root->right->right->left = nil;
+    // root->right->right->right = nil;
+    // postOrderDelete(root);
+    // std::cout << std::endl;
+    if (num_pairs == 0) {
+        root = new Node(k, v);
+    }
+
+    Node* tmp = search(root, k);
+    if (tmp != nil) {
+        tmp->key = k;
+    }
+
+    Node* z = new Node(k, v);
+
+    Node* y = nil;
+    Node* x = root;
+    while (x != nil) {
+        y = x;
+        if (z->key < x->key) {
+            x = x->left;
+        } else { 
+            x = x->right;
+        }
+    }
+      
+    z->parent = y;
+    if (y == nil) {
+        root = z;
+    } else if (z->key < y->key) {
+        y->left = z;
+    } else {
+        y->right = z;
+    }
 }
 
 std::string Dictionary::to_string() const{
