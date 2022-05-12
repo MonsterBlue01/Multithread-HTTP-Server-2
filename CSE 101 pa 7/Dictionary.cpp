@@ -26,11 +26,12 @@ Dictionary::~Dictionary(){
 }
 
 void Dictionary::inOrderString(std::string& s, Node* R) const {
-    if (R != nil) {
-        inOrderString(s, R->left);
-        s += R->key;
-        inOrderString(s, R->right);
-    }
+    // if (R != nil) {
+    //     inOrderString(s, R->left);
+    //     s += R->key;
+    //     inOrderString(s, R->right);
+    // }
+    std::cout << 1 << std::endl;
 }
 
 void Dictionary::preOrderString(std::string& s, Node* R) const {
