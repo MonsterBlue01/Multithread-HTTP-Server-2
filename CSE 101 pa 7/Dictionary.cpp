@@ -26,12 +26,11 @@ Dictionary::~Dictionary(){
 }
 
 void Dictionary::inOrderString(std::string& s, Node* R) const {
-    // if (R != nil) {
-    //     inOrderString(s, R->left);
-    //     s += R->key;
-    //     inOrderString(s, R->right);
-    // }
-    std::cout << 1 << std::endl;
+    if (R != nil) {
+        inOrderString(s, R->left);
+        s += R->key;
+        inOrderString(s, R->right);
+    }
 }
 
 void Dictionary::preOrderString(std::string& s, Node* R) const {
@@ -46,7 +45,7 @@ void Dictionary::postOrderDelete(Node* R) {
     if (R != nil) {
         postOrderDelete(R->left);
         postOrderDelete(R->right);
-        std::cout << R->key;
+        delete R;
     }
 }
 
@@ -58,6 +57,20 @@ Dictionary::Node* Dictionary::search(Node* R, keyType k) const{
     } else {
         return search(R->right, k);
     }
+}
+
+Dictionary::Node* Dictionary::findMin(Node* R) {
+    while (R->left != nil){
+        R = R->left;
+    }
+    return R;
+}
+
+Dictionary::Node* Dictionary::findMax(Node* R) {
+    while (R->right != nil){
+        R = R->right;
+    }
+    return R;
 }
 
 int Dictionary::size() const{
@@ -73,28 +86,6 @@ bool Dictionary::contains(keyType k) const{
 }
 
 void Dictionary::setValue(keyType k, valType v) {
-    // root = new Node ("Donkey", 1);
-    // root->left = new Node("Bee", 2);
-    // root->right = new Node("Font", 3);
-    // root->right->right = new Node("Glad", 7);
-    // root->right->left = new Node("Elon", 6);
-    // root->left->right = new Node("Cat", 5);
-    // root->left->left = new Node("Apple", 4);            //Don't forget parent in this part
-    // root->left->left->left = nil;
-    // root->left->left->right = nil;
-    // root->left->right->left = nil;
-    // root->left->right->right = nil;
-    // root->right->left->left = nil;
-    // root->right->left->right = nil;
-    // root->right->right->left = nil;
-    // root->right->right->right = nil;
-    // postOrderDelete(root);
-    // std::cout << std::endl;
-    
-    // Node* tmp = search(root, k);
-    // if (tmp != nil) {
-    //     tmp->key = k;
-    // }
     if (num_pairs != 0) {
         Node* tmp = search(root, k);
         if (tmp != nil) {
@@ -104,11 +95,15 @@ void Dictionary::setValue(keyType k, valType v) {
     }
 
     Node* z = new Node(k, v);
+    z->left = nil;
+    z->right = nil;
 
     Node* y = nil;
     Node* x = root;
     while (x != nil) {
         y = x;
+        // std::cout << "z->key: " << z->key << std::endl;
+        // std::cout << "x->key: " << x->key << std::endl;
         if (z->key < x->key) {
             x = x->left;
         } else { 
@@ -123,6 +118,46 @@ void Dictionary::setValue(keyType k, valType v) {
         y->left = z;
     } else {
         y->right = z;
+    }
+    num_pairs++;
+}
+
+void Dictionary::clear() {
+    postOrderDelete(root);
+    root = nil;
+    num_pairs = 0;
+}
+
+void Dictionary::Transplant(Node* u, Node* v) {
+    if (u->parent == nil) {
+        root = v;
+    } else if (u == u->parent->left) {
+        u->parent->left = v;
+    } else {
+        u->parent->right = v;
+    } 
+        
+    if (v != nil) {
+        v->parent = u->parent;
+    }
+}
+
+void Dictionary::remove(keyType k){
+    Node* z = search(root, k);
+    if (z->left == nil) {
+        Transplant(z, z->right);
+    } else if (z->right == nil) {
+        Transplant(z, z->left);
+    } else {
+        Node *y = findMin(z->right);
+        if (y->parent != z) {
+            Transplant(y, y->right);
+            y->right = z->right;
+            y->right->parent = y;
+        }
+        Transplant(z, y);
+        y->left = z->left;
+        y->left->parent = y;
     }
 }
 

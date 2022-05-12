@@ -64,15 +64,15 @@ private:
     // the address of the Node if it exists, returns nil otherwise.
     Node* search(Node* R, keyType k) const;
 
-   // findMin()
-   // If the subtree rooted at R is not empty, returns a pointer to the 
-   // leftmost Node in that subtree, otherwise returns nil.
-   Node* findMin(Node* R);
+    // findMin()
+    // If the subtree rooted at R is not empty, returns a pointer to the 
+    // leftmost Node in that subtree, otherwise returns nil.
+    Node* findMin(Node* R);
 
-   // findMax()
-   // If the subtree rooted at R is not empty, returns a pointer to the 
-   // rightmost Node in that subtree, otherwise returns nil.
-   Node* findMax(Node* R);
+    // findMax()
+    // If the subtree rooted at R is not empty, returns a pointer to the 
+    // rightmost Node in that subtree, otherwise returns nil.
+    Node* findMax(Node* R);
 
    // findNext()
    // If N does not point to the rightmost Node, returns a pointer to the
@@ -132,22 +132,24 @@ public:
    valType& currentVal() const;
 
 
-   // Manipulation procedures -------------------------------------------------
+    // Manipulation procedures -------------------------------------------------
 
-   // clear()
-   // Resets this Dictionary to the empty state, containing no pairs.
-   void clear();
+    // clear()
+    // Resets this Dictionary to the empty state, containing no pairs.
+    void clear();
 
     // setValue()
     // If a pair with key==k exists, overwrites the corresponding value with v, 
     // otherwise inserts the new pair (k, v).
     void setValue(keyType k, valType v);
 
-   // remove()
-   // Deletes the pair for which key==k. If that pair is current, then current
-   // becomes undefined.
-   // Pre: contains(k).
-   void remove(keyType k);
+    void Transplant(Node* u, Node* v);
+
+    // remove()
+    // Deletes the pair for which key==k. If that pair is current, then current
+    // becomes undefined.
+    // Pre: contains(k).
+    void remove(keyType k);
 
    // begin()
    // If non-empty, places current iterator at the first (key, value) pair
