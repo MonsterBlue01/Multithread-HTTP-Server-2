@@ -267,6 +267,9 @@ void Dictionary::begin() {
 }
 
 void Dictionary::end() {
+    if (root == nil) {
+        return;
+    }
     Node* tmp = findMax(root);
     current = tmp;
 }
