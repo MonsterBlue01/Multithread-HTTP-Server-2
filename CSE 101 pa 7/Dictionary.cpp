@@ -35,9 +35,11 @@ Dictionary::~Dictionary(){
 }
 
 void Dictionary::inOrderString(std::string& s, Node* R) const {
+    std::string s1 = " : ";
+    std::string s2 = "\n";
     if (R != nil) {
         inOrderString(s, R->left);
-        s += R->key;
+        s = s + R->key + s1 + std::to_string(R->val) + s2;
         inOrderString(s, R->right);
     }
 }
