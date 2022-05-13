@@ -140,10 +140,16 @@ bool Dictionary::hasCurrent() const {
 }
 
 keyType Dictionary::currentKey() const {
+    if (hasCurrent() == false){
+        throw std::logic_error("Dictionary: currentKey(): current undefined");
+    }
     return current->key;
 }
 
 valType& Dictionary::currentVal() const {
+    if (hasCurrent() == false){
+        throw std::logic_error("Dictionary: currentVal(): current undefined");
+    }
     return current->val;
 }
 
@@ -253,6 +259,9 @@ void Dictionary::remove(keyType k){
 }
 
 void Dictionary::begin() {
+    if (root == nil) {
+        return;
+    }
     Node* tmp = findMin(root);
     current = tmp;
 }
