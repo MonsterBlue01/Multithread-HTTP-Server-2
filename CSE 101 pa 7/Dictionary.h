@@ -40,6 +40,8 @@ private:
 
     void Transplant(Node* u, Node* v);
 
+    bool compare(Node* R, Node* r);
+
     // inOrderString()
     // Appends a string representation of the tree rooted at R to string s. The
     // string appended consists of: "key : value \n" for each key-value pair in
@@ -55,7 +57,7 @@ private:
     // preOrderCopy()
     // Recursively inserts a deep copy of the subtree rooted at R into this 
     // Dictionary. Recursion terminates at N.
-    void preOrderCopy(Node* R, Node* N);
+    void preOrderCopy(Node* R, Dictionary &T);
 
     // postOrderDelete()
     // Deletes all Nodes in the subtree rooted at R, sets R to nil.
@@ -191,10 +193,10 @@ public:
     // by a pre-order tree walk.
     std::string pre_string() const;
 
-   // equals()
-   // Returns true if and only if this Dictionary contains the same (key, value)
-   // pairs as Dictionary D.
-   bool equals(const Dictionary& D) const;
+    // equals()
+    // Returns true if and only if this Dictionary contains the same (key, value)
+    // pairs as Dictionary D.
+    bool equals(const Dictionary& D) const;
 
 
     // Overloaded Operators ----------------------------------------------------

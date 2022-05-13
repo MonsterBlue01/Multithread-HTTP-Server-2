@@ -12,10 +12,19 @@ Dictionary::Node::Node(keyType k, valType v){
 }
 
 Dictionary::Dictionary(){
-    this->nil = new Node("dnE", INT32_MAX);
+    this->nil = new Node("123AbC", INT32_MAX);
     this->root = nil;
     this->current = nullptr;
     this->num_pairs = 0;
+}
+
+Dictionary::Dictionary(const Dictionary& D) {
+    this->nil = new Node("123AbC", INT32_MAX);
+    this->root = nil;
+    this->current = nullptr;
+    this->num_pairs = 0;
+
+    preOrderCopy(D.root, (*this));
 }
 
 Dictionary::~Dictionary(){
@@ -46,6 +55,14 @@ void Dictionary::postOrderDelete(Node* R) {
         postOrderDelete(R->left);
         postOrderDelete(R->right);
         delete R;
+    }
+}
+
+void Dictionary::preOrderCopy(Node* R, Dictionary &T) {
+    if (R->key != "123AbC"){
+        T.setValue(R->key, R->val);
+        preOrderCopy(R->left, T);
+        preOrderCopy(R->right, T);
     }
 }
 
@@ -187,6 +204,34 @@ void Dictionary::Transplant(Node* u, Node* v) {
     }
 }
 
+bool Dictionary::compare(Node* R, Node* r) {
+    if ((R->key == "123AbC") && (r->key == "123AbC")) {
+        return true;
+    }
+
+    if (((R->key == "123AbC") && (r->key != "123AbC")) || ((R->key != "123AbC") && (r->key == "123AbC"))) {
+        return false;
+    }
+
+    if (R->key != r->key) {
+        return false;
+    }
+
+    if (R->val != r->val) {
+        return false;
+    }
+
+    if (compare(R->left, r->left) == false) {
+        return false;
+    }
+
+    if (compare(R->right, r->right) == false) {
+        return false;
+    }
+
+    return true;
+}
+
 void Dictionary::remove(keyType k){
     Node* z = search(root, k);
     if (z->left == nil) {
@@ -236,6 +281,36 @@ std::string Dictionary::pre_string() const{
     return s;
 }
 
+bool Dictionary::equals(const Dictionary& D) const{
+    std::string a = this->to_string();
+    std::string b = D.to_string();
+    if (a == b) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 std::ostream& operator<< ( std::ostream& stream, Dictionary& D ) {
     return stream << D.Dictionary::to_string();
+}
+
+bool operator==( const Dictionary& A, const Dictionary& B ) {
+    Dictionary C = A;
+    return C.compare(A.root, B.root);
+}
+
+Dictionary& Dictionary::operator=( const Dictionary& D ) {
+    if ( this != &D ){
+        Dictionary temp = D;
+
+        // then swap the copy's fields with fields of this
+        std::swap(nil, temp.nil);
+        std::swap(root, temp.root);
+        std::swap(current, temp.current);
+        std::swap(num_pairs, temp.num_pairs);
+    }
+
+    // return this with the new data installed
+    return *this;
 }
