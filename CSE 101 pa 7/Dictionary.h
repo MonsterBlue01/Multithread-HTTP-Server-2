@@ -38,6 +38,8 @@ private:
 
     // Helper Functions (Optional) ---------------------------------------------
 
+    void Transplant(Node* u, Node* v);
+
     // inOrderString()
     // Appends a string representation of the tree rooted at R to string s. The
     // string appended consists of: "key : value \n" for each key-value pair in
@@ -74,11 +76,11 @@ private:
     // rightmost Node in that subtree, otherwise returns nil.
     Node* findMax(Node* R);
 
-   // findNext()
-   // If N does not point to the rightmost Node, returns a pointer to the
-   // Node after N in an in-order tree walk.  If N points to the rightmost 
-   // Node, or is nil, returns nil. 
-   Node* findNext(Node* N);
+    // findNext()
+    // If N does not point to the rightmost Node, returns a pointer to the
+    // Node after N in an in-order tree walk.  If N points to the rightmost 
+    // Node, or is nil, returns nil. 
+    Node* findNext(Node* N);
 
    // findPrev()
    // If N does not point to the leftmost Node, returns a pointer to the
@@ -111,25 +113,25 @@ public:
     // otherwise.
     bool contains(keyType k) const;
 
-   // getValue()
-   // Returns a reference to the value corresponding to key k.
-   // Pre: contains(k)
-   valType& getValue(keyType k) const;
+    // getValue()
+    // Returns a reference to the value corresponding to key k.
+    // Pre: contains(k)
+    valType& getValue(keyType k) const;
 
-   // hasCurrent()
-   // Returns true if the current iterator is defined, and returns false 
-   // otherwise.
-   bool hasCurrent() const;
+    // hasCurrent()
+    // Returns true if the current iterator is defined, and returns false 
+    // otherwise.
+    bool hasCurrent() const;
 
-   // currentKey()
-   // Returns the current key.
-   // Pre: hasCurrent() 
-   keyType currentKey() const;
+    // currentKey()
+    // Returns the current key.
+    // Pre: hasCurrent() 
+    keyType currentKey() const;
 
-   // currentVal()
-   // Returns a reference to the current value.
-   // Pre: hasCurrent()
-   valType& currentVal() const;
+    // currentVal()
+    // Returns a reference to the current value.
+    // Pre: hasCurrent()
+    valType& currentVal() const;
 
 
     // Manipulation procedures -------------------------------------------------
@@ -143,30 +145,28 @@ public:
     // otherwise inserts the new pair (k, v).
     void setValue(keyType k, valType v);
 
-    void Transplant(Node* u, Node* v);
-
     // remove()
     // Deletes the pair for which key==k. If that pair is current, then current
     // becomes undefined.
     // Pre: contains(k).
     void remove(keyType k);
 
-   // begin()
-   // If non-empty, places current iterator at the first (key, value) pair
-   // (as defined by the order operator < on keys), otherwise does nothing. 
-   void begin();
+    // begin()
+    // If non-empty, places current iterator at the first (key, value) pair
+    // (as defined by the order operator < on keys), otherwise does nothing. 
+    void begin();
 
-   // end()
-   // If non-empty, places current iterator at the last (key, value) pair
-   // (as defined by the order operator < on keys), otherwise does nothing. 
-   void end();
+    // end()
+    // If non-empty, places current iterator at the last (key, value) pair
+    // (as defined by the order operator < on keys), otherwise does nothing. 
+    void end();
 
-   // next()
-   // If the current iterator is not at the last pair, advances current 
-   // to the next pair (as defined by the order operator < on keys). If 
-   // the current iterator is at the last pair, makes current undefined.
-   // Pre: hasCurrent()
-   void next();
+    // next()
+    // If the current iterator is not at the last pair, advances current 
+    // to the next pair (as defined by the order operator < on keys). If 
+    // the current iterator is at the last pair, makes current undefined.
+    // Pre: hasCurrent()
+    void next();
 
    // prev()
    // If the current iterator is not at the first pair, moves current to  
@@ -197,12 +197,12 @@ public:
    bool equals(const Dictionary& D) const;
 
 
-   // Overloaded Operators ----------------------------------------------------
-   
-   // operator<<()
-   // Inserts string representation of Dictionary D into stream, as defined by
-   // member function to_string().
-   friend std::ostream& operator<<( std::ostream& stream, Dictionary& D );
+    // Overloaded Operators ----------------------------------------------------
+    
+    // operator<<()
+    // Inserts string representation of Dictionary D into stream, as defined by
+    // member function to_string().
+    friend std::ostream& operator<<( std::ostream& stream, Dictionary& D );
 
    // operator==()
    // Returns true if and only if Dictionary A equals Dictionary B, as defined

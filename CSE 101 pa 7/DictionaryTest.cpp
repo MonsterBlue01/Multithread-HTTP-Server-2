@@ -13,11 +13,13 @@ int main() {
     D.setValue("Cat", 5);
     D.setValue("Elon", 6);
     D.setValue("Glad", 7);
+    cout << "<<: " << D << endl;
     // D.remove("Donkey");
-    s = D.to_string();
-    cout << s << endl;
-    s = D.pre_string();
-    cout << s << endl;
+    // s = D.to_string();
+    // cout << s << endl;
+    // s = D.pre_string();
+    // cout << s << endl;
+    // cout << "Corresponding value: " << D.getValue("Apple") << endl;
     // D.clear();
     // D.setValue("Apple", 1);
     // s = D.to_string();

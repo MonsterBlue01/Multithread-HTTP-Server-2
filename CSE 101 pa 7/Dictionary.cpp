@@ -73,6 +73,30 @@ Dictionary::Node* Dictionary::findMax(Node* R) {
     return R;
 }
 
+Dictionary::Node* Dictionary::findNext(Node* N) {
+    if (N->right != nil) {
+        return findMin(N->right);
+    }
+    Node* y = N->parent;
+    while ((y != nil) && (N == y->right)) {
+        N = y;
+        y = y->parent;
+    }
+    return y;
+}
+
+Dictionary::Node* Dictionary::findPrev(Node* N) {
+    if (N->left != nil) {
+        return findMax(N->right);
+    }
+    Node* y = N->parent;
+    while ((y != nil) && (N == y->left)) {
+        N = y;
+        y = y->parent;
+    }
+    return y;
+}
+
 int Dictionary::size() const{
     return num_pairs;
 }
@@ -83,6 +107,27 @@ bool Dictionary::contains(keyType k) const{
     } else {
         return true;
     }
+}
+
+valType& Dictionary::getValue(keyType k) const {
+    Node* tmp = search(root, k);
+    return tmp->val;
+}
+
+bool Dictionary::hasCurrent() const {
+    if (current == nullptr) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+keyType Dictionary::currentKey() const {
+    return current->key;
+}
+
+valType& Dictionary::currentVal() const {
+    return current->val;
 }
 
 void Dictionary::setValue(keyType k, valType v) {
@@ -161,6 +206,24 @@ void Dictionary::remove(keyType k){
     }
 }
 
+void Dictionary::begin() {
+    Node* tmp = findMin(root);
+    current = tmp;
+}
+
+void Dictionary::end() {
+    Node* tmp = findMax(root);
+    current = tmp;
+}
+
+void Dictionary::next() {
+    current = findNext(current);
+}
+
+void Dictionary::prev() {
+    current = findPrev(current);
+}
+
 std::string Dictionary::to_string() const{
     std::string s;
     inOrderString(s, root);
@@ -171,4 +234,8 @@ std::string Dictionary::pre_string() const{
     std::string s;
     preOrderString(s, root);
     return s;
+}
+
+std::ostream& operator<< ( std::ostream& stream, Dictionary& D ) {
+    return stream << D.Dictionary::to_string();
 }
