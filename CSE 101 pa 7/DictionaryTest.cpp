@@ -5,30 +5,48 @@ using namespace std;
 
 int main() {
     Dictionary A;
-    try {
-        A.begin();
-        A.currentVal();
-        cout << 1 << endl;
-    } catch (logic_error const &) {
-    }
-    try {
-        A.end();
-        A.currentVal();
-        cout << 2 << endl;
-    } catch (logic_error const &) {
-    }
-    try {
-        A.currentVal();
-        cout << 3 << endl;
-    } catch (logic_error const &) {
-    }
-    try {
-        A.currentKey();
-        cout << 4 << endl;
-    } catch (logic_error const &) {
-    }
+    A.setValue("a", 1);
+    A.setValue("b", 5);
+    A.setValue("c", 16);
+    A.setValue("d", 176);
+    A.setValue("e", 3214);
+    A.begin();
+    A.next();
+    A.next();
 
+    if (A.currentKey() != "c" || A.currentVal() != 16)
+        cout << 1 << endl;
+    A.next();
+    A.next();
+    A.next();
+    if (A.hasCurrent())
+        cout << 2 << endl;
     return 0;
+    // Dictionary A;
+    // try {
+    //     A.begin();
+    //     A.currentVal();
+    //     cout << 1 << endl;
+    // } catch (logic_error const &) {
+    // }
+    // try {
+    //     A.end();
+    //     A.currentVal();
+    //     cout << 2 << endl;
+    // } catch (logic_error const &) {
+    // }
+    // try {
+    //     A.currentVal();
+    //     cout << 3 << endl;
+    // } catch (logic_error const &) {
+    // }
+    // try {
+    //     A.currentKey();
+    //     cout << 4 << endl;
+    // } catch (logic_error const &) {
+    // }
+
+    // return 0;
     // Dictionary A;
     // A.setValue("c", 3);
     // A.setValue("a", 1);

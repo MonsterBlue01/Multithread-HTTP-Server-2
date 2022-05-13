@@ -14,14 +14,14 @@ Dictionary::Node::Node(keyType k, valType v){
 Dictionary::Dictionary(){
     this->nil = new Node("123AbC", INT32_MAX);
     this->root = nil;
-    this->current = nullptr;
+    this->current = nil;
     this->num_pairs = 0;
 }
 
 Dictionary::Dictionary(const Dictionary& D) {
     this->nil = new Node("123AbC", INT32_MAX);
     this->root = nil;
-    this->current = nullptr;
+    this->current = nil;
     this->num_pairs = 0;
 
     preOrderCopy(D.root, (*this));
@@ -132,7 +132,7 @@ valType& Dictionary::getValue(keyType k) const {
 }
 
 bool Dictionary::hasCurrent() const {
-    if (current == nullptr) {
+    if (current == nil) {
         return false;
     } else {
         return true;
@@ -275,10 +275,26 @@ void Dictionary::end() {
 }
 
 void Dictionary::next() {
+    Node* R = root;
+    while (R->right != nil){
+        R = R->right;
+    }
+    if (current->val == R->val) {
+        current = nil;
+        return;
+    }
     current = findNext(current);
 }
 
 void Dictionary::prev() {
+    Node* R = root;
+    while (R->left != nil){
+        R = R->left;
+    }
+    if (current->val == R->val) {
+        current = nil;
+        return;
+    }
     current = findPrev(current);
 }
 
