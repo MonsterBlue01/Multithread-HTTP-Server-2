@@ -249,6 +249,7 @@ void Dictionary::remove(keyType k){
         y->left = z->left;
         y->left->parent = y;
     }
+    num_pairs--;
 }
 
 void Dictionary::begin() {
