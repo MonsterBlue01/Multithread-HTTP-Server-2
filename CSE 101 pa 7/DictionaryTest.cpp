@@ -5,17 +5,42 @@ using namespace std;
 
 int main() {
     Dictionary A;
-    A.setValue("c", 3);
-    A.setValue("a", 1);
-    A.setValue("b", 2);
-    A.remove("a");
-    if (A.size() != 2)
+    try {
+        A.begin();
+        A.currentVal();
         cout << 1 << endl;
-    A.setValue("e", 5);
-    A.remove("c");
-    if (A.size() != 2)
+    } catch (logic_error const &) {
+    }
+    try {
+        A.end();
+        A.currentVal();
         cout << 2 << endl;
+    } catch (logic_error const &) {
+    }
+    try {
+        A.currentVal();
+        cout << 3 << endl;
+    } catch (logic_error const &) {
+    }
+    try {
+        A.currentKey();
+        cout << 4 << endl;
+    } catch (logic_error const &) {
+    }
+
     return 0;
+    // Dictionary A;
+    // A.setValue("c", 3);
+    // A.setValue("a", 1);
+    // A.setValue("b", 2);
+    // A.remove("a");
+    // if (A.size() != 2)
+    //     cout << 1 << endl;
+    // A.setValue("e", 5);
+    // A.remove("c");
+    // if (A.size() != 2)
+    //     cout << 2 << endl;
+    // return 0;
     // Dictionary D;
     // string s;
     // D.setValue("Hacks", 8);
