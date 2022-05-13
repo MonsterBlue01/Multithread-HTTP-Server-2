@@ -193,6 +193,7 @@ void Dictionary::setValue(keyType k, valType v) {
 void Dictionary::clear() {
     postOrderDelete(root);
     root = nil;
+    current = nil;
     num_pairs = 0;
 }
 
