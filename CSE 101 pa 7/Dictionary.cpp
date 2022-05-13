@@ -45,8 +45,9 @@ void Dictionary::inOrderString(std::string& s, Node* R) const {
 }
 
 void Dictionary::preOrderString(std::string& s, Node* R) const {
+    std::string s1 = "\n";
     if (R != nil) {
-        s += R->key;
+        s = s + R->key + s1;
         preOrderString(s, R->left);
         preOrderString(s, R->right);
     }
