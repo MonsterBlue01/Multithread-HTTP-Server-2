@@ -104,7 +104,7 @@ Dictionary::Node* Dictionary::findNext(Node* N) {
 
 Dictionary::Node* Dictionary::findPrev(Node* N) {
     if (N->left != nil) {
-        return findMax(N->right);
+        return findMax(N->left);
     }
     Node* y = N->parent;
     while ((y != nil) && (N == y->left)) {

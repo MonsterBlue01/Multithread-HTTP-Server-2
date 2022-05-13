@@ -5,20 +5,39 @@ using namespace std;
 
 int main() {
     Dictionary A;
-    A.setValue("c", 3);
-    A.setValue("b", 2);
     A.setValue("a", 1);
-    A.begin();
-    A.clear();
-    if (A.size() != 0) {
+    A.setValue("b", 5);
+    A.setValue("e", 10);
+    A.end();
+    A.setValue("h", 15);
+    A.setValue("f", 20);
+    A.setValue("i", 100);
+    if (A.currentKey() != "e" || A.currentVal() != 10)
         cout << 1 << endl;
-    }
-    try {
-        A.currentKey();
+    A.end();
+    cout << A.currentKey() << endl;
+    A.prev();
+    cout << A.currentKey() << endl;
+    A.prev();
+    cout << A.currentKey() << endl;
+    if (A.currentKey() != "f" || A.currentVal() != 20)
         cout << 2 << endl;
-    } catch (logic_error const &) {
-    }
     return 0;
+    // Dictionary A;
+    // A.setValue("c", 3);
+    // A.setValue("b", 2);
+    // A.setValue("a", 1);
+    // A.begin();
+    // A.clear();
+    // if (A.size() != 0) {
+    //     cout << 1 << endl;
+    // }
+    // try {
+    //     A.currentKey();
+    //     cout << 2 << endl;
+    // } catch (logic_error const &) {
+    // }
+    // return 0;
     // Dictionary A;
     // A.setValue("a", 1);
     // A.setValue("b", 5);
