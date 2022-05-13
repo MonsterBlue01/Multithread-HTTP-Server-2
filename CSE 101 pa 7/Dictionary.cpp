@@ -240,6 +240,9 @@ bool Dictionary::compare(Node* R, Node* r) {
 }
 
 void Dictionary::remove(keyType k){
+    if (current->key == k) {
+        current = nil;
+    }
     Node* z = search(root, k);
     if (z->left == nil) {
         Transplant(z, z->right);

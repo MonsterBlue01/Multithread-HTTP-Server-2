@@ -5,24 +5,44 @@ using namespace std;
 
 int main() {
     Dictionary A;
-    A.setValue("a", 1);
+    A.setValue("d", 1);
     A.setValue("b", 5);
-    A.setValue("e", 10);
-    A.end();
-    A.setValue("h", 15);
+    A.setValue("a", 10);
+    A.setValue("c", 15);
     A.setValue("f", 20);
-    A.setValue("i", 100);
-    if (A.currentKey() != "e" || A.currentVal() != 10)
+    A.setValue("e", 25);
+    A.setValue("g", 30);
+    A.begin();
+    A.remove("a");
+    if (A.hasCurrent())
         cout << 1 << endl;
     A.end();
-    cout << A.currentKey() << endl;
-    A.prev();
-    cout << A.currentKey() << endl;
-    A.prev();
-    cout << A.currentKey() << endl;
-    if (A.currentKey() != "f" || A.currentVal() != 20)
+    A.remove("d");
+    if (A.currentKey() != "g" || A.currentVal() != 30)
         cout << 2 << endl;
+    A.remove("g");
+    if (A.hasCurrent())
+        cout << 3 << endl;
     return 0;
+    // Dictionary A;
+    // A.setValue("a", 1);
+    // A.setValue("b", 5);
+    // A.setValue("e", 10);
+    // A.end();
+    // A.setValue("h", 15);
+    // A.setValue("f", 20);
+    // A.setValue("i", 100);
+    // if (A.currentKey() != "e" || A.currentVal() != 10)
+    //     cout << 1 << endl;
+    // A.end();
+    // cout << A.currentKey() << endl;
+    // A.prev();
+    // cout << A.currentKey() << endl;
+    // A.prev();
+    // cout << A.currentKey() << endl;
+    // if (A.currentKey() != "f" || A.currentVal() != 20)
+    //     cout << 2 << endl;
+    // return 0;
     // Dictionary A;
     // A.setValue("c", 3);
     // A.setValue("b", 2);
