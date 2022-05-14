@@ -14,7 +14,7 @@ int main (int argh, char * argv[]) {
     string tmp;
 
     string one, two;
-    int num = 0;
+    int num = q;
 
     ifstream infile; 
     infile.open(argv[1]); 
@@ -25,8 +25,6 @@ int main (int argh, char * argv[]) {
     while (!(infile.eof())) {
         infile.getline(buf, 16384);
         tmp = buf;
-        // cout << tmp << endl;
-        // cout << "Times: num " << num++ << endl;
         if (num == 0) {
             one = tmp;
         } else if (num == 2) {
