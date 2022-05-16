@@ -32,6 +32,17 @@ Dictionary::~Dictionary() {
     current = nil;
 }
 
+Dictionary::Node* Dictionary::search(Node* R, keyType k) const {
+    // R, k
+    if (R == nil or k == R->key) {
+        return R;
+    } else if (k < R->key) {
+        return search(R->left, k);
+    } else {// k > R.key
+        return search(R->right, k);
+    }
+}
+
 int Dictionary::size() const{
     return num_pairs;
 }
@@ -45,6 +56,15 @@ void Dictionary::inOrderString(std::string& s, Node* R) const {
             s = s + R->key + s1 + std::to_string(R->val) + s2;
         }
         inOrderString(s, R->right);
+    }
+}
+
+void Dictionary::preOrderString(std::string& s, Node* R) const {
+    std::string s1 = "\n";
+    if (R != nil) {
+        s = s + R->key + s1;
+        preOrderString(s, R->left);
+        preOrderString(s, R->right);
     }
 }
 
@@ -96,10 +116,54 @@ void Dictionary::RightRotate(Node* N) {
 }
 
 void Dictionary::RB_InsertFixUp(Node* N) {
-    std::cout << "uh oh" << std::endl;
+    //T, z
+    while (N->parent->color == red) {
+        if (N->parent == N->parent->parent->left) {
+            Node* y = N->parent->parent->right;
+            if (N->color == red) {
+                N->parent->color = black;               // case 1
+                y->color = black;                       // case 1
+                N->parent->parent->color = red;         // case 1
+                N = N->parent->parent;                  // case 1
+            } else {
+                if (N == N->parent->right) {
+                    N = N->parent;                      // case 2
+                    LeftRotate(N);                      // case 2
+                }
+                N->parent->color = black;               // case 3
+                N->parent->parent->color = red;         // case 3
+                RightRotate(N->parent->parent);         // case 3
+            }
+        } else {
+            Node* y = N->parent->parent->left;
+            if (y->color == red) {
+                N->parent->color = black;               // case 4
+                y->color = black;                       // case 4
+                N->parent->parent->color = red;         // case 4
+                N = N->parent->parent;                  // case 4
+            } else {
+                if (N == N->parent->left) {
+                    N = N->parent;                      // case 5
+                    RightRotate(N);                     // case 5
+                }
+                N->parent->color = black;               // case 6
+                N->parent->parent->color = red;         // case 6
+                LeftRotate(N->parent->parent);          // case 6
+            }
+        }
+    }
+    root->color = black;
 }
 
 void Dictionary::setValue(keyType k, valType v) {
+    if (root != nil) {
+        Node *tmp = search(root, k);
+        if (tmp != nil) {
+            tmp->key = k;
+            return;
+        }
+    }
+
     Node* z = new Node(k, v);
     Node* y = nil;
     Node* x = root;
@@ -123,6 +187,7 @@ void Dictionary::setValue(keyType k, valType v) {
     z->right = nil;
     z->color = red;
     RB_InsertFixUp(z);
+    num_pairs++;
 }
 
 std::string Dictionary::to_string() const{

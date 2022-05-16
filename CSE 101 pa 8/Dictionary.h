@@ -46,11 +46,11 @@ int   num_pairs;
     // tree R, arranged in order by keys.
     void inOrderString(std::string& s, Node* R) const;
 
-   // preOrderString()
-   // Appends a string representation of the tree rooted at R to s. The appended
-   // string consists of keys only, separated by "\n", with the order determined
-   // by a pre-order tree walk.
-   void preOrderString(std::string& s, Node* R) const;
+    // preOrderString()
+    // Appends a string representation of the tree rooted at R to s. The appended
+    // string consists of keys only, separated by "\n", with the order determined
+    // by a pre-order tree walk.
+    void preOrderString(std::string& s, Node* R) const;
 
    // preOrderCopy()
    // Recursively inserts a deep copy of the subtree rooted at R into this 
@@ -61,10 +61,10 @@ int   num_pairs;
    // Deletes all Nodes in the subtree rooted at R, sets R to nil.
    void postOrderDelete(Node* R);
 
-   // search()
-   // Searches the subtree rooted at R for a Node with key==k. Returns
-   // the address of the Node if it exists, returns nil otherwise.
-   Node* search(Node* R, keyType k) const;
+    // search()
+    // Searches the subtree rooted at R for a Node with key==k. Returns
+    // the address of the Node if it exists, returns nil otherwise.
+    Node* search(Node* R, keyType k) const;
 
    // findMin()
    // If the subtree rooted at R is not empty, returns a pointer to the 
