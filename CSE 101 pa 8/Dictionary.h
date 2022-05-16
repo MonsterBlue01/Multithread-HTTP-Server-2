@@ -96,8 +96,8 @@ int   num_pairs;
    // RightRotate()
    void RightRotate(Node* N);
 
-   // RB_InsertFixUP()
-   void RB_InsertFixUp(Node* N);
+    // RB_InsertFixUP()
+    void RB_InsertFixUp(Node* N);
 
    // RB_Transplant()
    void RB_Transplant(Node* u, Node* v);
@@ -197,14 +197,14 @@ public:
    void prev();
 
 
-   // Other Functions ---------------------------------------------------------
+    // Other Functions ---------------------------------------------------------
 
-   // to_string()
-   // Returns a string representation of this Dictionary. Consecutive (key, value)
-   // pairs are separated by a newline "\n" character, and the items key and value 
-   // are separated by the sequence space-colon-space " : ". The pairs are arranged 
-   // in order, as defined by the order operator <.
-   std::string to_string() const;
+    // to_string()
+    // Returns a string representation of this Dictionary. Consecutive (key, value)
+    // pairs are separated by a newline "\n" character, and the items key and value 
+    // are separated by the sequence space-colon-space " : ". The pairs are arranged 
+    // in order, as defined by the order operator <.
+    std::string to_string() const;
 
    // pre_string()
    // Returns a string consisting of all keys in this Dictionary. Consecutive
@@ -236,6 +236,5 @@ public:
    Dictionary& operator=( const Dictionary& D );
 
 };
-
 
 #endif
