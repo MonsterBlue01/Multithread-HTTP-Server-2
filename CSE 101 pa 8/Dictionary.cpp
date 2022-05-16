@@ -48,6 +48,53 @@ void Dictionary::inOrderString(std::string& s, Node* R) const {
     }
 }
 
+void Dictionary::LeftRotate(Node* N) {
+    // set y......T, x
+    Node* y = N->right; 
+    
+    // turn y's left subtree into x's right subtree
+    N->right = y->left;
+    if (y->left != nil) {     // not necessary if using sentinal nil node
+        y->left->parent = N;
+    }
+    
+    // link y's parent to x
+    y->parent = N->parent;
+    if (N->parent == nil) {
+        root = y;
+    } else if (N == N->parent->left) {
+        N->parent->left = y;
+    } else {
+        N->parent->right = y;
+    }
+    y->left = N;
+    N->parent = y;
+}
+
+void Dictionary::RightRotate(Node* N) {
+    // set y......T, x
+    Node* y = N->left;
+    
+   // turn y's right subtree into x's left subtree
+    N->left = y->right;
+    if (y->right != nil) {  // not necessary if using sentinal nil node
+        y->right->parent = N;
+    }
+    
+    // link y's parent to x
+    y->parent = N->parent;
+    if (N->parent == nil) {
+        root = y;
+    } else if (N == N->parent->right) {
+        N->parent->right = y;
+    } else {
+        N->parent->left = y;
+    }
+    // put x on y's right
+    y->right = N;
+    N->parent = y;
+}
+
 void Dictionary::RB_InsertFixUp(Node* N) {
     std::cout << "uh oh" << std::endl;
 }

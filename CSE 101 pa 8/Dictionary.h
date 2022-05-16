@@ -88,13 +88,13 @@ int   num_pairs;
    // Node, or is nil, returns nil.
    Node* findPrev(Node* N);
 
-   // RBT Helper Functions (Optional) -----------------------------------------
-   
-   // LeftRotate()
-   void LeftRotate(Node* N);
+    // RBT Helper Functions (Optional) -----------------------------------------
+    
+    // LeftRotate()
+    void LeftRotate(Node* N);
 
-   // RightRotate()
-   void RightRotate(Node* N);
+    // RightRotate()
+    void RightRotate(Node* N);
 
     // RB_InsertFixUP()
     void RB_InsertFixUp(Node* N);
