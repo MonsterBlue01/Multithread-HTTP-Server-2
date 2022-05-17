@@ -263,6 +263,34 @@ void Dictionary::RB_Transplant(Node* u, Node* v) {
     v->parent = u->parent;
 }
 
+bool Dictionary::compare(Node* R, Node* r) {
+    if ((R->key == "123AbC") && (r->key == "123AbC")) {
+        return true;
+    }
+
+    if (((R->key == "123AbC") && (r->key != "123AbC")) || ((R->key != "123AbC") && (r->key == "123AbC"))) {
+        return false;
+    }
+
+    if (R->key != r->key) {
+        return false;
+    }
+
+    if (R->val != r->val) {
+        return false;
+    }
+
+    if (compare(R->left, r->left) == false) {
+        return false;
+    }
+
+    if (compare(R->right, r->right) == false) {
+        return false;
+    }
+
+    return true;
+}
+
 void Dictionary::RB_DeleteFixUp(Node* N) {
     // T, x
     while ((N != root) && (N->color == black)) {
@@ -314,8 +342,8 @@ void Dictionary::RB_DeleteFixUp(Node* N) {
                 N = root;                             // case 8
             }
         }
-   }
-   N->color = black;
+    }
+    N->color = black;
 }
 
 void Dictionary::RB_Delete(Node* N) {
@@ -323,15 +351,15 @@ void Dictionary::RB_Delete(Node* N) {
     Node* x;
     int y_original_color = y->color;
     if (N->left == nil) {
-        Node* x = N->right;
+        x = N->right;
         RB_Transplant(N, N->right);
     } else if (N->right == nil) {
-        Node* x = N->left;
+        x = N->left;
         RB_Transplant(N, N->left);
     } else {
         y = findMin(N->right);
         y_original_color = y->color;
-        Node* x = y->right;
+        x = y->right;
         if (y->parent == N) {
             x->parent = y;
         } else {
@@ -391,8 +419,88 @@ void Dictionary::remove(keyType k) {
     }
 }
 
+void Dictionary::begin() {
+    if (root == nil) {
+        return;
+    }
+    Node* tmp = findMin(root);
+    current = tmp;
+}
+
+void Dictionary::end() {
+    if (root == nil) {
+        return;
+    }
+    Node* tmp = findMax(root);
+    current = tmp;
+}
+
+void Dictionary::next() {
+    Node* R = root;
+    while (R->right != nil){
+        R = R->right;
+    }
+    if (current->val == R->val) {
+        current = nil;
+        return;
+    }
+    current = findNext(current);
+}
+
+void Dictionary::prev() {
+    Node* R = root;
+    while (R->left != nil){
+        R = R->left;
+    }
+    if (current->val == R->val) {
+        current = nil;
+        return;
+    }
+    current = findPrev(current);
+}
+
 std::string Dictionary::to_string() const{
     std::string s;
     inOrderString(s, root);
     return s;
+}
+
+std::string Dictionary::pre_string() const{
+    std::string s;
+    preOrderString(s, root);
+    return s;
+}
+
+bool Dictionary::equals(const Dictionary& D) const{
+    std::string a = this->to_string();
+    std::string b = D.to_string();
+    if (a == b) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+std::ostream& operator<< ( std::ostream& stream, Dictionary& D ) {
+    return stream << D.Dictionary::to_string();
+}
+
+bool operator==( const Dictionary& A, const Dictionary& B ) {
+    Dictionary C = A;
+    return C.compare(A.root, B.root);
+}
+
+Dictionary& Dictionary::operator=( const Dictionary& D ) {
+    if ( this != &D ){
+        Dictionary temp = D;
+
+        // then swap the copy's fields with fields of this
+        std::swap(nil, temp.nil);
+        std::swap(root, temp.root);
+        std::swap(current, temp.current);
+        std::swap(num_pairs, temp.num_pairs);
+    }
+
+    // return this with the new data installed
+    return *this;
 }

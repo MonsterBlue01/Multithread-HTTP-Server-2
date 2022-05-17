@@ -40,6 +40,8 @@ int   num_pairs;
 
     // Helper Functions (Optional) ---------------------------------------------
 
+    bool compare(Node* R, Node* r);
+
     // inOrderString()
     // Appends a string representation of the tree rooted at R to string s. The
     // string appended consists of: "key : value \n" for each key-value pair in
@@ -172,29 +174,29 @@ public:
     // Pre: contains(k).
     void remove(keyType k);
 
-   // begin()
-   // If non-empty, places current iterator at the first (key, value) pair
-   // (as defined by the order operator < on keys), otherwise does nothing. 
-   void begin();
+    // begin()
+    // If non-empty, places current iterator at the first (key, value) pair
+    // (as defined by the order operator < on keys), otherwise does nothing. 
+    void begin();
 
-   // end()
-   // If non-empty, places current iterator at the last (key, value) pair
-   // (as defined by the order operator < on keys), otherwise does nothing. 
-   void end();
+    // end()
+    // If non-empty, places current iterator at the last (key, value) pair
+    // (as defined by the order operator < on keys), otherwise does nothing. 
+    void end();
 
-   // next()
-   // If the current iterator is not at the last pair, advances current 
-   // to the next pair (as defined by the order operator < on keys). If 
-   // the current iterator is at the last pair, makes current undefined.
-   // Pre: hasCurrent()
-   void next();
+    // next()
+    // If the current iterator is not at the last pair, advances current 
+    // to the next pair (as defined by the order operator < on keys). If 
+    // the current iterator is at the last pair, makes current undefined.
+    // Pre: hasCurrent()
+    void next();
 
-   // prev()
-   // If the current iterator is not at the first pair, moves current to  
-   // the previous pair (as defined by the order operator < on keys). If 
-   // the current iterator is at the first pair, makes current undefined.
-   // Pre: hasCurrent()
-   void prev();
+    // prev()
+    // If the current iterator is not at the first pair, moves current to  
+    // the previous pair (as defined by the order operator < on keys). If 
+    // the current iterator is at the first pair, makes current undefined.
+    // Pre: hasCurrent()
+    void prev();
 
 
     // Other Functions ---------------------------------------------------------
@@ -206,34 +208,34 @@ public:
     // in order, as defined by the order operator <.
     std::string to_string() const;
 
-   // pre_string()
-   // Returns a string consisting of all keys in this Dictionary. Consecutive
-   // keys are separated by newline "\n" characters. The key order is given
-   // by a pre-order tree walk.
-   std::string pre_string() const;
+    // pre_string()
+    // Returns a string consisting of all keys in this Dictionary. Consecutive
+    // keys are separated by newline "\n" characters. The key order is given
+    // by a pre-order tree walk.
+    std::string pre_string() const;
 
-   // equals()
-   // Returns true if and only if this Dictionary contains the same (key, value)
-   // pairs as Dictionary D.
-   bool equals(const Dictionary& D) const;
+    // equals()
+    // Returns true if and only if this Dictionary contains the same (key, value)
+    // pairs as Dictionary D.
+    bool equals(const Dictionary& D) const;
 
 
-   // Overloaded Operators ----------------------------------------------------
-   
-   // operator<<()
-   // Inserts string representation of Dictionary D into stream, as defined by
-   // member function to_string().
-   friend std::ostream& operator<<( std::ostream& stream, Dictionary& D );
+    // Overloaded Operators ----------------------------------------------------
+    
+    // operator<<()
+    // Inserts string representation of Dictionary D into stream, as defined by
+    // member function to_string().
+    friend std::ostream& operator<<( std::ostream& stream, Dictionary& D );
 
-   // operator==()
-   // Returns true if and only if Dictionary A equals Dictionary B, as defined
-   // by member function equals(). 
-   friend bool operator==( const Dictionary& A, const Dictionary& B );
+    // operator==()
+    // Returns true if and only if Dictionary A equals Dictionary B, as defined
+    // by member function equals(). 
+    friend bool operator==( const Dictionary& A, const Dictionary& B );
 
-   // operator=()
-   // Overwrites the state of this Dictionary with state of D, and returns a
-   // reference to this Dictionary.
-   Dictionary& operator=( const Dictionary& D );
+    // operator=()
+    // Overwrites the state of this Dictionary with state of D, and returns a
+    // reference to this Dictionary.
+    Dictionary& operator=( const Dictionary& D );
 
 };
 
