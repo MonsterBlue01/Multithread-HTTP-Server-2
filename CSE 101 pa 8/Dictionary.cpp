@@ -416,6 +416,7 @@ void Dictionary::remove(keyType k) {
     Node* tmp = search(root, k);
     if (tmp != nil) {
         RB_Delete(tmp);
+        num_pairs--;
     }
 }
 
