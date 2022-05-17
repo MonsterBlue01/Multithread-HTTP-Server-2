@@ -414,6 +414,11 @@ void Dictionary::setValue(keyType k, valType v) {
 
 void Dictionary::remove(keyType k) {
     Node* tmp = search(root, k);
+
+    if (current == tmp) {
+        current = nil;
+    }
+    
     if (tmp != nil) {
         RB_Delete(tmp);
         num_pairs--;

@@ -5,13 +5,32 @@ using namespace std;
 
 int main() {
     Dictionary A;
-    A.setValue("a", 1);
-    A.setValue("b", 2);
-    A.setValue("c", 3);
-    A.setValue("e", 5);
-    if (A.size() != 4)
+    A.setValue("d", 1);
+    A.setValue("b", 5);
+    A.setValue("a", 10);
+    A.setValue("c", 15);
+    A.setValue("f", 20);
+    A.setValue("e", 25);
+    A.setValue("g", 30);
+    A.begin();
+    A.remove("a");
+    if (A.hasCurrent())
         cout << 1 << endl;
+    A.end();
+    A.remove("d");
+    if (A.currentKey() != "g" || A.currentVal() != 30)
+        cout << 2 << endl;
+    A.remove("g");
+    if (A.hasCurrent())
+        cout << 3 << endl;;
     return 0;
+    // A.setValue("a", 1);
+    // A.setValue("b", 2);
+    // A.setValue("c", 3);
+    // A.setValue("e", 5);
+    // if (A.size() != 4)
+    //     cout << 1 << endl;
+    // return 0;
     // abcdefghij k l m n o p q r s t u v w x y z
     // 1234567891011121314151617181920212223242526
     // Dictionary D;
