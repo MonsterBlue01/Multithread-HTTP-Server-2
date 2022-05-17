@@ -52,41 +52,41 @@ int   num_pairs;
     // by a pre-order tree walk.
     void preOrderString(std::string& s, Node* R) const;
 
-   // preOrderCopy()
-   // Recursively inserts a deep copy of the subtree rooted at R into this 
-   // Dictionary. Recursion terminates at N.
-   void preOrderCopy(Node* R, Node* N);
+    // preOrderCopy()
+    // Recursively inserts a deep copy of the subtree rooted at R into this 
+    // Dictionary. Recursion terminates at N.
+    void preOrderCopy(Node* R, Dictionary &T);
 
-   // postOrderDelete()
-   // Deletes all Nodes in the subtree rooted at R, sets R to nil.
-   void postOrderDelete(Node* R);
+    // postOrderDelete()
+    // Deletes all Nodes in the subtree rooted at R, sets R to nil.
+    void postOrderDelete(Node* R);
 
     // search()
     // Searches the subtree rooted at R for a Node with key==k. Returns
     // the address of the Node if it exists, returns nil otherwise.
     Node* search(Node* R, keyType k) const;
 
-   // findMin()
-   // If the subtree rooted at R is not empty, returns a pointer to the 
-   // leftmost Node in that subtree, otherwise returns nil.
-   Node* findMin(Node* R);
+    // findMin()
+    // If the subtree rooted at R is not empty, returns a pointer to the 
+    // leftmost Node in that subtree, otherwise returns nil.
+    Node* findMin(Node* R);
 
-   // findMax()
-   // If the subtree rooted at R is not empty, returns a pointer to the 
-   // rightmost Node in that subtree, otherwise returns nil.
-   Node* findMax(Node* R);
+    // findMax()
+    // If the subtree rooted at R is not empty, returns a pointer to the 
+    // rightmost Node in that subtree, otherwise returns nil.
+    Node* findMax(Node* R);
 
-   // findNext()
-   // If N does not point to the rightmost Node, returns a pointer to the
-   // Node after N in an in-order tree walk.  If N points to the rightmost 
-   // Node, or is nil, returns nil. 
-   Node* findNext(Node* N);
+    // findNext()
+    // If N does not point to the rightmost Node, returns a pointer to the
+    // Node after N in an in-order tree walk.  If N points to the rightmost 
+    // Node, or is nil, returns nil. 
+    Node* findNext(Node* N);
 
-   // findPrev()
-   // If N does not point to the leftmost Node, returns a pointer to the
-   // Node before N in an in-order tree walk.  If N points to the leftmost 
-   // Node, or is nil, returns nil.
-   Node* findPrev(Node* N);
+    // findPrev()
+    // If N does not point to the leftmost Node, returns a pointer to the
+    // Node before N in an in-order tree walk.  If N points to the leftmost 
+    // Node, or is nil, returns nil.
+    Node* findPrev(Node* N);
 
     // RBT Helper Functions (Optional) -----------------------------------------
     
@@ -99,14 +99,14 @@ int   num_pairs;
     // RB_InsertFixUP()
     void RB_InsertFixUp(Node* N);
 
-   // RB_Transplant()
-   void RB_Transplant(Node* u, Node* v);
+    // RB_Transplant()
+    void RB_Transplant(Node* u, Node* v);
 
-   // RB_DeleteFixUp()
-   void RB_DeleteFixUp(Node* N);
+    // RB_DeleteFixUp()
+    void RB_DeleteFixUp(Node* N);
 
-   // RB_Delete()
-   void RB_Delete(Node* N);
+    // RB_Delete()
+    void RB_Delete(Node* N);
 
 
 public:
@@ -134,32 +134,32 @@ public:
     // otherwise.
     bool contains(keyType k) const;
 
-   // getValue()
-   // Returns a reference to the value corresponding to key k.
-   // Pre: contains(k)
-   valType& getValue(keyType k) const;
+    // getValue()
+    // Returns a reference to the value corresponding to key k.
+    // Pre: contains(k)
+    valType& getValue(keyType k) const;
 
-   // hasCurrent()
-   // Returns true if the current iterator is defined, and returns false 
-   // otherwise.
-   bool hasCurrent() const;
+    // hasCurrent()
+    // Returns true if the current iterator is defined, and returns false 
+    // otherwise.
+    bool hasCurrent() const;
 
-   // currentKey()
-   // Returns the current key.
-   // Pre: hasCurrent() 
-   keyType currentKey() const;
+    // currentKey()
+    // Returns the current key.
+    // Pre: hasCurrent() 
+    keyType currentKey() const;
 
-   // currentVal()
-   // Returns a reference to the current value.
-   // Pre: hasCurrent()
-   valType& currentVal() const;
+    // currentVal()
+    // Returns a reference to the current value.
+    // Pre: hasCurrent()
+    valType& currentVal() const;
 
 
-   // Manipulation procedures -------------------------------------------------
+    // Manipulation procedures -------------------------------------------------
 
-   // clear()
-   // Resets this Dictionary to the empty state, containing no pairs.
-   void clear();
+    // clear()
+    // Resets this Dictionary to the empty state, containing no pairs.
+    void clear();
 
     // setValue()
     // If a pair with key==k exists, overwrites the corresponding value with v, 
