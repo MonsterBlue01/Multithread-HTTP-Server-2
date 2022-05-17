@@ -381,7 +381,7 @@ void Dictionary::setValue(keyType k, valType v) {
     if (root != nil) {
         Node *tmp = search(root, k);
         if (tmp != nil) {
-            tmp->key = k;
+            tmp->val = v;
             return;
         }
     }
