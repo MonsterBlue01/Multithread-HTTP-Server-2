@@ -166,11 +166,11 @@ public:
     // otherwise inserts the new pair (k, v).
     void setValue(keyType k, valType v);
 
-   // remove()
-   // Deletes the pair for which key==k. If that pair is current, then current
-   // becomes undefined.
-   // Pre: contains(k).
-   void remove(keyType k);
+    // remove()
+    // Deletes the pair for which key==k. If that pair is current, then current
+    // becomes undefined.
+    // Pre: contains(k).
+    void remove(keyType k);
 
    // begin()
    // If non-empty, places current iterator at the first (key, value) pair

@@ -384,6 +384,13 @@ void Dictionary::setValue(keyType k, valType v) {
     num_pairs++;
 }
 
+void Dictionary::remove(keyType k) {
+    Node* tmp = search(root, k);
+    if (tmp != nil) {
+        RB_Delete(tmp);
+    }
+}
+
 std::string Dictionary::to_string() const{
     std::string s;
     inOrderString(s, root);
