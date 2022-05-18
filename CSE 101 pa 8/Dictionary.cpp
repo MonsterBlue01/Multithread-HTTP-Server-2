@@ -216,35 +216,35 @@ void Dictionary::RB_InsertFixUp(Node* N) {
     while (N->parent->color == red) {
         if (N->parent == N->parent->parent->left) {
             Node* y = N->parent->parent->right;
-            if (N->color == red) {
-                N->parent->color = black;               // case 1
-                y->color = black;                       // case 1
+            if (y->color == red) {
+                N->parent->color = black;              // case 1
+                y->color = black;                     // case 1
                 N->parent->parent->color = red;         // case 1
-                N = N->parent->parent;                  // case 1
+                N = N->parent->parent;                 // case 1
             } else {
                 if (N == N->parent->right) {
-                    N = N->parent;                      // case 2
-                    LeftRotate(N);                      // case 2
+                    N = N->parent;                     // case 2
+                    LeftRotate(N);                 // case 2
                 }
-                N->parent->color = black;               // case 3
+                N->parent->color = black;              // case 3
                 N->parent->parent->color = red;         // case 3
-                RightRotate(N->parent->parent);         // case 3
+                RightRotate(N->parent->parent);     // case 3
             }
-        } else {
+        } else { 
             Node* y = N->parent->parent->left;
             if (y->color == red) {
-                N->parent->color = black;               // case 4
-                y->color = black;                       // case 4
+                N->parent->color = black;              // case 4
+                y->color = black;                     // case 4
                 N->parent->parent->color = red;         // case 4
-                N = N->parent->parent;                  // case 4
+                N = N->parent->parent;                 // case 4
             } else {
                 if (N == N->parent->left) {
-                    N = N->parent;                      // case 5
-                    RightRotate(N);                     // case 5
+                    N = N->parent;                     // case 5
+                    RightRotate(N);                // case 5
                 }
-                N->parent->color = black;               // case 6
+                N->parent->color = black;              // case 6
                 N->parent->parent->color = red;         // case 6
-                LeftRotate(N->parent->parent);          // case 6
+                LeftRotate(N->parent->parent);      // case 6
             }
         }
     }
