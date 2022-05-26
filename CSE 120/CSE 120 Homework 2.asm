@@ -1,4 +1,4 @@
-1.  1.2[The base CPI] + ((0.1[Branch Instruction] * 0.25[Taken Branth] * 4[Cycle Delay]) + 0.2[Jump Instruction] * 3[Cycle Depay]) = 1.48
+1.  1.2[Base CPI] + 0.1[Branch Instruction](0.25(0.6 * 2 + 0.4 * 3) + 0.75[Jump Instruction](0.6 * 0 + 0.4 * 1)) + 0.2(0.6 * 1 + 0.4 * 2)
 2.  BTB has 8 bits, so erase the last "0" and keep last 3 digits. PHT has 16 bits, so erase the last "0" and keep last 
     4 digits. For example, 0x318. Convert 318 to 0b00011000. 00011000 -> 000110. For PHT, 0110. 0b0110 -> 6. So set 00 
     to 01. For BTB, 0110. 0b110 -> 6. So set 00 to 01. 
@@ -18,4 +18,8 @@
     0x16: beqz a5,0xa:                         F0 F1 F1 F1 D X0[0][1] X1        WB (Still stalled)
                                                        (The 0 is from previous instruction, 1 is passed in)
     0x18: j 0xa:                                  F0 F0 F0 F1 D X0              X0 WB (Still has hazard)
-    0x22: lw a5,0(a3):                                     F0 F1 (Other parts got flushed)      
+    0x22: lw a5,0(a3):                                     F0 F1 (Other parts got flushed)
+
+4.  A: Correct
+    B: Predict not taken, so we have to flush it, but it didn't do that.
+    C: No branch delay slot, which means two lines need to be flushed instead of one.
