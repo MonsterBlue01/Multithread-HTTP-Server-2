@@ -1,9 +1,3 @@
-// -----------------------------
-// Name: Dongjing Wang
-// CruzID: dwang114
-// Assignment: pa8
-// -----------------------------
-
 //-----------------------------------------------------------------------------
 // FileIO.cpp
 // Illustrates file input-output commands and text processing using the
