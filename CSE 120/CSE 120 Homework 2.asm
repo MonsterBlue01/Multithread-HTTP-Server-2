@@ -16,7 +16,7 @@
     0x10: lw a5,0(a3) # 0:               F0 F1 D X0 X1 X2[0]    WB (Other)
     0x14: andi a5,a5,1:                     F0 F1 D  D  D        X[0][1](This is the process for caltulation(0 and 1 = 0)) WB (Previous instruction use EX and that cause hazard)
     0x16: beqz a5,0xa:                         F0 F1 F1 F1 D X0[0][1] X1        WB (Still stalled)
-                                                       (The 0 is from previous instruction, 1 is passed in)
+                                                        (The 0 is from previous instruction, 1 is passed in)
     0x18: j 0xa:                                  F0 F0 F0 F1 D X0              X0 WB (Still has hazard)
     0x22: lw a5,0(a3):                                     F0 F1 (Other parts got flushed)
 
