@@ -11,15 +11,15 @@
     (2): jalr x8, x5, 0x10 (!!: It's hex) - 000000010000 im: 000000010000 rs1: 00101 func3: 000 rd: 01000 opcode: 1100111
     (3): bne x1,ra, 0x30 - im 12|10:5: 0000001 rs2: 00001 rs1: 00001 func3: 001 im 4:1|11: 10000 opcode: 1100011 00110000
 
-5.  (1): INST 1: addi x3,x7,0x03:                       A: 
-                                                        B:
-                                                        C:
-                                                        D:
-    (2): INST 2: jalr x8, x5, 0x10                      A:
-                                                        B:
-                                                        C:
-                                                        D:
-    (3): INST 3: bne x1,ra, 0x30  // if taken, PC+0x30  A:
-                                                        B:
-                                                        C:
-                                                        D:
+5.  (1): INST 1: addi x3,x7,0x03:                       A: 0x07 ; Reason: The input is the content of the first register.
+                                                        B: 0x27 ; Reason: This is what is built into the register.
+                                                        C: 0X2A ; Reason: 0x27 + 0x03 = 0x2A.
+                                                        D: 0x00 ; Reason: Not branch, not jump, so the output is 0.
+    (2): INST 2: jalr x8, x5, 0x10                      A: 0x05 ; Reason: The input is the content of the first register.
+                                                        B: 0x25 ; Reason: This is what is built into the register.
+                                                        C: 0x35 ; Reason: 0x25 + 0x10 = 0x35.
+                                                        D: 0x01 ; Readon: It's jump, so one of the input of OR gate is 1. Therefore, the output is 1.
+    (3): INST 3: bne x1,ra, 0x30  // if taken, PC+0x30  A: 0x01 ; Reason: The input is the content of the first register.
+                                                        B: 0x21 ; Reason: This is what is built into the register.
+                                                        C: 0x00 ; Reason: x1 = ra, so equal. 
+                                                        D: 0x00 ; Reason: Jump part is 0, and the output from ALU is 0. So the output is 0.
