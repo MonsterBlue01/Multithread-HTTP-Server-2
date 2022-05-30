@@ -24,4 +24,7 @@
                                                         C: 0x00 ; Reason: x1 = ra, so equal. 
                                                         D: 0x00 ; Reason: Jump part is 0, and the output from ALU is 0. So the output is 0.
 
-6. 0xfef42623 -> 0b11111110111101000010011000100011. So the opcode is 0100011. Therefore, choose A.
+6.  0xfef42623 -> 0b11111110111101000010011000100011. So the opcode is 0100011. Therefore, choose A.
+
+7.  im: 111111101100, rs1:01000, func3: 010, rd: 01111, opcode: 0000011 -> 0b111111101100 01000 010 01111 0000011 -> 0xfec42783
+    ; Can't understand "im", "rs1", "rd"
