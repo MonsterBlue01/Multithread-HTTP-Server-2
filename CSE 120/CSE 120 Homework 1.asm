@@ -23,3 +23,5 @@
                                                         B: 0x21 ; Reason: This is what is built into the register.
                                                         C: 0x00 ; Reason: x1 = ra, so equal. 
                                                         D: 0x00 ; Reason: Jump part is 0, and the output from ALU is 0. So the output is 0.
+
+6. 0xfef42623 -> 0b11111110111101000010011000100011. So the opcode is 0100011. Therefore, choose A.
