@@ -1,4 +1,8 @@
-1.  1.2[Base CPI] + 0.1[Branch Instruction](0.25(0.6 * 2 + 0.4 * 3) + 0.75[Jump Instruction](0.6 * 0 + 0.4 * 1)) + 0.2(0.6 * 1 + 0.4 * 2)
+1.  1.2[Base CPI] + 0.1[Branch Instruction](0.25[Branch Taken](0.6[Delay Slots filled] * 2[Delay Cycles] + 
+    0.4[Delay Slots not filled] * 3[Delay Cycles]) + 0.75[Branch Not Taken](0.6[Delay Slots filled] * 0[Delay Cycles] + 
+    0.4[Delay Slots not filled] * 1[Delay Cycles])) + 0.2[Jump Instruction](0.6[Delay Slots filled] * 1[Delay Cycles] + 
+    0.4[Delay Slots not filled] * 2[Delay Cycles])
+    
 2.  BTB has 8 bits, so erase the last "0" and keep last 3 digits. PHT has 16 bits, so erase the last "0" and keep last 
     4 digits. For example, 0x318. Convert 318 to 0b00011000. 00011000 -> 000110. For PHT, 0110. 0b0110 -> 6. So set 00 
     to 01. For BTB, 0110. 0b110 -> 6. So set 00 to 01. 
