@@ -48,3 +48,9 @@ foo: add  r3, r3, #1:                                              IF ID X0 WB
     cmp  r3, r7:                                                      IF ID X0 X1 WB
     bne foo:                                                             IF ID ID ID X0 WB ; What 
         ; exactly does this step do? Why is the time of jumping back different this time?
+foo: add r3, r3, #1                                                         IF IF IF ; Why they are three IF but not "IF ID X0 WB"
+    ldr r3, .L9:                                                                     IF ID X0 X1 WB
+    mov r0, #0:                                                                         IF ID ID X0 WB ; Why we choose to stall at ID but not 
+        ; stall at WB?
+    str  r2, [r3, #0]:                                                                     IF IF ID X0 X1 WB ; Why str use slt's instruction?
+    ret:                                                                                         IF ID ID X0 ; Which instruction is this?
