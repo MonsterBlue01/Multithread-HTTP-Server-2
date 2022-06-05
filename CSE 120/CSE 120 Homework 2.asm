@@ -32,4 +32,19 @@
     B: Predict not taken, so we have to flush it, but it didn't do that.
     C: No branch delay slot, which means two lines need to be flushed instead of one.
 
-5. 
+5.  add  r2, r2, r3:        IF ID X0 WB
+foo: add  r3, r3, #1:          IF ID X0 WB
+    cmp  r3, r7:                  IF ID X0 X1 WB ; Pay attention to the questions when taking the 
+        ; final exam.
+    bne foo:                         IF ID ID ID X0 WB ; Why does the ID card here have three cycles 
+        ; instead of entering X0 directly in the previous line X1?
+    ldr r3, .L9:                        IF IF IF (FLUSHED) ; The question mentioned branch taken 2 
+        ; times
+foo: add  r3, r3, #1:                            IF ID X0 WB
+    cmp  r3, r7:                                    IF ID X0 X1 WB
+    bne foo:                                           IF ID ID ID X0 WB
+    ldr r3, .L9:                                          IF IF IF (FLUSHED)
+foo: add  r3, r3, #1:                                              IF ID X0 WB
+    cmp  r3, r7:                                                      IF ID X0 X1 WB
+    bne foo:                                                             IF ID ID ID X0 WB ; What 
+        ; exactly does this step do? Why is the time of jumping back different this time?
