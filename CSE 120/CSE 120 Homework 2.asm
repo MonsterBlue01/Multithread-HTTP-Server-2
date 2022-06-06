@@ -32,7 +32,9 @@
     B: Predict not taken, so we have to flush it, but it didn't do that.
     C: No branch delay slot, which means two lines need to be flushed instead of one.
 
-5.  add  r2, r2, r3:        IF ID X0 WB
+5. ; Have no idea...
+
+6.  add  r2, r2, r3:        IF ID X0 WB
 foo: add  r3, r3, #1:          IF ID X0 WB
     cmp  r3, r7:                  IF ID X0 X1 WB ; Pay attention to the questions when taking the 
         ; final exam.
@@ -54,3 +56,5 @@ foo: add r3, r3, #1                                                         IF I
         ; stall at WB?
     str  r2, [r3, #0]:                                                                     IF IF ID X0 X1 WB ; Why str use slt's instruction?
     ret:                                                                                         IF ID ID X0 ; Which instruction is this?
+
+
