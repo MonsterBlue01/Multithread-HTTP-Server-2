@@ -32,7 +32,9 @@
     B: Predict not taken, so we have to flush it, but it didn't do that.
     C: No branch delay slot, which means two lines need to be flushed instead of one.
 
-5. ; Have no idea...
+5.  Ideal CPI: 1
+    Stall CPI: 0.1 * (0.7 * 4) + 0.1 * 2
+    CPI + stall CPI = 1 + 0.48 = 1.48
 
 6.  add  r2, r2, r3:        IF ID X0 WB
 foo: add  r3, r3, #1:          IF ID X0 WB
