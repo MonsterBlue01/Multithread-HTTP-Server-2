@@ -1,12 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "graph.h"
 
-Node* createNode(int num) {
-    Node* node = (Node*)malloc(sizeof(Node));
-    node->data = num;
+// Create a nodes
+Node *createNode(int value) {
+    Node *node = malloc(sizeof(Node));
+    node->value = value;
     node->next = NULL;
-    node->dest = NULL;
+    return node;
 }
 
 int main() {

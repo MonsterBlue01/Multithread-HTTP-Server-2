@@ -1,7 +1,12 @@
+typedef struct List {
+    int num;
+    struct Node *head;
+} List;
+
 typedef struct Node {
-    int* dest;
+    int no;
+    int num;
     struct Node *next;
-    int data;
 } Node;
 
-Node* createNode(int num);
+

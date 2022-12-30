@@ -1,13 +1,31 @@
-## [X.Y.Z] - YYYY-MM-DD
+# CHANGELOG
+
+## [1.0.0] - 2022-12-29
 
 ### Added
-- List of features that were added
+- File: graph.c
+- File: graph.h
 
 ### Changed
-- List of changes to existing features
+- None
 
 ### Fixed
-- List of bug fixes
+- None
 
 ### Removed
-- List of features that were removed
+- None
+
+## [1.0.1] - 2022-12-30
+
+### Added
+- File: graph.c
+- File: graph.h
+
+### Changed
+- Adjacency list redesigned
+
+### Fixed
+- None
+
+### Removed
+- All functions written for the previous adjacency list
