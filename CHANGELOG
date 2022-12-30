@@ -18,8 +18,7 @@
 ## [1.0.1] - 2022-12-30
 
 ### Added
-- File: graph.c
-- File: graph.h
+- Main: Get the total number of nodes in the graph and create an adjacency matrix from the total
 
 ### Changed
 - Adjacency list redesigned
