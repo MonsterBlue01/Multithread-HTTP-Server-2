@@ -28,3 +28,19 @@
 
 ### Removed
 - All functions written for the previous adjacency list
+
+## [1.0.1] - 2022-12-31
+
+### Added
+- Function: `int** initMatrix(int n)`
+- Function: `void deleteMatrix(int** matrix, int n)`
+
+### Changed
+- Since using an adjacency list requires a lot of memory, I decided to use an adjacency matrix instead
+- Since using a fixed size of array is not a good idea, I decided to use a dynamic array instead
+
+### Fixed
+- None
+
+### Removed
+- None
