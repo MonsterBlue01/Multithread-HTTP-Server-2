@@ -29,11 +29,15 @@
 ### Removed
 - All functions written for the previous adjacency list
 
-## [1.0.1] - 2022-12-31
+## [1.0.2] - 2023-1-1
 
 ### Added
 - Function: `int** initMatrix(int n)`
 - Function: `void deleteMatrix(int** matrix, int n)`
+- Function: `void createconnet(int** matrix, int a, int b)`
+- Function: `readbuild(int** matrix, char* filename)`
+- Function: `printMatrix(int** matrix, int n)`
+- Main function: The corresponding part has been added to the main function to test the operation of helper functions
 
 ### Changed
 - Since using an adjacency list requires a lot of memory, I decided to use an adjacency matrix instead
