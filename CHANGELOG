@@ -29,7 +29,7 @@
 ### Removed
 - All functions written for the previous adjacency list
 
-## [1.0.2] - 2023-1-1
+## [1.0.2] - 2023-1-2
 
 ### Added
 - Function: `int** initMatrix(int n)`
@@ -44,7 +44,7 @@
 - Since using a fixed size of array is not a good idea, I decided to use a dynamic array instead
 
 ### Fixed
-- None
+- Optimized for the situation where the program receives a path to its own node (it will not report an error directly but it may be better to inform the user not to do so)
 
 ### Removed
 - None

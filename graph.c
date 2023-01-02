@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "graph.h"
 
@@ -26,7 +27,8 @@ void deleteMatrix(int** matrix, int n) {
     free(matrix);
 }
 
-void readbuild(int** matrix, char* filename) {
+bool readbuild(int** matrix, char* filename) {
+    bool same = false;
     FILE *fp = fopen(filename, "r");
     if (fp == NULL) {
         printf("File not found!\n");
@@ -34,6 +36,9 @@ void readbuild(int** matrix, char* filename) {
     }
     int num1, num2;
     while (fscanf(fp, "%d %d", &num1, &num2) != EOF) {
+        if (num1 == num2 && num1 != 0) {
+            same = true;
+        }
         if (num1 == 0 && num2 == 0) {
             break;
         } else {
@@ -41,12 +46,17 @@ void readbuild(int** matrix, char* filename) {
         }
     }
     fclose(fp);
+    return same;
 }
 
 void printMatrix(int** matrix, int n) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf("%d ", matrix[i][j]);
+            if (i == j) {
+                printf("x ");
+            } else {
+                printf("%d ", matrix[i][j]);
+            }
         }
         printf("\n");
     }
@@ -60,6 +70,7 @@ int main() {
     }
     int num;
     int max = 0;
+    bool same;
     while (fscanf(fp, "%d", &num) != EOF) {
         if (num > max) {
             max = num;
@@ -68,7 +79,11 @@ int main() {
     printf("max = %d\n", max);
     fclose(fp);
     int** matrix = initMatrix(max);
-    readbuild(matrix, "node.txt");
+    same = readbuild(matrix, "node.txt");
+    if (same == true) {
+        fprintf(stderr, "\x1b[35mwarn: \x1b[0m");
+        fprintf(stderr, "Although paths to the same node can be accepted, it doesn't make sense. You can choose to delete the path connected to the same node (for example, 3 3, 4 4) next time\n");
+    }
     printMatrix(matrix, max);
     deleteMatrix(matrix, max);
 }
