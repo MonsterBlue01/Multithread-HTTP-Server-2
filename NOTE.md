@@ -9,6 +9,7 @@
 
 ## Future Work
 
+- Check again whether the reading of the number of nodes in the main function is wrong
 - Try to use backtracking algorithm or the Monte Carlo algorithm to solve this problem (write about the function of these two algorithms)
 - After finding the solution, try to use Held-Karp algorithm or Lin-Kernighan algorithm to optimize it (the user writes the corresponding functions of the two algorithms)
 
