@@ -5,3 +5,5 @@ Recursive Function: The backtracking algorithm for finding a Hamiltonian Circuit
 Base Case: You will need to decide on a base case for your recursive function. One option is to return true if the path through the graph has visited all of the nodes and ends at the starting node.
 Recursive Case: In the recursive case, you will need to consider all of the unvisited nodes that are adjacent to the current node. For each of these nodes, you can add it to the path, check if it is a valid move (i.e., whether it creates a circuit), and then recursively search for a Hamiltonian Circuit from that node. If a circuit is found, you can return true. Otherwise, you will need to backtrack by removing the node from the path and trying the next node.
 Pruning: To make your algorithm more efficient, you can try to prune the search tree by adding conditions that allow you to early terminate the search when it becomes clear that a particular branch will not lead to a solution. For example, you can return false if the path through the graph exceeds the maximum number of nodes that a Hamiltonian Circuit can have.
+
+Memory leak: valgrind --leak-check=full <executable>

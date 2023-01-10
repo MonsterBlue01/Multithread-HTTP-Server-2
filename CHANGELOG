@@ -54,3 +54,22 @@
 
 ### Removed
 - None
+
+## [1.0.3] - 2023-1-9
+
+### Added
+- Function: `LLNode* createNode(int value)`
+- Function: `void appendNode(LLNode* head, int value)`
+- Function: `LLNode* deleteNode(LLNode* head)`
+- Function: `void cleanList(LLNode* head)`
+- Function: `void printList(LLNode* head)`
+- Main function: The corresponding part has been added to the main function to test the operation of helper functions
+
+### Changed
+- None
+
+### Fixed
+- None
+
+### Removed
+- None
