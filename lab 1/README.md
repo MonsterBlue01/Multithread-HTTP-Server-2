@@ -1,4 +1,4 @@
-# README
+# lab 1
 
 This repository contains files related to my project for CSE 150 at UCSC. Below is a description of the contents of each file.
 
