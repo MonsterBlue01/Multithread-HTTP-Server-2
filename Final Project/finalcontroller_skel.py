@@ -48,14 +48,53 @@ class Final (object):
         connection.addListeners(self)
 
     def do_final (self, packet, packet_in, port_on_switch, switch_id):
-        # This is where you'll put your code. The following modifications have 
-        # been made from Lab 3:
-        #     - port_on_switch: represents the port that the packet was received on.
-        #     - switch_id represents the id of the switch that received the packet.
-        #            (for example, s1 would have switch_id == 1, s2 would have switch_id == 2, etc...)
-        # You should use these to determine where a packet came from. To figure out where a packet 
-        # is going, you can use the IP header information.
-        print "Example code."
+        # Parse the IP and ICMP packets
+        ip = packet.find('ipv4')
+        icmp = packet.find('icmp')
+
+        if ip:
+            src_ip = str(ip.srcip)
+            dst_ip = str(ip.dstip)
+
+            # Rule: Untrusted Host cannot send ICMP traffic to Host 10 to 80, or the Server.
+            # Rule: Untrusted Host cannot send any IP traffic to the Server.
+            if src_ip == '106.44.82.103':
+                if icmp or dst_ip == '10.3.9.90':
+                    self.drop_packet(packet, packet_in)
+                    return
+
+            # Rule: Trusted Host cannot send ICMP traffic to Host 50 to 80 in Department B, or the Server.
+            # Rule: Trusted Host cannot send any IP traffic to the Server.
+            if src_ip == '108.24.31.112':
+                if icmp and '10.2.' in dst_ip or dst_ip == '10.3.9.90':
+                    self.drop_packet(packet, packet_in)
+                    return
+
+            # Rule: Hosts in Department A (Host 10 to 40) cannot send any ICMP traffic to the hosts in
+            # Department B (Host 50 to 80), and vice versa.
+            if icmp and (('10.1.' in src_ip and '10.2.' in dst_ip) or ('10.2.' in src_ip and '10.1.' in dst_ip)):
+                self.drop_packet(packet, packet_in)
+                return
+
+        # If no rule is triggered, forward the packet normally
+        self.forward_packet(packet, packet_in)
+        
+    def drop_packet(self, packet, packet_in):
+        msg = of.ofp_flow_mod()
+        msg.match = of.ofp_match.from_packet(packet)
+        msg.idle_timeout = 30
+        msg.hard_timeout = 30
+        msg.data = packet_in
+        self.connection.send(msg)
+
+    def forward_packet(self, packet, packet_in):
+        msg = of.ofp_flow_mod()
+        msg.match = of.ofp_match.from_packet(packet)
+        msg.idle_timeout = 30
+        msg.hard_timeout = 30
+        msg.actions.append(of.ofp_action_output(port = of.OFPP_FLOOD))
+        msg.data = packet_in
+        self.connection.send(msg)
 
     def _handle_PacketIn (self, event):
         """
