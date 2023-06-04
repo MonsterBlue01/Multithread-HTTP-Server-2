@@ -63,23 +63,31 @@ class Final (object):
                     self.drop_packet(packet, packet_in)
                     return
 
-            # Rule: Trusted Host cannot send ICMP traffic to Host 50 to 80 in Department B, or the Server.
+            # ...50 to 80 in Department B, or the Server.
             # Rule: Trusted Host cannot send any IP traffic to the Server.
             if src_ip == '108.24.31.112':
-                if icmp and '10.2.' in dst_ip or dst_ip == '10.3.9.90':
+                if icmp and (dst_ip in ['10.2.5.50', '10.2.6.60', '10.2.7.70', '10.2.8.80'] or dst_ip == '10.3.9.90'):
+                    self.drop_packet(packet, packet_in)
+                    return
+                if dst_ip == '10.3.9.90':
                     self.drop_packet(packet, packet_in)
                     return
 
             # Rule: Hosts in Department A (Host 10 to 40) cannot send any ICMP traffic to the hosts in
             # Department B (Host 50 to 80), and vice versa.
-            if icmp and (('10.1.' in src_ip and '10.2.' in dst_ip) or ('10.2.' in src_ip and '10.1.' in dst_ip)):
+            if icmp and ((src_ip in ['10.1.1.10', '10.1.2.20', '10.1.3.30', '10.1.4.40'] and dst_ip in ['10.2.5.50', '10.2.6.60', '10.2.7.70', '10.2.8.80']) or
+                         (dst_ip in ['10.1.1.10', '10.1.2.20', '10.1.3.30', '10.1.4.40'] and src_ip in ['10.2.5.50', '10.2.6.60', '10.2.7.70', '10.2.8.80'])):
                 self.drop_packet(packet, packet_in)
                 return
 
-        # If no rule is triggered, forward the packet normally
-        self.forward_packet(packet, packet_in)
-        
-    def drop_packet(self, packet, packet_in):
+        # Default behavior: flood packet on all ports
+        self.flood_packet(packet, packet_in)
+
+    def drop_packet (self, packet, packet_in):
+        """
+        Drops this packet and optionally installs a flow to continue
+        dropping similar packets for a while.
+        """
         msg = of.ofp_flow_mod()
         msg.match = of.ofp_match.from_packet(packet)
         msg.idle_timeout = 30
@@ -87,7 +95,11 @@ class Final (object):
         msg.data = packet_in
         self.connection.send(msg)
 
-    def forward_packet(self, packet, packet_in):
+    def flood_packet (self, packet, packet_in):
+        """
+        Outputs a packet on all ports.  If the switch supports
+        flooding, use that.  Otherwise, send it out on all ports.
+        """
         msg = of.ofp_flow_mod()
         msg.match = of.ofp_match.from_packet(packet)
         msg.idle_timeout = 30
@@ -100,13 +112,9 @@ class Final (object):
         """
         Handles packet in messages from the switch.
         """
-        packet = event.parsed # This is the parsed packet data.
-        if not packet.parsed:
-            log.warning("Ignoring incomplete packet")
-            return
-
-        packet_in = event.ofp # The actual ofp_packet_in message.
-        self.do_final(packet, packet_in, event.port, event.dpid)
+        packet = event.parsed
+        packet_in = event.ofp
+        self.do_final(packet, packet_in, event.port, event.connection.dpid)
 
 def launch ():
     """
@@ -115,4 +123,5 @@ def launch ():
     def start_switch (event):
         log.debug("Controlling %s" % (event.connection,))
         Final(event.connection)
-    core.openflow.addListenerByName("ConnectionUp", start_switch)
+    core.openflow
+
