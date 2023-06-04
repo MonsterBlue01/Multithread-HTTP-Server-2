@@ -49,12 +49,18 @@ class final_topo(Topo):
         self.addLink(floor1_switch1, h20, port1=2, port2=0)
         self.addLink(floor1_switch2, h30, port1=1, port2=0)
         self.addLink(floor1_switch2, h40, port1=2, port2=0)
+        self.addLink(floor2_switch1, h50, port1=1, port2=0)
+        self.addLink(floor2_switch1, h60, port1=2, port2=0)
+        self.addLink(floor2_switch2, h70, port1=1, port2=0)
+        self.addLink(floor2_switch2, h80, port1=2, port2=0)
         self.addLink(data_center_switch, h_server, port1=1, port2=0)
         self.addLink(core_switch, data_center_switch, port1=1, port2=2)
         self.addLink(core_switch, floor1_switch1, port1=2, port2=3)
         self.addLink(core_switch, floor1_switch2, port1=3, port2=3)
         self.addLink(core_switch, floor2_switch1, port1=4, port2=3)
         self.addLink(core_switch, floor2_switch2, port1=5, port2=3)
+        self.addLink(core_switch, h_untrust, port1=6, port2=0)
+        self.addLink(core_switch, h_trust, port1=7, port2=0)
 
 def configure():
     topo = final_topo()
