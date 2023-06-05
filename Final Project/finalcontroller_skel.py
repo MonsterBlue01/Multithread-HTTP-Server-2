@@ -31,7 +31,6 @@
 
 from pox.core import core
 import pox.openflow.libopenflow_01 as of
-from pox.lib.packet import icmp, ipv4
 
 log = core.getLogger()
 
@@ -49,59 +48,26 @@ class Final (object):
         connection.addListeners(self)
 
     def do_final (self, packet, packet_in, port_on_switch, switch_id):
-        ip_packet = packet.find('ipv4')
-        if ip_packet is not None:  # Check if this is an IP packet.
-            if ip_packet.srcip == "106.44.82.103":  # Check if this packet is from the untrusted host.
-                icmp_packet = packet.find('icmp')
-                if icmp_packet is not None:  # Check if this is an ICMP packet.
-                    if (ip_packet.dstip in ["10.1.1.10", "10.1.2.20", "10.1.3.30", "10.1.4.40", 
-                                            "10.2.5.50", "10.2.6.60", "10.2.7.70", "10.2.8.80", "10.3.9.90"]):  
-                        # If the destination is one of the specified hosts or the server, drop the packet.
-                        self.drop_packet(packet, packet_in)
-                        return
-
-        # If none of the conditions are met, proceed with the existing logic.
-        msg = of.ofp_flow_mod()
-        msg.match = of.ofp_match.from_packet(packet)
-        msg.idle_timeout = 30
-        msg.hard_timeout = 30
-        msg.actions.append(of.ofp_action_output(port = of.OFPP_ALL))
-        msg.data = packet_in
-        self.connection.send(msg)
-
-
-    def drop_packet (self, packet, packet_in):
-        """
-        Drops this packet and optionally installs a flow to continue
-        dropping similar packets for a while.
-        """
-        msg = of.ofp_flow_mod()
-        msg.match = of.ofp_match.from_packet(packet)
-        msg.idle_timeout = 30
-        msg.hard_timeout = 30
-        msg.data = packet_in
-        self.connection.send(msg)
-
-    def flood_packet (self, packet, packet_in):
-        """
-        Outputs a packet on all ports.  If the switch supports
-        flooding, use that.  Otherwise, send it out on all ports.
-        """
-        msg = of.ofp_flow_mod()
-        msg.match = of.ofp_match.from_packet(packet)
-        msg.idle_timeout = 30
-        msg.hard_timeout = 30
-        msg.actions.append(of.ofp_action_output(port = of.OFPP_FLOOD))
-        msg.data = packet_in
-        self.connection.send(msg)
+        # This is where you'll put your code. The following modifications have 
+        # been made from Lab 3:
+        #     - port_on_switch: represents the port that the packet was received on.
+        #     - switch_id represents the id of the switch that received the packet.
+        #            (for example, s1 would have switch_id == 1, s2 would have switch_id == 2, etc...)
+        # You should use these to determine where a packet came from. To figure out where a packet 
+        # is going, you can use the IP header information.
+        print "Example code."
 
     def _handle_PacketIn (self, event):
         """
         Handles packet in messages from the switch.
         """
-        packet = event.parsed
-        packet_in = event.ofp
-        self.do_final(packet, packet_in, event.port, event.connection.dpid)
+        packet = event.parsed # This is the parsed packet data.
+        if not packet.parsed:
+            log.warning("Ignoring incomplete packet")
+            return
+
+        packet_in = event.ofp # The actual ofp_packet_in message.
+        self.do_final(packet, packet_in, event.port, event.dpid)
 
 def launch ():
     """
@@ -110,5 +76,4 @@ def launch ():
     def start_switch (event):
         log.debug("Controlling %s" % (event.connection,))
         Final(event.connection)
-    core.openflow
-
+    core.openflow.addListenerByName("ConnectionUp", start_switch)
