@@ -25,6 +25,8 @@ class Final (object):
         protected_ips = ["10.1.1.10", "10.1.2.20", "10.1.3.30", "10.1.4.40", "10.2.5.50", "10.2.6.60", "10.2.7.70", "10.2.8.80", "10.3.9.90"]
         # Define the new protected IPs for Department B
         protected_ips_B = ["10.2.5.50", "10.2.6.60", "10.2.7.70", "10.2.8.80"]
+        # Define the new protected IPs for Department A
+        protected_ips_A = ["10.1.1.10", "10.1.2.20", "10.1.3.30", "10.1.4.40"]
         msg = of.ofp_flow_mod()
         msg.match = of.ofp_match.from_packet(packet)
         msg.idle_timeout = 30
@@ -64,6 +66,21 @@ class Final (object):
                 self.connection.send(msg)
                 return
 
+        # If the packet is an ICMP packet and it's from Department A to Department B, drop it.
+        if ip_header is not None and icmp_header is not None:
+            if str(ip_header.srcip) in protected_ips_A and str(ip_header.dstip) in protected_ips_B:
+                log.info("Dropping an ICMP packet from Department A to Department B")
+                msg.buffer_id = packet_in.buffer_id
+                self.connection.send(msg)
+                return
+
+        # If the packet is an ICMP packet and it's from Department B to Department A, drop it.
+        if ip_header is not None and icmp_header is not None:
+            if str(ip_header.srcip) in protected_ips_B and str(ip_header.dstip) in protected_ips_A:
+                log.info("Dropping an ICMP packet from Department B to Department A")
+                msg.buffer_id = packet_in.buffer_id
+                self.connection.send(msg)
+                return
 
         # Otherwise, if it's not from the untrusted host to a protected IP, let it through.
         msg.actions.append(of.ofp_action_output(port = of.OFPP_ALL))
