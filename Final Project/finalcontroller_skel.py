@@ -37,6 +37,15 @@ class Final (object):
                 self.connection.send(msg)
                 return
 
+        # If the packet is an IP packet and it's from the untrusted host to the server, drop it.
+        if ip_header is not None:
+            if ip_header.srcip == '106.44.82.103' and ip_header.dstip == '10.3.9.90':
+                log.info("Dropping an IP packet from Untrusted Host to server")
+                msg.buffer_id = packet_in.buffer_id
+                self.connection.send(msg)
+                return
+
+
         # Otherwise, if it's not from the untrusted host to a protected IP, let it through.
         msg.actions.append(of.ofp_action_output(port = of.OFPP_ALL))
         msg.data = packet_in
