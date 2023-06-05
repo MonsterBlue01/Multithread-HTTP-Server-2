@@ -31,6 +31,7 @@
 
 from pox.core import core
 import pox.openflow.libopenflow_01 as of
+from pox.lib.packet import icmp, ipv4
 
 log = core.getLogger()
 
@@ -48,11 +49,23 @@ class Final (object):
         connection.addListeners(self)
 
     def do_final (self, packet, packet_in, port_on_switch, switch_id):
+        ip_packet = packet.find('ipv4')
+        if ip_packet is not None:  # Check if this is an IP packet.
+            if ip_packet.srcip == "106.44.82.103":  # Check if this packet is from the untrusted host.
+                icmp_packet = packet.find('icmp')
+                if icmp_packet is not None:  # Check if this is an ICMP packet.
+                    if (ip_packet.dstip in ["10.1.1.10", "10.1.2.20", "10.1.3.30", "10.1.4.40", 
+                                            "10.2.5.50", "10.2.6.60", "10.2.7.70", "10.2.8.80", "10.3.9.90"]):  
+                        # If the destination is one of the specified hosts or the server, drop the packet.
+                        self.drop_packet(packet, packet_in)
+                        return
+
+        # If none of the conditions are met, proceed with the existing logic.
         msg = of.ofp_flow_mod()
         msg.match = of.ofp_match.from_packet(packet)
         msg.idle_timeout = 30
         msg.hard_timeout = 30
-        msg.actions.append(of.ofp_action_output(port = of.OFPP_ALL)) # Sends the packet out of all ports.
+        msg.actions.append(of.ofp_action_output(port = of.OFPP_ALL))
         msg.data = packet_in
         self.connection.send(msg)
 
