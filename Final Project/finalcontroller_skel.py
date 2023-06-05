@@ -23,6 +23,8 @@ class Final (object):
 
         # List of IPs to be protected
         protected_ips = ["10.1.1.10", "10.1.2.20", "10.1.3.30", "10.1.4.40", "10.2.5.50", "10.2.6.60", "10.2.7.70", "10.2.8.80", "10.3.9.90"]
+        # Define the new protected IPs for Department B
+        protected_ips_B = ["10.2.5.50", "10.2.6.60", "10.2.7.70", "10.2.8.80"]
         msg = of.ofp_flow_mod()
         msg.match = of.ofp_match.from_packet(packet)
         msg.idle_timeout = 30
@@ -41,6 +43,23 @@ class Final (object):
         if ip_header is not None:
             if ip_header.srcip == '106.44.82.103' and ip_header.dstip == '10.3.9.90':
                 log.info("Dropping an IP packet from Untrusted Host to server")
+                msg.buffer_id = packet_in.buffer_id
+                self.connection.send(msg)
+                return
+            
+        # If the packet is an ICMP packet and it's from the trusted host to one of the protected IPs in department B,
+        # or to the server, send a flow rule to the switch to drop it.
+        if ip_header is not None and icmp_header is not None:
+            if ip_header.srcip == '108.24.31.112' and str(ip_header.dstip) in protected_ips_B + ['10.3.9.90']:
+                log.info("Dropping an ICMP packet from Trusted Host to {}".format(ip_header.dstip))
+                msg.buffer_id = packet_in.buffer_id
+                self.connection.send(msg)
+                return
+
+        # If the packet is an IP packet and it's from the trusted host to the server, drop it.
+        if ip_header is not None:
+            if ip_header.srcip == '108.24.31.112' and ip_header.dstip == '10.3.9.90':
+                log.info("Dropping an IP packet from Trusted Host to server")
                 msg.buffer_id = packet_in.buffer_id
                 self.connection.send(msg)
                 return
