@@ -1,34 +1,3 @@
-# Final Skeleton
-#
-# Hints/Reminders from Lab 3:
-#
-# To check the source and destination of an IP packet, you can use
-# the header information... For example:
-#
-# ip_header = packet.find('ipv4')
-#
-# if ip_header.srcip == "1.1.1.1":
-#     print "Packet is from 1.1.1.1"
-#
-# Important Note: the "is" comparison DOES NOT work for IP address
-# comparisons in this way. You must use ==.
-# 
-# To send an OpenFlow Message telling a switch to send packets out a
-# port, do the following, replacing <PORT> with the port number the 
-# switch should send the packets out:
-#
-#        msg = of.ofp_flow_mod()
-#        msg.match = of.ofp_match.from_packet(packet)
-#        msg.idle_timeout = 30
-#        msg.hard_timeout = 30
-#
-#        msg.actions.append(of.ofp_action_output(port = <PORT>))
-#        msg.data = packet_in
-#        self.connection.send(msg)
-#
-# To drop packets, simply omit the action.
-#
-
 from pox.core import core
 import pox.openflow.libopenflow_01 as of
 
@@ -47,19 +16,30 @@ class Final (object):
         # This binds our PacketIn event listener
         connection.addListeners(self)
 
-    def do_final (self, packet, packet_in, port_on_switch, switch_id):
+    def do_final(self, packet, packet_in, port_on_switch, switch_id):
+        # Parse the IP and ICMP headers
+        ip_header = packet.find('ipv4')
+        icmp_header = packet.find('icmp')
+
+        # List of IPs to be protected
+        protected_ips = ["10.1.1.10", "10.1.2.20", "10.1.3.30", "10.1.4.40", "10.2.5.50", "10.2.6.60", "10.2.7.70", "10.2.8.80", "10.3.9.90"]
         msg = of.ofp_flow_mod()
         msg.match = of.ofp_match.from_packet(packet)
         msg.idle_timeout = 30
         msg.hard_timeout = 30
 
-        # Tell the switch to send packets out of all ports
+        # If the packet is an ICMP packet and it's from the untrusted host to one of the protected IPs,
+        # send a flow rule to the switch to drop it.
+        if ip_header is not None and icmp_header is not None:
+            if ip_header.srcip == '106.44.82.103' and str(ip_header.dstip) in protected_ips:
+                log.info("Dropping an ICMP packet from Untrusted Host to {}".format(ip_header.dstip))
+                msg.buffer_id = packet_in.buffer_id
+                self.connection.send(msg)
+                return
+
+        # Otherwise, if it's not from the untrusted host to a protected IP, let it through.
         msg.actions.append(of.ofp_action_output(port = of.OFPP_ALL))
-
-        # The actual packet that triggered the packet in event
         msg.data = packet_in
-
-        # Send the message to the switch
         self.connection.send(msg)
 
     def _handle_PacketIn (self, event):
