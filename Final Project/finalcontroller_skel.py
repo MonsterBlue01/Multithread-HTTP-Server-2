@@ -65,7 +65,8 @@ class Final (object):
         msg.match = of.ofp_match.from_packet(packet)
         msg.idle_timeout = 30
         msg.hard_timeout = 30
-        msg.actions.append(of.ofp_action_output(port = of.OFPP_ALL))
+        # Do not specify any actions for the flow_mod message. 
+        # This means that the switch will not forward these matched packets.
         msg.data = packet_in
         self.connection.send(msg)
 
