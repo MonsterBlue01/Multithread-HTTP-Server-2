@@ -19,9 +19,9 @@ void log_messge(LogLevel level, const char* message, ...);
 
 void handle_error(const char* message, int exit_code);
 
-void safe_malloc(size_t size);
+void* safe_malloc(size_t size);
 
-void safe_realloc(void* ptr, size_t size);
+void* safe_realloc(void* ptr, size_t size);
 
 void safe_free(void** ptr);
 
