@@ -1,2 +1,35 @@
+# Compiled object files
+*.o
+*.so
+*.a
+
+# Compiled executable files
+*.out
+server
+client
+test_program
+
+# Folders
+bin/
+obj/
+build/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# OS generated files
 .DS_Store
-__pycache__/
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*~

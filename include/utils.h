@@ -15,7 +15,7 @@ void init_logging(FILE* log_file);
 
 void set_log_level(LogLevel level);
 
-void log_messge(LogLevel level, const char* message, ...);
+void log_message(LogLevel level, const char* message, ...);
 
 void handle_error(const char* message, int exit_code);
 
