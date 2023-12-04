@@ -1,14 +1,21 @@
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -pedantic
 
-TARGET = memory
+TARGET = httpserver
+
+SOURCES = httpserver.c
+
+OBJECTS = $(SOURCES:.c=.o)
 
 all: $(TARGET)
 
-$(TARGET): memory.c
-	$(CC) $(CFLAGS) memory.c -o $(TARGET)
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) $(OBJECTS)
 
 .PHONY: all clean
