@@ -1,35 +1,29 @@
 #include <pthread.h>
 #include <stdlib.h>
-
-typedef struct queue {
-    void **elements;
-    int head;
-    int tail;
-    int maxSize;
-    pthread_mutex_t lock;
-} queue_t;
+#include <stdio.h>
+#include "queue.h"
 
 queue_t *queue_new(int size) {
     queue_t *q = malloc(sizeof(queue_t));
     if (q == NULL) {
-        return NULL; // 内存分配失败
+        return NULL; //Memory allocation failed
     }
     q->elements = malloc(sizeof(void *) * size);
     if (q->elements == NULL) {
-        free(q); // 清理之前分配的内存
+        free(q); // Clean up previously allocated memory
         return NULL;
     }
     q->head = 0;
     q->tail = 0;
     q->maxSize = size;
-    pthread_mutex_init(&q->lock, NULL); // 初始化互斥锁
+    pthread_mutex_init(&q->lock, NULL); //Initialize mutex lock
     return q;
 }
 
 void queue_delete(queue_t **q) {
     if (q != NULL && *q != NULL) {
         free((*q)->elements);
-        pthread_mutex_destroy(&(*q)->lock); // 销毁互斥锁
+        pthread_mutex_destroy(&(*q)->lock); // Destroy mutex lock
         free(*q);
         *q = NULL;
     }
@@ -38,9 +32,12 @@ void queue_delete(queue_t **q) {
 void queue_push(queue_t *q, void *elem) {
     pthread_mutex_lock(&q->lock);
     if ((q->tail + 1) % q->maxSize == q->head) {
-        // 队列已满
+        // Queue is full
+        // printf("Queue is full, cannot push new element.\n");
+        pthread_mutex_unlock(&q->lock);
         return;
     }
+    printf("Pushing element into queue at position %d\n", q->tail);
     q->elements[q->tail] = elem;
     q->tail = (q->tail + 1) % q->maxSize;
     pthread_mutex_unlock(&q->lock);
@@ -49,12 +46,14 @@ void queue_push(queue_t *q, void *elem) {
 void queue_pop(queue_t *q, void **elem) {
     pthread_mutex_lock(&q->lock);
     if (q->head == q->tail) {
-        // 队列为空
+        // Queue is empty
+        // printf("Queue is empty, cannot pop element.\n");
         *elem = NULL;
+        pthread_mutex_unlock(&q->lock);
         return;
     }
     *elem = q->elements[q->head];
+    printf("Popping element from queue at position %d\n", q->head);
     q->head = (q->head + 1) % q->maxSize;
     pthread_mutex_unlock(&q->lock);
 }
-

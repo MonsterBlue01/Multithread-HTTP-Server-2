@@ -5,10 +5,16 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <stdbool.h>
+#include "queue.h"
 
 #define PORT 8080
+#define THREAD_POOL_SIZE 4
+
+pthread_t thread_pool[THREAD_POOL_SIZE];
+queue_t *request_queue;
 
 void handleGetRequest(int client_fd, char *filename) {
+    printf("Handling GET request for %s\n", filename);
     FILE *file = fopen(filename, "rb");
     if (file == NULL) {
         char *response = "HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\n\r\n";
@@ -34,6 +40,7 @@ void handleGetRequest(int client_fd, char *filename) {
 
 
 void handlePutRequest(int client_fd, char *filename, char *content, long content_length) {
+    printf("Handling PUT request for %s\n", filename);
     FILE *file = fopen(filename, "rb");
     bool isNewFile = false;
     if (file == NULL) {
@@ -61,6 +68,64 @@ void handlePutRequest(int client_fd, char *filename, char *content, long content
     send(client_fd, response, strlen(response), 0);
 }
 
+void *worker_thread_function(void *arg) {
+    printf("Worker thread started\n");
+    while (1) {
+        int *client_fd;
+        queue_pop(request_queue, (void **)&client_fd);
+        if (client_fd != NULL) {
+            printf("Processing connection: %d\n", *client_fd);
+            char buffer[1024] = {0};
+            int bytes_read = read(*client_fd, buffer, sizeof(buffer));
+            printf("Bytes read from connection %d: %d\n", *client_fd, bytes_read);
+            if (bytes_read > 0) {
+                printf("Request: %s\n", buffer);
+                char method[8], filename[256], http_version[16];
+                sscanf(buffer, "%s %s %s", method, filename, http_version);
+
+                char *trimmed_filename = filename;
+                if (filename[0] == '/') {
+                    trimmed_filename++;
+                }
+
+                if (strcmp(method, "GET") == 0) {
+                    printf("Handling GET request for %s\n", trimmed_filename);
+                    handleGetRequest(*client_fd, trimmed_filename);
+                } else if (strcmp(method, "PUT") == 0) {
+                    printf("Handling PUT request for %s\n", trimmed_filename);
+                    char *content = strstr(buffer, "\r\n\r\n");
+                    long content_length = 0;
+                    if (content != NULL) {
+                        content += 4;  // Skip over "\r\n\r\n"
+                        content_length = bytes_read - (content - buffer);
+                    }
+                    handlePutRequest(*client_fd, trimmed_filename, content, content_length);
+                } else if (bytes_read < 0) {
+                    perror("Read error");
+                }
+            }
+
+            close(*client_fd);
+            printf("Closed connection: %d\n", *client_fd);
+            free(client_fd);
+        }
+    }
+    (void)arg;
+    return NULL;
+}
+
+void create_thread_pool(void) {
+    for (int i = 0; i < THREAD_POOL_SIZE; i++) {
+        pthread_create(&thread_pool[i], NULL, worker_thread_function, NULL);
+    }
+}
+
+void join_thread_pool(void) {
+    for (int i = 0; i < THREAD_POOL_SIZE; i++) {
+        pthread_join(thread_pool[i], NULL);
+    }
+}
+
 int main(void) {
     int server_fd, client_fd;
     struct sockaddr_in address;
@@ -71,6 +136,9 @@ int main(void) {
         perror("socket failed");
         exit(EXIT_FAILURE);
     }
+
+    request_queue = queue_new(10);
+    create_thread_pool();
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
@@ -94,34 +162,16 @@ int main(void) {
             perror("accept");
             continue;
         }
+        printf("Accepted connection: %d\n", client_fd);
 
-        char buffer[1024] = {0};
-        int bytes_read = read(client_fd, buffer, 1024);
-        
-        char method[8], filename[256], http_version[16];
-        sscanf(buffer, "%s %s %s", method, filename, http_version);
-        char *trimmed_filename = filename;
-        if (filename[0] == '/') {
-            trimmed_filename++;
-        }
-
-        char *content = strstr(buffer, "\r\n\r\n");
-        long content_length = 0;
-        if (content != NULL) {
-            content += 4;
-            content_length = bytes_read - (content - buffer);
-        }
-
-        if (strcmp(method, "GET") == 0) {
-            handleGetRequest(client_fd, trimmed_filename);
-        } else if (strcmp(method, "PUT") == 0) {
-            handlePutRequest(client_fd, trimmed_filename, content, content_length);
-        } else {
-            printf("Unsupported HTTP method: %s\n", method);
-        }
-
-        close(client_fd);
+        int *client_fd_ptr = malloc(sizeof(int));
+        *client_fd_ptr = client_fd;
+        printf("Pushing connection %d to queue\n", *client_fd_ptr);
+        queue_push(request_queue, client_fd_ptr);
     }
+
+    join_thread_pool();
+    queue_delete(&request_queue);
 
     return 0;
 }

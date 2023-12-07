@@ -1,9 +1,9 @@
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -pedantic
+CFLAGS = -Wall -Wextra -Werror -pedantic -pthread
 
 TARGET = httpserver
 
-SOURCES = httpserver.c
+SOURCES = httpserver.c queue.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
