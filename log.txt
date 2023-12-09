@@ -1,0 +1,78 @@
+[Sat Dec  9 14:48:14 2023] [INFO] Accepted connection: 5
+[Sat Dec  9 14:48:14 2023] [INFO] Pushing connection 5 to queue
+[Sat Dec  9 14:48:14 2023] [INFO] Accepted connection: 6
+[Sat Dec  9 14:48:14 2023] [INFO] Pushing connection 6 to queue
+[Sat Dec  9 14:48:14 2023] [INFO] Processing connection: 5
+[Sat Dec  9 14:48:14 2023] [INFO] Request: PUT /testfile2.txt HTTP/1.1
+Host: localhost:8080
+User-Agent: curl/7.88.1
+Accept: */*
+Content-Length: 21
+Content-Type: application/x-www-form-urlencoded
+
+Hello, HTTP Server 2!
+[Sat Dec  9 14:48:14 2023] [INFO] Handling PUT request for testfile2.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Handling PUT request for testfile2.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Accepted connection: 8
+[Sat Dec  9 14:48:14 2023] [INFO] Pushing connection 8 to queue
+[Sat Dec  9 14:48:14 2023] [INFO] Processing connection: 6
+[Sat Dec  9 14:48:14 2023] [INFO] Closed connection: 5
+[Sat Dec  9 14:48:14 2023] [INFO] Request: PUT /testfile1.txt HTTP/1.1
+Host: localhost:8080
+User-Agent: curl/7.88.1
+Accept: */*
+Content-Length: 21
+Content-Type: application/x-www-form-urlencoded
+
+Hello, HTTP Server 1!
+[Sat Dec  9 14:48:14 2023] [INFO] Handling PUT request for testfile1.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Handling PUT request for testfile1.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Closed connection: 6
+[Sat Dec  9 14:48:14 2023] [INFO] Processing connection: 8
+[Sat Dec  9 14:48:14 2023] [INFO] Request: PUT /testfile3.txt HTTP/1.1
+Host: localhost:8080
+User-Agent: curl/7.88.1
+Accept: */*
+Content-Length: 21
+Content-Type: application/x-www-form-urlencoded
+
+Hello, HTTP Server 3!
+[Sat Dec  9 14:48:14 2023] [INFO] Handling PUT request for testfile3.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Handling PUT request for testfile3.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Closed connection: 8
+[Sat Dec  9 14:48:14 2023] [INFO] Accepted connection: 5
+[Sat Dec  9 14:48:14 2023] [INFO] Pushing connection 5 to queue
+[Sat Dec  9 14:48:14 2023] [INFO] Accepted connection: 6
+[Sat Dec  9 14:48:14 2023] [INFO] Pushing connection 6 to queue
+[Sat Dec  9 14:48:14 2023] [INFO] Processing connection: 5
+[Sat Dec  9 14:48:14 2023] [INFO] Accepted connection: 7
+[Sat Dec  9 14:48:14 2023] [INFO] Pushing connection 7 to queue
+[Sat Dec  9 14:48:14 2023] [INFO] Processing connection: 6
+[Sat Dec  9 14:48:14 2023] [INFO] Request: GET /testfile3.txt HTTP/1.1
+Host: localhost:8080
+User-Agent: curl/7.88.1
+Accept: */*
+
+
+[Sat Dec  9 14:48:14 2023] [INFO] Handling GET request for testfile3.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Handling GET request for testfile3.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Processing connection: 7
+[Sat Dec  9 14:48:14 2023] [INFO] Request: GET /testfile2.txt HTTP/1.1
+Host: localhost:8080
+User-Agent: curl/7.88.1
+Accept: */*
+
+
+[Sat Dec  9 14:48:14 2023] [INFO] Handling GET request for testfile2.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Handling GET request for testfile2.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Closed connection: 7
+[Sat Dec  9 14:48:14 2023] [INFO] Closed connection: 6
+[Sat Dec  9 14:48:14 2023] [INFO] Request: GET /testfile1.txt HTTP/1.1
+Host: localhost:8080
+User-Agent: curl/7.88.1
+Accept: */*
+
+
+[Sat Dec  9 14:48:14 2023] [INFO] Handling GET request for testfile1.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Handling GET request for testfile1.txt
+[Sat Dec  9 14:48:14 2023] [INFO] Closed connection: 5

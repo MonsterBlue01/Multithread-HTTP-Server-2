@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <stdbool.h>
 #include "queue.h"
+#include "log.h"
 
 #define PORT 8080
 #define THREAD_POOL_SIZE 4
@@ -14,7 +15,7 @@ pthread_t thread_pool[THREAD_POOL_SIZE];
 queue_t *request_queue;
 
 void handleGetRequest(int client_fd, char *filename) {
-    printf("Handling GET request for %s\n", filename);
+    log_message(LOG_INFO, "Handling GET request for %s", filename);
     FILE *file = fopen(filename, "rb");
     if (file == NULL) {
         char *response = "HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\n\r\n";
@@ -40,7 +41,7 @@ void handleGetRequest(int client_fd, char *filename) {
 
 
 void handlePutRequest(int client_fd, char *filename, char *content, long content_length) {
-    printf("Handling PUT request for %s\n", filename);
+    log_message(LOG_INFO, "Handling PUT request for %s", filename);
     FILE *file = fopen(filename, "rb");
     bool isNewFile = false;
     if (file == NULL) {
@@ -69,17 +70,17 @@ void handlePutRequest(int client_fd, char *filename, char *content, long content
 }
 
 void *worker_thread_function(void *arg) {
-    printf("Worker thread started\n");
+    log_message(LOG_INFO, "Worker thread started");
     while (1) {
         int *client_fd;
         queue_pop(request_queue, (void **)&client_fd);
         if (client_fd != NULL) {
-            printf("Processing connection: %d\n", *client_fd);
+            log_message(LOG_INFO, "Processing connection: %d", *client_fd);
             char buffer[1024] = {0};
             int bytes_read = read(*client_fd, buffer, sizeof(buffer));
             printf("Bytes read from connection %d: %d\n", *client_fd, bytes_read);
             if (bytes_read > 0) {
-                printf("Request: %s\n", buffer);
+                log_message(LOG_INFO, "Request: %s", buffer);
                 char method[8], filename[256], http_version[16];
                 sscanf(buffer, "%s %s %s", method, filename, http_version);
 
@@ -89,10 +90,10 @@ void *worker_thread_function(void *arg) {
                 }
 
                 if (strcmp(method, "GET") == 0) {
-                    printf("Handling GET request for %s\n", trimmed_filename);
+                    log_message(LOG_INFO, "Handling GET request for %s", trimmed_filename);
                     handleGetRequest(*client_fd, trimmed_filename);
                 } else if (strcmp(method, "PUT") == 0) {
-                    printf("Handling PUT request for %s\n", trimmed_filename);
+                    log_message(LOG_INFO, "Handling PUT request for %s", trimmed_filename);
                     char *content = strstr(buffer, "\r\n\r\n");
                     long content_length = 0;
                     if (content != NULL) {
@@ -106,7 +107,7 @@ void *worker_thread_function(void *arg) {
             }
 
             close(*client_fd);
-            printf("Closed connection: %d\n", *client_fd);
+            log_message(LOG_INFO, "Closed connection: %d", *client_fd);
             free(client_fd);
         }
     }
@@ -127,6 +128,7 @@ void join_thread_pool(void) {
 }
 
 int main(void) {
+    open_log_file();
     int server_fd, client_fd;
     struct sockaddr_in address;
     int addrlen = sizeof(address);
@@ -154,7 +156,7 @@ int main(void) {
         exit(EXIT_FAILURE);
     }
 
-    printf("Listening on port %d\n", PORT);
+    log_message(LOG_INFO, "Listening on port %d", PORT);
 
     while (1) {
         client_fd = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen);
@@ -162,16 +164,17 @@ int main(void) {
             perror("accept");
             continue;
         }
-        printf("Accepted connection: %d\n", client_fd);
+        log_message(LOG_INFO, "Accepted connection: %d", client_fd);
 
         int *client_fd_ptr = malloc(sizeof(int));
         *client_fd_ptr = client_fd;
-        printf("Pushing connection %d to queue\n", *client_fd_ptr);
+        log_message(LOG_INFO, "Pushing connection %d to queue", *client_fd_ptr);
         queue_push(request_queue, client_fd_ptr);
     }
 
     join_thread_pool();
     queue_delete(&request_queue);
 
+    close_log_file();
     return 0;
 }
