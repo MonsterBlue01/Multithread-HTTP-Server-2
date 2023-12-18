@@ -7,51 +7,19 @@
 #include <stdbool.h>
 #include "queue.h"
 #include "log.h"
+#include "cacher.h"
 
-#define PORT 8080
-#define THREAD_POOL_SIZE 4
+int THREAD_POOL_SIZE;
 
-pthread_t thread_pool[THREAD_POOL_SIZE];
+pthread_t *thread_pool;
 queue_t *request_queue;
-
-void handleGetRequest(int client_fd, char *filename) {
-    log_message(LOG_INFO, "Handling GET request for %s", filename);
-    FILE *file = fopen(filename, "rb");
-    if (file == NULL) {
-        char *response = "HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\n\r\n";
-        send(client_fd, response, strlen(response), 0);
-        return;
-    }
-
-    fseek(file, 0, SEEK_END);
-    long fsize = ftell(file);
-    fseek(file, 0, SEEK_SET);
-
-    char *buffer = malloc(fsize + 1);
-    fread(buffer, 1, fsize, file);
-    fclose(file);
-
-    char header[1024];
-    sprintf(header, "HTTP/1.1 200 OK\r\nContent-Length: %ld\r\n\r\n", fsize);
-    send(client_fd, header, strlen(header), 0);
-    send(client_fd, buffer, fsize, 0);
-
-    free(buffer);
-}
-
+cache_t *cache;
 
 void handlePutRequest(int client_fd, char *filename, char *content, long content_length) {
     log_message(LOG_INFO, "Handling PUT request for %s", filename);
-    FILE *file = fopen(filename, "rb");
-    bool isNewFile = false;
-    if (file == NULL) {
-        isNewFile = true;
-    } else {
-        fclose(file);
-    }
-
-    file = fopen(filename, "wb");
-    if (file == NULL) {
+    bool isNewFile = fopen(filename, "rb") == NULL;
+    FILE *file = fopen(filename, "wb");
+    if (!file) {
         char *response = "HTTP/1.1 500 Internal Server Error\r\nContent-Length: 0\r\n\r\n";
         send(client_fd, response, strlen(response), 0);
         return;
@@ -60,13 +28,53 @@ void handlePutRequest(int client_fd, char *filename, char *content, long content
     fwrite(content, 1, content_length, file);
     fclose(file);
 
-    char *response;
-    if (isNewFile) {
-        response = "HTTP/1.1 201 Created\r\nContent-Length: 0\r\n\r\n";
-    } else {
-        response = "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n";
+    if (cache_lookup(cache, filename)) {
+        cache_update(cache, filename, content, content_length);
     }
+
+    char *response = isNewFile ? "HTTP/1.1 201 Created\r\nContent-Length: 0\r\n\r\n" :
+                                 "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n";
     send(client_fd, response, strlen(response), 0);
+}
+
+
+void handleGetRequest(int client_fd, char *filename) {
+    log_message(LOG_INFO, "Handling GET request for %s", filename);
+
+    if (cache_lookup(cache, filename)) {
+        char *buffer;
+        long fsize;
+        cache_retrieve_data(cache, filename, &buffer, &fsize); // Implement this function
+
+        char header[1024];
+        sprintf(header, "HTTP/1.1 200 OK\r\nContent-Length: %ld\r\n\r\n", fsize);
+        send(client_fd, header, strlen(header), 0);
+        send(client_fd, buffer, fsize, 0);
+        free(buffer); // Assuming cache_retrieve_data allocates memory for buffer
+    } else {
+        FILE *file = fopen(filename, "rb");
+        if (file == NULL) {
+            char *response = "HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\n\r\n";
+            send(client_fd, response, strlen(response), 0);
+            return;
+        }
+
+        fseek(file, 0, SEEK_END);
+        long fsize = ftell(file);
+        fseek(file, 0, SEEK_SET);
+
+        char *buffer = malloc(fsize + 1);
+        fread(buffer, 1, fsize, file);
+        fclose(file);
+
+        char header[1024];
+        sprintf(header, "HTTP/1.1 200 OK\r\nContent-Length: %ld\r\n\r\n", fsize);
+        send(client_fd, header, strlen(header), 0);
+        send(client_fd, buffer, fsize, 0);
+
+        cache_insert(cache, filename); // Add to cache
+        free(buffer);
+    }
 }
 
 void *worker_thread_function(void *arg) {
@@ -127,11 +135,40 @@ void join_thread_pool(void) {
     }
 }
 
-int main(void) {
+cache_policy_t parse_policy(const char *policyStr) {
+    if (strcmp(policyStr, "FIFO") == 0) {
+        return FIFO;
+    } else if (strcmp(policyStr, "LRU") == 0) {
+        return LRU;
+    } else if (strcmp(policyStr, "CLOCK") == 0) {
+        return CLOCK;
+    } else {
+        fprintf(stderr, "Invalid cache policy: %s\n", policyStr);
+        exit(EXIT_FAILURE);
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 5) {
+        fprintf(stderr, "Usage: %s <PORT> <THREAD_POOL_SIZE> <CACHE_SIZE> <CACHE_POLICY>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    THREAD_POOL_SIZE = atoi(argv[2]);
+    thread_pool = malloc(THREAD_POOL_SIZE * sizeof(pthread_t));
+    
+    if (!thread_pool) {
+        perror("Failed to allocate memory for thread pool");
+        exit(EXIT_FAILURE);
+    }
+    int PORT = atoi(argv[1]);
+    int CACHE_SIZE = atoi(argv[3]);
+    cache_policy_t CACHE_POLICY = parse_policy(argv[4]);
     open_log_file();
     int server_fd, client_fd;
     struct sockaddr_in address;
     int addrlen = sizeof(address);
+    cache = cache_create(CACHE_SIZE, CACHE_POLICY);
 
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_fd < 0) {
@@ -174,6 +211,8 @@ int main(void) {
 
     join_thread_pool();
     queue_delete(&request_queue);
+    cache_destroy(cache);
+    free(thread_pool);
 
     close_log_file();
     return 0;

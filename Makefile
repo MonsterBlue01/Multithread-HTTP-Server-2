@@ -3,7 +3,8 @@ CFLAGS = -Wall -Wextra -Werror -pedantic -pthread
 
 TARGET = httpserver
 
-SOURCES = httpserver.c queue.c log.c
+SOURCES = httpserver.c queue.c log.c cacher.c
+
 
 OBJECTS = $(SOURCES:.c=.o)
 
